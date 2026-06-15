@@ -18,7 +18,6 @@
 
 
   const MULTIMODEL_FALLBACK_PRODUCTS = {
-    'nap125250-look-pack': { product_code: 'nap125250-look-pack', product_name: 'Napoleon 125/250 selected build', product_short: 'Selected 125/250 build direction', fitment: 'Benda Napoleon 125/250', price: 'To confirm', delivery_estimate: '10 to 15 business days', image: './napoleon-125-250.jpg', stripe_url: '' },
     'nap500-black-bobber': { product_code: 'nap500-black-bobber', product_name: 'Napoleon 500 Black Bobber build', product_short: 'Black Bobber 500 build direction', fitment: 'Benda Napoleon 500', price: 'To confirm', delivery_estimate: '10 to 15 business days', image: './napoleon-500.jpg', stripe_url: '' },
     'nap500-premium-cruiser': { product_code: 'nap500-premium-cruiser', product_name: 'Napoleon 500 Premium Cruiser build', product_short: 'Premium Cruiser 500 build direction', fitment: 'Benda Napoleon 500', price: 'To confirm', delivery_estimate: '10 to 15 business days', image: './napoleon-500.jpg', stripe_url: '' },
     'darkflag-shadow-beast': { product_code: 'darkflag-shadow-beast', product_name: 'Dark Flag V4 Shadow Beast build', product_short: 'Shadow Beast V4 build direction', fitment: 'Benda Dark Flag V4', price: 'To confirm', delivery_estimate: '10 to 15 business days', image: './darkflag-v4.jpg', stripe_url: '' },
@@ -135,6 +134,89 @@
       ]
     }
   ];
+
+
+
+  const BENDAGO_V25_BUNDLES = {
+    'strong-pure-bob-essentials': {
+      name: 'Strong Pure Bob Essentials',
+      items: [
+        { code: 'rear-fender', color_option: 'Black' },
+        { code: 'tank-cover-support-volume', color_option: 'Black' }
+      ]
+    },
+    'strong-pure-bob-complete': {
+      name: 'Strong Pure Bob Complete Build',
+      items: [
+        { code: 'headlight-fairing' },
+        { code: 'top-bumper' },
+        { code: 'chassis-protection' },
+        { code: 'rear-fender', color_option: 'Black' },
+        { code: 'tank-cover-support-volume', color_option: 'Black' },
+        { code: 'premium-double-seat' },
+        { code: 'left-premium-engine-cover' },
+        { code: 'metal-foot-controls' }
+      ]
+    },
+    'headlight-fairing-essentials': {
+      name: 'Headlight Fairing Essentials',
+      items: [
+        { code: 'future-led-light' },
+        { code: 'black-striped-clutch-cover' }
+      ]
+    },
+    'headlight-fairing-complete': {
+      name: 'Headlight Fairing Complete Build',
+      items: [
+        { code: 'future-led-light' },
+        { code: 'top-bumper' },
+        { code: 'chassis-protection' },
+        { code: 'black-striped-clutch-cover' },
+        { code: 'chrome-engine-cover' },
+        { code: 'tank-cover-support-volume', color_option: 'Black' },
+        { code: 'premium-double-seat' },
+        { code: 'black-foot-control-kit' }
+      ]
+    },
+    'brutal-bob-essentials': {
+      name: 'Brutal Bob Essentials',
+      items: [
+        { code: 'right-engine-filter-cover' },
+        { code: 'closed-metal-hubcap-benda-samurai' }
+      ]
+    },
+    'brutal-bob-complete': {
+      name: 'Brutal Bob Complete Build',
+      items: [
+        { code: 'right-engine-filter-cover' },
+        { code: 'handlebar-riser' },
+        { code: 'transparent-clutch-cover' },
+        { code: 'gold-clutch-flywheel' },
+        { code: 'rear-led-seat-comfort' },
+        { code: 'brutal-rear-fender-kit' },
+        { code: 'closed-metal-hubcap-benda-samurai' },
+        { code: 'dual-exhaust', color_option: 'Chrome' }
+      ]
+    },
+    'blackout-predator-essentials': {
+      name: 'Blackout Predator Essentials',
+      items: [
+        { code: 'maverick-air-filter-cover' },
+        { code: 'tank-cover-support-volume', color_option: 'Black' }
+      ]
+    },
+    'blackout-predator-complete': {
+      name: 'Blackout Predator Complete Build',
+      items: [
+        { code: 'dual-exhaust', color_option: 'Black' },
+        { code: 'maverick-air-filter-cover' },
+        { code: 'headlight-fairing', color_option: 'Black' },
+        { code: 'black-foot-control-kit' },
+        { code: 'tank-cover-support-volume', color_option: 'Black' },
+        { code: 'premium-double-seat', color_option: 'Black' }
+      ]
+    }
+  };
 
   /* BENDAGO v55 — append build attribution to checkout GA4 events */
   const BUILD_ATTR_KEY_V55 = 'bendago_build_attribution_v55';
@@ -652,14 +734,18 @@ async function createStripeCheckout(lines, formData) {
 
   function updateStripeCheckoutButtonLabel() {
     const button = document.getElementById('stripeCheckoutButton');
-    if (!button || button.disabled) return;
+    if (!button) return;
     const lines = getLines();
-    if (!lines.length) {
+    const pricing = calculateLaunchOffer(lines);
+    if (!lines.length || !pricing || pricing.total <= 0) {
       button.textContent = 'Pay securely now';
       button.dataset.readyText = button.textContent;
+      button.disabled = true;
+      button.classList.add('stripe-checkout-disabled');
       return;
     }
-    const pricing = calculateLaunchOffer(lines);
+    button.disabled = false;
+    button.classList.remove('stripe-checkout-disabled');
     button.textContent = 'Pay securely now — ' + formatEuro(pricing.total);
     button.dataset.readyText = button.textContent;
   }
@@ -764,6 +850,7 @@ async function createStripeCheckout(lines, formData) {
       if (!product) return null;
       const qty = Math.max(1, Number(item.qty) || 1);
       const unit = euroToNumber(product.price);
+      if (!unit || unit <= 0) return null;
       return { ...product, code: item.code, qty, color_option: optionLabel(item), line_total: unit * qty };
     }).filter(Boolean);
   }
@@ -846,9 +933,44 @@ async function createStripeCheckout(lines, formData) {
     saveCart([]);
   }
 
+
+  function hasValidPrice(product) {
+    return !!(product && euroToNumber(product.price) > 0);
+  }
+
+  function pricedBundleItems(bundleKey) {
+    const bundle = BENDAGO_V25_BUNDLES[bundleKey];
+    if (!bundle) return null;
+    const map = products();
+    const bad = bundle.items.filter(item => !map[item.code] || !hasValidPrice(map[item.code]));
+    if (bad.length) return null;
+    return bundle.items.map(item => ({
+      code: item.code,
+      qty: Math.max(1, Number(item.qty) || 1),
+      color_option: item.color_option || ''
+    }));
+  }
+
+  function addBundleToCart(bundleKey) {
+    const bundle = BENDAGO_V25_BUNDLES[bundleKey];
+    const items = pricedBundleItems(bundleKey);
+    if (!bundle || !items) {
+      showCartStatus('err', 'This build selection is being prepared. Choose ready priced parts from the Napoleon 125/250 catalogue.');
+      return false;
+    }
+    const changed = upsertMany(items);
+    push('cart_bundle_added', {
+      bundle_key: bundleKey,
+      bundle_name: bundle.name,
+      inserted_count: changed,
+      cart_count: cartCount()
+    });
+    return true;
+  }
+
   function addToCart(code, qty = 1, options = {}) {
     const map = products();
-    if (!code || !map[code]) return false;
+    if (!code || !map[code] || !hasValidPrice(map[code])) return false;
     const colorOption = cleanOption(options.color_option);
     const cart = readCart();
     const existing = cart.find(item => item.code === code && optionLabel(item) === colorOption);
@@ -871,13 +993,13 @@ async function createStripeCheckout(lines, formData) {
     let changed = 0;
     (Array.isArray(items) ? items : []).forEach(item => {
       const code = String(item && item.code || '').trim();
-      if (!code || !map[code]) return;
-      const colorOption = cleanOption(item.options && item.options.color_option);
+      if (!code || !map[code] || !hasValidPrice(map[code])) return;
+      const colorOption = cleanOption((item.options && item.options.color_option) || item.color_option);
       const existing = cart.find(line => line.code === code && optionLabel(line) === colorOption);
       if (existing) {
         existing.qty = Math.max(1, Number(existing.qty) || 1);
       } else {
-        cart.push({ code, qty: 1, color_option: colorOption });
+        cart.push({ code, qty: Math.max(1, Number(item.qty) || 1), color_option: colorOption });
         changed += 1;
       }
     });
@@ -1131,6 +1253,7 @@ window.BendagoCart = {
     read: readCart,
     add: addToCart,
     upsertMany: upsertMany,
+    addBundle: addBundleToCart,
     open: openCart,
     render: renderCartDrawer,
     clear: clearCart,
@@ -1143,12 +1266,25 @@ window.BendagoCart = {
     if (window.__BENDAGO_MULTIMODEL_BUTTONS_BOUND__) return;
     window.__BENDAGO_MULTIMODEL_BUTTONS_BOUND__ = true;
     document.addEventListener('click', function (event) {
+      const disabled = event.target.closest('[data-add-disabled]');
+      if (disabled) {
+        event.preventDefault();
+        showCartStatus('err', 'This selection is being prepared. It will be activated when product photos, prices and checkout SKUs are confirmed.');
+        return;
+      }
+      const bundle = event.target.closest('[data-add-bundle]');
+      if (bundle) {
+        event.preventDefault();
+        const key = bundle.getAttribute('data-add-bundle');
+        if (addBundleToCart(key)) openCart();
+        return;
+      }
       const add = event.target.closest('[data-add-preview]');
       if (add) {
         event.preventDefault();
         const code = add.getAttribute('data-add-preview');
         if (addToCart(code, 1, {})) openCart();
-        else showCartStatus('err', 'This selected part is not ready in the cart map yet.');
+        else showCartStatus('err', 'This selected part is not ready in the priced cart map yet.');
         return;
       }
       const open = event.target.closest('[data-open-cart]');

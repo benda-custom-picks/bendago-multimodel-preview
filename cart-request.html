@@ -672,6 +672,56 @@
   .checkout-terms-content-v106 { grid-template-columns: minmax(0,1fr) minmax(220px,.74fr) !important; gap:8px !important; }
 }
 /* END BENDAGO V106 */
+
+
+/* V25 CHECKOUT POLISH — premium Stripe panel and no 0€ state */
+.stripe-checkout-panel{
+  margin-top:16px !important;
+  padding:22px !important;
+  border-radius:24px !important;
+  border:1px solid rgba(226,189,114,.24) !important;
+  background:
+    radial-gradient(circle at 50% 0%,rgba(64,88,140,.28),transparent 44%),
+    radial-gradient(circle at 10% 100%,rgba(226,189,114,.13),transparent 34%),
+    linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.025)),
+    #0b1019 !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.10),0 22px 62px rgba(0,0,0,.42) !important;
+  text-align:center !important;
+}
+.stripe-checkout-kicker{display:block;color:#c8d8ff !important;font-size:.80rem !important;letter-spacing:.12em !important;text-transform:uppercase !important;margin-bottom:6px !important;}
+.stripe-checkout-panel h3{margin:0 0 7px !important;font-size:1.18rem !important;line-height:1.1 !important;}
+.stripe-checkout-panel p{margin:0 auto 14px !important;max-width:620px !important;color:rgba(248,250,252,.82) !important;}
+.stripe-checkout-main-btn{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  width:min(460px,100%) !important;
+  min-height:54px !important;
+  margin:0 auto !important;
+  border:1px solid rgba(255,229,170,.42) !important;
+  border-radius:999px !important;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,.02)),
+    linear-gradient(135deg,#bb8732,#d6aa55 48%,#8b6024) !important;
+  color:#100c06 !important;
+  font-weight:950 !important;
+  letter-spacing:.02em !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.45),0 16px 38px rgba(0,0,0,.38),0 0 26px rgba(214,170,85,.16) !important;
+  cursor:pointer !important;
+}
+.stripe-checkout-main-btn:hover{filter:brightness(1.04) !important;transform:translateY(-1px) !important;}
+.stripe-checkout-main-btn:disabled,.stripe-checkout-main-btn.stripe-checkout-disabled{
+  opacity:.48 !important;
+  filter:grayscale(.45) !important;
+  cursor:not-allowed !important;
+  transform:none !important;
+}
+.stripe-checkout-note{margin-top:10px !important;color:rgba(248,250,252,.68) !important;font-size:.80rem !important;}
+@media(max-width:640px){
+  .stripe-checkout-panel{padding:14px !important;border-radius:18px !important;}
+  .stripe-checkout-main-btn{min-height:49px !important;font-size:.92rem !important;}
+}
+
 </style>
 </head>
 <body class="order-body">
@@ -789,7 +839,8 @@
   </div>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script src="./cart-flow.js?v=multimodel-v21"></script>
+<script src="./order-flow.js?v=v25-bundles-checkout"></script>
+<script src="./cart-flow.js?v=v25-bundles-checkout"></script>
 <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 <script id="bcp-v59-terms-accordion">
 (function () {
