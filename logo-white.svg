@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" role="img" aria-label="Benda Custom Picks">
+  <defs>
+    <style>
+      .w{fill:none;stroke:#fff;stroke-width:10;stroke-linecap:round;stroke-linejoin:round}
+      .t1{fill:#fff;font-family:Arial, Helvetica, sans-serif;font-size:108px;font-weight:800;letter-spacing:30px}
+      .t2{fill:#fff;font-family:Arial, Helvetica, sans-serif;font-size:56px;font-weight:700;letter-spacing:24px}
+      .t3{fill:#fff;font-family:Arial, Helvetica, sans-serif;font-size:28px;font-weight:700;letter-spacing:13px}
+      .b{fill:#fff;font-family:Arial, Helvetica, sans-serif;font-size:74px;font-weight:800}
+      .line{stroke:#fff;stroke-width:5;stroke-linecap:round}
+    </style>
+  </defs>
+
+  <g transform="translate(600 98)">
+    <text class="b" x="0" y="27" text-anchor="middle">B</text>
+    <g transform="translate(-45 5)">
+      <path class="w" d="M-8,-6 C-75,-42 -138,-62 -214,-72"/>
+      <path class="w" d="M-12,14 C-88,-10 -148,-20 -230,-22"/>
+      <path class="w" d="M-14,34 C-88,28 -150,36 -220,54"/>
+      <path class="w" d="M-18,54 C-78,62 -134,86 -190,122"/>
+      <path class="w" d="M-20,74 C-72,94 -112,124 -154,164"/>
+    </g>
+    <g transform="translate(45 5) scale(-1 1)">
+      <path class="w" d="M-8,-6 C-75,-42 -138,-62 -214,-72"/>
+      <path class="w" d="M-12,14 C-88,-10 -148,-20 -230,-22"/>
+      <path class="w" d="M-14,34 C-88,28 -150,36 -220,54"/>
+      <path class="w" d="M-18,54 C-78,62 -134,86 -190,122"/>
+      <path class="w" d="M-20,74 C-72,94 -112,124 -154,164"/>
+    </g>
+  </g>
+
+  <text class="t1" x="600" y="265" text-anchor="middle">BENDA</text>
+  <text class="t2" x="600" y="360" text-anchor="middle">CUSTOM PICKS</text>
+
+  <line class="line" x1="286" y1="418" x2="482" y2="418"/>
+  <path fill="#fff" d="M600 393 l13 17 21 2 -15 14 5 21 -24 -12 -24 12 5 -21 -15 -14 21 -2z"/>
+  <line class="line" x1="718" y1="418" x2="914" y2="418"/>
+
+  <text class="t3" x="600" y="486" text-anchor="middle">BUILT TO STAND APART</text>
+</svg>
