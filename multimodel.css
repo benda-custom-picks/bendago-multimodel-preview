@@ -1098,3 +1098,27 @@ body.home-page .hero-video{
   .look-card .look-media-video,
   .look-card .look-video{border-radius:22px 22px 0 0 !important;}
 }
+
+
+/* V40 — Dark Flag V4 autoplay video band + Shadow Beast single look
+   Scope: visual/media only. Keeps cart, checkout, Stripe and disabled V4 buttons unchanged. */
+.darkflag-band-video .band-video{
+  object-position:center center;
+}
+.model-v4 .look-grid.look-grid-single .look-card{
+  width:100%;
+}
+.model-v4 .look-media-video .look-video{
+  object-position:center center;
+}
+@media(min-width:901px){
+  .model-v4 .look-grid.look-grid-single{
+    grid-template-columns:minmax(0,560px);
+    justify-content:start;
+  }
+}
+@media(max-width:900px){
+  .model-v4 #looks .look-grid.look-grid-single .look-card{
+    flex:0 0 min(84vw,390px);
+  }
+}
