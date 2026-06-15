@@ -663,12 +663,18 @@ body.home-page .hero-video{
 }
 
 
-/* V32 — desktop 50% visual baseline
-   Requested behavior: desktop/PC renders at 50% scale.
-   Mobile and small tablets are intentionally untouched.
-*/
-@media (min-width: 901px) and (hover: hover) and (pointer: fine){
-  body{
-    zoom: .5;
-  }
+/* V33 — functional CRO rebuild guardrails: no desktop zoom hack, keep premium symmetry */
+@media (min-width:901px){
+  html,body{zoom:normal !important;}
+  .product-card{display:flex;flex-direction:column;height:100%;}
+  .product-card .body{display:flex;flex-direction:column;flex:1;}
+  .product-card .body .small,.product-card .body .product-meta{margin-top:auto;}
+  .product-card .add-preview{margin-top:12px;}
+  .look-card{height:100%;}
+  .look-body{display:flex;flex-direction:column;}
+  .look-actions{margin-top:auto;}
+  .order-trust-section > .wrap,.model-proof-section > .wrap,.home-proof-section > .wrap{width:calc(100vw - clamp(32px,4vw,72px)) !important;max-width:none !important;margin-left:auto !important;margin-right:auto !important;}
+}
+@media (max-width:900px){
+  html,body{zoom:normal !important;}
 }

@@ -1,12 +1,13 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta name="robots" content="noindex,nofollow"/>
+<meta content="noindex,nofollow" name="robots"/>
 <title>Finalize cart – Benda Custom Picks</title>
 <meta content="Finalize one or several selected parts through secure Stripe card checkout." name="description"/>
-<link href="./multimodel.css?v=v32-desktop-50" rel="stylesheet"/>
+<link href="./multimodel.css?v=v33-functional-cro-rebuild" rel="stylesheet"/>
 <link href="./order-flow.css" rel="stylesheet"/>
 <link href="./cart-flow.css?v=stripe-v1" rel="stylesheet"/>
 <style>
@@ -746,7 +747,7 @@
 </div>
 </div>
 <div class="cart-summary-card" id="cartSummary"></div>
-<form id="cartRequestForm" data-terms-version="BCP-CGV-2026-06-09-ORDERLOCK">
+<form data-terms-version="BCP-CGV-2026-06-09-ORDERLOCK" id="cartRequestForm">
 <input name="terms_version" type="hidden" value="BCP-CGV-2026-06-09-ORDERLOCK"/>
 <input name="terms_accepted_at" type="hidden" value=""/>
 <input name="custom_sourcing_accepted" type="hidden" value="false"/>
@@ -766,60 +767,60 @@
 <div class="field"><label>Year / version *</label><input name="year_version" placeholder="e.g. 2024" required=""/></div>
 <div class="field"><label>Colour / option</label><input name="color_option" placeholder="e.g. black parts / green Benda Napoleon / to confirm"/></div>
 <div class="field"><label>Delivery city / country *</label><input name="delivery_city_country" placeholder="e.g. Paris, France" required=""/></div>
-<div class="field full"><label>Delivery address *</label><textarea name="delivery_address" placeholder="Street, postcode, city, country" required></textarea></div>
+<div class="field full"><label>Delivery address *</label><textarea name="delivery_address" placeholder="Street, postcode, city, country" required=""></textarea></div>
 <div class="field full"><label>Message / notes</label><textarea name="message" placeholder="Anything we should know about your Benda model, colour, build or order?"></textarea></div>
 </div>
 <div class="checkout-trust-compact-v106">Secure Stripe checkout · processed after payment · tracking after dispatch · French registered business</div>
-<div class="checkout-trust-panel checkout-trust-panel-v105" aria-label="Secure checkout reassurance">
+<div aria-label="Secure checkout reassurance" class="checkout-trust-panel checkout-trust-panel-v105">
 <div class="checkout-trust-item"><strong>Secure Stripe checkout</strong>Card payment opens on Stripe's hosted checkout page.</div>
 <div class="checkout-trust-item"><strong>Processed after payment</strong>Your custom order is processed only after confirmed payment.</div>
 <div class="checkout-trust-item"><strong>Tracking after dispatch</strong>Tracking is shared as soon as it is issued by the carrier.</div>
 <div class="checkout-trust-item checkout-trust-business"><strong>French registered business</strong>Benda Custom Picks · SIREN 849 889 514 · RCS Lisieux · <a href="mailto:support@bendacustompicks.com">support</a></div>
 </div>
 <div class="checkout-payment-note checkout-payment-note-v105">Secure Stripe card checkout. Your order is processed after payment confirmation; tracking is sent after dispatch.</div>
-<details class="checkout-terms-panel checkout-terms-panel-v106" id="customOrderPolicyGate" aria-label="Custom order and cancellation policy" open>
-  <summary class="checkout-terms-summary checkout-terms-summary-v106">
-    <span class="checkout-terms-summary-main">
-      <span class="checkout-terms-kicker">Required before payment</span>
-      <span class="checkout-terms-summary-title">Confirm order &amp; custom terms</span>
-      <span class="checkout-terms-summary-help">Required acceptance before Stripe checkout.</span>
-    </span>
-    <span class="checkout-terms-toggle">Review &amp; accept</span>
-  </summary>
-  <div class="checkout-terms-content checkout-terms-content-v105 checkout-terms-content-v106">
-    <div class="checkout-required-compact-v106">
-      <h3>Required confirmation</h3>
-      <p>These confirmations are recorded before Stripe checkout for order clarity and payment-dispute evidence.</p>
-      <ul class="checkout-confirmation-list-v106 checkout-confirmation-list-compact-v106">
-        <li><strong>Model / parts / options:</strong> I confirm my Benda model, selected parts, colours, quantities and options.</li>
-        <li><strong>Total / delivery country:</strong> I confirm the delivery country and full amount before payment.</li>
-        <li><strong>Custom order terms:</strong> I accept custom sourcing, processing after payment, delivery/import responsibility and cancellation policy.</li>
-      </ul>
-    </div>
-    <label class="checkout-terms-accept checkout-terms-accept-v105 checkout-terms-accept-v106">
-      <input id="customOrderTerms" name="custom_order_terms_acceptance" required type="checkbox" value="Accepted"/>
-      <span>I confirm my model, selected parts/options, delivery country, total amount, custom sourcing, processing after payment and cancellation policy before secure payment.</span>
-    </label>
-    <details class="checkout-full-terms-v106">
-      <summary>View full custom order terms</summary>
-      <ul class="checkout-full-terms-list-v106">
-        <li>I confirm the selected motorcycle model, parts, quantities, colours and options.</li>
-        <li>I confirm the delivery country and full amount before payment.</li>
-        <li>I understand this is a custom-sourced parts order prepared according to my selection.</li>
-        <li>I request order processing after Stripe payment confirmation.</li>
-        <li>Delivery is included unless stated otherwise; local import duties, taxes or carrier fees remain my responsibility if applied.</li>
-        <li>Once processing, supplier preparation or dispatch preparation has started, cancellation is not automatic and may no longer be possible.</li>
-      </ul>
-    </details>
-    <div class="checkout-terms-links checkout-terms-links-v106">Policy version: <strong>BCP-CGV-2026-06-09-ORDERLOCK</strong> · <a href="./terms-and-conditions.html" target="_blank" rel="noopener">Read full Terms &amp; Conditions</a></div>
-  </div>
+<details aria-label="Custom order and cancellation policy" class="checkout-terms-panel checkout-terms-panel-v106" id="customOrderPolicyGate" open="">
+<summary class="checkout-terms-summary checkout-terms-summary-v106">
+<span class="checkout-terms-summary-main">
+<span class="checkout-terms-kicker">Required before payment</span>
+<span class="checkout-terms-summary-title">Confirm order &amp; custom terms</span>
+<span class="checkout-terms-summary-help">Required acceptance before Stripe checkout.</span>
+</span>
+<span class="checkout-terms-toggle">Review &amp; accept</span>
+</summary>
+<div class="checkout-terms-content checkout-terms-content-v105 checkout-terms-content-v106">
+<div class="checkout-required-compact-v106">
+<h3>Required confirmation</h3>
+<p>These confirmations are recorded before Stripe checkout for order clarity and payment-dispute evidence.</p>
+<ul class="checkout-confirmation-list-v106 checkout-confirmation-list-compact-v106">
+<li><strong>Model / parts / options:</strong> I confirm my Benda model, selected parts, colours, quantities and options.</li>
+<li><strong>Total / delivery country:</strong> I confirm the delivery country and full amount before payment.</li>
+<li><strong>Custom order terms:</strong> I accept custom sourcing, processing after payment, delivery/import responsibility and cancellation policy.</li>
+</ul>
+</div>
+<label class="checkout-terms-accept checkout-terms-accept-v105 checkout-terms-accept-v106">
+<input id="customOrderTerms" name="custom_order_terms_acceptance" required="" type="checkbox" value="Accepted"/>
+<span>I confirm my model, selected parts/options, delivery country, total amount, custom sourcing, processing after payment and cancellation policy before secure payment.</span>
+</label>
+<details class="checkout-full-terms-v106">
+<summary>View full custom order terms</summary>
+<ul class="checkout-full-terms-list-v106">
+<li>I confirm the selected motorcycle model, parts, quantities, colours and options.</li>
+<li>I confirm the delivery country and full amount before payment.</li>
+<li>I understand this is a custom-sourced parts order prepared according to my selection.</li>
+<li>I request order processing after Stripe payment confirmation.</li>
+<li>Delivery is included unless stated otherwise; local import duties, taxes or carrier fees remain my responsibility if applied.</li>
+<li>Once processing, supplier preparation or dispatch preparation has started, cancellation is not automatic and may no longer be possible.</li>
+</ul>
 </details>
-<div class="stripe-checkout-panel payment-provider-panel payment-provider-primary stripe-checkout-panel-v105" aria-label="Stripe card checkout">
-  <span class="stripe-checkout-kicker stripe-kicker">Secure Stripe checkout</span>
-  <h3>Pay securely now</h3>
-  <p>Card payment via Stripe. Apple Pay, Google Pay or Link may appear when available on your device.</p>
-  <button class="stripe-checkout-btn stripe-checkout-main-btn" id="stripeCheckoutButton" type="button">Pay securely now</button>
-  <div class="stripe-checkout-note">You will be redirected to Stripe's secure hosted checkout page. No card data is stored on this site.</div>
+<div class="checkout-terms-links checkout-terms-links-v106">Policy version: <strong>BCP-CGV-2026-06-09-ORDERLOCK</strong> · <a href="./terms-and-conditions.html" rel="noopener" target="_blank">Read full Terms &amp; Conditions</a></div>
+</div>
+</details>
+<div aria-label="Stripe card checkout" class="stripe-checkout-panel payment-provider-panel payment-provider-primary stripe-checkout-panel-v105">
+<span class="stripe-checkout-kicker stripe-kicker">Secure Stripe checkout</span>
+<h3>Pay securely now</h3>
+<p>Card payment via Stripe. Apple Pay, Google Pay or Link may appear when available on your device.</p>
+<button class="stripe-checkout-btn stripe-checkout-main-btn" id="stripeCheckoutButton" type="button">Pay securely now</button>
+<div class="stripe-checkout-note">You will be redirected to Stripe's secure hosted checkout page. No card data is stored on this site.</div>
 </div>
 <div class="status-box" id="cartFormStatus"></div>
 </form>
@@ -833,13 +834,14 @@
 </section>
 </main>
 <footer class="order-footer">
-  <div class="order-wrap footer-legal">
-    <div>© <span id="year">2026</span> Benda Custom Picks — independent, not affiliated with the brands mentioned.</div>
-    <div class="footer-registered">French registered business · SIREN 849 889 514 · RCS Lisieux · Based in Normandy, France · <a href="mailto:support@bendacustompicks.com">support@bendacustompicks.com</a> · <a href="./terms-and-conditions.html">Terms &amp; Conditions</a></div>
-  </div>
+<div class="order-wrap footer-legal">
+<div>© <span id="year">2026</span> Benda Custom Picks — independent, not affiliated with the brands mentioned.</div>
+<div class="footer-registered">French registered business · SIREN 849 889 514 · RCS Lisieux · Based in Normandy, France · <a href="mailto:support@bendacustompicks.com">support@bendacustompicks.com</a> · <a href="./terms-and-conditions.html">Terms &amp; Conditions</a></div>
+</div>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script src="./cart-flow.js?v=v32-desktop-50"></script>
+<script src="./order-flow.js?v=v33-functional-cro-rebuild"></script>
+<script src="./cart-flow.js?v=v33-functional-cro-rebuild"></script>
 <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 <script id="bcp-v59-terms-accordion">
 (function () {
