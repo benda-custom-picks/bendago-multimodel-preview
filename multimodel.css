@@ -592,3 +592,31 @@ body.home-page .scroll-dot{
   .model-social-pill span{display:none;}
 }
 
+
+
+/* V28 — home desktop model title and hero video clean load */
+@media (min-width: 901px){
+  .home-page .model-band.half .band-copy{
+    max-width: min(560px,42vw);
+  }
+  .home-page .model-band.half .band-copy strong{
+    white-space: nowrap;
+    font-size: clamp(22px,2vw,32px);
+    line-height: 1.02;
+    letter-spacing: .105em;
+  }
+}
+
+body.home-page .hero-band{
+  background:#000 !important;
+}
+body.home-page .hero-band::before,
+body.home-page .hero-band::after{
+  content:none !important;
+  display:none !important;
+  background:none !important;
+}
+body.home-page .hero-video{
+  background:#000 !important;
+  opacity:1 !important;
+}
