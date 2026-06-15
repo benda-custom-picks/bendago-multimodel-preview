@@ -867,3 +867,202 @@ body.home-page .hero-video{
   .build-launch-copy strong{font-size:14px;}
   .build-bundle-actions .btn{min-height:46px;font-size:10px;letter-spacing:.10em;}
 }
+
+
+/* V37 — tan outline + premium mouse sweep micro-motion
+   Scope: visual-only. Keeps all V35/V36 blocks, buttons, text and cart logic unchanged. */
+:root{
+  --bcp-tan:#b99363;
+  --bcp-tan-soft:#d2ad78;
+  --bcp-tan-light:#efd39a;
+  --bcp-tan-dark:#6f4f31;
+  --bcp-tan-ink:#17100a;
+  --bcp-card-line:rgba(185,147,99,.48);
+  --bcp-card-line-soft:rgba(185,147,99,.28);
+  --bcp-card-glow:rgba(185,147,99,.16);
+}
+
+/* Stronger premium outlines for all selling cells: looks, most-clicked and shop-by-part */
+.look-card,
+.product-card{
+  position:relative;
+  isolation:isolate;
+  border:1.25px solid var(--bcp-card-line) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.055),
+    inset 0 0 0 1px rgba(0,0,0,.40),
+    0 20px 58px rgba(0,0,0,.36),
+    0 0 0 1px rgba(185,147,99,.08) !important;
+  background:
+    radial-gradient(circle at 20% 0%,rgba(185,147,99,.09),transparent 42%),
+    linear-gradient(180deg,rgba(16,16,15,.88),rgba(7,7,7,.94)) !important;
+}
+.look-card::before,
+.product-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  pointer-events:none;
+  opacity:.42;
+  z-index:2;
+  box-shadow:
+    inset 0 0 0 1px rgba(239,211,154,.10),
+    inset 0 -34px 70px rgba(185,147,99,.035);
+  transition:opacity .22s ease, box-shadow .22s ease;
+}
+.look-card::after,
+.product-card::after{
+  content:"";
+  position:absolute;
+  inset:-1px;
+  border-radius:inherit;
+  pointer-events:none;
+  opacity:0;
+  z-index:3;
+  background:linear-gradient(120deg,transparent 0%,rgba(239,211,154,.12) 42%,transparent 72%);
+  transform:translateX(-18%);
+  transition:opacity .24s ease, transform .32s ease;
+}
+
+/* Keep the original blocks, only recolor green/teal washes to muted tan */
+.build-essentials-card,
+.build-launch-card{
+  border-color:rgba(185,147,99,.48) !important;
+  background:
+    radial-gradient(circle at 10% 0%,rgba(185,147,99,.18),transparent 46%),
+    linear-gradient(180deg,rgba(31,25,18,.86),rgba(9,8,7,.92)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.07),
+    0 20px 44px rgba(0,0,0,.34),
+    0 0 0 1px rgba(185,147,99,.07) !important;
+}
+.build-launch-card{
+  background:
+    radial-gradient(circle at 6% 0%,rgba(210,173,120,.22),transparent 44%),
+    linear-gradient(135deg,rgba(135,98,60,.72),rgba(17,13,10,.94) 68%) !important;
+  border-color:rgba(210,173,120,.55) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.10),
+    0 22px 48px rgba(0,0,0,.36),
+    0 0 38px rgba(185,147,99,.10) !important;
+}
+.build-essentials-head span,
+.build-launch-copy small{
+  color:var(--bcp-tan-soft) !important;
+}
+.build-essentials-head b,
+.build-launch-copy span,
+.build-launch-emblem{
+  color:var(--bcp-tan-light) !important;
+}
+.build-essentials-card li::before{
+  border-color:rgba(210,173,120,.90) !important;
+  box-shadow:0 0 0 3px rgba(185,147,99,.10),0 0 18px rgba(185,147,99,.18) !important;
+}
+.build-launch-emblem{
+  border-color:rgba(239,211,154,.30) !important;
+  background:linear-gradient(180deg,rgba(185,147,99,.16),rgba(0,0,0,.38)) !important;
+}
+
+/* Premium button palette: tan / champagne, no green, same text and hierarchy */
+.add-preview,
+.build-bundle-actions .btn.primary,
+.cart-checkout-btn{
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.18),rgba(255,255,255,.035)),
+    linear-gradient(135deg,#d7b47a 0%,#b78d58 48%,#e7c98d 100%) !important;
+  color:#17100a !important;
+  border-color:rgba(239,211,154,.72) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.40),
+    inset 0 -18px 34px rgba(92,62,31,.16),
+    0 16px 36px rgba(0,0,0,.38),
+    0 0 24px rgba(185,147,99,.13) !important;
+}
+.look-cta-primary,
+.build-bundle-actions .btn.secondary{
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.028)),
+    linear-gradient(135deg,#171514,#2a2118 52%,#0a0a0a) !important;
+  color:#f4e6ce !important;
+  border-color:rgba(185,147,99,.48) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.11),
+    0 14px 34px rgba(0,0,0,.36),
+    0 0 0 1px rgba(185,147,99,.06) !important;
+}
+.build-bundle-actions .btn.secondary::before,
+.build-bundle-actions .btn.secondary::after{
+  color:var(--bcp-tan-light) !important;
+}
+.add-preview.is-disabled,
+.look-cta.is-disabled,
+.build-bundle-actions .btn.is-disabled,
+.add-preview:disabled,
+.look-cta:disabled,
+.build-bundle-actions .btn:disabled{
+  background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.018)) !important;
+  color:rgba(255,255,255,.58) !important;
+  border-color:rgba(185,147,99,.18) !important;
+  box-shadow:none !important;
+}
+
+/* Mouse sweep selector / micro movement on desktop only */
+@media(hover:hover) and (pointer:fine){
+  .look-card,
+  .product-card,
+  .build-essentials-card,
+  .build-launch-card{
+    transition:transform .22s ease, border-color .22s ease, box-shadow .22s ease, background .22s ease;
+    will-change:transform;
+  }
+  .look-card:hover,
+  .product-card:hover{
+    transform:translateY(-3px) scale(1.006);
+    border-color:rgba(239,211,154,.68) !important;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.08),
+      inset 0 0 0 1px rgba(0,0,0,.34),
+      0 26px 72px rgba(0,0,0,.46),
+      0 0 34px rgba(185,147,99,.16) !important;
+  }
+  .look-card:hover::before,
+  .product-card:hover::before{
+    opacity:1;
+    box-shadow:
+      inset 0 0 0 1px rgba(239,211,154,.18),
+      inset 0 -36px 72px rgba(185,147,99,.055),
+      0 0 0 1px rgba(185,147,99,.06);
+  }
+  .look-card:hover::after,
+  .product-card:hover::after{
+    opacity:1;
+    transform:translateX(18%);
+  }
+  .build-essentials-card:hover,
+  .build-launch-card:hover{
+    transform:translateY(-2px);
+    border-color:rgba(239,211,154,.62) !important;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.09),
+      0 24px 54px rgba(0,0,0,.40),
+      0 0 30px rgba(185,147,99,.13) !important;
+  }
+  .add-preview:hover,
+  .look-cta:hover,
+  .build-bundle-actions .btn:hover,
+  .cart-checkout-btn:hover{
+    transform:translateY(-1px);
+    filter:saturate(1.05) brightness(1.03);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.28),
+      0 20px 48px rgba(0,0,0,.42),
+      0 0 28px rgba(185,147,99,.16) !important;
+  }
+}
+
+@media(max-width:640px){
+  .look-card:hover,.product-card:hover,.build-essentials-card:hover,.build-launch-card:hover{transform:none;}
+}
+
