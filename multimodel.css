@@ -661,3 +661,14 @@ body.home-page .hero-video{
     border-radius: 26px;
   }
 }
+
+
+/* V31 — desktop 150% visual baseline
+   Requested behavior: desktop/PC renders like browser zoom 150% while Chrome remains at 100%.
+   Mobile and small tablets are intentionally untouched.
+*/
+@media (min-width: 901px) and (hover: hover) and (pointer: fine){
+  body{
+    zoom: 1.5;
+  }
+}
