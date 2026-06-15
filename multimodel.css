@@ -1066,3 +1066,13 @@ body.home-page .hero-video{
   .look-card:hover,.product-card:hover,.build-essentials-card:hover,.build-launch-card:hover{transform:none;}
 }
 
+
+
+/* V38 — Napoleon 450/500 autoplay video band + Black Bobber single look */
+.band-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;filter:grayscale(1) contrast(1.05) brightness(.82);transform:scale(1.005);transition:filter .42s ease,transform .7s ease;background:#000;display:block}
+.model-band:hover .band-video,.model-band:focus-visible .band-video{filter:grayscale(0) contrast(1.02) brightness(.98);transform:scale(1.045)}
+.model-band-video .band-copy strong{line-height:1.02}
+.look-media-video{background:#000}
+.look-media-video .look-video{width:100%;height:100%;object-fit:cover;object-position:center center;display:block}
+@media(min-width:901px){.look-grid.look-grid-single{grid-template-columns:minmax(0,560px);justify-content:start}.look-grid.look-grid-single .look-card{width:100%}}
+@media(max-width:900px){#looks .look-grid.look-grid-single .look-card{flex:0 0 min(84vw,390px)}}
