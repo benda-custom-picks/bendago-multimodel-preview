@@ -2,10 +2,10 @@
 html{scroll-behavior:smooth}
 body{margin:0;overflow-x:hidden;background:#050505;color:#fff;font-family:Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 a{color:inherit;text-decoration:none}
-.bcp-header{position:fixed;top:0;left:0;right:0;width:100%;height:42px;z-index:80;display:flex;align-items:center;justify-content:space-between;padding:0 7vw;background:rgba(0,0,0,.56);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.08);letter-spacing:.16em;text-transform:uppercase}
-.bcp-brand{display:flex;align-items:center;gap:10px;font-size:11px;font-weight:700;white-space:nowrap}
-.brand-wing{font-size:12px;opacity:.9}
-.bcp-nav{display:flex;align-items:center;gap:26px;font-size:10px;font-weight:700}
+.bcp-header{position:sticky;top:0;left:0;right:0;width:100%;height:54px;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:0 9vw;background:rgba(0,0,0,.92);border-bottom:1px solid rgba(255,255,255,.08);letter-spacing:.18em;text-transform:uppercase}
+.bcp-brand{display:flex;align-items:center;gap:12px;font-size:13px;font-weight:700;white-space:nowrap}
+.brand-wing{font-size:14px;opacity:.9}
+.bcp-nav{display:flex;align-items:center;gap:34px;font-size:11px;font-weight:700}
 .bcp-nav a{opacity:.86}
 .bcp-nav a:hover{opacity:1}
 .cart-link{padding-left:8px}
@@ -86,7 +86,7 @@ a{color:inherit;text-decoration:none}
 .footer,.site-footer{padding:24px 0;border-top:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.52);font-size:10px;letter-spacing:.14em;text-transform:uppercase;text-align:center}
 
 @media(max-width:900px){
-  .bcp-header{height:42px;padding:0 14px}
+  .bcp-header{height:58px;padding:0 18px}
   .bcp-nav{display:none}
   .hero-logo{width:min(330px,58vw)}
   .model-bands{grid-template-columns:1fr}
@@ -102,7 +102,7 @@ a{color:inherit;text-decoration:none}
   .pack-band{grid-template-columns:1fr}
 }
 @media(max-width:560px){
-  .bcp-brand{font-size:10px}
+  .bcp-brand{font-size:11px}
   .hero-logo{width:min(295px,62vw)}
   .scroll-dot{width:42px;height:42px;bottom:22px}
   .model-band,.model-band.full,.model-band.low{min-height:235px}
@@ -114,7 +114,125 @@ a{color:inherit;text-decoration:none}
 
 main{margin:0;padding:0}
 
+/* V14 MOBILE HERO SAFE FRAME
+   Goal: thin menu only, no large black band, no hero/logo cut by the menu.
+   Header is fixed and thin; main starts exactly below it; video gets more vertical room on mobile.
+*/
+body.home-page .bcp-header{
+  position:fixed !important;
+  top:0 !important;
+  left:0 !important;
+  right:0 !important;
+  width:100% !important;
+  height:42px !important;
+  min-height:42px !important;
+  padding:0 7vw !important;
+  z-index:1000 !important;
+  background:rgba(0,0,0,.58) !important;
+  backdrop-filter:blur(10px) !important;
+  -webkit-backdrop-filter:blur(10px) !important;
+  border-bottom:1px solid rgba(255,255,255,.08) !important;
+}
 
-/* V13 thin overlay menu: header stays visible without creating a large black band above the hero video. */
-body.home-page .hero-band{margin-top:0}
-body.home-page .bcp-header + main{padding-top:0}
+body.home-page .bcp-brand{
+  gap:10px !important;
+  font-size:11px !important;
+  letter-spacing:.18em !important;
+}
+
+body.home-page .brand-wing{
+  font-size:12px !important;
+}
+
+body.home-page .bcp-nav{
+  gap:24px !important;
+  font-size:10px !important;
+}
+
+body.home-page main{
+  margin:0 !important;
+  padding-top:42px !important;
+}
+
+body.home-page .hero-band{
+  height:clamp(460px,72svh,720px) !important;
+  min-height:460px !important;
+  aspect-ratio:auto !important;
+  margin:0 !important;
+  padding:0 !important;
+  background:#000 !important;
+  overflow:hidden !important;
+}
+
+body.home-page .hero-video{
+  position:absolute !important;
+  inset:0 !important;
+  width:100% !important;
+  height:100% !important;
+  object-fit:cover !important;
+  object-position:center center !important;
+  transform:none !important;
+}
+
+body.home-page .hero-dim{
+  background:
+    linear-gradient(180deg,rgba(0,0,0,.18),rgba(0,0,0,.34)),
+    radial-gradient(circle at center,rgba(0,0,0,.05),rgba(0,0,0,.38)) !important;
+}
+
+body.home-page .hero-logo{
+  top:52% !important;
+  width:min(430px,58vw) !important;
+  max-height:58% !important;
+  object-fit:contain !important;
+}
+
+body.home-page .scroll-dot{
+  bottom:22px !important;
+}
+
+@media(max-width:900px){
+  body.home-page .bcp-header{
+    height:42px !important;
+    min-height:42px !important;
+    padding:0 18px !important;
+  }
+
+  body.home-page main{
+    padding-top:42px !important;
+  }
+
+  body.home-page .hero-band{
+    height:clamp(500px,74svh,680px) !important;
+    min-height:500px !important;
+  }
+
+  body.home-page .hero-logo{
+    top:52% !important;
+    width:min(340px,70vw) !important;
+    max-height:54% !important;
+  }
+}
+
+@media(max-width:560px){
+  body.home-page .bcp-header{
+    height:42px !important;
+    min-height:42px !important;
+    padding:0 14px !important;
+  }
+
+  body.home-page .bcp-brand{
+    font-size:10px !important;
+    letter-spacing:.16em !important;
+  }
+
+  body.home-page .hero-band{
+    height:clamp(500px,76svh,640px) !important;
+    min-height:500px !important;
+  }
+
+  body.home-page .hero-logo{
+    top:52% !important;
+    width:min(330px,72vw) !important;
+  }
+}
