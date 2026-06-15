@@ -2,10 +2,10 @@
 html{scroll-behavior:smooth}
 body{margin:0;overflow-x:hidden;background:#050505;color:#fff;font-family:Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 a{color:inherit;text-decoration:none}
-.bcp-header{position:sticky;top:0;left:0;right:0;width:100%;height:54px;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:0 9vw;background:rgba(0,0,0,.92);border-bottom:1px solid rgba(255,255,255,.08);letter-spacing:.18em;text-transform:uppercase}
-.bcp-brand{display:flex;align-items:center;gap:12px;font-size:13px;font-weight:700;white-space:nowrap}
-.brand-wing{font-size:14px;opacity:.9}
-.bcp-nav{display:flex;align-items:center;gap:34px;font-size:11px;font-weight:700}
+.bcp-header{position:fixed;top:0;left:0;right:0;width:100%;height:42px;z-index:80;display:flex;align-items:center;justify-content:space-between;padding:0 7vw;background:rgba(0,0,0,.56);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.08);letter-spacing:.16em;text-transform:uppercase}
+.bcp-brand{display:flex;align-items:center;gap:10px;font-size:11px;font-weight:700;white-space:nowrap}
+.brand-wing{font-size:12px;opacity:.9}
+.bcp-nav{display:flex;align-items:center;gap:26px;font-size:10px;font-weight:700}
 .bcp-nav a{opacity:.86}
 .bcp-nav a:hover{opacity:1}
 .cart-link{padding-left:8px}
@@ -86,7 +86,7 @@ a{color:inherit;text-decoration:none}
 .footer,.site-footer{padding:24px 0;border-top:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.52);font-size:10px;letter-spacing:.14em;text-transform:uppercase;text-align:center}
 
 @media(max-width:900px){
-  .bcp-header{height:58px;padding:0 18px}
+  .bcp-header{height:42px;padding:0 14px}
   .bcp-nav{display:none}
   .hero-logo{width:min(330px,58vw)}
   .model-bands{grid-template-columns:1fr}
@@ -102,7 +102,7 @@ a{color:inherit;text-decoration:none}
   .pack-band{grid-template-columns:1fr}
 }
 @media(max-width:560px){
-  .bcp-brand{font-size:11px}
+  .bcp-brand{font-size:10px}
   .hero-logo{width:min(295px,62vw)}
   .scroll-dot{width:42px;height:42px;bottom:22px}
   .model-band,.model-band.full,.model-band.low{min-height:235px}
@@ -113,3 +113,8 @@ a{color:inherit;text-decoration:none}
 }
 
 main{margin:0;padding:0}
+
+
+/* V13 thin overlay menu: header stays visible without creating a large black band above the hero video. */
+body.home-page .hero-band{margin-top:0}
+body.home-page .bcp-header + main{padding-top:0}
