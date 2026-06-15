@@ -1076,3 +1076,25 @@ body.home-page .hero-video{
 .look-media-video .look-video{width:100%;height:100%;object-fit:cover;object-position:center center;display:block}
 @media(min-width:901px){.look-grid.look-grid-single{grid-template-columns:minmax(0,560px);justify-content:start}.look-grid.look-grid-single .look-card{width:100%}}
 @media(max-width:900px){#looks .look-grid.look-grid-single .look-card{flex:0 0 min(84vw,390px)}}
+
+
+/* V39 — look card rounded edges alignment
+   Scope: CSS-only visual fix. Matches look cards to product-card rounded premium shape and clips video/media inside the radius. */
+.look-card{
+  border-radius:24px !important;
+  overflow:hidden !important;
+}
+.look-card .look-media,
+.look-card .look-media-video{
+  border-radius:24px 24px 0 0 !important;
+  overflow:hidden !important;
+}
+.look-card .look-video{
+  border-radius:24px 24px 0 0 !important;
+}
+@media(max-width:900px){
+  .look-card{border-radius:22px !important;}
+  .look-card .look-media,
+  .look-card .look-media-video,
+  .look-card .look-video{border-radius:22px 22px 0 0 !important;}
+}
