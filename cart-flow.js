@@ -18,7 +18,6 @@
 
 
   const MULTIMODEL_FALLBACK_PRODUCTS = {
-    'nap125250-look-pack': { product_code: 'nap125250-look-pack', product_name: 'Napoleon 125/250 selected build', product_short: 'Selected 125/250 build direction', fitment: 'Benda Napoleon 125/250', price: 'To confirm', delivery_estimate: '10 to 15 business days', image: './napoleon-125-250.jpg', stripe_url: '' },
     'nap500-black-bobber': { product_code: 'nap500-black-bobber', product_name: 'Napoleon 500 Black Bobber build', product_short: 'Black Bobber 500 build direction', fitment: 'Benda Napoleon 500', price: 'To confirm', delivery_estimate: '10 to 15 business days', image: './napoleon-500.jpg', stripe_url: '' },
     'nap500-premium-cruiser': { product_code: 'nap500-premium-cruiser', product_name: 'Napoleon 500 Premium Cruiser build', product_short: 'Premium Cruiser 500 build direction', fitment: 'Benda Napoleon 500', price: 'To confirm', delivery_estimate: '10 to 15 business days', image: './napoleon-500.jpg', stripe_url: '' },
     'darkflag-shadow-beast': { product_code: 'darkflag-shadow-beast', product_name: 'Dark Flag V4 Shadow Beast build', product_short: 'Shadow Beast V4 build direction', fitment: 'Benda Dark Flag V4', price: 'To confirm', delivery_estimate: '10 to 15 business days', image: './darkflag-v4.jpg', stripe_url: '' },

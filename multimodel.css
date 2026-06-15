@@ -663,12 +663,12 @@ body.home-page .hero-video{
 }
 
 
-/* V31 — desktop 150% visual baseline
-   Requested behavior: desktop/PC renders like browser zoom 150% while Chrome remains at 100%.
+/* V32 — desktop 50% visual baseline
+   Requested behavior: desktop/PC renders at 50% scale.
    Mobile and small tablets are intentionally untouched.
 */
 @media (min-width: 901px) and (hover: hover) and (pointer: fine){
   body{
-    zoom: 1.5;
+    zoom: .5;
   }
 }
