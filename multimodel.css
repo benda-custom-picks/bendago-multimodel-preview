@@ -620,3 +620,44 @@ body.home-page .hero-video{
   background:#000 !important;
   opacity:1 !important;
 }
+
+
+/* V29 — PC bottom trust/social width alignment
+   Desktop only: bottom Order & Trust + proof blocks now follow the wide page/photo rhythm. */
+@media (min-width: 1101px){
+  body.home-page .order-trust-section > .wrap,
+  body.home-page .home-proof-section > .wrap,
+  body.model-page .order-trust-section > .wrap,
+  body.model-page .model-proof-section > .wrap{
+    width:min(1640px,calc(100% - 9vw));
+    max-width:none;
+  }
+
+  body.home-page .order-trust-section .trust-grid,
+  body.model-page .order-trust-section .trust-grid{
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:18px;
+  }
+
+  body.home-page .model-proof-trust-grid,
+  body.model-page .model-proof-trust-grid{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:18px;
+  }
+
+  body.home-page .model-social-proof-card,
+  body.model-page .model-social-proof-card{
+    padding:22px 26px;
+    grid-template-columns:minmax(0,1fr) auto;
+  }
+}
+
+@media (min-width: 1500px){
+  body.home-page .order-trust-section > .wrap,
+  body.home-page .home-proof-section > .wrap,
+  body.model-page .order-trust-section > .wrap,
+  body.model-page .model-proof-section > .wrap{
+    width:min(1760px,calc(100% - 120px));
+  }
+}
+
