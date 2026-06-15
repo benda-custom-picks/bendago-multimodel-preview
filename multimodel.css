@@ -235,3 +235,54 @@ body.home-page .scroll-dot{
     transform:translateY(-50%);
   }
 }
+
+/* V20 ORDER & TRUST
+   Accessories is no longer a product/category bucket.
+   It now contains order method, terms, policy and company information.
+*/
+.order-trust-section{
+  padding-top:28px;
+}
+.trust-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:16px;
+}
+.trust-card{
+  border:1px solid rgba(199,146,66,.28);
+  border-radius:22px;
+  padding:18px;
+  background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.015));
+  min-height:170px;
+}
+.trust-card h3{
+  margin:0 0 10px;
+  font-size:20px;
+  line-height:1.1;
+}
+.trust-card p{
+  margin:0;
+  color:#b9b3aa;
+  font-size:14px;
+  line-height:1.45;
+}
+@media(max-width:900px){
+  .trust-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:560px){
+  .trust-grid{grid-template-columns:1fr}
+}
+
+/* V21 REAL CART + CHECKOUT ARCHITECTURE */
+.cart-floating-btn{position:fixed;right:18px;bottom:18px;z-index:1000;min-height:46px;padding:0 16px;border-radius:999px;border:1px solid rgba(199,146,66,.45);background:#111;color:#f5f1ea;font-weight:900;box-shadow:0 18px 46px rgba(0,0,0,.45)}
+.cart-count-badge{display:inline-grid;place-items:center;min-width:24px;height:24px;margin-left:8px;border-radius:999px;background:#c79242;color:#100c06;padding:0 7px}.cart-overlay{position:fixed;inset:0;z-index:1001;background:rgba(0,0,0,.55);opacity:0;pointer-events:none;transition:.2s}.cart-overlay.active{opacity:1;pointer-events:auto}.cart-drawer{position:fixed;top:0;right:0;z-index:1002;width:min(430px,100vw);height:100dvh;background:#090909;border-left:1px solid rgba(199,146,66,.35);box-shadow:-22px 0 70px rgba(0,0,0,.55);transform:translateX(104%);transition:.22s ease;display:flex;flex-direction:column;color:#f5f1ea}.cart-drawer.active{transform:translateX(0)}.cart-head{display:flex;justify-content:space-between;gap:16px;padding:18px;border-bottom:1px solid rgba(255,255,255,.1)}.cart-head h2{margin:0}.cart-head p{margin:4px 0 0;color:#b9b3aa;font-size:13px}.cart-close{background:none;border:0;color:#fff;font-size:30px}.cart-body{flex:1;overflow:auto;padding:14px;display:grid;gap:12px}.cart-line{display:grid;grid-template-columns:72px 1fr;gap:12px;padding:12px;border-radius:16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)}.cart-line-media img{width:72px;height:72px;object-fit:cover;border-radius:12px}.cart-line-title{font-weight:900;color:#fff}.cart-line-details-link{display:block;margin:4px 0;color:#e4bd72;font-size:12px}.cart-line-price{color:#e4bd72;font-weight:900;margin-top:4px}.cart-line-actions{display:flex;align-items:center;gap:8px;margin-top:10px}.cart-qty-btn,.cart-remove-btn,.cart-clear-btn,.cart-share-btn{border:1px solid rgba(199,146,66,.35);background:rgba(199,146,66,.08);color:#f2d69c;border-radius:10px;min-height:32px;padding:0 10px;font-weight:800}.cart-footer{padding:14px;border-top:1px solid rgba(255,255,255,.1)}.cart-total-row,.cart-pricing-row{display:flex;justify-content:space-between;gap:12px;margin:8px 0}.cart-total-row strong{color:#e4bd72;font-size:20px}.cart-note{margin:12px 0;padding:12px;border-radius:14px;background:rgba(199,146,66,.08);color:#d8d1c8;font-size:13px;line-height:1.35}.cart-checkout-btn{display:flex;align-items:center;justify-content:center;min-height:48px;border-radius:14px;background:linear-gradient(135deg,#c79242,#e4bd72);color:#100c06;font-weight:950}.cart-checkout-btn.disabled{opacity:.45;pointer-events:none}.cart-secondary-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.cart-other-product-btn{display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.12);border-radius:12px;color:#fff}.cart-empty{padding:18px;color:#b9b3aa}.cart-summary-card{padding:16px;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid rgba(199,146,66,.22);margin:16px 0}.cart-summary-row,.cart-summary-total{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.08)}.cart-summary-total{border-bottom:0;font-size:18px}.order-body{background:#070707;color:#f5f1ea;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}.order-wrap{width:min(980px,calc(100% - 28px));margin:auto}.order-header{border-bottom:1px solid rgba(255,255,255,.09);background:#090909}.order-nav{min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:18px}.order-brand{display:flex;align-items:center;gap:10px;font-weight:950}.order-logo{width:36px;height:36px;border-radius:999px;background:#c79242;color:#080808;display:grid;place-items:center}.order-links{display:flex;gap:16px;align-items:center;font-size:13px}.send-moto{padding:10px 12px;border:1px solid rgba(199,146,66,.35);border-radius:999px;color:#e4bd72}.back-link{display:inline-flex;margin:18px 0;color:#e4bd72;font-weight:850}.request-layout{padding-bottom:40px}.request-card,.next-card,.legal-card{border:1px solid rgba(199,146,66,.24);border-radius:24px;padding:22px;background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.015));box-shadow:0 22px 60px rgba(0,0,0,.35)}.request-top h1,.legal-card h1{margin:0 0 8px;font-size:clamp(34px,5vw,58px);line-height:1}.request-top p,.legal-card p,.legal-card li{color:#d0c8bc;line-height:1.5}.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.field{display:grid;gap:6px}.field.full{grid-column:1/-1}.field label{font-weight:900}.field input,.field textarea{width:100%;min-height:48px;border-radius:14px;border:1px solid rgba(255,255,255,.13);background:#0d0d0d;color:#fff;padding:12px;font:inherit}.field textarea{min-height:94px}.status-box{margin-top:12px;color:#e4bd72;font-weight:850}.next-card{margin:18px 0}.next-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.next-step{padding:14px;border-radius:16px;background:rgba(255,255,255,.04)}.order-footer{padding:24px 0;border-top:1px solid rgba(255,255,255,.1);color:#b9b3aa}.legal-wrap{padding:34px 0}.legal-card a,.trust-card a{display:inline-flex;margin-top:10px;color:#e4bd72;font-weight:900}.trust-card p{min-height:64px}@media(max-width:640px){.cart-drawer{width:100vw}.order-links{display:none}.form-grid,.next-grid{grid-template-columns:1fr}.request-card,.next-card,.legal-card{padding:16px;border-radius:20px}.cart-secondary-actions{grid-template-columns:1fr}.cart-floating-btn{right:12px;bottom:12px}}
+
+/* V22 NAPOLEON 125 FULL BACKFILL */
+.look-media-video{position:relative;background:#000;overflow:hidden}
+.look-video{width:100%;height:100%;object-fit:cover;display:block;min-height:100%}
+.real-product-card .thumb{position:relative;background-size:cover;background-position:center}
+.card-rank{position:absolute;top:10px;left:10px;min-width:34px;height:34px;border-radius:999px;display:grid;place-items:center;background:rgba(0,0,0,.68);border:1px solid rgba(214,170,85,.45);color:#f0cd86;font-size:12px;font-weight:950}
+.product-meta{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:4px;padding-top:8px;border-top:1px solid rgba(255,255,255,.10);font-size:12px;color:#aeb7c3}
+.product-meta strong{color:#f0cd86;font-size:15px;white-space:nowrap}
+.product-grid-full{margin-top:20px}
+@media(max-width:640px){.product-meta{display:grid;gap:4px}.product-meta strong{font-size:14px}}
