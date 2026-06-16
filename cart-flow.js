@@ -4,7 +4,7 @@
   const CHECKOUT_WORKER_URL = ['https://bendago-', 'sum', 'up-checkout.custom125picks.workers.dev/'].join('');
   const LAUNCH_DISCOUNT_RATE = 0.05;
   const TERMS_VERSION = 'BCP-CGV-2026-06-09-ORDERLOCK';
-  const TERMS_URL = new URL('./terms-and-conditions.html', window.location.href).href;
+  const TERMS_URL = 'https://bendacustompicks.com/terms-and-conditions.html';
   const CHECKOUT_TERMS_VISIBLE_TEXT = [
     'Model & parts: I confirm the selected motorcycle model, parts, quantities, colours and options.',
     'Total & delivery country: I confirm the delivery country and full amount before payment.',
@@ -14,39 +14,6 @@
     'Cancellation policy: once processing, supplier preparation or dispatch preparation has started, cancellation is not automatic and may no longer be possible.',
     'I confirm my model, selected parts/options, delivery country, total amount, custom sourcing, processing after payment and cancellation policy before secure payment.'
   ].join('\n');
-
-
-
-  const MULTIMODEL_FALLBACK_PRODUCTS = {
-    'nap500-black-bobber': { product_code: 'nap500-black-bobber', product_name: 'Napoleon 500 Black Bobber build', product_short: 'Black Bobber 500 build direction', fitment: 'Benda Napoleon 500', price: 'To confirm', delivery_estimate: '10 to 15 business days', image: './napoleon-500.jpg', stripe_url: '' },
-    'nap500-premium-cruiser': { product_code: 'nap500-premium-cruiser', product_name: 'Napoleon 500 Premium Cruiser build', product_short: 'Premium Cruiser 500 build direction', fitment: 'Benda Napoleon 500', price: 'To confirm', delivery_estimate: '10 to 15 business days', image: './napoleon-500.jpg', stripe_url: '' },
-    'darkflag-shadow-beast': { product_code: 'darkflag-shadow-beast', product_name: 'Dark Flag V4 Shadow Beast build', product_short: 'Shadow Beast V4 build direction', fitment: 'Benda Dark Flag V4', price: 'To confirm', delivery_estimate: '10 to 15 business days', image: './darkflag-v4.jpg', stripe_url: '' },
-    'darkflag-midnight-reaper': { product_code: 'darkflag-midnight-reaper', product_name: 'Dark Flag V4 Midnight Reaper build', product_short: 'Midnight Reaper V4 build direction', fitment: 'Benda Dark Flag V4', price: 'To confirm', delivery_estimate: '10 to 15 business days', image: './darkflag-v4.jpg', stripe_url: '' },
-    'headlight-fairing': { product_code: 'headlight-fairing', product_name: 'Headlight Fairing', product_short: 'Front style upgrade for Napoleon 125/250', fitment: 'Benda Napoleon 125/250', price: 'To confirm', delivery_estimate: '10 to 15 business days', image: './napoleon-125-250.jpg', stripe_url: '' },
-    'right-engine-filter-cover': { product_code: 'right-engine-filter-cover', product_name: 'Right Engine Side Cover', product_short: 'Engine side visual upgrade for Napoleon 125/250', fitment: 'Benda Napoleon 125/250', price: 'To confirm', delivery_estimate: '10 to 15 business days', image: './napoleon-125-250.jpg', stripe_url: '' },
-    'ultra-single-seat-comfort': { product_code: 'ultra-single-seat-comfort', product_name: 'Ultra Single Seat Comfort', product_short: 'Single seat comfort upgrade for Napoleon 125/250', fitment: 'Benda Napoleon 125/250', price: 'To confirm', delivery_estimate: '10 to 15 business days', image: './napoleon-125-250.jpg', stripe_url: '' },
-    'dual-exhaust': { product_code: 'dual-exhaust', product_name: 'Dual Exhaust Custom Kit', product_short: 'Dual exhaust visual upgrade for Napoleon 125/250', fitment: 'Benda Napoleon 125/250', price: 'To confirm', delivery_estimate: '10 to 15 business days', image: './napoleon-125-250.jpg', stripe_url: '' },
-    'nap500-upgrade-01': { product_code: 'nap500-upgrade-01', product_name: 'Front Style Kit', product_short: 'Front Style Kit for Napoleon 500', fitment: 'Benda Napoleon 500', price: 'To confirm', delivery_estimate: '10 to 15 business days', image: './napoleon-500.jpg', stripe_url: '' },
-    'nap500-upgrade-02': { product_code: 'nap500-upgrade-02', product_name: 'Comfort Seat Pack', product_short: 'Comfort Seat Pack for Napoleon 500', fitment: 'Benda Napoleon 500', price: 'To confirm', delivery_estimate: '10 to 15 business days', image: './napoleon-500.jpg', stripe_url: '' },
-    'nap500-upgrade-03': { product_code: 'nap500-upgrade-03', product_name: 'Engine Cover Set', product_short: 'Engine Cover Set for Napoleon 500', fitment: 'Benda Napoleon 500', price: 'To confirm', delivery_estimate: '10 to 15 business days', image: './napoleon-500.jpg', stripe_url: '' },
-    'nap500-upgrade-04': { product_code: 'nap500-upgrade-04', product_name: 'Premium Rear Setup', product_short: 'Premium Rear Setup for Napoleon 500', fitment: 'Benda Napoleon 500', price: 'To confirm', delivery_estimate: '10 to 15 business days', image: './napoleon-500.jpg', stripe_url: '' },
-    'nap500-upgrade-05': { product_code: 'nap500-upgrade-05', product_name: 'Headlight Upgrade', product_short: 'Headlight Upgrade for Napoleon 500', fitment: 'Benda Napoleon 500', price: 'To confirm', delivery_estimate: '10 to 15 business days', image: './napoleon-500.jpg', stripe_url: '' },
-    'nap500-upgrade-06': { product_code: 'nap500-upgrade-06', product_name: 'Handlebar Riser Kit', product_short: 'Handlebar Riser Kit for Napoleon 500', fitment: 'Benda Napoleon 500', price: 'To confirm', delivery_estimate: '10 to 15 business days', image: './napoleon-500.jpg', stripe_url: '' },
-    'nap500-upgrade-07': { product_code: 'nap500-upgrade-07', product_name: 'Side Cover Set', product_short: 'Side Cover Set for Napoleon 500', fitment: 'Benda Napoleon 500', price: 'To confirm', delivery_estimate: '10 to 15 business days', image: './napoleon-500.jpg', stripe_url: '' },
-    'nap500-upgrade-08': { product_code: 'nap500-upgrade-08', product_name: 'Rear Fender Kit', product_short: 'Rear Fender Kit for Napoleon 500', fitment: 'Benda Napoleon 500', price: 'To confirm', delivery_estimate: '10 to 15 business days', image: './napoleon-500.jpg', stripe_url: '' },
-    'nap500-upgrade-09': { product_code: 'nap500-upgrade-09', product_name: 'Exhaust Style Kit', product_short: 'Exhaust Style Kit for Napoleon 500', fitment: 'Benda Napoleon 500', price: 'To confirm', delivery_estimate: '10 to 15 business days', image: './napoleon-500.jpg', stripe_url: '' },
-    'nap500-upgrade-10': { product_code: 'nap500-upgrade-10', product_name: 'Luggage Rack Setup', product_short: 'Luggage Rack Setup for Napoleon 500', fitment: 'Benda Napoleon 500', price: 'To confirm', delivery_estimate: '10 to 15 business days', image: './napoleon-500.jpg', stripe_url: '' },
-    'darkflag-upgrade-01': { product_code: 'darkflag-upgrade-01', product_name: 'V4 Front Presence Kit', product_short: 'V4 Front Presence Kit for Dark Flag V4', fitment: 'Benda Dark Flag V4', price: 'To confirm', delivery_estimate: '10 to 15 business days', image: './darkflag-v4.jpg', stripe_url: '' },
-    'darkflag-upgrade-02': { product_code: 'darkflag-upgrade-02', product_name: 'Black Commander Detail Set', product_short: 'Black Commander Detail Set for Dark Flag V4', fitment: 'Benda Dark Flag V4', price: 'To confirm', delivery_estimate: '10 to 15 business days', image: './darkflag-v4.jpg', stripe_url: '' },
-    'darkflag-upgrade-03': { product_code: 'darkflag-upgrade-03', product_name: 'Premium Seat Direction', product_short: 'Premium Seat Direction for Dark Flag V4', fitment: 'Benda Dark Flag V4', price: 'To confirm', delivery_estimate: '10 to 15 business days', image: './darkflag-v4.jpg', stripe_url: '' },
-    'darkflag-upgrade-04': { product_code: 'darkflag-upgrade-04', product_name: 'Dark Rear Visual Setup', product_short: 'Dark Rear Visual Setup for Dark Flag V4', fitment: 'Benda Dark Flag V4', price: 'To confirm', delivery_estimate: '10 to 15 business days', image: './darkflag-v4.jpg', stripe_url: '' },
-    'darkflag-upgrade-05': { product_code: 'darkflag-upgrade-05', product_name: 'Headlight Upgrade', product_short: 'Headlight Upgrade for Dark Flag V4', fitment: 'Benda Dark Flag V4', price: 'To confirm', delivery_estimate: '10 to 15 business days', image: './darkflag-v4.jpg', stripe_url: '' },
-    'darkflag-upgrade-06': { product_code: 'darkflag-upgrade-06', product_name: 'Engine Cover Set', product_short: 'Engine Cover Set for Dark Flag V4', fitment: 'Benda Dark Flag V4', price: 'To confirm', delivery_estimate: '10 to 15 business days', image: './darkflag-v4.jpg', stripe_url: '' },
-    'darkflag-upgrade-07': { product_code: 'darkflag-upgrade-07', product_name: 'Side Cover Set', product_short: 'Side Cover Set for Dark Flag V4', fitment: 'Benda Dark Flag V4', price: 'To confirm', delivery_estimate: '10 to 15 business days', image: './darkflag-v4.jpg', stripe_url: '' },
-    'darkflag-upgrade-08': { product_code: 'darkflag-upgrade-08', product_name: 'Rear Fender Kit', product_short: 'Rear Fender Kit for Dark Flag V4', fitment: 'Benda Dark Flag V4', price: 'To confirm', delivery_estimate: '10 to 15 business days', image: './darkflag-v4.jpg', stripe_url: '' },
-    'darkflag-upgrade-09': { product_code: 'darkflag-upgrade-09', product_name: 'Exhaust Style Kit', product_short: 'Exhaust Style Kit for Dark Flag V4', fitment: 'Benda Dark Flag V4', price: 'To confirm', delivery_estimate: '10 to 15 business days', image: './darkflag-v4.jpg', stripe_url: '' },
-    'darkflag-upgrade-10': { product_code: 'darkflag-upgrade-10', product_name: 'Handlebar Detail Kit', product_short: 'Handlebar Detail Kit for Dark Flag V4', fitment: 'Benda Dark Flag V4', price: 'To confirm', delivery_estimate: '10 to 15 business days', image: './darkflag-v4.jpg', stripe_url: '' }
-  };
 
   const CHECKOUT_SKU_MAP = {
     'black-striped-clutch-cover': 'black-ribbed-clutch-cover',
@@ -134,89 +101,6 @@
       ]
     }
   ];
-
-
-
-  const BENDAGO_V25_BUNDLES = {
-    'strong-pure-bob-essentials': {
-      name: 'Strong Pure Bob Essentials',
-      items: [
-        { code: 'rear-fender', color_option: 'Black' },
-        { code: 'tank-cover-support-volume', color_option: 'Black' }
-      ]
-    },
-    'strong-pure-bob-complete': {
-      name: 'Strong Pure Bob Complete Build',
-      items: [
-        { code: 'headlight-fairing' },
-        { code: 'top-bumper' },
-        { code: 'chassis-protection' },
-        { code: 'rear-fender', color_option: 'Black' },
-        { code: 'tank-cover-support-volume', color_option: 'Black' },
-        { code: 'premium-double-seat' },
-        { code: 'left-premium-engine-cover' },
-        { code: 'metal-foot-controls' }
-      ]
-    },
-    'headlight-fairing-essentials': {
-      name: 'Headlight Fairing Essentials',
-      items: [
-        { code: 'future-led-light' },
-        { code: 'black-striped-clutch-cover' }
-      ]
-    },
-    'headlight-fairing-complete': {
-      name: 'Headlight Fairing Complete Build',
-      items: [
-        { code: 'future-led-light' },
-        { code: 'top-bumper' },
-        { code: 'chassis-protection' },
-        { code: 'black-striped-clutch-cover' },
-        { code: 'chrome-engine-cover' },
-        { code: 'tank-cover-support-volume', color_option: 'Black' },
-        { code: 'premium-double-seat' },
-        { code: 'black-foot-control-kit' }
-      ]
-    },
-    'brutal-bob-essentials': {
-      name: 'Brutal Bob Essentials',
-      items: [
-        { code: 'right-engine-filter-cover' },
-        { code: 'closed-metal-hubcap-benda-samurai' }
-      ]
-    },
-    'brutal-bob-complete': {
-      name: 'Brutal Bob Complete Build',
-      items: [
-        { code: 'right-engine-filter-cover' },
-        { code: 'handlebar-riser' },
-        { code: 'transparent-clutch-cover' },
-        { code: 'gold-clutch-flywheel' },
-        { code: 'rear-led-seat-comfort' },
-        { code: 'brutal-rear-fender-kit' },
-        { code: 'closed-metal-hubcap-benda-samurai' },
-        { code: 'dual-exhaust', color_option: 'Chrome' }
-      ]
-    },
-    'blackout-predator-essentials': {
-      name: 'Blackout Predator Essentials',
-      items: [
-        { code: 'maverick-air-filter-cover' },
-        { code: 'tank-cover-support-volume', color_option: 'Black' }
-      ]
-    },
-    'blackout-predator-complete': {
-      name: 'Blackout Predator Complete Build',
-      items: [
-        { code: 'dual-exhaust', color_option: 'Black' },
-        { code: 'maverick-air-filter-cover' },
-        { code: 'headlight-fairing', color_option: 'Black' },
-        { code: 'black-foot-control-kit' },
-        { code: 'tank-cover-support-volume', color_option: 'Black' },
-        { code: 'premium-double-seat', color_option: 'Black' }
-      ]
-    }
-  };
 
   /* BENDAGO v55 — append build attribution to checkout GA4 events */
   const BUILD_ATTR_KEY_V55 = 'bendago_build_attribution_v55';
@@ -606,6 +490,10 @@ async function createStripeCheckout(lines, formData) {
     }
 
     const cfg = window.BENDAGO_EMAILJS_CONFIG || {};
+    if (!cfg.publicKey || cfg.publicKey.includes('PASTE_') || !cfg.serviceId || cfg.serviceId.includes('PASTE_')) {
+      throw new Error('EmailJS is not configured yet.');
+    }
+
     return { form, formData, lines, cfg, termsAcceptance };
   }
 
@@ -639,7 +527,7 @@ async function createStripeCheckout(lines, formData) {
       product_name: isSingle ? first.product_name : 'Grouped Benda Napoleon cart',
       product_short: isSingle ? first.product_short : 'Grouped Benda Napoleon parts',
       price: isSingle ? first.price : formatEuro(finalPricing.total),
-      fitment: formData.motorcycle_model || 'Benda custom build',
+      fitment: 'Benda Napoleon 125 / 250',
       delivery_estimate: '10 to 15 business days',
       payment_provider: 'Stripe',
       payment_url: checkout.checkout_url || '',
@@ -681,14 +569,9 @@ async function createStripeCheckout(lines, formData) {
       processing_note: 'Order processed after Stripe payment confirmation.'
     };
 
-    const emailReady = !!(cfg && cfg.publicKey && cfg.serviceId && cfg.adminTemplateId && cfg.clientTemplateId && window.emailjs && emailjs.init && !String(cfg.publicKey).includes('PASTE_') && !String(cfg.serviceId).includes('PASTE_'));
-    if (emailReady) {
-      emailjs.init({ publicKey: cfg.publicKey });
-      await emailjs.send(cfg.serviceId, cfg.adminTemplateId, emailData);
-      await emailjs.send(cfg.serviceId, cfg.clientTemplateId, emailData);
-    } else {
-      emailData.emailjs_status = 'skipped_missing_config';
-    }
+    if (window.emailjs && emailjs.init) emailjs.init({ publicKey: cfg.publicKey });
+    await emailjs.send(cfg.serviceId, cfg.adminTemplateId, emailData);
+    await emailjs.send(cfg.serviceId, cfg.clientTemplateId, emailData);
 
     push('stripe_checkout_created', {
       request_id: emailData.request_id,
@@ -734,18 +617,14 @@ async function createStripeCheckout(lines, formData) {
 
   function updateStripeCheckoutButtonLabel() {
     const button = document.getElementById('stripeCheckoutButton');
-    if (!button) return;
+    if (!button || button.disabled) return;
     const lines = getLines();
-    const pricing = calculateLaunchOffer(lines);
-    if (!lines.length || !pricing || pricing.total <= 0) {
+    if (!lines.length) {
       button.textContent = 'Pay securely now';
       button.dataset.readyText = button.textContent;
-      button.disabled = true;
-      button.classList.add('stripe-checkout-disabled');
       return;
     }
-    button.disabled = false;
-    button.classList.remove('stripe-checkout-disabled');
+    const pricing = calculateLaunchOffer(lines);
     button.textContent = 'Pay securely now — ' + formatEuro(pricing.total);
     button.dataset.readyText = button.textContent;
   }
@@ -790,7 +669,6 @@ async function createStripeCheckout(lines, formData) {
 
   function products() {
     const map = window.BENDAGO_PRODUCTS || {};
-    Object.keys(MULTIMODEL_FALLBACK_PRODUCTS).forEach(function(code){ if (!map[code]) map[code] = MULTIMODEL_FALLBACK_PRODUCTS[code]; });
     if (!map['ultra-single-seat-comfort']) {
       map['ultra-single-seat-comfort'] = {
         product_code: 'ultra-single-seat-comfort',
@@ -840,7 +718,7 @@ async function createStripeCheckout(lines, formData) {
   };
 
   function productPageUrl(code) {
-    return PRODUCT_PAGE_MAP[String(code || '').trim()] || './index.html#order-selected-parts';
+    return PRODUCT_PAGE_MAP[String(code || '').trim()] || './benda-napoleon-125-250-custom-parts.html#shop-part-by-part';
   }
 
   function getLines() {
@@ -850,7 +728,6 @@ async function createStripeCheckout(lines, formData) {
       if (!product) return null;
       const qty = Math.max(1, Number(item.qty) || 1);
       const unit = euroToNumber(product.price);
-      if (!unit || unit <= 0) return null;
       return { ...product, code: item.code, qty, color_option: optionLabel(item), line_total: unit * qty };
     }).filter(Boolean);
   }
@@ -933,44 +810,9 @@ async function createStripeCheckout(lines, formData) {
     saveCart([]);
   }
 
-
-  function hasValidPrice(product) {
-    return !!(product && euroToNumber(product.price) > 0);
-  }
-
-  function pricedBundleItems(bundleKey) {
-    const bundle = BENDAGO_V25_BUNDLES[bundleKey];
-    if (!bundle) return null;
-    const map = products();
-    const bad = bundle.items.filter(item => !map[item.code] || !hasValidPrice(map[item.code]));
-    if (bad.length) return null;
-    return bundle.items.map(item => ({
-      code: item.code,
-      qty: Math.max(1, Number(item.qty) || 1),
-      color_option: item.color_option || ''
-    }));
-  }
-
-  function addBundleToCart(bundleKey) {
-    const bundle = BENDAGO_V25_BUNDLES[bundleKey];
-    const items = pricedBundleItems(bundleKey);
-    if (!bundle || !items) {
-      showCartStatus('err', 'This build selection is being prepared. Choose ready priced parts from the Napoleon 125/250 catalogue.');
-      return false;
-    }
-    const changed = upsertMany(items);
-    push('cart_bundle_added', {
-      bundle_key: bundleKey,
-      bundle_name: bundle.name,
-      inserted_count: changed,
-      cart_count: cartCount()
-    });
-    return true;
-  }
-
   function addToCart(code, qty = 1, options = {}) {
     const map = products();
-    if (!code || !map[code] || !hasValidPrice(map[code])) return false;
+    if (!code || !map[code]) return false;
     const colorOption = cleanOption(options.color_option);
     const cart = readCart();
     const existing = cart.find(item => item.code === code && optionLabel(item) === colorOption);
@@ -993,13 +835,13 @@ async function createStripeCheckout(lines, formData) {
     let changed = 0;
     (Array.isArray(items) ? items : []).forEach(item => {
       const code = String(item && item.code || '').trim();
-      if (!code || !map[code] || !hasValidPrice(map[code])) return;
-      const colorOption = cleanOption((item.options && item.options.color_option) || item.color_option);
+      if (!code || !map[code]) return;
+      const colorOption = cleanOption(item.options && item.options.color_option);
       const existing = cart.find(line => line.code === code && optionLabel(line) === colorOption);
       if (existing) {
         existing.qty = Math.max(1, Number(existing.qty) || 1);
       } else {
-        cart.push({ code, qty: Math.max(1, Number(item.qty) || 1), color_option: colorOption });
+        cart.push({ code, qty: 1, color_option: colorOption });
         changed += 1;
       }
     });
@@ -1042,7 +884,7 @@ async function createStripeCheckout(lines, formData) {
       '<button type="button" class="cart-share-btn" data-cart-share disabled>Copy cart link</button>',
       '<div class="cart-secondary-actions">',
       '<button type="button" class="cart-clear-btn" data-cart-clear>Clear cart</button>',
-      '<a class="cart-other-product-btn" href="./#order-selected-parts" data-cart-other-product>Add another product</a>',
+      '<a class="cart-other-product-btn" href="./benda-napoleon-125-250-custom-parts.html#shop-part-by-part" data-cart-other-product>Add another product</a>',
       '</div>',
       '</div>'
     ].join('');
@@ -1189,7 +1031,7 @@ async function createStripeCheckout(lines, formData) {
     if (!box) return;
     const lines = getLines();
     if (!lines.length) {
-      box.innerHTML = '<h2>Your cart is empty</h2><p>Go back to the parts list and choose at least one Benda Napoleon part.</p><a class="yellow-btn" href="./index.html#order-selected-parts">Choose parts</a>';
+      box.innerHTML = '<h2>Your cart is empty</h2><p>Go back to the parts list and choose at least one Benda Napoleon part.</p><a class="yellow-btn" href="./benda-napoleon-125-250-custom-parts.html#shop-part-by-part">Choose parts</a>';
       return;
     }
     const pricing = calculateLaunchOffer(lines);
@@ -1253,52 +1095,15 @@ window.BendagoCart = {
     read: readCart,
     add: addToCart,
     upsertMany: upsertMany,
-    addBundle: addBundleToCart,
     open: openCart,
     render: renderCartDrawer,
     clear: clearCart,
     calculateLaunchOffer: calculateLaunchOffer
   };
 
-
-
-  function bindMultimodelPreviewButtons() {
-    if (window.__BENDAGO_MULTIMODEL_BUTTONS_BOUND__) return;
-    window.__BENDAGO_MULTIMODEL_BUTTONS_BOUND__ = true;
-    document.addEventListener('click', function (event) {
-      const disabled = event.target.closest('[data-add-disabled]');
-      if (disabled) {
-        event.preventDefault();
-        showCartStatus('err', 'This selection is being prepared. It will be activated when product photos, prices and checkout SKUs are confirmed.');
-        return;
-      }
-      const bundle = event.target.closest('[data-add-bundle]');
-      if (bundle) {
-        event.preventDefault();
-        const key = bundle.getAttribute('data-add-bundle');
-        if (addBundleToCart(key)) openCart();
-        return;
-      }
-      const add = event.target.closest('[data-add-preview]');
-      if (add) {
-        event.preventDefault();
-        const code = add.getAttribute('data-add-preview');
-        if (addToCart(code, 1, {})) openCart();
-        else showCartStatus('err', 'This selected part is not ready in the priced cart map yet.');
-        return;
-      }
-      const open = event.target.closest('[data-open-cart]');
-      if (open) {
-        event.preventDefault();
-        openCart();
-      }
-    });
-  }
-
   document.addEventListener('DOMContentLoaded', () => {
     const sharedCartLoaded = loadSharedCartFromUrl();
     ensureCartUi();
-    bindMultimodelPreviewButtons();
     bindCartForm();
     renderStripeCheckoutButton();
     updateStripeCheckoutButtonLabel();
