@@ -2513,3 +2513,60 @@ body.model-page .cart-floating-btn,
 /* Decorative cover card uses original product relation image and does not grow off rhythm. */
 #most-part-decorative-cover-side .thumb,.product-card[id='part-decorative-cover-side'] .thumb{background-position:center center !important;}
 /* END BENDAGO PATCH V50 */
+
+/* BENDAGO PATCH V52 — Desktop look cards not clipped
+   Scope: desktop model look cards only. Fixes V47/V50 fixed-height clipping where essentials/buttons were pushed below the visible card area. */
+@media(min-width:901px){
+  #looks .look-grid{
+    align-items:stretch !important;
+  }
+  .model-125 #looks .look-card{
+    height:auto !important;
+    min-height:650px !important;
+    max-height:none !important;
+    overflow:hidden !important;
+    display:flex !important;
+    flex-direction:column !important;
+  }
+  .model-500 #looks .look-card,
+  .model-v4 #looks .look-card{
+    height:auto !important;
+    min-height:610px !important;
+    max-height:none !important;
+    overflow:hidden !important;
+    display:flex !important;
+    flex-direction:column !important;
+  }
+  #looks .look-media,
+  #looks .look-media-video{
+    flex:0 0 190px !important;
+    height:190px !important;
+  }
+  #looks .look-body{
+    flex:1 1 auto !important;
+    min-height:0 !important;
+    height:auto !important;
+    display:flex !important;
+    flex-direction:column !important;
+  }
+  #looks .look-bundle-cta{
+    margin-top:auto !important;
+    flex:0 0 auto !important;
+    width:100% !important;
+  }
+  #looks .build-essentials-card{
+    min-height:108px !important;
+  }
+  #looks .build-bundle-actions{
+    display:grid !important;
+    grid-template-columns:1fr !important;
+    gap:8px !important;
+  }
+  #looks .build-bundle-actions .btn{
+    width:100% !important;
+    white-space:normal !important;
+    line-height:1.08 !important;
+    text-align:center !important;
+  }
+}
+/* END BENDAGO PATCH V52 */
