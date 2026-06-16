@@ -1,5 +1,15 @@
 /* BENDAGO ORDER + CART CHECKOUT FLOW */
 const BENDAGO_PRODUCTS = {
+  "premium-rear-fender-450": {
+    product_code: "premium-rear-fender-450",
+    product_name: 'Premium Rear Fender',
+    product_short: 'Premium rear fender kit Napoleon 450',
+    fitment: 'Benda Napoleon 450',
+    price: '323 €',
+    delivery_estimate: '10 to 15 business days',
+    image: './premium-rear-fender-450-hero.png',
+    stripe_url: ''
+  },
   "bumper-top-protect-450": {
     product_code: "bumper-top-protect-450",
     product_name: 'Top Bumper Protection',
