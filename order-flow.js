@@ -1,5 +1,15 @@
 /* BENDAGO ORDER + CART CHECKOUT FLOW */
 const BENDAGO_PRODUCTS = {
+  "carbon-exhaust-protection-kit-450": {
+    product_code: "carbon-exhaust-protection-kit-450",
+    product_name: 'Carbon Exhaust Protection Kit',
+    product_short: 'Carbon-look exhaust heat shield kit for Benda Napoleon 450/500',
+    fitment: 'Benda Napoleon 450/500',
+    price: '271 €',
+    delivery_estimate: '10 to 15 business days',
+    image: './carbon-exhaust-protection-kit-450-hero.png',
+    stripe_url: ''
+  },
   "premium-transparent-clutch-cover-kit-450": {
     product_code: "premium-transparent-clutch-cover-kit-450",
     product_name: 'Premium Transparent Clutch Cover Kit',
