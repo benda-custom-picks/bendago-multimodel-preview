@@ -1337,3 +1337,21 @@ body.home-page .hero-video{
   .follow-builds-links{grid-template-columns:1fr;}
   .faq-card{padding:16px;border-radius:18px;}
 }
+
+
+/* BENDAGO PATCH V41 — remove follow block, full-width FAQ on desktop
+   Scope: Home bottom layout only. No cart, checkout, Stripe, Worker or product logic changed. */
+@media (min-width: 901px){
+  .home-faq-section > .wrap{
+    width: calc(100vw - clamp(32px, 4vw, 72px)) !important;
+    max-width: none !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  .home-faq-section .faq-list,
+  .home-faq-section .faq-card{
+    width: 100% !important;
+    max-width: none !important;
+  }
+}
+/* END BENDAGO PATCH V41 */
