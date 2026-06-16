@@ -127,8 +127,7 @@
       { code: 'premium-comfort-foot-kit-450', options: { color_option: 'Skull Platinum' } }
     ],
     'midnight-hunter-essentials': [
-      { code: 'madmax-double-exhaust-kit-450' },
-      { code: 'maverick-air-filter-450' }
+      { code: 'premium-comfort-foot-kit-450', options: { color_option: 'Skull Platinum' } }
     ]
   };
 
@@ -144,7 +143,9 @@
         const box = button.closest('[data-bundle-box]');
         const msg = box ? box.querySelector('.build-bundle-added') : null;
         if (msg) {
-          msg.textContent = 'Added to cart. Launch Access 5% appears when Madmax + Maverick are together.';
+          msg.textContent = key === 'midnight-hunter-essentials'
+            ? 'Essentials added to cart. You can complete the full look later.'
+            : 'Complete look added to cart. Launch Access 5% appears in cart.';
           msg.classList.add('show');
         }
         push('build_bundle_add_click', {
