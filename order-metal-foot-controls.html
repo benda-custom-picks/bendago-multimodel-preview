@@ -18,8 +18,8 @@
 <meta content="Bronze Foot Control Kit for Benda Napoleon 125/250 | Benda Custom Picks" name="twitter:title"/>
 <meta content="Bronze Foot Control Kit for Benda Napoleon 125/250. Premium bronze foot controls, sharper riding position, product photos and secure Stripe checkout." name="twitter:description"/>
 <meta content="https://bendacustompicks.com/metal-foot-controls-hero.webp" name="twitter:image"/>
-<link href="./order-flow.css?v=v49-recovery-home-premium" rel="stylesheet"/>
-<link href="./cart-flow.css?v=v49-recovery-home-premium" rel="stylesheet"/>
+<link href="./order-flow.css?v=v50-responsive-qa-fix" rel="stylesheet"/>
+<link href="./cart-flow.css?v=v50-responsive-qa-fix" rel="stylesheet"/>
 <style>
 :root{--bg:#0b0e12;--line:rgba(255,255,255,.12);--text:#f5f7fb;--muted:#a9b3c2;--accent:#16d5c7;--accent2:#67f1a8;}
 *{box-sizing:border-box} html,body{max-width:100%;overflow-x:hidden} body{margin:0;background:radial-gradient(circle at top left,#203043 0,#0b0e12 38%,#07090c 100%);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;-webkit-user-select:none;user-select:none} a{color:inherit} .wrap{width:min(1160px,92vw);margin:auto} header{position:sticky;top:0;z-index:10;background:rgba(11,14,18,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)} nav{height:68px;display:flex;align-items:center;justify-content:space-between;gap:20px} .brand{display:flex;align-items:center;gap:12px;font-weight:900;text-decoration:none} .logo{width:38px;height:38px;border-radius:14px;background:linear-gradient(135deg,var(--accent),#ffd89b);display:grid;place-items:center;color:#071014;font-weight:900} .nav-link{text-decoration:none;color:var(--muted);font-weight:800;font-size:14px}
@@ -135,7 +135,7 @@ const mainImg=document.getElementById('mainProductImage');
 document.querySelectorAll('.product-thumb').forEach(btn=>{btn.addEventListener('click',()=>{document.querySelectorAll('.product-thumb').forEach(b=>b.classList.remove('active'));btn.classList.add('active');mainImg.src=btn.dataset.img;mainImg.alt=btn.dataset.alt||'Bronze Foot Control Kit product view';window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'product_gallery_click',product_name:'Bronze Foot Control Kit',image_src:btn.dataset.img});});});
 document.querySelectorAll('.order-btn').forEach(btn=>{btn.addEventListener('click',()=>{window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'product_order_request_click',product_name:'Bronze Foot Control Kit',product_price:'449',product_url:btn.href});});});
 </script>
-<script src="./order-flow.js?v=v49-recovery-home-premium"></script>
-<script src="./cart-flow.js?v=v49-recovery-home-premium"></script>
+<script src="./order-flow.js?v=v50-responsive-qa-fix"></script>
+<script src="./cart-flow.js?v=v50-responsive-qa-fix"></script>
 </body>
 </html>

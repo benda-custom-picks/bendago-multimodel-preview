@@ -1101,3 +1101,13 @@ a.btn.secondary{
 }
 .order-body .cart-count-badge{background:#d9b875 !important;color:#0d0905 !important;}
 /* END BENDAGO PATCH V49 */
+
+
+/* BENDAGO PATCH V50 — product gallery QA fix
+   Scope: product gallery buttons/cart offset only. */
+.order-body .cart-floating-btn{top:74px !important;right:12px !important;bottom:auto !important;min-height:34px !important;height:34px !important;padding:0 10px !important;border-radius:999px !important;font-size:11px !important;background:linear-gradient(180deg,rgba(255,255,255,.050),rgba(255,255,255,.014)),rgba(6,8,12,.94) !important;border:1px solid rgba(217,184,117,.42) !important;color:rgba(247,241,232,.92) !important;box-shadow:0 8px 20px rgba(0,0,0,.28) !important;}
+.order-body .secondary-btn.product-more-parts-btn{margin-top:8px !important;}
+.order-body .secondary-btn,.order-body a.secondary-btn{border-color:rgba(217,184,117,.36) !important;background:linear-gradient(180deg,rgba(255,255,255,.050),rgba(255,255,255,.014)),rgba(6,8,12,.92) !important;color:rgba(247,241,232,.92) !important;}
+@media(max-width:760px){.order-body .cart-floating-btn{top:82px !important;right:10px !important;max-width:76px !important;overflow:hidden !important;}.order-body .info-card{padding-top:18px !important;}}
+@media(orientation:landscape) and (max-height:520px) and (max-width:980px){.order-body .cart-floating-btn{top:54px !important;height:32px !important;min-height:32px !important;}}
+/* END BENDAGO PATCH V50 */

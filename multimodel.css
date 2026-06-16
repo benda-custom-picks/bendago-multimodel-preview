@@ -2442,3 +2442,74 @@ body.model-page .cart-floating-btn,
   color:rgba(247,241,232,.46) !important;
 }
 /* END BENDAGO PATCH V49 */
+
+
+/* BENDAGO PATCH V50 — Responsive QA fix
+   Scope: responsive cart, look-card alignment, model guides, product-card rhythm. No checkout/Worker/SKU/price logic. */
+:root{
+  --v50-gold:#d9b875;
+  --v50-gold-soft:#f2d89d;
+  --v50-line:rgba(217,184,117,.34);
+  --v50-panel:rgba(7,9,13,.92);
+  --v50-text:#f7f1e8;
+}
+/* Home mobile: bring back one discreet header cart, not yellow and not floating. */
+@media(max-width:900px){
+  body.home-page .bcp-header{padding:0 104px 0 14px !important;overflow:hidden !important;}
+  body.home-page .bcp-nav{display:flex !important;position:absolute !important;right:10px !important;top:50% !important;transform:translateY(-50%) !important;gap:0 !important;z-index:70 !important;}
+  body.home-page .bcp-nav a:not(.cart-link){display:none !important;}
+  body.home-page .cart-link{display:inline-flex !important;align-items:center !important;justify-content:center !important;gap:5px !important;width:auto !important;min-width:58px !important;max-width:76px !important;height:30px !important;padding:0 9px !important;border-radius:999px !important;border:1px solid rgba(217,184,117,.42) !important;background:linear-gradient(180deg,rgba(255,255,255,.052),rgba(255,255,255,.014)),rgba(6,8,12,.92) !important;color:rgba(247,241,232,.92) !important;box-shadow:none !important;font-size:10px !important;font-weight:900 !important;letter-spacing:.08em !important;text-transform:uppercase !important;}
+  body.home-page .cart-link::before{content:'🛒';font-size:12px;line-height:1;}
+}
+/* Model pages mobile: kill floating cart, keep one small static header cart pill. */
+@media(max-width:900px){
+  body.model-page .cart-floating-btn,.model-page .cart-floating-btn{display:none !important;visibility:hidden !important;opacity:0 !important;pointer-events:none !important;}
+  .model-page .nav{padding-right:0 !important;min-height:42px !important;display:flex !important;align-items:center !important;}
+  .model-page .brand{min-width:0 !important;max-width:calc(100vw - 112px) !important;overflow:hidden !important;}
+  .model-page .cart-pill{display:inline-flex !important;align-items:center !important;justify-content:center !important;gap:4px !important;flex:0 0 auto !important;min-height:30px !important;min-width:58px !important;padding:0 8px !important;border-radius:999px !important;border:1px solid rgba(217,184,117,.38) !important;background:linear-gradient(180deg,rgba(255,255,255,.052),rgba(255,255,255,.014)),rgba(6,8,12,.92) !important;color:rgba(247,241,232,.92) !important;font-size:10px !important;letter-spacing:.06em !important;box-shadow:none !important;}
+  .model-page .cart-pill::before{content:'🛒';font-size:12px;line-height:1;}
+  .model-page .cart-pill span{display:inline-grid !important;place-items:center !important;min-width:17px !important;height:17px !important;margin-left:1px !important;border-radius:999px !important;background:rgba(217,184,117,.92) !important;color:#080705 !important;font-size:10px !important;font-weight:950 !important;}
+}
+/* Look carousel: equal card rhythm on responsive, fixed internal zones and aligned CTAs. */
+@media(max-width:900px){
+  #looks .look-grid{align-items:stretch !important;scroll-padding-left:0 !important;}
+  #looks .look-card{flex:0 0 min(82vw,360px) !important;display:flex !important;flex-direction:column !important;height:740px !important;min-height:740px !important;max-height:740px !important;overflow:hidden !important;}
+  #looks .look-media,#looks .look-media-video{height:190px !important;flex:0 0 190px !important;}
+  #looks .look-body{flex:1 1 auto !important;display:grid !important;grid-template-rows:auto auto minmax(58px,auto) minmax(92px,auto) 1fr !important;gap:10px !important;padding:15px !important;min-height:0 !important;}
+  #looks .look-body h3{font-size:22px !important;line-height:1.05 !important;min-height:48px !important;display:flex !important;align-items:flex-end !important;margin:0 !important;}
+  #looks .tagline{min-height:18px !important;margin:0 !important;display:flex !important;align-items:center !important;}
+  #looks .look-body p{min-height:58px !important;margin:0 !important;font-size:12.5px !important;line-height:1.36 !important;overflow:hidden !important;}
+  #looks .parts-list{min-height:92px !important;margin:0 !important;font-size:12.5px !important;line-height:1.34 !important;overflow:hidden !important;}
+  #looks .look-bundle-cta{align-self:end !important;margin-top:0 !important;padding-top:0 !important;display:grid !important;gap:8px !important;}
+  #looks .build-essentials-card{min-height:112px !important;display:grid !important;align-content:start !important;padding:12px !important;}
+  #looks .build-bundle-actions{display:grid !important;grid-template-columns:1fr !important;gap:8px !important;}
+  #looks .build-bundle-actions .btn{width:100% !important;min-height:44px !important;padding:0 10px !important;white-space:normal !important;line-height:1.08 !important;text-align:center !important;}
+}
+@media(max-width:430px){#looks .look-card{height:715px !important;min-height:715px !important;max-height:715px !important;flex-basis:82vw !important;}#looks .look-media,#looks .look-media-video{height:176px !important;flex-basis:176px !important;}#looks .build-bundle-actions .btn{font-size:9.4px !important;letter-spacing:.052em !important;}}
+/* Most clicked carousel: equal card dimensions and corrected visual rhythm. */
+@media(max-width:900px){
+  #most-clicked .product-grid{align-items:stretch !important;}
+  #most-clicked .product-card{flex:0 0 min(78vw,330px) !important;min-height:610px !important;display:flex !important;flex-direction:column !important;}
+  #most-clicked .product-card .thumb{height:255px !important;flex:0 0 255px !important;background-size:cover !important;background-position:center center !important;}
+  #most-clicked .product-card .body{flex:1 !important;display:grid !important;grid-template-rows:auto minmax(54px,auto) auto auto auto auto !important;gap:10px !important;padding:16px !important;}
+  #most-clicked .product-card h3{min-height:48px !important;display:flex !important;align-items:end !important;}
+  #most-clicked .product-card p{min-height:54px !important;overflow:hidden !important;}
+  #most-clicked .product-details-link{margin-top:auto !important;}
+}
+/* Build / model guides. */
+.model-guide-section{padding-top:24px !important;padding-bottom:28px !important;}
+.model-guide-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;align-items:stretch;}
+.model-guide-card{position:relative;display:flex;flex-direction:column;gap:10px;min-height:190px;padding:18px;border-radius:20px;border:1px solid rgba(217,184,117,.20);background:radial-gradient(circle at 16% 0%,rgba(217,184,117,.10),transparent 42%),linear-gradient(180deg,rgba(255,255,255,.044),rgba(255,255,255,.014)),rgba(7,9,13,.90);box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 16px 36px rgba(0,0,0,.22);}
+.model-guide-icon{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(217,184,117,.32);color:var(--v50-gold-soft);font-size:11px;}
+.model-guide-card h3{margin:0;color:var(--v50-text);font-size:17px;line-height:1.12;}
+.model-guide-card p{margin:0;color:rgba(247,241,232,.64);font-size:13px;line-height:1.42;}
+.model-guide-link{margin-top:auto;min-height:38px;border-radius:13px;border:1px solid rgba(217,184,117,.32);display:flex;align-items:center;justify-content:center;color:rgba(247,241,232,.90);font-size:10px;font-weight:950;letter-spacing:.10em;text-transform:uppercase;background:rgba(6,8,12,.72);}
+@media(max-width:900px){.model-guide-grid{display:flex;overflow-x:auto;gap:12px;padding:2px 16px 12px 0;margin-right:-16px;scroll-snap-type:x mandatory;scrollbar-width:none}.model-guide-grid::-webkit-scrollbar{display:none}.model-guide-card{flex:0 0 min(78vw,320px);scroll-snap-align:start;min-height:200px}.model-guide-section .section-head p{display:block !important;font-size:12px !important;line-height:1.42 !important;}}
+/* Icon/text alignment in trust cards on Napoleon 450/500 and Dark Flag. */
+.model-proof-trust-item{display:flex !important;align-items:center !important;gap:12px !important;padding:16px !important;}
+.model-proof-icon{flex:0 0 38px !important;width:38px !important;height:38px !important;display:grid !important;place-items:center !important;line-height:1 !important;}
+.model-proof-copy{display:flex !important;flex-direction:column !important;justify-content:center !important;min-width:0 !important;gap:3px !important;}
+.model-proof-copy strong,.model-proof-copy small{display:block !important;margin:0 !important;line-height:1.18 !important;}
+/* Decorative cover card uses original product relation image and does not grow off rhythm. */
+#most-part-decorative-cover-side .thumb,.product-card[id='part-decorative-cover-side'] .thumb{background-position:center center !important;}
+/* END BENDAGO PATCH V50 */

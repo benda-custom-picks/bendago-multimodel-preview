@@ -2305,3 +2305,21 @@ body.model-page .cart-floating-btn,
 .model-page .cart-floating-btn{display:none !important;visibility:hidden !important;opacity:0 !important;pointer-events:none !important;}
 .cart-count-badge{background:#d9b875 !important;color:#0d0905 !important;}
 /* END BENDAGO PATCH V49 */
+
+
+/* BENDAGO PATCH V50 — cart QA responsive fix
+   Scope: cart position/visual only. */
+body.home-page .cart-floating-btn,
+body.model-page .cart-floating-btn,
+.home-page .cart-floating-btn,
+.model-page .cart-floating-btn{display:none !important;visibility:hidden !important;opacity:0 !important;pointer-events:none !important;}
+/* On product pages, keep cart available but move it below the top header zone so it does not cover navigation/content. */
+.order-body .cart-floating-btn{top:74px !important;right:12px !important;bottom:auto !important;min-height:34px !important;height:34px !important;padding:0 10px !important;border-radius:999px !important;font-size:11px !important;letter-spacing:.04em !important;background:linear-gradient(180deg,rgba(255,255,255,.050),rgba(255,255,255,.014)),rgba(6,8,12,.94) !important;border:1px solid rgba(217,184,117,.42) !important;color:rgba(247,241,232,.92) !important;box-shadow:0 8px 20px rgba(0,0,0,.28) !important;}
+.order-body .cart-floating-btn::before{font-size:12px !important;margin-right:5px !important;}
+.order-body .cart-count-badge{min-width:18px !important;height:18px !important;padding:0 5px !important;font-size:10px !important;background:rgba(217,184,117,.92) !important;color:#080705 !important;}
+@media(max-width:760px){.order-body .cart-floating-btn{top:82px !important;right:10px !important;max-width:76px !important;overflow:hidden !important;}}
+@media(orientation:landscape) and (max-height:520px) and (max-width:980px){.order-body .cart-floating-btn{top:54px !important;right:10px !important;height:32px !important;min-height:32px !important;}}
+/* Drawer hierarchy stays premium and avoids oversized yellow legacy feeling. */
+.cart-checkout-btn{border-radius:15px !important;}
+.cart-line-details-link,.cart-summary-product-link{color:#d9b875 !important;}
+/* END BENDAGO PATCH V50 */
