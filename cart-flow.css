@@ -2204,3 +2204,25 @@ body.home-page .cart-floating-btn,
   .cart-clear-btn,.cart-other-product-btn{min-height:32px !important;font-size:.72rem !important;}
 }
 /* END BENDAGO PATCH V46 */
+
+
+/* BENDAGO PATCH V47 — cart drawer clean hierarchy */
+body.home-page .cart-floating-btn,
+.model-page .cart-floating-btn{display:none !important;}
+.cart-footer{display:flex !important;flex-direction:column !important;gap:9px !important;padding:14px !important;background:rgba(5,7,11,.96) !important;}
+.cart-pricing-block{order:1 !important;}
+.cart-note{order:2 !important;font-size:12px !important;line-height:1.34 !important;color:rgba(246,241,232,.62) !important;background:rgba(216,182,115,.07) !important;border:1px solid rgba(216,182,115,.13) !important;}
+.cart-checkout-btn{order:3 !important;min-height:50px !important;border-radius:16px !important;background:linear-gradient(180deg,#f0d99d,#c89445) !important;color:#0b0905 !important;font-weight:950 !important;}
+.cart-secondary-actions{order:4 !important;display:grid !important;grid-template-columns:minmax(0,1.35fr) minmax(0,.65fr) !important;gap:8px !important;margin:0 !important;}
+.cart-other-product-btn{order:1 !important;min-height:40px !important;border-radius:14px !important;border-color:rgba(216,182,115,.28) !important;background:rgba(255,255,255,.035) !important;color:rgba(246,241,232,.88) !important;}
+.cart-clear-btn{order:2 !important;min-height:40px !important;border-radius:14px !important;opacity:.52 !important;background:transparent !important;color:rgba(246,241,232,.70) !important;}
+.cart-share-btn{order:5 !important;min-height:32px !important;border:0 !important;background:transparent !important;color:rgba(246,241,232,.45) !important;font-size:.74rem !important;box-shadow:none !important;}
+.cart-checkout-btn,.cart-share-btn,.cart-clear-btn,.cart-other-product-btn{width:100% !important;max-width:100% !important;white-space:normal !important;line-height:1.12 !important;text-align:center !important;}
+@media(max-width:430px){.cart-secondary-actions{grid-template-columns:1fr !important;}.cart-share-btn{font-size:.72rem !important;}}
+@media(orientation:landscape) and (max-height:520px) and (max-width:980px){
+  .cart-footer{gap:6px !important;padding:8px 10px !important;}
+  .cart-note,.cart-share-btn{display:none !important;}
+  .cart-checkout-btn{min-height:34px !important;font-size:.80rem !important;}
+  .cart-clear-btn,.cart-other-product-btn{min-height:30px !important;font-size:.70rem !important;}
+}
+/* END BENDAGO PATCH V47 */

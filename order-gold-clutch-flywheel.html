@@ -18,8 +18,8 @@
 <meta content="Gold Clutch Inner Accent for Benda Napoleon 125/250 | Benda Custom Picks" name="twitter:title"/>
 <meta content="Gold Clutch Inner Accent for Benda Napoleon 125/250. Premium gold engine-side accent, custom mechanical look, product photos and secure Stripe checkout." name="twitter:description"/>
 <meta content="https://bendacustompicks.com/gold-clutch-flywheel-retouched-1.webp" name="twitter:image"/>
-<link href="./order-flow.css?v=v46-recovery-cro" rel="stylesheet"/>
-<link href="./cart-flow.css?v=v46-recovery-cro" rel="stylesheet"/>
+<link href="./order-flow.css?v=v47-clean-alignment" rel="stylesheet"/>
+<link href="./cart-flow.css?v=v47-clean-alignment" rel="stylesheet"/>
 <style>
 :root{--bg:#080d13;--panel:#151b22;--line:rgba(255,255,255,.13);--text:#f2f6fb;--muted:#c7d0da;--accent:#38efb2;--cyan:#29c9d5}
 *{box-sizing:border-box}html,body{max-width:100%;overflow-x:hidden}
@@ -139,7 +139,7 @@ h2{font-size:31px;line-height:1.06;margin:0 0 18px}.desc{font-size:17px;line-hei
 (function(){ const main = document.getElementById('mainProductImage'); const gallery = document.querySelector('.gallery'); if (!main || !gallery) return; gallery.addEventListener('click', function(event){ const btn = event.target.closest('.product-thumb'); if (!btn || !gallery.contains(btn)) return; event.preventDefault(); const src = btn.getAttribute('data-img') || (btn.querySelector('img') ? btn.querySelector('img').getAttribute('src') : ''); const alt = btn.getAttribute('data-alt') || (btn.querySelector('img') ? btn.querySelector('img').getAttribute('alt') : 'Product image'); if (!src) return; main.src = src; main.alt = alt; gallery.querySelectorAll('.product-thumb').forEach(t => t.classList.remove('active')); btn.classList.add('active'); window.dataLayer = window.dataLayer || []; window.dataLayer.push({ event: 'product_gallery_click', product_name: document.body.getAttribute('data-product') || document.title, image_src: src }); });
 })();
 </script>
-<script src="./order-flow.js?v=v46-recovery-cro"></script>
-<script src="./cart-flow.js?v=v46-recovery-cro"></script>
+<script src="./order-flow.js?v=v47-clean-alignment"></script>
+<script src="./cart-flow.js?v=v47-clean-alignment"></script>
 </body>
 </html>

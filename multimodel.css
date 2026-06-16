@@ -2059,3 +2059,217 @@ body.home-page .cart-floating-btn,
   .model-page .footer .wrap,.footer .wrap,.site-footer .wrap{font-size:10.5px !important;width:min(100% - 28px,720px) !important;}
 }
 /* END BENDAGO PATCH V46 */
+
+
+/* BENDAGO PATCH V47 — Clean Alignment
+   Purpose: coherent premium layout, equal look-card heights, single CTA hierarchy, no legacy colors, header-only cart. */
+:root{
+  --v47-bg:#05070b;
+  --v47-card:#0b0d11;
+  --v47-card-2:#101318;
+  --v47-border:rgba(215,178,111,.20);
+  --v47-border-strong:rgba(215,178,111,.38);
+  --v47-gold:#d8b673;
+  --v47-gold-soft:#f1d99d;
+  --v47-text:#f6f1e8;
+  --v47-muted:rgba(246,241,232,.66);
+  --v47-emerald:#64e8b7;
+}
+body.home-page .cart-floating-btn,
+.model-page .cart-floating-btn{display:none !important;}
+.model-page .cart-pill,
+.home-page .cart-link{
+  border:1px solid var(--v47-border-strong) !important;
+  background:linear-gradient(180deg,rgba(255,255,255,.052),rgba(255,255,255,.012)),rgba(5,7,11,.92) !important;
+  color:var(--v47-text) !important;
+}
+.model-page .section{padding-top:34px !important;padding-bottom:34px !important;}
+.model-page .section-head{margin:0 0 20px !important;}
+.model-page .section-head h2{letter-spacing:-.035em !important;}
+.model-page .section-head p{color:var(--v47-muted) !important;line-height:1.45 !important;}
+@media(min-width:901px){
+  #looks.model-start{padding-top:30px !important;padding-bottom:28px !important;}
+  #looks .wrap{width:min(1080px,calc(100% - 72px)) !important;}
+  .model-125 #looks .look-grid{
+    display:grid !important;
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:18px !important;
+    align-items:stretch !important;
+  }
+  .model-500 #looks .look-grid,
+  .model-v4 #looks .look-grid,
+  #looks .look-grid.look-grid-single{
+    display:grid !important;
+    grid-template-columns:minmax(0,480px) !important;
+    justify-content:center !important;
+    gap:18px !important;
+    max-width:520px !important;
+    margin-inline:auto !important;
+  }
+  #looks .look-card{
+    display:grid !important;
+    grid-template-rows:190px minmax(0,1fr) !important;
+    height:555px !important;
+    min-height:0 !important;
+    border-radius:20px !important;
+    overflow:hidden !important;
+    background:linear-gradient(180deg,rgba(255,255,255,.046),rgba(255,255,255,.015)),rgba(8,10,14,.92) !important;
+    border:1px solid var(--v47-border) !important;
+    box-shadow:0 18px 50px rgba(0,0,0,.34) !important;
+  }
+  .model-500 #looks .look-card,
+  .model-v4 #looks .look-card{height:535px !important;}
+  #looks .look-media,
+  #looks .look-media-video{
+    height:190px !important;
+    min-height:0 !important;
+    border-radius:20px 20px 0 0 !important;
+    overflow:hidden !important;
+  }
+  #looks .look-video,
+  #looks .look-media video,
+  #looks .look-media img{height:100% !important;width:100% !important;object-fit:cover !important;display:block !important;}
+  #looks .look-body{
+    display:flex !important;
+    flex-direction:column !important;
+    min-height:0 !important;
+    height:100% !important;
+    gap:8px !important;
+    padding:17px 18px 18px !important;
+  }
+  #looks .look-body h3{font-size:clamp(23px,1.55vw,28px) !important;line-height:1.02 !important;margin:0 !important;min-height:30px !important;}
+  #looks .tagline{font-size:10px !important;line-height:1.15 !important;letter-spacing:.17em !important;margin:0 !important;color:var(--v47-gold) !important;}
+  #looks .look-body p{font-size:12.5px !important;line-height:1.40 !important;margin:0 !important;color:rgba(246,241,232,.68) !important;min-height:52px !important;}
+  #looks .parts-list{font-size:12px !important;line-height:1.28 !important;margin:2px 0 0 !important;padding-left:16px !important;color:rgba(246,241,232,.78) !important;min-height:52px !important;}
+  #looks .parts-list li{margin:0 0 3px !important;}
+  #looks .look-bundle-cta{
+    margin-top:auto !important;
+    padding-top:10px !important;
+    display:grid !important;
+    gap:9px !important;
+  }
+  #looks .build-essentials-card{
+    min-height:98px !important;
+    padding:12px 13px !important;
+    border-radius:15px !important;
+    background:linear-gradient(180deg,rgba(255,255,255,.042),rgba(255,255,255,.014)),rgba(8,10,13,.88) !important;
+    border:1px solid rgba(215,178,111,.24) !important;
+  }
+  #looks .build-essentials-head{margin-bottom:7px !important;}
+  #looks .build-essentials-head span{font-size:9px !important;letter-spacing:.15em !important;color:rgba(215,178,111,.86) !important;}
+  #looks .build-essentials-head b{font-size:24px !important;line-height:1 !important;color:var(--v47-gold-soft) !important;}
+  #looks .build-essentials-card ul{gap:5px !important;}
+  #looks .build-essentials-card li{font-size:11.5px !important;line-height:1.18 !important;padding-left:17px !important;}
+  #looks .build-essentials-card li::before{width:10px !important;height:10px !important;top:.20em !important;}
+  #looks .build-bundle-actions{display:grid !important;grid-template-columns:1fr !important;gap:8px !important;margin-top:0 !important;}
+}
+/* Remove duplicate promo card physically from layout if any old cache still contains it. */
+.build-launch-card{display:none !important;}
+#looks .build-bundle-review.primary,
+#looks .btn.build-bundle-review.primary:not(.is-disabled){
+  min-height:44px !important;
+  border-radius:14px !important;
+  border:1px solid rgba(100,232,183,.50) !important;
+  background:linear-gradient(180deg,rgba(100,232,183,.18),rgba(100,232,183,.075)),rgba(8,34,27,.86) !important;
+  color:#eafff6 !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.10),0 10px 24px rgba(0,0,0,.24) !important;
+  font-size:11px !important;
+  letter-spacing:.065em !important;
+  text-transform:uppercase !important;
+}
+#looks .build-bundle-review.secondary{
+  min-height:42px !important;
+  border-radius:14px !important;
+  border:1px solid rgba(215,178,111,.32) !important;
+  background:linear-gradient(180deg,rgba(255,255,255,.042),rgba(255,255,255,.012)),rgba(7,10,14,.88) !important;
+  color:rgba(246,241,232,.90) !important;
+  font-size:11px !important;
+  letter-spacing:.045em !important;
+  text-transform:uppercase !important;
+}
+#looks .build-bundle-review.is-disabled{
+  border-color:rgba(215,178,111,.22) !important;
+  background:rgba(255,255,255,.045) !important;
+  color:rgba(246,241,232,.54) !important;
+  box-shadow:none !important;
+  cursor:not-allowed !important;
+}
+#looks .build-bundle-added{font-size:11px !important;color:rgba(246,241,232,.56) !important;line-height:1.3 !important;}
+/* Product cards: fixed internal rhythm, bottom-aligned CTAs, no old blue/green. */
+.model-page .product-grid{align-items:stretch !important;}
+.model-page .product-card{
+  display:flex !important;
+  flex-direction:column !important;
+  height:100% !important;
+  min-height:0 !important;
+  border-radius:18px !important;
+  border:1px solid var(--v47-border) !important;
+  background:linear-gradient(180deg,rgba(255,255,255,.040),rgba(255,255,255,.012)),rgba(8,10,14,.90) !important;
+  overflow:hidden !important;
+}
+.model-page .product-card .thumb{height:158px !important;flex:0 0 158px !important;}
+.model-page .product-card .body{
+  flex:1 !important;
+  display:flex !important;
+  flex-direction:column !important;
+  gap:9px !important;
+  padding:16px 16px 17px !important;
+  min-height:0 !important;
+}
+.model-page .product-card h3{font-size:16px !important;line-height:1.10 !important;margin:0 !important;}
+.model-page .product-card p{font-size:12.5px !important;line-height:1.35 !important;margin:0 !important;color:rgba(246,241,232,.64) !important;}
+.model-page .product-card .product-meta{margin-top:2px !important;line-height:1.2 !important;gap:8px !important;}
+.model-page .product-card .small{font-size:11px !important;line-height:1.25 !important;color:rgba(246,241,232,.50) !important;}
+.model-page .product-details-link{
+  margin-top:auto !important;
+  min-height:40px !important;
+  border-radius:13px !important;
+  border:1px solid rgba(215,178,111,.30) !important;
+  background:rgba(5,7,11,.72) !important;
+  color:rgba(246,241,232,.88) !important;
+  display:flex !important;align-items:center !important;justify-content:center !important;
+}
+.model-page .add-preview{
+  margin-top:7px !important;
+  min-height:42px !important;
+  border-radius:13px !important;
+  border:1px solid rgba(215,178,111,.50) !important;
+  background:linear-gradient(180deg,rgba(215,178,111,.95),rgba(176,124,56,.96)) !important;
+  color:#0c0905 !important;
+  font-weight:950 !important;
+  display:flex !important;align-items:center !important;justify-content:center !important;
+}
+.model-page .add-preview::before,.model-page .add-preview::after{display:none !important;}
+/* Footer: compact premium legal, no orphan cheap text. */
+.bcp-footer.footer,.model-page .footer{
+  margin-top:10px !important;
+  padding:18px 0 24px !important;
+  border-top:1px solid rgba(215,178,111,.13) !important;
+  background:rgba(0,0,0,.16) !important;
+}
+.bcp-footer.footer .wrap,.model-page .footer .wrap{
+  width:min(1040px,calc(100% - 40px)) !important;
+  display:grid !important;
+  gap:4px !important;
+  text-align:center !important;
+  color:rgba(246,241,232,.44) !important;
+  font-size:11px !important;
+  line-height:1.45 !important;
+  letter-spacing:.015em !important;
+}
+.bcp-footer.footer p{margin:0 !important;}
+.bcp-footer.footer a{color:rgba(215,178,111,.72) !important;text-decoration:none !important;}
+@media(max-width:900px){
+  #looks .look-card{display:flex !important;flex-direction:column !important;height:auto !important;min-height:0 !important;border-radius:20px !important;}
+  #looks .look-media,#looks .look-media-video{height:220px !important;flex:0 0 220px !important;}
+  #looks .look-body{display:flex !important;flex-direction:column !important;gap:10px !important;padding:16px !important;}
+  #looks .look-body p,#looks .parts-list{min-height:0 !important;}
+  #looks .look-bundle-cta{margin-top:8px !important;}
+  .model-page .product-card .body{padding:15px !important;}
+}
+@media(max-width:430px){
+  #looks .look-media,#looks .look-media-video{height:205px !important;flex-basis:205px !important;}
+  #looks .build-bundle-review.primary,#looks .build-bundle-review.secondary{min-height:44px !important;font-size:10px !important;padding-left:10px !important;padding-right:10px !important;}
+  .model-page .section{padding-top:28px !important;padding-bottom:28px !important;}
+}
+/* END BENDAGO PATCH V47 */
