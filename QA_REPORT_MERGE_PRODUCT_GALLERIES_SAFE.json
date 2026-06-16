@@ -1,0 +1,24 @@
+{
+  "file_count": 196,
+  "order_pages_count": 33,
+  "has_cname": false,
+  "bad_strings": {
+    "preview-cart.js": [],
+    "nap125250-look-pack": [],
+    "GTM-": [],
+    "anti-copy.js": [],
+    "sumup": [],
+    "paypal": []
+  },
+  "order_pages_noindex_all": true,
+  "cards_add_to_cart_count": 33,
+  "view_gallery_count": 33,
+  "image_title_order_href_occurrences": 99,
+  "start_with_essentials_present": true,
+  "complete_look_present": true,
+  "shop_part_text_500": true,
+  "shop_part_text_darkflag": true,
+  "order_media_refs_count": 317,
+  "order_media_missing": [],
+  "order_media_missing_count": 0
+}

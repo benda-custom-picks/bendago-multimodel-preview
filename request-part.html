@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="noindex,nofollow" name="robots"/>
+<title>Request this part – Benda Custom Picks</title>
+<meta content="Send a parts request and confirm your delivery details before secure Stripe payment." name="description"/>
+<link rel="canonical" href="https://bendacustompicks.com/request-part.html"/>
+<meta property="og:url" content="https://bendacustompicks.com/request-part.html"/>
+<link href="./order-flow.css" rel="stylesheet"/>
+</head>
+<body class="order-body">
+<header class="order-header">
+<nav class="order-wrap order-nav">
+<a class="order-brand" href="./index.html"><span class="order-logo">B</span><span>Benda Custom Picks</span></a>
+<div class="order-links">
+<a href="./index.html#shop-builds">Builds</a>
+<a href="./order-headlight-fairing.html">Headlight</a>
+<a href="./order-chassis-protection.html">Chassis Protection</a>
+<a href="./index.html#products">Parts</a>
+<a href="./terms-and-conditions.html">Terms</a>
+<a class="send-moto" href="mailto:support@bendacustompicks.com">Support</a>
+</div>
+</nav>
+</header>
+<main class="order-wrap request-layout">
+<a class="back-link" href="javascript:history.back()">← Back to product</a>
+<section class="request-card">
+<div class="request-top">
+<div>
+<h1 class="product-title">Confirm your order details</h1>
+<p>Fill out your contact, Benda Napoleon model and delivery details. Then continue to the secure Stripe card payment page for this product.</p>
+</div>
+<div class="request-product-mini">
+<img alt="Selected product" data-product-image="" src="./fairing-hero.png"/>
+<div><strong data-product-name-text="">Selected product</strong><br/><span data-product-fitment-text="">Benda Napoleon 125/250</span></div>
+</div>
+</div>
+<form id="orderRequestForm"><input name="payment_provider" type="hidden"/><input name="payment_url" type="hidden"/><input name="stripe_url" type="hidden"/>
+<input name="product_code" type="hidden"/>
+<input name="product_name" type="hidden"/>
+<input name="product_short" type="hidden"/>
+<input name="price" type="hidden"/>
+<input name="fitment" type="hidden"/>
+<input name="delivery_estimate" type="hidden"/>
+<input name="request_page" type="hidden"/>
+<input name="referrer" type="hidden"/>
+<input name="utm_source" type="hidden"/><input name="utm_medium" type="hidden"/><input name="utm_campaign" type="hidden"/><input name="utm_content" type="hidden"/>
+<div class="form-grid">
+<div class="field"><label>Full name *</label><input name="customer_name" placeholder="e.g. John Doe" required=""/></div>
+<div class="field"><label>Email *</label><input name="email" placeholder="e.g. john@example.com" required="" type="email"/></div>
+<div class="field"><label>Phone</label><input name="phone" placeholder="e.g. +33 6 12 34 56 78"/></div>
+<div class="field"><label>Country *</label><input name="country" placeholder="e.g. France" required=""/></div>
+<div class="field"><label>Motorcycle model *</label><input name="motorcycle_model" placeholder="e.g. Benda Napoleon 125" required=""/></div>
+<div class="field"><label>Year / version *</label><input name="year_version" placeholder="e.g. 2024" required=""/></div>
+<div class="field"><label>Quantity *</label><input min="1" name="quantity" required="" type="number" value="1"/></div><div class="field" id="colorOptionField"><label>Colour / option</label><select id="colorOptionSelect" name="color_option"><option value="">To confirm / not applicable</option><option value="Black">Black</option><option value="Green">Green</option><option value="Grey">Grey</option></select></div>
+<div class="field"><label>Delivery city / country *</label><input name="delivery_city_country" placeholder="e.g. Paris, France" required=""/></div>
+<div class="field full"><label>Delivery address</label><textarea name="delivery_address" placeholder="Street, postcode, city, country"></textarea></div>
+<div class="field full"><label>Message / notes</label><textarea name="message" placeholder="Anything we should know about your Benda Napoleon or order?"></textarea></div>
+</div>
+<div class="form-note">After secure Stripe payment confirmation, your product is prepared and delivered within 10 to 15 days. Tracking details will be shared as soon as they are available.</div>
+<button class="yellow-btn" type="submit">Confirm order details</button>
+<div class="status-box" id="formStatus"></div>
+</form>
+</section>
+<section class="next-card">
+<h2>What happens next?</h2>
+<div class="next-grid next-grid-two">
+<div class="next-step"><strong>1. Order details received</strong><p>Your contact, Benda Napoleon model and delivery information are saved with your order request.</p></div>
+<div class="next-step"><strong>2. Delivery after payment</strong><p>After secure Stripe payment confirmation, your product is prepared and delivered within 10 to 15 days.</p></div>
+</div>
+</section>
+</main>
+<footer class="order-footer"><div class="order-wrap">© <span id="year">2026</span> Benda Custom Picks — independent, not affiliated with the brands mentioned.</div></footer>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="./emailjs-config.js"></script>
+<script src="./order-flow.js"></script>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
