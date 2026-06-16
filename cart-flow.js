@@ -50,7 +50,8 @@
     'transparent-gold-clutch-cover-kit-450': 'transparent-gold-clutch-cover-kit-450',
     'madmax-double-exhaust-kit-450': 'madmax-double-exhaust-kit-450',
     'premium-comfort-foot-kit-450': 'premium-comfort-foot-kit-450',
-    'headlight-windscreen-cover-kit-450': 'headlight-windscreen-cover-kit-450'
+    'headlight-windscreen-cover-kit-450': 'headlight-windscreen-cover-kit-450',
+    'premium-transparent-clutch-cover-kit-450': 'premium-transparent-clutch-cover-kit-450'
   };
 
   const COMPLETE_BUILD_OFFERS = [
@@ -114,7 +115,8 @@
       items: [
         { code: 'madmax-double-exhaust-kit-450' },
         { code: 'maverick-air-filter-450' },
-        { code: 'premium-comfort-foot-kit-450' }
+        { code: 'premium-comfort-foot-kit-450' },
+        { code: 'premium-transparent-clutch-cover-kit-450' }
       ]
     }
   ];
@@ -124,7 +126,8 @@
     'midnight-hunter-complete': [
       { code: 'madmax-double-exhaust-kit-450' },
       { code: 'maverick-air-filter-450' },
-      { code: 'premium-comfort-foot-kit-450', options: { color_option: 'Skull Platinum' } }
+      { code: 'premium-comfort-foot-kit-450', options: { color_option: 'Skull Platinum' } },
+      { code: 'premium-transparent-clutch-cover-kit-450' }
     ],
     'midnight-hunter-essentials': [
       { code: 'premium-comfort-foot-kit-450', options: { color_option: 'Skull Platinum' } }
@@ -821,6 +824,16 @@ async function createStripeCheckout(lines, formData) {
         delivery_estimate: '10 to 15 business days',
         image: './headlight-windscreen-cover-kit-450-hero.png',
         stripe_url: ''
+      },
+      'premium-transparent-clutch-cover-kit-450': {
+        product_code: 'premium-transparent-clutch-cover-kit-450',
+        product_name: 'Premium Transparent Clutch Cover Kit',
+        product_short: 'Premium transparent clutch cover kit for Benda Napoleon 450/500',
+        fitment: 'Benda Napoleon 450/500',
+        price: '471 €',
+        delivery_estimate: '10 to 15 business days',
+        image: './premium-transparent-clutch-cover-kit-450-hero.png',
+        stripe_url: ''
       }
     };
 
@@ -869,7 +882,8 @@ async function createStripeCheckout(lines, formData) {
     'transparent-gold-clutch-cover-kit-450': './order-transparent-gold-clutch-cover-kit-450.html',
     'madmax-double-exhaust-kit-450': './order-madmax-double-exhaust-kit-450.html',
     'premium-comfort-foot-kit-450': './order-premium-comfort-foot-kit-450.html',
-    'headlight-windscreen-cover-kit-450': './order-headlight-windscreen-cover-kit-450.html'
+    'headlight-windscreen-cover-kit-450': './order-headlight-windscreen-cover-kit-450.html',
+    'premium-transparent-clutch-cover-kit-450': './order-premium-transparent-clutch-cover-kit-450.html'
   };
 
   function productPageUrl(code) {

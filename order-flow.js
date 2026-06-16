@@ -1,5 +1,15 @@
 /* BENDAGO ORDER + CART CHECKOUT FLOW */
 const BENDAGO_PRODUCTS = {
+  "premium-transparent-clutch-cover-kit-450": {
+    product_code: "premium-transparent-clutch-cover-kit-450",
+    product_name: 'Premium Transparent Clutch Cover Kit',
+    product_short: 'Premium transparent clutch cover kit for Benda Napoleon 450/500',
+    fitment: 'Benda Napoleon 450/500',
+    price: '471 €',
+    delivery_estimate: '10 to 15 business days',
+    image: './premium-transparent-clutch-cover-kit-450-hero.png',
+    stripe_url: ''
+  },
   "premium-comfort-foot-kit-450": {
     product_code: "premium-comfort-foot-kit-450",
     product_name: 'Premium Comfort Foot Kit',
