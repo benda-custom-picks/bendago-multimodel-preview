@@ -805,3 +805,123 @@ a.secondary-btn:hover{
   .product-title{font-size:clamp(30px,9vw,42px) !important;}
 }
 /* END BENDAGO PATCH V42 */
+
+
+/* BENDAGO PATCH V43 — gallery CTA theme and model-specific navigation
+   Scope: visual/navigation only. No checkout, cart logic, Worker, SKU or price changes. */
+.buy-btn,
+a.buy-btn.js-request-link,
+.request-btn,
+.yellow-btn,
+.seo-copy-links a{
+  border:1px solid rgba(230,201,137,.88) !important;
+  color:#0b1018 !important;
+  background:
+    radial-gradient(circle at 20% 0%,rgba(255,255,255,.24),transparent 32%),
+    linear-gradient(180deg,#e6c989 0%,#c9a35f 58%,#a97835 100%) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.34),0 16px 34px rgba(0,0,0,.28) !important;
+}
+.secondary-btn,
+a.secondary-btn,
+.btn.secondary,
+a.btn.secondary{
+  border:1px solid rgba(201,163,95,.38) !important;
+  color:#f5f1e8 !important;
+  background:
+    radial-gradient(circle at 16% 0%,rgba(201,163,95,.10),transparent 38%),
+    linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.016)),
+    rgba(13,13,14,.92) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 12px 26px rgba(0,0,0,.22) !important;
+}
+.secondary-btn:hover,
+a.secondary-btn:hover,
+.btn.secondary:hover,
+a.btn.secondary:hover{
+  border-color:rgba(230,201,137,.62) !important;
+  color:#fff !important;
+}
+.btn,
+.buy-btn,
+.secondary-btn,
+a.buy-btn.js-request-link,
+a.secondary-btn,
+a.btn.secondary{
+  box-sizing:border-box !important;
+  max-width:100% !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  text-align:center !important;
+  white-space:normal !important;
+  line-height:1.12 !important;
+}
+.product-thumb:hover,
+.product-thumb:focus-visible,
+.product-thumb.is-active{
+  border-color:rgba(230,201,137,.70) !important;
+}
+.price-line strong,
+.check-list div::before,
+.back-link,
+.order-small-link,
+.gallery-caption strong{
+  color:#e6c989 !important;
+}
+.seo-copy-links a{
+  text-decoration:none !important;
+}
+@media(max-width:640px){
+  .buy-btn,
+  a.buy-btn.js-request-link,
+  .secondary-btn,
+  a.secondary-btn,
+  .btn.secondary,
+  a.btn.secondary{
+    width:100% !important;
+    min-height:50px !important;
+    padding-left:12px !important;
+    padding-right:12px !important;
+  }
+}
+/* END BENDAGO PATCH V43 */
+
+
+/* BENDAGO PATCH V45 — product gallery CTA final theme + full-build link fix */
+.buy-btn,
+a.buy-btn.js-request-link,
+.js-request-link.buy-btn{
+  border:1px solid rgba(201,163,95,.58) !important;
+  color:#f8fafc !important;
+  background:
+    radial-gradient(circle at 18% 0%, rgba(118,200,190,.13), transparent 42%),
+    linear-gradient(180deg, rgba(255,255,255,.068), rgba(255,255,255,.018)),
+    linear-gradient(135deg, rgba(19,29,37,.98), rgba(9,15,23,.98) 58%, rgba(5,8,13,.99)) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.10), 0 16px 34px rgba(0,0,0,.30) !important;
+}
+.buy-btn::after,
+a.buy-btn.js-request-link::after{color:#e6c989 !important;}
+.secondary-btn,
+a.secondary-btn,
+.btn.secondary,
+a.btn.secondary{
+  border:1px solid rgba(201,163,95,.42) !important;
+  color:#f4f6f8 !important;
+  background:
+    radial-gradient(circle at 18% 0%, rgba(201,163,95,.10), transparent 40%),
+    linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.016)),
+    rgba(13,23,36,.88) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08), 0 12px 26px rgba(0,0,0,.22) !important;
+  text-decoration:none !important;
+  text-align:center !important;
+}
+.secondary-btn:hover,
+a.secondary-btn:hover,
+.btn.secondary:hover,
+a.btn.secondary:hover{
+  border-color:rgba(230,201,137,.68) !important;
+  color:#fff7e6 !important;
+  transform:translateY(-1px);
+}
+.info-card .secondary-btn,
+.info-card .btn.secondary{width:100% !important;min-height:52px !important;}
+/* END BENDAGO PATCH V45 */
