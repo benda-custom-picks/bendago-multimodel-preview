@@ -1,5 +1,15 @@
 /* BENDAGO ORDER + CART CHECKOUT FLOW */
 const BENDAGO_PRODUCTS = {
+  "bumper-top-protect-450": {
+    product_code: "bumper-top-protect-450",
+    product_name: 'Top Bumper Protection',
+    product_short: 'Top protection bar Napoleon 450',
+    fitment: 'Benda Napoleon 450',
+    price: '459 €',
+    delivery_estimate: '10 to 15 business days',
+    image: './top-bumper-protection-450-hero.png',
+    stripe_url: ''
+  },
   "double-seat-comfort-premium-plus": {
     product_code: "double-seat-comfort-premium-plus",
     product_name: 'Kit Double Seat Comfort Premium +',
