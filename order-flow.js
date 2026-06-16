@@ -1,33 +1,16 @@
 /* BENDAGO ORDER + CART CHECKOUT FLOW */
 const BENDAGO_PRODUCTS = {
-  "madmax-double-exhaust-kit-450": {
-    product_code: "madmax-double-exhaust-kit-450",
-    product_name: "Madmax Double Exhaust Kit",
-    product_price: 910,
-    product_image: './madmax-double-exhaust-kit-450-hero.png',
-    image: './madmax-double-exhaust-kit-450-hero.png',
-    meta_title: "Madmax Double Exhaust Kit",
-    category: "Napoleon 450/500"
-  },
-  "transparent-gold-clutch-cover-kit-450": {
-    product_code: "transparent-gold-clutch-cover-kit-450",
-    product_name: 'Transparent Gold Clutch Cover Kit',
-    product_short: 'Transparent gold clutch cover kit Napoleon 450/500',
+  "premium-comfort-foot-kit-450": {
+    product_code: "premium-comfort-foot-kit-450",
+    product_name: 'Premium Comfort Foot Kit',
+    product_short: 'Premium wide foot kit with selectable designs for Benda Napoleon 450/500',
     fitment: 'Benda Napoleon 450/500',
-    price: '871 €',
+    price: '271 €',
     delivery_estimate: '10 to 15 business days',
-    image: './transparent-gold-clutch-cover-kit-450-hero.png',
-    stripe_url: ''
-  },
-  "maverick-air-filter-450": {
-    product_code: "maverick-air-filter-450",
-    product_name: 'Maverick Air Filter',
-    product_short: 'Turbine air filter upgrade Napoleon 450/500',
-    fitment: 'Benda Napoleon 450/500',
-    price: '391 €',
-    delivery_estimate: '10 to 15 business days',
-    image: './maverick-air-filter-450-hero.png',
-    stripe_url: ''
+    image: './premium-comfort-foot-kit-450-skull-platinum.png',
+    stripe_url: '',
+    color_required: true,
+    color_options: 'Black Strass / Skull Platinum / Gold Look / Design Black'
   },
   "premium-rear-fender-450": {
     product_code: "premium-rear-fender-450",

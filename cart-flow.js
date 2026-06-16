@@ -48,7 +48,8 @@
     'premium-rear-fender-450': 'premium-rear-fender-450',
     'maverick-air-filter-450': 'maverick-air-filter-450',
     'transparent-gold-clutch-cover-kit-450': 'transparent-gold-clutch-cover-kit-450',
-    'madmax-double-exhaust-kit-450': 'madmax-double-exhaust-kit-450'
+    'madmax-double-exhaust-kit-450': 'madmax-double-exhaust-kit-450',
+    'premium-comfort-foot-kit-450': 'premium-comfort-foot-kit-450'
   };
 
   const COMPLETE_BUILD_OFFERS = [
@@ -105,8 +106,55 @@
         { code: 'tank-cover-support-volume', color_option: 'Black' },
         { code: 'premium-double-seat', color_option: 'Black' }
       ]
+    },
+    {
+      key: 'midnight-hunter',
+      name: 'Midnight Hunter Build',
+      items: [
+        { code: 'madmax-double-exhaust-kit-450' },
+        { code: 'maverick-air-filter-450' },
+        { code: 'premium-comfort-foot-kit-450' }
+      ]
     }
   ];
+
+
+  const BUNDLE_ADD_TO_CART_ITEMS = {
+    'midnight-hunter-complete': [
+      { code: 'madmax-double-exhaust-kit-450' },
+      { code: 'maverick-air-filter-450' },
+      { code: 'premium-comfort-foot-kit-450', options: { color_option: 'Skull Platinum' } }
+    ],
+    'midnight-hunter-essentials': [
+      { code: 'madmax-double-exhaust-kit-450' },
+      { code: 'maverick-air-filter-450' }
+    ]
+  };
+
+  function bindBuildBundleButtons() {
+    document.querySelectorAll('[data-add-bundle]').forEach(button => {
+      if (button.dataset.bundleBound === 'true') return;
+      button.dataset.bundleBound = 'true';
+      button.addEventListener('click', () => {
+        const key = String(button.getAttribute('data-add-bundle') || '').trim();
+        const items = BUNDLE_ADD_TO_CART_ITEMS[key];
+        if (!items || !items.length) return;
+        upsertMany(items);
+        const box = button.closest('[data-bundle-box]');
+        const msg = box ? box.querySelector('.build-bundle-added') : null;
+        if (msg) {
+          msg.textContent = 'Added to cart. Launch Access 5% appears when Madmax + Maverick are together.';
+          msg.classList.add('show');
+        }
+        push('build_bundle_add_click', {
+          build_key: key,
+          build_name: key.indexOf('midnight-hunter') === 0 ? 'Midnight Hunter Build' : key,
+          cart_count: cartCount()
+        });
+        openCart();
+      });
+    });
+  }
 
   /* BENDAGO v55 — append build attribution to checkout GA4 events */
   const BUILD_ATTR_KEY_V55 = 'bendago_build_attribution_v55';
@@ -186,6 +234,7 @@
     if (!color) return '';
     if (item && String(item.code || item.product_code || '').trim() === 'maverick-air-filter-cover') return 'Side: ' + color;
     if (item && String(item.code || item.product_code || '').trim() === 'decorative-cover-side') return 'Finish: ' + color;
+    if (item && String(item.code || item.product_code || '').trim() === 'premium-comfort-foot-kit-450') return 'Design: ' + color;
     return 'Colour: ' + color;
   }
 
@@ -687,6 +736,86 @@ async function createStripeCheckout(lines, formData) {
         stripe_url: ''
       };
     }
+
+    const napoleon450Fallbacks = {
+      'double-seat-comfort-premium-plus': {
+        product_code: 'double-seat-comfort-premium-plus',
+        product_name: 'Kit Double Seat Comfort Premium +',
+        product_short: 'Premium double-seat comfort kit for Benda Napoleon 450/500',
+        fitment: 'Benda Napoleon 450/500',
+        price: '683 €',
+        delivery_estimate: '10 to 15 business days',
+        image: './double-seat-comfort-premium-plus-hero.png',
+        stripe_url: ''
+      },
+      'bumper-top-protect-450': {
+        product_code: 'bumper-top-protect-450',
+        product_name: 'Top Bumper Protection',
+        product_short: 'Premium top-mounted protection bar for Benda Napoleon 450',
+        fitment: 'Benda Napoleon 450',
+        price: '459 €',
+        delivery_estimate: '10 to 15 business days',
+        image: './top-bumper-protection-450-hero.png',
+        stripe_url: ''
+      },
+      'premium-rear-fender-450': {
+        product_code: 'premium-rear-fender-450',
+        product_name: 'Premium Rear Fender',
+        product_short: 'Premium rear fender kit with rear shelf detail for Benda Napoleon 450',
+        fitment: 'Benda Napoleon 450',
+        price: '323 €',
+        delivery_estimate: '10 to 15 business days',
+        image: './premium-rear-fender-450-hero.png',
+        stripe_url: ''
+      },
+      'maverick-air-filter-450': {
+        product_code: 'maverick-air-filter-450',
+        product_name: 'Maverick Air Filter',
+        product_short: 'Premium turbine-style air filter upgrade for Benda Napoleon 450/500',
+        fitment: 'Benda Napoleon 450/500',
+        price: '391 €',
+        delivery_estimate: '10 to 15 business days',
+        image: './maverick-air-filter-450-hero.png',
+        stripe_url: ''
+      },
+      'transparent-gold-clutch-cover-kit-450': {
+        product_code: 'transparent-gold-clutch-cover-kit-450',
+        product_name: 'Transparent Gold Clutch Cover Kit',
+        product_short: 'Premium black-and-gold clutch cover kit for Benda Napoleon 450/500',
+        fitment: 'Benda Napoleon 450/500',
+        price: '871 €',
+        delivery_estimate: '10 to 15 business days',
+        image: './transparent-gold-clutch-cover-kit-450-hero.png',
+        stripe_url: ''
+      },
+      'madmax-double-exhaust-kit-450': {
+        product_code: 'madmax-double-exhaust-kit-450',
+        product_name: 'Madmax Double Exhaust Kit',
+        product_short: 'Madmax-style double exhaust kit for Benda Napoleon 450/500',
+        fitment: 'Benda Napoleon 450/500',
+        price: '910 €',
+        delivery_estimate: '10 to 15 business days',
+        image: './madmax-double-exhaust-kit-450-hero.png',
+        stripe_url: ''
+      },
+      'premium-comfort-foot-kit-450': {
+        product_code: 'premium-comfort-foot-kit-450',
+        product_name: 'Premium Comfort Foot Kit',
+        product_short: 'Premium wide foot kit with selectable designs for Benda Napoleon 450/500',
+        fitment: 'Benda Napoleon 450/500',
+        price: '271 €',
+        delivery_estimate: '10 to 15 business days',
+        image: './premium-comfort-foot-kit-450-skull-platinum.png',
+        stripe_url: '',
+        color_required: true,
+        color_options: 'Black Strass / Skull Platinum / Gold Look / Design Black'
+      }
+    };
+
+    Object.keys(napoleon450Fallbacks).forEach(code => {
+      if (!map[code]) map[code] = napoleon450Fallbacks[code];
+    });
+
     return map;
   }
 
@@ -726,7 +855,8 @@ async function createStripeCheckout(lines, formData) {
     'premium-rear-fender-450': './order-premium-rear-fender-450.html',
     'maverick-air-filter-450': './order-maverick-air-filter-450.html',
     'transparent-gold-clutch-cover-kit-450': './order-transparent-gold-clutch-cover-kit-450.html',
-    'madmax-double-exhaust-kit-450': './order-madmax-double-exhaust-kit-450.html'
+    'madmax-double-exhaust-kit-450': './order-madmax-double-exhaust-kit-450.html',
+    'premium-comfort-foot-kit-450': './order-premium-comfort-foot-kit-450.html'
   };
 
   function productPageUrl(code) {
@@ -1116,6 +1246,7 @@ window.BendagoCart = {
   document.addEventListener('DOMContentLoaded', () => {
     const sharedCartLoaded = loadSharedCartFromUrl();
     ensureCartUi();
+    bindBuildBundleButtons();
     bindCartForm();
     renderStripeCheckoutButton();
     updateStripeCheckoutButtonLabel();
