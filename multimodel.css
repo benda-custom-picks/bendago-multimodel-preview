@@ -2570,3 +2570,36 @@ body.model-page .cart-floating-btn,
   }
 }
 /* END BENDAGO PATCH V52 */
+
+
+/* BENDAGO V53 — Model guide as one link cell, no swipe friction.
+   Scope: model-guide section only. No checkout / Worker / price / SKU logic. */
+.model-guide-section{padding-top:22px !important;padding-bottom:30px !important;}
+.model-guide-panel{display:grid;grid-template-columns:minmax(220px,.85fr) minmax(0,1.65fr);gap:18px;align-items:stretch;border:1px solid rgba(217,184,117,.22);border-radius:24px;padding:18px;background:radial-gradient(circle at 10% 0%,rgba(217,184,117,.12),transparent 38%),linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.012)),rgba(7,9,13,.90);box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 18px 42px rgba(0,0,0,.26);}
+.model-guide-copy{display:flex;flex-direction:column;justify-content:center;min-width:0;}
+.model-guide-copy h2{margin:0 0 8px;color:var(--v50-text,#f7f1e8);font-size:clamp(24px,2.1vw,34px);line-height:.98;letter-spacing:-.035em;}
+.model-guide-copy p{margin:0;color:rgba(247,241,232,.62);font-size:13px;line-height:1.45;max-width:42em;}
+.model-guide-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;align-content:center;}
+.model-guide-link{min-height:58px;border-radius:16px;border:1px solid rgba(217,184,117,.28);background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.012)),rgba(5,7,10,.82);display:flex;flex-direction:column;justify-content:center;gap:4px;padding:12px 14px;color:rgba(247,241,232,.92);text-decoration:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.045);}
+.model-guide-link span{font-size:12px;font-weight:950;letter-spacing:.10em;text-transform:uppercase;color:rgba(247,241,232,.95);white-space:normal;}
+.model-guide-link b{font-size:12px;line-height:1.25;color:rgba(217,184,117,.82);font-weight:750;}
+.model-guide-link-shop{border-color:rgba(217,184,117,.42);background:linear-gradient(180deg,rgba(217,184,117,.11),rgba(217,184,117,.035)),rgba(6,8,12,.88);}
+.model-guide-link:hover{border-color:rgba(231,201,139,.56);transform:translateY(-1px);}
+/* Legacy model-guide grid disabled by V53 in case older markup remains cached. */
+.model-guide-grid{display:grid !important;grid-template-columns:1fr !important;overflow:visible !important;padding:0 !important;margin:0 !important;scroll-snap-type:none !important;}
+@media(max-width:900px){
+  .model-guide-section{padding-top:18px !important;padding-bottom:22px !important;}
+  .model-guide-panel{display:block;border-radius:20px;padding:16px;margin:0 0 4px;}
+  .model-guide-copy{margin-bottom:14px;}
+  .model-guide-copy h2{font-size:25px;line-height:1;}
+  .model-guide-copy p{font-size:12px;line-height:1.42;}
+  .model-guide-links{display:grid !important;grid-template-columns:1fr !important;gap:9px;overflow:visible !important;padding:0 !important;margin:0 !important;scroll-snap-type:none !important;}
+  .model-guide-link{min-height:52px;border-radius:15px;padding:11px 13px;}
+  .model-guide-link span{font-size:11px;letter-spacing:.09em;}
+  .model-guide-link b{font-size:11.5px;}
+}
+@media(min-width:901px){
+  .model-guide-section .wrap{max-width:1180px;}
+  .model-guide-links-five{grid-template-columns:repeat(5,minmax(0,1fr));}
+  .model-guide-links-five .model-guide-link{min-height:70px;}
+}
