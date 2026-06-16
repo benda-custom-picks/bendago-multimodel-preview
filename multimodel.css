@@ -1355,3 +1355,141 @@ body.home-page .hero-video{
   }
 }
 /* END BENDAGO PATCH V41 */
+
+
+/* BENDAGO PATCH V42 — model backgrounds + product-card gallery theme
+   Scope: visual coherence only. No cart, checkout, Stripe, Worker, price or SKU logic changed. */
+:root{
+  --bcp-obsidian:#060708;
+  --bcp-panel:#11100e;
+  --bcp-panel-soft:#17130f;
+  --bcp-champagne:#c9a35f;
+  --bcp-champagne-light:#e6c989;
+  --bcp-cocoa:#7b5631;
+  --bcp-ivory:#f5f1e8;
+  --bcp-muted-warm:#c4b8a3;
+}
+
+/* Make the three motorcycle entry backgrounds slightly more readable without changing layout. */
+body.home-page .model-band .band-img{
+  filter:grayscale(.82) contrast(1.08) brightness(.96) saturate(.92) !important;
+}
+body.home-page .model-band .band-video{
+  filter:grayscale(.82) contrast(1.08) brightness(.95) saturate(.92) !important;
+}
+body.home-page .model-band:hover .band-img,
+body.home-page .model-band:focus-visible .band-img,
+body.home-page .model-band:hover .band-video,
+body.home-page .model-band:focus-visible .band-video{
+  filter:grayscale(.35) contrast(1.05) brightness(1.02) saturate(1) !important;
+}
+body.home-page .band-shade{
+  background:
+    linear-gradient(90deg,rgba(0,0,0,.52),rgba(0,0,0,.08) 50%,rgba(0,0,0,.34)),
+    linear-gradient(180deg,rgba(0,0,0,.04),rgba(0,0,0,.34)) !important;
+}
+@media (min-width:901px){
+  body.home-page .band-shade{
+    background:
+      linear-gradient(90deg,rgba(0,0,0,.56),rgba(0,0,0,.10) 50%,rgba(0,0,0,.38)),
+      linear-gradient(180deg,rgba(0,0,0,.06),rgba(0,0,0,.38)) !important;
+  }
+}
+.model-page main:before{
+  opacity:.22 !important;
+  filter:blur(1.25px) saturate(.95) brightness(1.14) !important;
+}
+.model-page main:after{
+  background:rgba(0,0,0,.70) !important;
+}
+
+/* Napoleon 125/250 product cards: keep Add to cart primary, restore View gallery as premium secondary CTA. */
+.model-125 .real-product-card,
+.model-500 .real-product-card,
+.model-v4 .real-product-card{
+  border-color:rgba(201,163,95,.18) !important;
+  background:
+    radial-gradient(circle at 12% 0%,rgba(201,163,95,.11),transparent 34%),
+    linear-gradient(180deg,rgba(255,255,255,.050),rgba(255,255,255,.018)),
+    rgba(10,10,11,.88) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.055),0 20px 44px rgba(0,0,0,.28) !important;
+}
+.model-125 .real-product-card .thumb,
+.model-500 .real-product-card .thumb,
+.model-v4 .real-product-card .thumb{
+  background-color:#050505 !important;
+  filter:brightness(.97) contrast(1.03) saturate(.96) !important;
+  transition:filter .28s ease, transform .42s ease !important;
+}
+.model-125 .real-product-card:hover .thumb,
+.model-500 .real-product-card:hover .thumb,
+.model-v4 .real-product-card:hover .thumb{
+  filter:brightness(1.05) contrast(1.04) saturate(1) !important;
+  transform:scale(1.018) !important;
+}
+.model-125 .real-product-card .body,
+.model-500 .real-product-card .body,
+.model-v4 .real-product-card .body{
+  color:var(--bcp-ivory) !important;
+}
+.product-title-link{
+  color:var(--bcp-ivory,#f5f1e8) !important;
+  letter-spacing:-.01em !important;
+}
+.product-title-link:hover,
+.product-title-link:focus-visible{
+  color:var(--bcp-champagne-light,#e6c989) !important;
+}
+.model-125 .real-product-card p,
+.model-500 .real-product-card p,
+.model-v4 .real-product-card p{
+  color:rgba(245,241,232,.70) !important;
+}
+.product-meta{
+  color:rgba(245,241,232,.72) !important;
+}
+.product-meta strong,
+.price-row strong{
+  color:var(--bcp-champagne-light,#e6c989) !important;
+  white-space:nowrap !important;
+}
+.product-details-link{
+  min-height:44px !important;
+  border:1px solid rgba(201,163,95,.42) !important;
+  color:var(--bcp-champagne-light,#e6c989) !important;
+  background:
+    radial-gradient(circle at 18% 0%,rgba(201,163,95,.12),transparent 42%),
+    linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.014)),
+    rgba(17,16,14,.92) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 10px 22px rgba(0,0,0,.18) !important;
+}
+.product-details-link:hover,
+.product-details-link:focus-visible{
+  color:#fff !important;
+  border-color:rgba(230,201,137,.74) !important;
+  background:
+    radial-gradient(circle at 18% 0%,rgba(230,201,137,.18),transparent 42%),
+    linear-gradient(180deg,rgba(255,255,255,.070),rgba(255,255,255,.018)),
+    rgba(26,21,15,.96) !important;
+}
+.add-preview{
+  min-height:46px !important;
+  border:1px solid rgba(230,201,137,.84) !important;
+  color:#0b1018 !important;
+  background:
+    radial-gradient(circle at 20% 0%,rgba(255,255,255,.24),transparent 32%),
+    linear-gradient(180deg,#e6c989 0%,#c9a35f 58%,#a97835 100%) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.32),0 14px 28px rgba(0,0,0,.25) !important;
+  font-weight:950 !important;
+}
+.add-preview:hover,
+.add-preview:focus-visible{
+  filter:brightness(1.04) !important;
+  transform:translateY(-1px) !important;
+}
+.card-rank{
+  background:rgba(5,5,5,.74) !important;
+  border:1px solid rgba(230,201,137,.38) !important;
+  color:var(--bcp-champagne-light,#e6c989) !important;
+}
+/* END BENDAGO PATCH V42 */

@@ -615,3 +615,193 @@ body .info-card .delivery-included-line {
   text-decoration:none;
 }
 .build-seo-links a:hover{text-decoration:underline}
+
+
+/* BENDAGO PATCH V42 — product gallery theme alignment
+   Scope: visual theme only for order/product gallery pages. No cart, checkout, Stripe, Worker, price or SKU logic changed. */
+:root{
+  --order-bg:#060708 !important;
+  --order-panel:#11100e !important;
+  --order-panel2:#17130f !important;
+  --order-line:rgba(201,163,95,.20) !important;
+  --order-text:#f5f1e8 !important;
+  --order-muted:#c4b8a3 !important;
+  --order-green:#c9a35f !important;
+  --order-cyan:#e6c989 !important;
+  --order-yellow:#e6c989 !important;
+  --order-yellow2:#a97835 !important;
+}
+.order-body{
+  background:
+    radial-gradient(circle at 14% 0%,rgba(201,163,95,.18),transparent 32%),
+    radial-gradient(circle at 86% 10%,rgba(92,63,31,.16),transparent 34%),
+    linear-gradient(180deg,#050505 0%,#080808 42%,#030303 100%) !important;
+  color:#f5f1e8 !important;
+}
+.order-header{
+  background:rgba(5,5,5,.88) !important;
+  border-bottom:1px solid rgba(201,163,95,.18) !important;
+  box-shadow:0 12px 34px rgba(0,0,0,.20) !important;
+}
+.order-logo,
+.order-links .send-moto,
+.links a.nav-cta{
+  background:
+    radial-gradient(circle at 20% 0%,rgba(255,255,255,.24),transparent 35%),
+    linear-gradient(180deg,#e6c989 0%,#c9a35f 58%,#a97835 100%) !important;
+  color:#0b1018 !important;
+}
+.order-links,
+.info-mini,
+.trust-list,
+.order-footer{
+  color:rgba(245,241,232,.68) !important;
+}
+.back-link,
+.order-eyebrow,
+.order-small-link,
+.product-detail-panel h3,
+.cart-line-details-link{
+  color:#e6c989 !important;
+}
+.product-title{
+  color:#f8f3e7 !important;
+  text-shadow:0 18px 46px rgba(0,0,0,.38) !important;
+}
+.media-card,
+.info-card,
+.request-card,
+.next-card,
+.thanks-card,
+.seo-copy-section{
+  border-color:rgba(201,163,95,.20) !important;
+  background:
+    radial-gradient(circle at 14% 0%,rgba(201,163,95,.10),transparent 36%),
+    linear-gradient(180deg,rgba(255,255,255,.052),rgba(255,255,255,.018)),
+    rgba(13,13,14,.90) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 22px 54px rgba(0,0,0,.30) !important;
+}
+.media-card{
+  padding:16px !important;
+}
+.media-stage,
+.main-product-img,
+.main-product-video{
+  background:#050505 !important;
+}
+.main-product-img,
+.main-product-video{
+  border-radius:18px !important;
+}
+.product-thumb{
+  border-color:rgba(201,163,95,.22) !important;
+  background:#050505 !important;
+}
+.product-thumb:hover,
+.product-thumb:focus-visible{
+  border-color:rgba(230,201,137,.70) !important;
+  box-shadow:0 10px 24px rgba(0,0,0,.24),0 0 0 1px rgba(230,201,137,.20) !important;
+}
+.product-thumb.is-active{
+  border-color:#e6c989 !important;
+  box-shadow:0 0 0 1px rgba(230,201,137,.35),0 12px 28px rgba(0,0,0,.24) !important;
+}
+.product-thumb.video-thumb::before{
+  background:rgba(10,8,6,.72) !important;
+  color:#e6c989 !important;
+  border:1px solid rgba(230,201,137,.38) !important;
+}
+.product-thumb.video-thumb::after{
+  background:rgba(10,8,6,.72) !important;
+  color:#f5f1e8 !important;
+  border:1px solid rgba(230,201,137,.30) !important;
+}
+.gallery-caption,
+.seo-copy-section p,
+.info-card p,
+.product-detail-row p,
+.check-list div{
+  color:rgba(245,241,232,.74) !important;
+}
+.product-detail-panel,
+.seo-cro-panel,
+.compat-box,
+.form-note{
+  border-color:rgba(201,163,95,.18) !important;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.044),rgba(255,255,255,.014)),
+    rgba(17,16,14,.82) !important;
+  color:rgba(245,241,232,.80) !important;
+}
+.product-detail-row strong,
+.info-card h2,
+.seo-copy-section h2,
+.seo-cro-panel strong{
+  color:#f8f3e7 !important;
+}
+.check-list div::before{
+  color:#e6c989 !important;
+}
+.price-line{
+  border-top-color:rgba(201,163,95,.22) !important;
+}
+.price-line strong{
+  color:#e6c989 !important;
+}
+.price-included-note,
+.stripe-secure-note{
+  color:rgba(245,241,232,.68) !important;
+}
+.buy-btn,
+a.buy-btn.js-request-link,
+.request-btn,
+.yellow-btn,
+.seo-copy-links a{
+  border:1px solid rgba(230,201,137,.88) !important;
+  color:#0b1018 !important;
+  background:
+    radial-gradient(circle at 20% 0%,rgba(255,255,255,.24),transparent 32%),
+    linear-gradient(180deg,#e6c989 0%,#c9a35f 58%,#a97835 100%) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.34),0 16px 34px rgba(0,0,0,.28) !important;
+}
+.buy-btn:hover,
+a.buy-btn.js-request-link:hover,
+.request-btn:hover,
+.yellow-btn:hover,
+.seo-copy-links a:hover{
+  filter:brightness(1.04) !important;
+}
+.secondary-btn,
+a.secondary-btn{
+  border-color:rgba(201,163,95,.34) !important;
+  color:#f5f1e8 !important;
+  background:
+    radial-gradient(circle at 16% 0%,rgba(201,163,95,.10),transparent 38%),
+    linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.016)),
+    rgba(13,13,14,.90) !important;
+}
+.secondary-btn:hover,
+a.secondary-btn:hover{
+  border-color:rgba(230,201,137,.60) !important;
+  color:#fff !important;
+}
+.trust-list div{
+  color:rgba(245,241,232,.70) !important;
+}
+.field input,
+.field textarea,
+.field select{
+  border-color:rgba(201,163,95,.22) !important;
+  background:rgba(5,5,5,.58) !important;
+  color:#f5f1e8 !important;
+}
+.status-box.ok{
+  background:rgba(201,163,95,.12) !important;
+  border-color:rgba(201,163,95,.30) !important;
+  color:#fff3d2 !important;
+}
+@media (max-width:760px){
+  .media-card{padding:12px !important;}
+  .product-title{font-size:clamp(30px,9vw,42px) !important;}
+}
+/* END BENDAGO PATCH V42 */
