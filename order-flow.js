@@ -12,6 +12,16 @@ const BENDAGO_PRODUCTS = {
     color_required: true,
     color_options: 'Black Strass / Skull Platinum / Gold Look / Design Black'
   },
+  "headlight-windscreen-cover-kit-450": {
+    product_code: "headlight-windscreen-cover-kit-450",
+    product_name: 'Headlight Windscreen Cover Kit',
+    product_short: 'Gloss black headlight windscreen cover kit for Benda Napoleon 450/500',
+    fitment: 'Benda Napoleon 450/500',
+    price: '191 €',
+    delivery_estimate: '10 to 15 business days',
+    image: './headlight-windscreen-cover-kit-450-hero.png',
+    stripe_url: ''
+  },
   "premium-rear-fender-450": {
     product_code: "premium-rear-fender-450",
     product_name: 'Premium Rear Fender',

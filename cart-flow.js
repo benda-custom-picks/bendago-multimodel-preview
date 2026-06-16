@@ -49,7 +49,8 @@
     'maverick-air-filter-450': 'maverick-air-filter-450',
     'transparent-gold-clutch-cover-kit-450': 'transparent-gold-clutch-cover-kit-450',
     'madmax-double-exhaust-kit-450': 'madmax-double-exhaust-kit-450',
-    'premium-comfort-foot-kit-450': 'premium-comfort-foot-kit-450'
+    'premium-comfort-foot-kit-450': 'premium-comfort-foot-kit-450',
+    'headlight-windscreen-cover-kit-450': 'headlight-windscreen-cover-kit-450'
   };
 
   const COMPLETE_BUILD_OFFERS = [
@@ -809,6 +810,16 @@ async function createStripeCheckout(lines, formData) {
         stripe_url: '',
         color_required: true,
         color_options: 'Black Strass / Skull Platinum / Gold Look / Design Black'
+      },
+      'headlight-windscreen-cover-kit-450': {
+        product_code: 'headlight-windscreen-cover-kit-450',
+        product_name: 'Headlight Windscreen Cover Kit',
+        product_short: 'Gloss black headlight windscreen cover kit for Benda Napoleon 450/500',
+        fitment: 'Benda Napoleon 450/500',
+        price: '191 €',
+        delivery_estimate: '10 to 15 business days',
+        image: './headlight-windscreen-cover-kit-450-hero.png',
+        stripe_url: ''
       }
     };
 
@@ -856,7 +867,8 @@ async function createStripeCheckout(lines, formData) {
     'maverick-air-filter-450': './order-maverick-air-filter-450.html',
     'transparent-gold-clutch-cover-kit-450': './order-transparent-gold-clutch-cover-kit-450.html',
     'madmax-double-exhaust-kit-450': './order-madmax-double-exhaust-kit-450.html',
-    'premium-comfort-foot-kit-450': './order-premium-comfort-foot-kit-450.html'
+    'premium-comfort-foot-kit-450': './order-premium-comfort-foot-kit-450.html',
+    'headlight-windscreen-cover-kit-450': './order-headlight-windscreen-cover-kit-450.html'
   };
 
   function productPageUrl(code) {
