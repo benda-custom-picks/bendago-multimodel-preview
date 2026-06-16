@@ -42,7 +42,8 @@
     'fat-bob-bumper': 'fat-bob-front-bumper-kit',
     'top-bumper': 'top-bumper',
     'chassis-protection': 'lower-chassis-protection-plate',
-    'headlight-fairing': 'front-fairing-style-kit'
+    'headlight-fairing': 'front-fairing-style-kit',
+    'double-seat-comfort-premium-plus': 'double-seat-comfort-premium-plus'
   };
 
   const COMPLETE_BUILD_OFFERS = [
@@ -714,7 +715,8 @@ async function createStripeCheckout(lines, formData) {
     'fat-bob-bumper': './order-fat-bob-bumper.html',
     'top-bumper': './order-top-bumper.html',
     'chassis-protection': './order-chassis-protection.html',
-    'headlight-fairing': './order-headlight-fairing.html'
+    'headlight-fairing': './order-headlight-fairing.html',
+    'double-seat-comfort-premium-plus': './order-kit-double-seat-comfort-premium-plus.html'
   };
 
   function productPageUrl(code) {

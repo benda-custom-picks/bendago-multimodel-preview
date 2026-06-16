@@ -1,5 +1,15 @@
 /* BENDAGO ORDER + CART CHECKOUT FLOW */
 const BENDAGO_PRODUCTS = {
+  "double-seat-comfort-premium-plus": {
+    product_code: "double-seat-comfort-premium-plus",
+    product_name: 'Kit Double Seat Comfort Premium +',
+    product_short: 'Premium double-seat comfort kit Napoleon 450/500',
+    fitment: 'Benda Napoleon 450/500',
+    price: '683 €',
+    delivery_estimate: '10 to 15 business days',
+    image: './double-seat-comfort-premium-plus-hero.png',
+    stripe_url: ''
+  },
   "maverick-air-filter-cover": {
     product_code: "maverick-air-filter-cover",
     product_name: 'Maverick Air Filter Cover',
@@ -434,6 +444,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.querySelectorAll('.order-footer .order-wrap').forEach(node => {
     node.textContent = 'Independent custom parts selection — not affiliated with Benda or the brands mentioned.';
+  });
+
+
+  document.querySelectorAll('[data-add-preview]').forEach(button => {
+    button.addEventListener('click', (event) => {
+      event.preventDefault();
+      if (button.disabled || button.hasAttribute('data-add-disabled')) return;
+      const code = (button.getAttribute('data-add-preview') || '').trim();
+      if (!code) return;
+      const added = bendagoAddOneToCart(code, {});
+      bendagoPush('model_card_add_to_cart', {
+        product_code: code,
+        product_name: (window.BENDAGO_PRODUCTS && window.BENDAGO_PRODUCTS[code] && window.BENDAGO_PRODUCTS[code].product_name) || code,
+        source_page: window.location.pathname || ''
+      });
+      if (added && window.BendagoCart && typeof window.BendagoCart.open === 'function') {
+        window.BendagoCart.open();
+      }
+    });
   });
 
   document.querySelectorAll('.js-request-link').forEach(link => {
