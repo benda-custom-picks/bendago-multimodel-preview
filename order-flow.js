@@ -1,5 +1,15 @@
 /* BENDAGO ORDER + CART CHECKOUT FLOW */
 const BENDAGO_PRODUCTS = {
+  "transparent-gold-clutch-cover-kit-450": {
+    product_code: "transparent-gold-clutch-cover-kit-450",
+    product_name: 'Transparent Gold Clutch Cover Kit',
+    product_short: 'Transparent gold clutch cover kit Napoleon 450/500',
+    fitment: 'Benda Napoleon 450/500',
+    price: '871 €',
+    delivery_estimate: '10 to 15 business days',
+    image: './transparent-gold-clutch-cover-kit-450-hero.png',
+    stripe_url: ''
+  },
   "maverick-air-filter-450": {
     product_code: "maverick-air-filter-450",
     product_name: 'Maverick Air Filter',
