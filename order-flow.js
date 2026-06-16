@@ -1,5 +1,15 @@
 /* BENDAGO ORDER + CART CHECKOUT FLOW */
 const BENDAGO_PRODUCTS = {
+  "maverick-air-filter-450": {
+    product_code: "maverick-air-filter-450",
+    product_name: 'Maverick Air Filter',
+    product_short: 'Turbine air filter upgrade Napoleon 450/500',
+    fitment: 'Benda Napoleon 450/500',
+    price: '391 €',
+    delivery_estimate: '10 to 15 business days',
+    image: './maverick-air-filter-450-hero.png',
+    stripe_url: ''
+  },
   "premium-rear-fender-450": {
     product_code: "premium-rear-fender-450",
     product_name: 'Premium Rear Fender',

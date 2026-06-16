@@ -45,7 +45,8 @@
     'headlight-fairing': 'front-fairing-style-kit',
     'double-seat-comfort-premium-plus': 'double-seat-comfort-premium-plus',
     'bumper-top-protect-450': 'bumper-top-protect-450',
-    'premium-rear-fender-450': 'premium-rear-fender-450'
+    'premium-rear-fender-450': 'premium-rear-fender-450',
+    'maverick-air-filter-450': 'maverick-air-filter-450'
   };
 
   const COMPLETE_BUILD_OFFERS = [
@@ -720,7 +721,8 @@ async function createStripeCheckout(lines, formData) {
     'headlight-fairing': './order-headlight-fairing.html',
     'double-seat-comfort-premium-plus': './order-kit-double-seat-comfort-premium-plus.html',
     'bumper-top-protect-450': './order-top-bumper-protection-450.html',
-    'premium-rear-fender-450': './order-premium-rear-fender-450.html'
+    'premium-rear-fender-450': './order-premium-rear-fender-450.html',
+    'maverick-air-filter-450': './order-maverick-air-filter-450.html'
   };
 
   function productPageUrl(code) {
