@@ -1122,3 +1122,112 @@ body.home-page .hero-video{
     flex:0 0 min(84vw,390px);
   }
 }
+
+/* V42 — desktop compact home entry at real 100% scale
+   Scope: desktop Home only. No global zoom/scale. Keeps mobile layout untouched. */
+@media (min-width:901px){
+  body.home-page .bcp-header{
+    height:28px !important;
+    min-height:28px !important;
+    padding:0 18px !important;
+    background:rgba(0,0,0,.76) !important;
+    border-bottom:1px solid rgba(255,255,255,.08) !important;
+  }
+  body.home-page .bcp-brand{
+    font-size:8px !important;
+    letter-spacing:.20em !important;
+    gap:8px !important;
+  }
+  body.home-page .brand-wing{font-size:8px !important;}
+  body.home-page main{padding-top:28px !important;}
+
+  body.home-page .hero-band{
+    height:clamp(330px,42vh,405px) !important;
+    min-height:330px !important;
+    aspect-ratio:auto !important;
+  }
+  body.home-page .hero-video{
+    object-fit:cover !important;
+    object-position:center center !important;
+  }
+  body.home-page .hero-logo{
+    top:52% !important;
+    width:min(185px,13vw) !important;
+    max-height:42% !important;
+    filter:drop-shadow(0 14px 34px rgba(0,0,0,.70)) !important;
+  }
+  body.home-page .scroll-dot{
+    width:32px !important;
+    height:32px !important;
+    bottom:14px !important;
+    font-size:14px !important;
+    background:rgba(0,0,0,.28) !important;
+  }
+
+  body.home-page .model-bands{
+    grid-template-columns:1fr 1fr !important;
+    gap:0 !important;
+  }
+  body.home-page .model-band{
+    min-height:162px !important;
+  }
+  body.home-page .model-band.half{
+    grid-column:span 1 !important;
+    min-height:170px !important;
+  }
+  body.home-page .model-band.full{
+    grid-column:1/-1 !important;
+    min-height:145px !important;
+  }
+  body.home-page .model-band.full.low{
+    min-height:140px !important;
+  }
+  body.home-page .band-img,
+  body.home-page .band-video{
+    object-fit:cover !important;
+    object-position:center center !important;
+    transform:scale(1.01) !important;
+  }
+  body.home-page .model-band:hover .band-img,
+  body.home-page .model-band:focus-visible .band-img,
+  body.home-page .model-band:hover .band-video,
+  body.home-page .model-band:focus-visible .band-video{
+    transform:scale(1.035) !important;
+  }
+  body.home-page .band-shade{
+    background:
+      linear-gradient(90deg,rgba(0,0,0,.66),rgba(0,0,0,.16) 50%,rgba(0,0,0,.48)),
+      linear-gradient(180deg,rgba(0,0,0,.12),rgba(0,0,0,.48)) !important;
+  }
+  body.home-page .band-copy{
+    left:6.5vw !important;
+    max-width:520px !important;
+    letter-spacing:.13em !important;
+  }
+  body.home-page .band-copy.center{
+    left:50% !important;
+    text-align:center !important;
+    transform:translate(-50%,-50%) !important;
+  }
+  body.home-page .band-copy strong{
+    font-size:clamp(18px,1.35vw,25px) !important;
+    line-height:1.02 !important;
+    letter-spacing:.14em !important;
+    white-space:nowrap !important;
+  }
+  body.home-page .band-copy em{
+    margin-top:6px !important;
+    font-size:7px !important;
+    line-height:1.15 !important;
+    letter-spacing:.15em !important;
+  }
+  body.home-page .model-band.full.low .band-copy{
+    left:6.5vw !important;
+    text-align:left !important;
+    transform:translateY(-50%) !important;
+  }
+  body.home-page .model-band.full.low .band-copy strong{
+    white-space:normal !important;
+    max-width:210px !important;
+  }
+}
