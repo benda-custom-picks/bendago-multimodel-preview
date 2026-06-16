@@ -437,8 +437,8 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   document.querySelectorAll('.js-request-link').forEach(link => {
-    link.textContent = 'Add to cart & pay securely →';
-    link.setAttribute('aria-label', 'Add to cart and continue to secure checkout');
+    link.textContent = 'Add to cart';
+    link.setAttribute('aria-label', 'Add to cart');
     if (!link.nextElementSibling || !link.nextElementSibling.classList || !link.nextElementSibling.classList.contains('stripe-secure-note')) {
       link.insertAdjacentHTML('afterend', '<p class="stripe-secure-note">Secure card payment by Stripe.</p>');
     }
