@@ -2273,3 +2273,172 @@ body.home-page .cart-floating-btn,
   .model-page .section{padding-top:28px !important;padding-bottom:28px !important;}
 }
 /* END BENDAGO PATCH V47 */
+
+/* BENDAGO PATCH V49 — Recovery Home Premium
+   Scope: Home hero video source/layout, clean CTA hierarchy, visible essentials CTA, no old blue/green, header-only cart. */
+:root{
+  --v49-bg:#05070b;
+  --v49-panel:#0a0d12;
+  --v49-panel-2:#111318;
+  --v49-gold:#d9b875;
+  --v49-gold-soft:#f2d89d;
+  --v49-gold-line:rgba(217,184,117,.42);
+  --v49-text:#f7f1e8;
+  --v49-muted:rgba(247,241,232,.66);
+  --v49-emerald:#5ee0b0;
+}
+/* Home: keep the clean multimodel structure. Only the hero video under the logo changes. */
+body.home-page .hero-band{
+  background:#000 !important;
+  overflow:hidden !important;
+}
+body.home-page .hero-video{
+  width:100% !important;
+  height:100% !important;
+  object-fit:cover !important;
+  object-position:center center !important;
+  filter:brightness(.82) contrast(1.05) saturate(.92) !important;
+  transform:none !important;
+}
+body.home-page .hero-dim{
+  background:
+    radial-gradient(circle at center,rgba(0,0,0,.03),rgba(0,0,0,.44)),
+    linear-gradient(180deg,rgba(0,0,0,.18),rgba(0,0,0,.44)) !important;
+}
+body.home-page .hero-logo{z-index:4 !important;}
+body.home-page .model-band .band-video{
+  object-fit:cover !important;
+  object-position:center center !important;
+  filter:grayscale(1) contrast(1.04) brightness(.78) !important;
+}
+@media(min-width:901px){
+  body.home-page .hero-band{height:clamp(330px,42vh,405px) !important;min-height:330px !important;}
+  body.home-page .hero-logo{width:min(190px,13vw) !important;top:52% !important;}
+}
+@media(max-width:900px){
+  body.home-page .hero-band{height:clamp(400px,54svh,520px) !important;min-height:400px !important;}
+  body.home-page .hero-logo{width:min(210px,48vw) !important;top:55% !important;}
+}
+@media(orientation:landscape) and (max-height:520px) and (max-width:980px){
+  body.home-page .hero-band{height:calc(100svh - 40px) !important;min-height:300px !important;}
+  body.home-page .hero-logo{width:min(170px,21vw) !important;top:53% !important;}
+}
+/* Cart trigger: no yellow bottom floating pill on Home/model pages, ever. */
+body.home-page .cart-floating-btn,
+body.model-page .cart-floating-btn,
+.home-page .cart-floating-btn,
+.model-page .cart-floating-btn{
+  display:none !important;
+  visibility:hidden !important;
+  opacity:0 !important;
+  pointer-events:none !important;
+}
+.home-page .cart-link,
+.model-page .cart-pill{
+  border:1px solid var(--v49-gold-line) !important;
+  background:linear-gradient(180deg,rgba(255,255,255,.052),rgba(255,255,255,.014)),rgba(6,8,12,.92) !important;
+  color:var(--v49-text) !important;
+  box-shadow:0 10px 28px rgba(0,0,0,.26) !important;
+}
+/* Look cards: clean aligned rhythm and keep both actions visible on Napoleon 125/250. */
+.model-125 #looks .look-card{
+  display:flex !important;
+  flex-direction:column !important;
+  overflow:hidden !important;
+}
+.model-125 #looks .look-body{
+  display:flex !important;
+  flex-direction:column !important;
+  flex:1 1 auto !important;
+  min-height:0 !important;
+}
+.model-125 #looks .look-bundle-cta{
+  display:grid !important;
+  gap:10px !important;
+  margin-top:auto !important;
+  padding-top:10px !important;
+}
+.model-125 #looks .build-bundle-actions{
+  display:grid !important;
+  grid-template-columns:1fr !important;
+  gap:8px !important;
+  width:100% !important;
+}
+.model-125 #looks .build-bundle-actions .btn{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  width:100% !important;
+  opacity:1 !important;
+  visibility:visible !important;
+  pointer-events:auto !important;
+  white-space:normal !important;
+  text-align:center !important;
+  line-height:1.1 !important;
+}
+.model-125 #looks .build-bundle-actions .btn.primary{
+  min-height:46px !important;
+  border-radius:15px !important;
+  border:1px solid rgba(94,224,176,.52) !important;
+  background:linear-gradient(180deg,rgba(94,224,176,.18),rgba(94,224,176,.075)),rgba(8,31,25,.82) !important;
+  color:#ecfff7 !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.11),0 13px 28px rgba(0,0,0,.28) !important;
+}
+.model-125 #looks .build-bundle-actions .btn.secondary{
+  min-height:44px !important;
+  border-radius:15px !important;
+  border:1px solid rgba(217,184,117,.38) !important;
+  background:linear-gradient(180deg,rgba(255,255,255,.052),rgba(255,255,255,.014)),rgba(7,9,13,.90) !important;
+  color:rgba(247,241,232,.92) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 10px 22px rgba(0,0,0,.20) !important;
+}
+.model-125 #looks .build-bundle-actions .btn.secondary::before,
+.model-125 #looks .build-bundle-actions .btn.secondary::after{display:none !important;content:none !important;}
+/* Future model looks stay neutral, not fake green buy CTAs. */
+.model-500 #looks .build-bundle-actions .btn,
+.model-v4 #looks .build-bundle-actions .btn,
+.model-500 #looks .add-preview,
+.model-v4 #looks .add-preview{
+  border-color:rgba(217,184,117,.24) !important;
+  background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.012)),rgba(8,10,13,.88) !important;
+  color:rgba(247,241,232,.58) !important;
+  box-shadow:none !important;
+}
+/* Product cards on model pages: no legacy blue/green. */
+.model-page .product-details-link{
+  border:1px solid rgba(217,184,117,.36) !important;
+  background:linear-gradient(180deg,rgba(255,255,255,.052),rgba(255,255,255,.014)),rgba(7,9,13,.88) !important;
+  color:rgba(247,241,232,.92) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 9px 18px rgba(0,0,0,.20) !important;
+}
+.model-page .product-details-link:hover,
+.model-page .product-details-link:focus-visible{
+  color:#fff !important;
+  border-color:rgba(242,216,157,.62) !important;
+}
+.model-125 .product-card .add-preview:not(:disabled){
+  border:1px solid rgba(242,216,157,.72) !important;
+  background:linear-gradient(180deg,#f1d89a,#c99648) !important;
+  color:#0d0905 !important;
+}
+.model-500 .product-card .add-preview,
+.model-v4 .product-card .add-preview{
+  border:1px solid rgba(217,184,117,.24) !important;
+  background:rgba(255,255,255,.035) !important;
+  color:rgba(247,241,232,.52) !important;
+  cursor:not-allowed !important;
+  box-shadow:none !important;
+}
+.model-500 .product-card .add-preview::before,
+.model-500 .product-card .add-preview::after,
+.model-v4 .product-card .add-preview::before,
+.model-v4 .product-card .add-preview::after{display:none !important;content:none !important;}
+/* Footer: compact premium, no lonely cheap line. */
+.bcp-footer.footer,
+.model-page .footer,
+.site-footer{
+  border-top:1px solid rgba(217,184,117,.14) !important;
+  background:linear-gradient(180deg,rgba(255,255,255,.010),rgba(0,0,0,0)) !important;
+  color:rgba(247,241,232,.46) !important;
+}
+/* END BENDAGO PATCH V49 */

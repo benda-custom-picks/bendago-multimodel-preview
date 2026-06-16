@@ -2226,3 +2226,82 @@ body.home-page .cart-floating-btn,
   .cart-clear-btn,.cart-other-product-btn{min-height:30px !important;font-size:.70rem !important;}
 }
 /* END BENDAGO PATCH V47 */
+
+/* BENDAGO PATCH V49 — Premium cart drawer reset
+   Scope: visual only. Removes old cyan/blue/green accents and reinforces modern dark/champagne hierarchy. */
+.cart-drawer{
+  background:linear-gradient(180deg,rgba(8,10,14,.985),rgba(5,6,9,.995)) !important;
+  border-left:1px solid rgba(217,184,117,.28) !important;
+  color:#f7f1e8 !important;
+  box-shadow:-24px 0 80px rgba(0,0,0,.64) !important;
+}
+.cart-head{border-bottom:1px solid rgba(217,184,117,.14) !important;background:rgba(5,7,11,.72) !important;}
+.cart-head h2{color:#f7f1e8 !important;}
+.cart-head p{color:rgba(247,241,232,.62) !important;}
+.cart-line{
+  background:linear-gradient(180deg,rgba(255,255,255,.042),rgba(255,255,255,.014)),rgba(10,12,16,.92) !important;
+  border:1px solid rgba(217,184,117,.16) !important;
+  border-radius:18px !important;
+}
+.cart-line-title{color:#f7f1e8 !important;}
+.cart-line-details-link,
+.cart-summary-product-link{
+  color:#d9b875 !important;
+  text-decoration:none !important;
+  font-weight:850 !important;
+}
+.cart-line-details-link:hover,
+.cart-line-details-link:focus-visible,
+.cart-summary-product-link:hover,
+.cart-summary-product-link:focus-visible{color:#f2d89d !important;}
+.cart-line-price,
+.cart-summary-row strong,
+.cart-pricing-row strong,
+.cart-total-row strong{
+  color:#f2d89d !important;
+}
+.cart-pricing-discount strong,
+.cart-summary-discount strong,
+.cart-launch-note,
+.cart-summary-launch-note{
+  color:#d9b875 !important;
+}
+.cart-qty-btn,
+.cart-remove-btn,
+.cart-clear-btn,
+.cart-other-product-btn,
+.cart-share-btn{
+  border-color:rgba(217,184,117,.28) !important;
+  background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.012)),rgba(7,9,13,.86) !important;
+  color:rgba(247,241,232,.86) !important;
+  box-shadow:none !important;
+}
+.cart-remove-btn,.cart-clear-btn{color:rgba(247,241,232,.58) !important;}
+.cart-note{
+  background:rgba(217,184,117,.065) !important;
+  border:1px solid rgba(217,184,117,.13) !important;
+  color:rgba(247,241,232,.66) !important;
+}
+.cart-checkout-btn{
+  background:linear-gradient(180deg,#f2d89d,#d2a458 58%,#aa7435) !important;
+  color:#0d0905 !important;
+  border:1px solid rgba(242,216,157,.74) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 16px 34px rgba(0,0,0,.32) !important;
+}
+.cart-other-product-btn{
+  background:linear-gradient(180deg,rgba(255,255,255,.052),rgba(255,255,255,.014)),rgba(8,10,14,.94) !important;
+  color:rgba(247,241,232,.90) !important;
+}
+.cart-share-btn{background:transparent !important;border:0 !important;color:rgba(247,241,232,.42) !important;}
+.cart-floating-btn{
+  border:1px solid rgba(217,184,117,.48) !important;
+  background:linear-gradient(180deg,rgba(255,255,255,.052),rgba(255,255,255,.014)),rgba(6,8,12,.92) !important;
+  color:rgba(247,241,232,.94) !important;
+  box-shadow:0 10px 28px rgba(0,0,0,.34) !important;
+}
+body.home-page .cart-floating-btn,
+body.model-page .cart-floating-btn,
+.home-page .cart-floating-btn,
+.model-page .cart-floating-btn{display:none !important;visibility:hidden !important;opacity:0 !important;pointer-events:none !important;}
+.cart-count-badge{background:#d9b875 !important;color:#0d0905 !important;}
+/* END BENDAGO PATCH V49 */
