@@ -1493,3 +1493,342 @@ body.home-page .band-shade{
   color:var(--bcp-champagne-light,#e6c989) !important;
 }
 /* END BENDAGO PATCH V42 */
+
+
+/* BENDAGO PATCH V43 — CTA links, premium translucent green complete-look, and no-overlap cart/product buttons
+   Scope: visual/navigation only. No cart logic, checkout, Worker, SKU or price changes. */
+:root{
+  --bcp-emerald-soft:#7ee7c4;
+  --bcp-emerald-deep:#173a32;
+  --bcp-emerald-line:rgba(126,231,196,.42);
+}
+.product-card .body{
+  display:flex !important;
+  flex-direction:column !important;
+  min-width:0 !important;
+}
+.product-details-link,
+.model-125 .product-card .add-preview,
+.model-500 .product-card .add-preview,
+.model-v4 .product-card .add-preview{
+  width:100% !important;
+  max-width:100% !important;
+  box-sizing:border-box !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  text-align:center !important;
+  min-width:0 !important;
+  white-space:normal !important;
+  overflow-wrap:normal !important;
+  line-height:1.12 !important;
+  padding-left:12px !important;
+  padding-right:12px !important;
+}
+.product-details-link{
+  margin-top:auto !important;
+}
+.product-details-link + .add-preview{
+  margin-top:9px !important;
+}
+.model-125 .product-card .add-preview,
+.model-500 .product-card .add-preview,
+.model-v4 .product-card .add-preview{
+  min-height:46px !important;
+}
+.build-launch-card{
+  border-color:rgba(126,231,196,.28) !important;
+  background:
+    radial-gradient(circle at 18% 0%,rgba(126,231,196,.15),transparent 40%),
+    linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.016)),
+    rgba(11,22,20,.82) !important;
+}
+.build-launch-emblem{
+  border-color:rgba(126,231,196,.34) !important;
+  background:
+    radial-gradient(circle at 30% 0%,rgba(255,255,255,.18),transparent 38%),
+    linear-gradient(180deg,rgba(126,231,196,.26),rgba(126,231,196,.08)),
+    rgba(12,34,29,.86) !important;
+  color:#dffcf2 !important;
+}
+.build-launch-copy span{
+  color:var(--bcp-emerald-soft) !important;
+}
+.build-launch-copy small{
+  color:rgba(223,252,242,.68) !important;
+}
+.build-bundle-actions .btn.primary{
+  color:#eafff7 !important;
+  border:1px solid rgba(126,231,196,.52) !important;
+  background:
+    radial-gradient(circle at 20% 0%,rgba(255,255,255,.16),transparent 34%),
+    linear-gradient(180deg,rgba(126,231,196,.25),rgba(126,231,196,.10)),
+    rgba(13,45,38,.82) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 16px 36px rgba(0,0,0,.32),0 0 28px rgba(126,231,196,.08) !important;
+}
+.build-bundle-actions .btn.primary:hover,
+.build-bundle-actions .btn.primary:focus-visible{
+  border-color:rgba(126,231,196,.76) !important;
+  background:
+    radial-gradient(circle at 20% 0%,rgba(255,255,255,.20),transparent 34%),
+    linear-gradient(180deg,rgba(126,231,196,.32),rgba(126,231,196,.13)),
+    rgba(15,56,47,.88) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 18px 42px rgba(0,0,0,.38),0 0 32px rgba(126,231,196,.12) !important;
+}
+.build-bundle-actions .btn.primary::before{
+  content:"◆";
+  color:var(--bcp-emerald-soft);
+  font-size:11px;
+}
+.build-bundle-actions .btn.primary::after{
+  content:"→";
+  color:rgba(230,201,137,.95);
+  font-size:14px;
+  margin-left:auto;
+}
+.build-bundle-actions .btn.primary.is-disabled,
+.build-bundle-actions .btn.primary:disabled{
+  opacity:.78 !important;
+  color:rgba(234,255,247,.62) !important;
+  border-color:rgba(126,231,196,.24) !important;
+  background:
+    radial-gradient(circle at 20% 0%,rgba(126,231,196,.10),transparent 34%),
+    linear-gradient(180deg,rgba(255,255,255,.040),rgba(255,255,255,.014)),
+    rgba(13,30,27,.74) !important;
+  box-shadow:none !important;
+}
+/* Cart drawer used on model pages: keep button hierarchy readable on all models. */
+.cart-footer,
+.cart-footer *{box-sizing:border-box !important;}
+.cart-checkout-btn,
+.cart-share-btn,
+.cart-clear-btn,
+.cart-other-product-btn{
+  width:100% !important;
+  min-width:0 !important;
+  max-width:100% !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  text-align:center !important;
+  white-space:normal !important;
+  line-height:1.12 !important;
+  overflow:hidden !important;
+}
+.cart-secondary-actions{
+  display:grid !important;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;
+  gap:10px !important;
+  min-width:0 !important;
+}
+@media(max-width:520px){
+  .cart-secondary-actions{grid-template-columns:1fr !important;}
+  .cart-checkout-btn,.cart-share-btn,.cart-clear-btn,.cart-other-product-btn{min-height:44px !important;}
+}
+@media(orientation:landscape) and (max-height:520px) and (max-width:980px){
+  .cart-drawer{display:grid !important;grid-template-rows:auto minmax(0,1fr) auto !important;}
+  .cart-body{min-height:0 !important;overflow-y:auto !important;}
+  .cart-footer{
+    display:grid !important;
+    grid-template-columns:minmax(118px,.34fr) minmax(0,1fr) !important;
+    grid-template-areas:"pricing checkout" "share secondary" !important;
+    gap:7px 9px !important;
+    padding:7px 11px 8px !important;
+    align-items:stretch !important;
+  }
+  .cart-pricing-block{grid-area:pricing !important;margin:0 !important;min-width:0 !important;align-self:center !important;}
+  .cart-checkout-btn{grid-area:checkout !important;min-height:40px !important;height:40px !important;font-size:.82rem !important;padding:0 10px !important;}
+  .cart-share-btn{grid-area:share !important;min-height:32px !important;height:32px !important;margin:0 !important;font-size:.70rem !important;padding:0 7px !important;}
+  .cart-secondary-actions{grid-area:secondary !important;grid-template-columns:minmax(82px,.68fr) minmax(136px,1.32fr) !important;gap:7px !important;margin:0 !important;}
+  .cart-clear-btn,.cart-other-product-btn{min-height:32px !important;height:32px !important;font-size:.70rem !important;padding:0 7px !important;}
+}
+@media(orientation:landscape) and (max-height:390px) and (max-width:760px){
+  .cart-footer{
+    grid-template-columns:104px minmax(0,1fr) !important;
+    grid-template-areas:"pricing checkout" "secondary secondary" !important;
+    gap:6px 7px !important;
+    padding:6px 8px 7px !important;
+  }
+  .cart-share-btn{display:none !important;}
+  .cart-checkout-btn{min-height:36px !important;height:36px !important;font-size:.72rem !important;}
+  .cart-secondary-actions{grid-template-columns:minmax(72px,.70fr) minmax(132px,1.30fr) !important;}
+  .cart-clear-btn,.cart-other-product-btn{min-height:30px !important;height:30px !important;font-size:.64rem !important;}
+}
+/* END BENDAGO PATCH V43 */
+
+/* BENDAGO PATCH V44 — responsive home hero, discreet footer and header cart
+   Scope: responsive layout/visual only. No cart logic, checkout, Worker, SKU or price changes. */
+@media (max-width: 900px){
+  body.home-page .bcp-header{
+    height:40px !important;
+    min-height:40px !important;
+    padding:0 98px 0 12px !important;
+    background:rgba(0,0,0,.76) !important;
+    border-bottom:1px solid rgba(230,201,137,.10) !important;
+  }
+  body.home-page .bcp-brand{
+    max-width:calc(100vw - 126px) !important;
+    overflow:hidden !important;
+    text-overflow:ellipsis !important;
+    white-space:nowrap !important;
+  }
+  body.home-page main{
+    padding-top:40px !important;
+  }
+  body.home-page .hero-band{
+    height:clamp(430px,58svh,555px) !important;
+    min-height:430px !important;
+    aspect-ratio:auto !important;
+  }
+  body.home-page .hero-logo{
+    top:55% !important;
+    width:min(215px,48vw) !important;
+    max-height:30% !important;
+  }
+  body.home-page .scroll-dot{
+    bottom:14px !important;
+  }
+  body.home-page .cart-floating-btn,
+  .model-page .cart-floating-btn{
+    position:fixed !important;
+    top:6px !important;
+    right:10px !important;
+    bottom:auto !important;
+    z-index:1200 !important;
+    min-height:28px !important;
+    height:28px !important;
+    max-width:84px !important;
+    padding:0 8px !important;
+    gap:5px !important;
+    border-radius:999px !important;
+    border:1px solid rgba(230,201,137,.34) !important;
+    background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.016)),rgba(8,10,12,.86) !important;
+    color:rgba(245,241,232,.92) !important;
+    box-shadow:none !important;
+    font-size:10px !important;
+    line-height:1 !important;
+    letter-spacing:.08em !important;
+    text-transform:uppercase !important;
+    backdrop-filter:blur(10px) !important;
+    -webkit-backdrop-filter:blur(10px) !important;
+  }
+  body.home-page .cart-floating-btn::before,
+  .model-page .cart-floating-btn::before{
+    content:"🛒" !important;
+    font-size:12px !important;
+    line-height:1 !important;
+  }
+  body.home-page .cart-count-badge,
+  .model-page .cart-count-badge{
+    min-width:17px !important;
+    height:17px !important;
+    padding:0 4px !important;
+    margin-left:0 !important;
+    border-radius:999px !important;
+    background:rgba(230,201,137,.92) !important;
+    color:#070707 !important;
+    font-size:10px !important;
+    font-weight:950 !important;
+  }
+  .model-page .site-header{
+    min-height:40px !important;
+  }
+  .model-page .nav{
+    min-height:40px !important;
+    padding-right:96px !important;
+  }
+  .model-page .brand{
+    max-width:calc(100vw - 126px) !important;
+    overflow:hidden !important;
+  }
+  .model-page .brand-mark{
+    width:24px !important;
+    height:24px !important;
+  }
+  .model-page .brand-name strong{font-size:11px !important;}
+  .model-page .brand-name span{font-size:8px !important;}
+  .model-page .cart-pill{
+    display:none !important;
+  }
+  .footer-legal-block{
+    gap:7px !important;
+    color:rgba(226,232,240,.54) !important;
+    font-size:10.5px !important;
+    line-height:1.45 !important;
+    letter-spacing:.02em !important;
+    text-transform:none !important;
+    text-align:center !important;
+  }
+  .footer-legal-block p{
+    max-width:720px !important;
+    margin:0 auto !important;
+    font-weight:450 !important;
+  }
+  .footer-legal-block a{
+    color:rgba(230,201,137,.76) !important;
+    font-weight:650 !important;
+    text-decoration:none !important;
+    border-bottom:1px solid rgba(230,201,137,.18) !important;
+  }
+  .bcp-footer.footer{
+    padding:18px 14px 24px !important;
+    letter-spacing:0 !important;
+    text-transform:none !important;
+  }
+}
+@media (max-width: 560px){
+  body.home-page .hero-band{
+    height:clamp(400px,54svh,500px) !important;
+    min-height:400px !important;
+  }
+  body.home-page .hero-logo{
+    top:55% !important;
+    width:min(198px,46vw) !important;
+    max-height:28% !important;
+  }
+  .home-proof-section{
+    padding-top:24px !important;
+    padding-bottom:20px !important;
+  }
+  .model-social-proof-card{
+    padding:13px 14px !important;
+    border-radius:19px !important;
+  }
+  .model-social-kicker{
+    font-size:8.5px !important;
+    letter-spacing:.08em !important;
+  }
+  .model-social-proof-copy strong{
+    font-size:20px !important;
+    line-height:1.08 !important;
+    font-weight:820 !important;
+    letter-spacing:-.025em !important;
+  }
+  .model-social-proof-copy small{
+    font-size:11.5px !important;
+    line-height:1.34 !important;
+    font-weight:430 !important;
+    color:rgba(226,232,240,.58) !important;
+  }
+  .model-social-links{
+    gap:6px !important;
+  }
+  .model-social-pill{
+    min-height:34px !important;
+    padding:0 7px !important;
+    font-size:10.5px !important;
+    font-weight:760 !important;
+  }
+}
+@media (orientation: landscape) and (max-height: 520px) and (max-width: 980px){
+  body.home-page .hero-band{
+    height:calc(100svh - 40px) !important;
+    min-height:300px !important;
+  }
+  body.home-page .hero-logo{
+    top:53% !important;
+    width:min(170px,21vw) !important;
+    max-height:36% !important;
+  }
+}
+/* END BENDAGO PATCH V44 */
