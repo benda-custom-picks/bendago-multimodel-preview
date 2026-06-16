@@ -1,5 +1,14 @@
 /* BENDAGO ORDER + CART CHECKOUT FLOW */
 const BENDAGO_PRODUCTS = {
+  "madmax-double-exhaust-kit-450": {
+    product_code: "madmax-double-exhaust-kit-450",
+    product_name: "Madmax Double Exhaust Kit",
+    product_price: 910,
+    product_image: './madmax-double-exhaust-kit-450-hero.png',
+    image: './madmax-double-exhaust-kit-450-hero.png',
+    meta_title: "Madmax Double Exhaust Kit",
+    category: "Napoleon 450/500"
+  },
   "transparent-gold-clutch-cover-kit-450": {
     product_code: "transparent-gold-clutch-cover-kit-450",
     product_name: 'Transparent Gold Clutch Cover Kit',
