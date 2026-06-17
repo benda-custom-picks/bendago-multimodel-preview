@@ -555,6 +555,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.querySelectorAll('.product-thumb').forEach(btn => {
     btn.addEventListener('click', () => {
+      if ((btn.getAttribute('data-type') || '').toLowerCase() === 'video') return;
       const src = btn.getAttribute('data-src');
       const main = document.querySelector('#mainProductImage');
       if (src && main) main.src = src;
@@ -775,6 +776,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.querySelectorAll('.product-thumb').forEach(function (btn) {
       btn.addEventListener('click', function () {
+        if ((btn.getAttribute('data-type') || '').toLowerCase() === 'video') return;
         var src = btn.getAttribute('data-src') || (btn.querySelector('img') && btn.querySelector('img').src) || '';
         if (src && main) {
           main.src = src;
