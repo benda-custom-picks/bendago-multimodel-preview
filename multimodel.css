@@ -2748,3 +2748,135 @@ body.model-page .cart-floating-btn,
   .model-v4 #looks .build-essentials-card{min-height:0 !important;}
 }
 /* END BENDAGO V92 */
+
+
+/* BENDAGO V93 — responsive premium tightening for model pages.
+   Scope: model-page mobile polish only. No checkout / Worker / SKU / GTM / EmailJS logic changed. */
+.look-media-link{position:relative;display:block;text-decoration:none;color:inherit;cursor:pointer;}
+.look-media-link .look-media-expand-badge{
+  position:absolute;right:12px;bottom:12px;z-index:2;
+  display:inline-flex;align-items:center;gap:6px;
+  min-height:30px;padding:0 10px;border-radius:999px;
+  border:1px solid rgba(217,184,117,.34);
+  background:rgba(7,9,13,.70);backdrop-filter:blur(8px);
+  color:rgba(247,241,232,.92);font-size:10px;font-weight:900;letter-spacing:.09em;text-transform:uppercase;
+  box-shadow:0 10px 22px rgba(0,0,0,.24);
+}
+.look-media-link .look-media-expand-badge::before{content:"⤢";font-size:12px;line-height:1;color:rgba(217,184,117,.95);}
+.look-media-link::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,transparent 58%,rgba(0,0,0,.16));}
+
+.model-guide-mini-bar-v59{
+  display:grid;grid-template-columns:auto repeat(2,minmax(0,1fr));gap:10px;align-items:center;
+  border:1px solid rgba(217,184,117,.18);border-radius:18px;padding:12px 14px;
+  background:radial-gradient(circle at 10% 0%,rgba(217,184,117,.09),transparent 38%),linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.010)),rgba(7,9,13,.88);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 14px 32px rgba(0,0,0,.22);
+}
+.model-guide-mini-label-v59{font-size:10px;font-weight:950;letter-spacing:.14em;text-transform:uppercase;color:rgba(217,184,117,.92);white-space:nowrap;}
+.model-guide-mini-bar-v59 a{
+  min-height:42px;border-radius:14px;padding:0 12px;display:flex;align-items:center;justify-content:center;text-align:center;
+  border:1px solid rgba(217,184,117,.24);background:rgba(6,8,12,.70);color:rgba(247,241,232,.92);
+  font-size:10px;font-weight:900;letter-spacing:.11em;text-transform:uppercase;line-height:1.15;text-decoration:none;
+}
+.model-guide-mini-bar-v59 a.is-primary{border-color:rgba(217,184,117,.40);background:linear-gradient(180deg,rgba(217,184,117,.10),rgba(217,184,117,.03)),rgba(7,9,13,.82);color:#f5e1b3;}
+
+@media (max-width:900px){
+  .model-proof-top{padding:8px 0 6px !important;}
+  .model-proof-top .model-proof-trust-grid{
+    display:grid !important;grid-template-columns:repeat(3,minmax(0,1fr)) !important;gap:8px !important;
+    overflow:visible !important;padding:0 !important;scroll-snap-type:none !important;
+  }
+  .model-proof-top .model-proof-trust-item{
+    min-width:0 !important;min-height:88px !important;padding:10px 10px !important;border-radius:18px !important;
+  }
+  .model-proof-top .model-proof-icon{width:24px !important;height:24px !important;font-size:10px !important;}
+  .model-proof-top .model-proof-copy strong{font-size:14px !important;line-height:1.02 !important;letter-spacing:-.02em !important;}
+  .model-proof-top .model-proof-copy small{font-size:11px !important;line-height:1.2 !important;display:block !important;}
+  .model-proof-top .model-social-proof-card{padding:14px !important;border-radius:20px !important;}
+  .model-proof-top .model-social-links{gap:8px !important;}
+  .model-proof-top .model-social-pill{min-height:42px !important;padding:0 12px !important;}
+
+  .model-500 .model-start .section-head .swipe-hint,
+  .model-v4 .model-start .section-head .swipe-hint{display:none !important;}
+
+  .model-500 #looks .look-grid.look-grid-single,
+  .model-v4 #looks .look-grid.look-grid-single{
+    display:block !important;max-width:none !important;width:100% !important;margin:0 !important;overflow:visible !important;
+  }
+  .model-500 #looks .look-grid.look-grid-single .look-card,
+  .model-v4 #looks .look-grid.look-grid-single .look-card{
+    width:min(100%,560px) !important;max-width:100% !important;flex:none !important;margin:0 auto !important;
+    height:auto !important;min-height:0 !important;max-height:none !important;
+  }
+  .model-500 #looks .look-media,#looks .look-media-video,
+  .model-v4 #looks .look-media,.model-v4 #looks .look-media-video{height:220px !important;flex-basis:220px !important;}
+  .model-500 #looks .look-video,.model-v4 #looks .look-video{object-fit:cover !important;}
+
+  .model-500 #looks .look-body,
+  .model-v4 #looks .look-body{padding:15px 14px 14px !important;}
+  .model-500 #looks .parts-list,
+  .model-v4 #looks .parts-list{gap:8px !important;}
+  .model-500 #looks .build-essentials-card,
+  .model-v4 #looks .build-essentials-card{padding:13px 13px !important;border-radius:16px !important;min-height:0 !important;}
+  .model-500 #looks .build-essentials-head,
+  .model-v4 #looks .build-essentials-head{margin-bottom:8px !important;}
+  .model-500 #looks .build-essentials-head span,
+  .model-v4 #looks .build-essentials-head span{font-size:9px !important;}
+  .model-500 #looks .build-essentials-head b,
+  .model-v4 #looks .build-essentials-head b{font-size:clamp(18px,5.5vw,23px) !important;}
+  .model-500 #looks .build-essentials-card li,
+  .model-v4 #looks .build-essentials-card li{
+    display:grid !important;grid-template-columns:10px minmax(0,1fr) !important;column-gap:8px !important;align-items:start !important;
+    padding-left:0 !important;font-size:12px !important;line-height:1.22 !important;
+  }
+  .model-500 #looks .build-essentials-card li::before,
+  .model-v4 #looks .build-essentials-card li::before{position:relative !important;left:auto !important;top:.28em !important;margin:0 !important;width:10px !important;height:10px !important;}
+
+  .model-500 #looks .build-bundle-actions,
+  .model-v4 #looks .build-bundle-actions{gap:9px !important;}
+  .model-500 #looks .build-bundle-actions .btn,
+  .model-v4 #looks .build-bundle-actions .btn{min-height:46px !important;border-radius:14px !important;}
+  .model-500 #looks .build-bundle-actions .btn.secondary,
+  .model-v4 #looks .build-bundle-actions .btn.secondary{
+    border:1px solid rgba(217,184,117,.34) !important;background:linear-gradient(180deg,rgba(217,184,117,.08),rgba(217,184,117,.025)),rgba(8,10,15,.92) !important;
+    color:#f6efe2 !important;box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 12px 24px rgba(0,0,0,.24) !important;
+  }
+
+  .model-guide-section{padding-top:12px !important;padding-bottom:16px !important;}
+  .model-500 .model-guide-section .wrap,
+  .model-v4 .model-guide-section .wrap{width:min(100%,calc(100vw - 30px)) !important;}
+  .model-v4 .model-guide-panel{display:block !important;padding:12px !important;border-radius:18px !important;gap:0 !important;}
+  .model-v4 .model-guide-copy{margin-bottom:10px !important;}
+  .model-v4 .model-guide-copy h2{font-size:18px !important;line-height:1.02 !important;margin:0 0 4px !important;}
+  .model-v4 .model-guide-copy p{font-size:11.5px !important;line-height:1.35 !important;}
+  .model-v4 .model-guide-links{grid-template-columns:1fr 1fr !important;gap:8px !important;}
+  .model-v4 .model-guide-link{min-height:42px !important;padding:10px 10px !important;border-radius:14px !important;gap:2px !important;}
+  .model-v4 .model-guide-link span{font-size:10px !important;}
+  .model-v4 .model-guide-link b{font-size:10.5px !important;}
+
+  .model-guide-mini-v59{padding-top:10px !important;padding-bottom:14px !important;}
+  .model-guide-mini-v59 .wrap{width:min(100%,calc(100vw - 30px)) !important;}
+  .model-guide-mini-bar-v59{grid-template-columns:1fr 1fr !important;gap:8px !important;padding:10px !important;border-radius:16px !important;}
+  .model-guide-mini-label-v59{grid-column:1 / -1 !important;font-size:9px !important;letter-spacing:.13em !important;}
+  .model-guide-mini-bar-v59 a{min-height:38px !important;padding:0 8px !important;font-size:9.5px !important;letter-spacing:.09em !important;border-radius:13px !important;}
+
+  .order-trust-section{padding-top:14px !important;padding-bottom:20px !important;}
+  .order-trust-section .wrap{width:min(100%,calc(100vw - 30px)) !important;}
+  .order-trust-section .section-head{margin-bottom:12px !important;}
+  .order-trust-section .section-head h2{font-size:clamp(32px,8.3vw,42px) !important;line-height:.96 !important;}
+  .order-trust-section .section-head p{font-size:13px !important;line-height:1.4 !important;}
+  .order-trust-section .trust-grid{display:grid !important;grid-template-columns:1fr !important;gap:10px !important;}
+  .order-trust-section .trust-card{padding:14px !important;border-radius:18px !important;min-height:0 !important;}
+  .order-trust-section .trust-card h3{font-size:16px !important;line-height:1.06 !important;margin-bottom:8px !important;min-height:0 !important;}
+  .order-trust-section .trust-card p{font-size:13px !important;line-height:1.42 !important;min-height:0 !important;margin:0 !important;}
+  .order-trust-section .trust-card a{margin-top:8px !important;font-size:13px !important;}
+}
+@media (max-width:430px){
+  .model-proof-top .model-proof-trust-item{min-height:82px !important;padding:9px 8px !important;}
+  .model-proof-top .model-proof-copy strong{font-size:13px !important;}
+  .model-proof-top .model-proof-copy small{font-size:10px !important;}
+  .model-500 #looks .look-media,.model-500 #looks .look-media-video,
+  .model-v4 #looks .look-media,.model-v4 #looks .look-media-video{height:200px !important;flex-basis:200px !important;}
+  .model-v4 .model-guide-panel{padding:11px !important;}
+  .model-v4 .model-guide-copy p{display:none !important;}
+}
+/* END BENDAGO V93 */
