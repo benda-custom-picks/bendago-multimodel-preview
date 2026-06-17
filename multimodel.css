@@ -3296,11 +3296,18 @@ body.model-page .cart-floating-btn,
 }
 @media (min-width:901px){
   .model-page main::before{
-    opacity:.42!important;
-    filter:blur(.55px) saturate(1.18) brightness(1.52) contrast(1.08)!important;
+    opacity:.35!important;
+    filter:blur(.8px) saturate(1.10) brightness(1.28) contrast(1.03)!important;
     background-position:center center!important;
   }
-  .model-page main::after{background:rgba(0,0,0,.44)!important;}
+  .model-page main::after{
+    background:linear-gradient(to left,
+      rgba(0,0,0,.78) 0%,
+      rgba(0,0,0,.68) 26%,
+      rgba(0,0,0,.57) 52%,
+      rgba(0,0,0,.48) 76%,
+      rgba(0,0,0,.42) 100%)!important;
+  }
   .model-page .section>.wrap,
   .model-page .model-proof-section>.wrap,
   .model-page .order-trust-section>.wrap{max-width:1420px!important;}
@@ -3309,3 +3316,23 @@ body.model-page .cart-floating-btn,
   .model-page #shop-part-by-part .wrap{width:min(1420px,calc(100% - 76px))!important;}
 }
 /* END BENDAGO V99 */
+
+
+/* BENDAGO V100 — model background balance after V99.
+   Scope: desktop background visibility only. No layout / checkout / Worker / Stripe / SKU changes. */
+@media (min-width:901px){
+  .model-page main::before{
+    opacity:.29!important;
+    filter:blur(.9px) saturate(1.04) brightness(1.18) contrast(1.02)!important;
+    background-position:center center!important;
+  }
+  .model-page main::after{
+    background:linear-gradient(to left,
+      rgba(0,0,0,.86) 0%,
+      rgba(0,0,0,.78) 22%,
+      rgba(0,0,0,.64) 50%,
+      rgba(0,0,0,.52) 76%,
+      rgba(0,0,0,.46) 100%)!important;
+  }
+}
+/* END BENDAGO V100 */
