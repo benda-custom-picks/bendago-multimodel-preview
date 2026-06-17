@@ -613,6 +613,15 @@ async function createStripeCheckout(lines, formData) {
     status.textContent = message;
   }
 
+  function isEmailJsConfigured(cfg) {
+    const c = cfg || {};
+    const values = [c.publicKey, c.serviceId, c.adminTemplateId, c.clientTemplateId];
+    return values.every(function (value) {
+      const text = String(value || '').trim();
+      return text && !/PASTE_|YOUR_|REPLACE_|XXXX|TODO/i.test(text);
+    });
+  }
+
   function getValidatedCartFormData() {
     const form = document.getElementById('cartRequestForm');
     if (!form) throw new Error('Cart form not found');
@@ -634,9 +643,6 @@ async function createStripeCheckout(lines, formData) {
     }
 
     const cfg = window.BENDAGO_EMAILJS_CONFIG || {};
-    if (!cfg.publicKey || cfg.publicKey.includes('PASTE_') || !cfg.serviceId || cfg.serviceId.includes('PASTE_')) {
-      throw new Error('EmailJS is not configured yet.');
-    }
 
     return { form, formData, lines, cfg, termsAcceptance };
   }
@@ -713,9 +719,34 @@ async function createStripeCheckout(lines, formData) {
       processing_note: 'Order processed after Stripe payment confirmation.'
     };
 
-    if (window.emailjs && emailjs.init) emailjs.init({ publicKey: cfg.publicKey });
-    await emailjs.send(cfg.serviceId, cfg.adminTemplateId, emailData);
-    await emailjs.send(cfg.serviceId, cfg.clientTemplateId, emailData);
+    if (isEmailJsConfigured(cfg) && window.emailjs && window.emailjs.init && window.emailjs.send) {
+      try {
+        window.emailjs.init({ publicKey: cfg.publicKey });
+        await window.emailjs.send(cfg.serviceId, cfg.adminTemplateId, emailData);
+        await window.emailjs.send(cfg.serviceId, cfg.clientTemplateId, emailData);
+        push('cart_checkout_email_sent', {
+          request_id: emailData.request_id,
+          checkout_id: emailData.checkout_id,
+          payment_provider: 'stripe'
+        });
+      } catch (emailErr) {
+        console.warn('EmailJS pre-checkout email skipped; Stripe checkout continues.', emailErr);
+        push('cart_checkout_email_skipped', {
+          request_id: emailData.request_id,
+          checkout_id: emailData.checkout_id,
+          reason: 'emailjs_send_failed',
+          payment_provider: 'stripe'
+        });
+      }
+    } else {
+      console.warn('EmailJS not configured; Stripe checkout continues without pre-checkout email.');
+      push('cart_checkout_email_skipped', {
+        request_id: emailData.request_id,
+        checkout_id: emailData.checkout_id,
+        reason: 'emailjs_not_configured',
+        payment_provider: 'stripe'
+      });
+    }
 
     push('stripe_checkout_created', {
       request_id: emailData.request_id,
