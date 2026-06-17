@@ -1,5 +1,29 @@
 /* BENDAGO ORDER + CART CHECKOUT FLOW */
 const BENDAGO_PRODUCTS = {
+  "ghost-kit-maverick-air-filter-v4": {
+    product_code: "ghost-kit-maverick-air-filter-v4",
+    product_name: 'Ghost Kit | Maverick Air Filter',
+    product_short: 'Turbine-style Maverick air filter for Dark Flag V4',
+    fitment: 'Dark Flag V4',
+    price: '411 €',
+    delivery_estimate: '10 to 15 business days',
+    image: './ghost-kit-maverick-air-filter-v4-hero.png',
+    stripe_url: '',
+    color_required: true,
+    color_options: 'Full Black / Platinum Silver'
+  },
+  "ghost-kit-transparent-clutch-cover-v4": {
+    product_code: "ghost-kit-transparent-clutch-cover-v4",
+    product_name: 'Ghost Kit | Transparent Clutch Cover',
+    product_short: 'Transparent clutch cover kit for Dark Flag V4',
+    fitment: 'Dark Flag V4',
+    price: '481 €',
+    delivery_estimate: '10 to 15 business days',
+    image: './ghost-kit-darkflag-v4-engine-overview.png',
+    stripe_url: '',
+    color_required: true,
+    color_options: 'Black / Gold / Green'
+  },
   "black-shield-armor-kit-450": {
     product_code: "black-shield-armor-kit-450",
     product_name: 'Black Shield Armor Kit',

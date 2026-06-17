@@ -53,7 +53,9 @@
     'headlight-windscreen-cover-kit-450': 'headlight-windscreen-cover-kit-450',
     'premium-transparent-clutch-cover-kit-450': 'premium-transparent-clutch-cover-kit-450',
     'carbon-exhaust-protection-kit-450': 'carbon-exhaust-protection-kit-450',
-    'black-shield-armor-kit-450': 'black-shield-armor-kit-450'
+    'black-shield-armor-kit-450': 'black-shield-armor-kit-450',
+    'ghost-kit-maverick-air-filter-v4': 'ghost-kit-maverick-air-filter-v4',
+    'ghost-kit-transparent-clutch-cover-v4': 'ghost-kit-transparent-clutch-cover-v4'
   };
 
   const COMPLETE_BUILD_OFFERS = [
@@ -109,6 +111,14 @@
         { code: 'black-foot-control-kit' },
         { code: 'tank-cover-support-volume', color_option: 'Black' },
         { code: 'premium-double-seat', color_option: 'Black' }
+      ]
+    },
+    {
+      key: 'shadow-beast-v4',
+      name: 'Shadow Beast V4',
+      items: [
+        { code: 'ghost-kit-maverick-air-filter-v4' },
+        { code: 'ghost-kit-transparent-clutch-cover-v4' }
       ]
     },
     {
@@ -181,6 +191,13 @@
       { code: 'maverick-air-filter-cover' },
       { code: 'tank-cover-support-volume', options: { color_option: 'Black' } }
     ],
+    'shadow-beast-v4-complete': [
+      { code: 'ghost-kit-maverick-air-filter-v4', options: { color_option: 'Full Black' } },
+      { code: 'ghost-kit-transparent-clutch-cover-v4', options: { color_option: 'Black' } }
+    ],
+    'shadow-beast-v4-essentials': [
+      { code: 'ghost-kit-maverick-air-filter-v4', options: { color_option: 'Full Black' } }
+    ],
     'midnight-hunter-complete': [
       { code: 'madmax-double-exhaust-kit-450' },
       { code: 'maverick-air-filter-450' },
@@ -206,14 +223,14 @@
         const box = button.closest('[data-bundle-box]');
         const msg = box ? box.querySelector('.build-bundle-added') : null;
         if (msg) {
-          msg.textContent = key === 'midnight-hunter-essentials'
+          msg.textContent = key.endsWith('-essentials')
             ? 'Essentials added to cart. You can complete the full look later.'
             : 'Complete look added to cart. Launch Access 5% appears in cart.';
           msg.classList.add('show');
         }
         push('build_bundle_add_click', {
           build_key: key,
-          build_name: key.indexOf('midnight-hunter') === 0 ? 'Midnight Hunter Build' : key,
+          build_name: key.indexOf('midnight-hunter') === 0 ? 'Midnight Hunter Build' : (key.indexOf('shadow-beast-v4') === 0 ? 'Shadow Beast V4' : key),
           cart_count: cartCount()
         });
         openCart();
@@ -965,7 +982,9 @@ async function createStripeCheckout(lines, formData) {
     'headlight-windscreen-cover-kit-450': './order-headlight-windscreen-cover-kit-450.html',
     'premium-transparent-clutch-cover-kit-450': './order-premium-transparent-clutch-cover-kit-450.html',
     'carbon-exhaust-protection-kit-450': './order-carbon-exhaust-protection-kit-450.html',
-    'black-shield-armor-kit-450': './order-black-shield-armor-kit-450.html'
+    'black-shield-armor-kit-450': './order-black-shield-armor-kit-450.html',
+    'ghost-kit-transparent-clutch-cover-v4': './order-ghost-kit-transparent-clutch-cover-v4.html',
+    'ghost-kit-maverick-air-filter-v4': './order-ghost-kit-maverick-air-filter-v4.html'
   };
 
   function productPageUrl(code) {
