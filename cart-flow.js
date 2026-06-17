@@ -1163,8 +1163,65 @@ async function createStripeCheckout(lines, formData) {
     return changed;
   }
 
+
+  function ensureCartUxStyles() {
+    if (document.getElementById('bcp-v84-cart-ux-fix')) return;
+    const style = document.createElement('style');
+    style.id = 'bcp-v84-cart-ux-fix';
+    style.textContent = `
+      .cart-overlay{position:fixed!important;inset:0!important;background:rgba(0,0,0,.58)!important;backdrop-filter:blur(8px)!important;opacity:0!important;pointer-events:none!important;transition:opacity .22s ease!important;z-index:9998!important;}
+      .cart-overlay.active{opacity:1!important;pointer-events:auto!important;}
+      .cart-drawer{position:fixed!important;top:0!important;right:0!important;bottom:0!important;left:auto!important;width:min(500px,calc(100vw - 20px))!important;max-width:500px!important;display:flex!important;flex-direction:column!important;background:#090a0d!important;color:#fff!important;border-left:1px solid rgba(255,255,255,.14)!important;box-shadow:-28px 0 80px rgba(0,0,0,.55)!important;transform:translateX(110%)!important;transition:transform .25s ease!important;z-index:9999!important;overflow:hidden!important;}
+      .cart-drawer.active{transform:translateX(0)!important;}
+      .cart-head{flex:0 0 auto!important;padding:18px 18px 12px!important;border-bottom:1px solid rgba(255,255,255,.10)!important;}
+      .cart-body{flex:1 1 auto!important;overflow-y:auto!important;overscroll-behavior:contain!important;padding:14px 18px!important;}
+      .cart-footer{flex:0 0 auto!important;padding:14px 18px 18px!important;border-top:1px solid rgba(255,255,255,.10)!important;background:linear-gradient(180deg,rgba(9,10,13,.88),#090a0d)!important;}
+      .cart-line{background:rgba(255,255,255,.045)!important;border:1px solid rgba(255,255,255,.10)!important;border-radius:18px!important;padding:12px!important;}
+      .cart-floating-btn{position:fixed!important;right:max(16px,env(safe-area-inset-right))!important;left:auto!important;bottom:max(16px,env(safe-area-inset-bottom))!important;top:auto!important;z-index:9997!important;min-height:48px!important;padding:0 16px!important;border:1px solid rgba(246,196,49,.42)!important;border-radius:999px!important;background:linear-gradient(135deg,#f6c431,#c99028)!important;color:#100b04!important;font-weight:950!important;box-shadow:0 18px 46px rgba(0,0,0,.42)!important;}
+      body.cart-drawer-open .cart-floating-btn{opacity:0!important;pointer-events:none!important;transform:translateY(8px) scale(.96)!important;}
+      .order-cart-link,.cart-pill{display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:8px!important;min-height:38px!important;padding:0 13px!important;border-radius:999px!important;border:1px solid rgba(246,196,49,.38)!important;background:rgba(246,196,49,.11)!important;color:#f6c431!important;text-decoration:none!important;font-weight:950!important;white-space:nowrap!important;}
+      .order-cart-link span,.cart-pill span{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-width:22px!important;height:22px!important;border-radius:999px!important;background:#f6c431!important;color:#100b04!important;font-size:.78rem!important;}
+      @media (min-width:901px){.cart-floating-btn{display:none!important;}.cart-drawer{width:min(480px,36vw)!important;}}
+      @media (max-width:900px){
+        .cart-drawer{top:7px!important;right:7px!important;bottom:7px!important;width:calc(100vw - 14px)!important;max-width:none!important;border-left:1px solid rgba(255,255,255,.14)!important;border-radius:22px!important;}
+        .cart-head{padding:14px 14px 10px!important;}
+        .cart-head h2{font-size:1.15rem!important;margin:0 0 4px!important;}
+        .cart-head p{font-size:.82rem!important;margin:0!important;}
+        .cart-body{display:flex!important;flex-direction:row!important;gap:12px!important;overflow-x:auto!important;overflow-y:hidden!important;scroll-snap-type:x mandatory!important;-webkit-overflow-scrolling:touch!important;padding:14px!important;min-height:210px!important;}
+        .cart-line{flex:0 0 min(82vw,340px)!important;scroll-snap-align:start!important;display:grid!important;grid-template-columns:96px minmax(0,1fr)!important;gap:10px!important;align-content:start!important;}
+        .cart-line-media{width:96px!important;min-width:96px!important;height:96px!important;border-radius:14px!important;overflow:hidden!important;background:#05070b!important;}
+        .cart-line-media img{width:100%!important;height:100%!important;object-fit:contain!important;display:block!important;}
+        .cart-footer{padding:12px 14px 14px!important;max-height:48vh!important;overflow-y:auto!important;}
+        .cart-checkout-btn,.cart-share-btn{min-height:46px!important;border-radius:14px!important;}
+        .cart-floating-btn{display:inline-flex!important;align-items:center!important;justify-content:center!important;}
+      }
+      @media (max-width:430px){.cart-line{flex-basis:86vw!important;grid-template-columns:88px minmax(0,1fr)!important}.cart-line-media{width:88px!important;min-width:88px!important;height:88px!important}.cart-footer{max-height:52vh!important}}
+    `;
+    document.head.appendChild(style);
+  }
+
+  function currentPartsHref() {
+    const path = String(window.location.pathname || '').toLowerCase();
+    if (path.includes('dark-flag') || path.includes('-v4')) return './benda-dark-flag-v4-custom-parts.html#shop-part-by-part';
+    if (path.includes('450') || path.includes('500')) return './benda-napoleon-500-custom-parts.html#shop-part-by-part';
+    return './benda-napoleon-125-250-custom-parts.html#shop-part-by-part';
+  }
+
+  function bindOpenCartLinks() {
+    document.querySelectorAll('[data-open-cart]').forEach(link => {
+      if (link.dataset.bcpCartBound === '1') return;
+      link.dataset.bcpCartBound = '1';
+      link.addEventListener('click', event => {
+        event.preventDefault();
+        ensureCartUi();
+        openCart();
+      });
+    });
+  }
+
   function ensureCartUi() {
-    if (document.getElementById('bendagoCartButton')) return;
+    ensureCartUxStyles();
+    if (document.getElementById('bendagoCartButton')) { bindOpenCartLinks(); return; }
 
     const btn = document.createElement('button');
     btn.type = 'button';
@@ -1183,7 +1240,7 @@ async function createStripeCheckout(lines, formData) {
     drawer.setAttribute('aria-label', 'Benda Custom Picks cart');
     drawer.innerHTML = [
       '<div class="cart-head">',
-      '<div><h2>Your cart</h2><p>Select one or several Benda Napoleon parts.</p></div>',
+      '<div><h2>Your cart</h2><p>Swipe selected products, then continue with secure checkout.</p></div>',
       '<button type="button" class="cart-close" data-cart-close aria-label="Close cart">×</button>',
       '</div>',
       '<div class="cart-body" data-cart-body></div>',
@@ -1191,10 +1248,10 @@ async function createStripeCheckout(lines, formData) {
       '<div class="cart-pricing-block" data-cart-pricing><div class="cart-total-row"><span>Total</span><strong>0 €</strong></div></div>',
       '<div class="cart-note"><strong>Ready to pay securely.</strong><br>Fill your details once, then continue with secure Stripe card checkout. Delivery after payment: 10–15 business days. Local import duties/taxes may apply.</div>',
       '<a class="cart-checkout-btn disabled" data-cart-checkout href="./cart-request.html">Continue to secure payment</a>',
-      '<button type="button" class="cart-share-btn" data-cart-share disabled>Copy cart link</button>',
+      '<button type="button" class="cart-share-btn" data-cart-share>Copy cart link</button>',
       '<div class="cart-secondary-actions">',
       '<button type="button" class="cart-clear-btn" data-cart-clear>Clear cart</button>',
-      '<a class="cart-other-product-btn" href="./benda-napoleon-125-250-custom-parts.html#shop-part-by-part" data-cart-other-product>Add another product</a>',
+      '<a class="cart-other-product-btn" href="' + currentPartsHref() + '" data-cart-other-product>Add another product</a>',
       '</div>',
       '</div>'
     ].join('');
@@ -1218,9 +1275,13 @@ async function createStripeCheckout(lines, formData) {
     const shareBtn = drawer.querySelector('[data-cart-share]');
     if (shareBtn) {
       shareBtn.addEventListener('click', async () => {
-        if (!cartCount()) return;
-        const link = sharedCartUrl();
         const originalText = shareBtn.textContent;
+        if (!cartCount()) {
+          shareBtn.textContent = 'Add a product first';
+          window.setTimeout(() => { shareBtn.textContent = originalText; }, 1600);
+          return;
+        }
+        const link = sharedCartUrl();
         let copied = false;
         try {
           if (navigator.clipboard && window.isSecureContext) {
@@ -1279,11 +1340,13 @@ async function createStripeCheckout(lines, formData) {
   function openCart() {
     ensureCartUi();
     renderCartDrawer();
+    document.body.classList.add('cart-drawer-open');
     document.getElementById('bendagoCartOverlay')?.classList.add('active');
     document.getElementById('bendagoCartDrawer')?.classList.add('active');
   }
 
   function closeCart() {
+    document.body.classList.remove('cart-drawer-open');
     document.getElementById('bendagoCartOverlay')?.classList.remove('active');
     document.getElementById('bendagoCartDrawer')?.classList.remove('active');
   }
@@ -1302,7 +1365,7 @@ async function createStripeCheckout(lines, formData) {
       body.innerHTML = '<div class="cart-empty">Your cart is empty. Open a product page and add one or several parts.</div>';
       pricingEl.innerHTML = '<div class="cart-total-row"><span>Total</span><strong>0 €</strong></div>';
       checkout.classList.add('disabled');
-      if (shareBtn) shareBtn.disabled = true;
+      if (shareBtn) shareBtn.disabled = false;
       return;
     }
 
@@ -1414,6 +1477,7 @@ window.BendagoCart = {
   document.addEventListener('DOMContentLoaded', () => {
     const sharedCartLoaded = loadSharedCartFromUrl();
     ensureCartUi();
+    bindOpenCartLinks();
     bindBuildBundleButtons();
     bindCartForm();
     renderStripeCheckoutButton();

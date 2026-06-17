@@ -108,9 +108,34 @@ html,body{max-width:100%;overflow-x:hidden!important}
   .product-option-actions{display:grid!important;grid-template-columns:1fr!important}
   .product-option-btn{justify-content:center!important;width:100%!important}
 }
-</style></head>
+</style>
+<style id="bcp-v84-darkflag-gallery-cart-fix">
+/* BCP V84 — full-format product gallery + reliable top cart entry */
+.order-links{align-items:center!important}
+.order-cart-link{display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:8px!important;min-height:38px!important;padding:0 13px!important;border-radius:999px!important;border:1px solid rgba(246,196,49,.38)!important;background:rgba(246,196,49,.11)!important;color:#f6c431!important;text-decoration:none!important;font-weight:950!important;white-space:nowrap!important}
+.order-cart-link span{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-width:22px!important;height:22px!important;border-radius:999px!important;background:#f6c431!important;color:#100b04!important;font-size:.78rem!important}
+.media-card{display:block!important;overflow:hidden!important}
+.media-card .main-product-img,.main-product-img{width:100%!important;height:clamp(440px,68vh,780px)!important;max-height:none!important;object-fit:contain!important;object-position:center!important;background:#05070b!important;border-radius:18px!important;padding:0!important}
+.thumb-row{display:grid!important;grid-template-columns:repeat(auto-fit,minmax(104px,1fr))!important;gap:12px!important;overflow:visible!important;width:100%!important}
+.product-thumb{height:auto!important;min-height:0!important;aspect-ratio:4/3!important;padding:0!important;background:#05070b!important}
+.product-thumb img{width:100%!important;height:100%!important;object-fit:contain!important;object-position:center!important;padding:0!important;background:#05070b!important}
+@media (max-width:900px){
+  .order-nav{align-items:center!important}
+  .order-links{width:auto!important;margin-left:auto!important;justify-content:flex-end!important}
+  .media-card .main-product-img,.main-product-img{height:min(72vh,640px)!important}
+  .thumb-row{display:flex!important;grid-template-columns:none!important;gap:10px!important;overflow-x:auto!important;overflow-y:hidden!important;scroll-snap-type:x mandatory!important;-webkit-overflow-scrolling:touch!important;padding-bottom:4px!important}
+  .product-thumb{flex:0 0 46%!important;scroll-snap-align:start!important;aspect-ratio:4/3!important}
+}
+@media (max-width:430px){
+  .order-links{gap:8px!important}
+  .order-cart-link{min-height:36px!important;padding:0 11px!important;font-size:.86rem!important}
+  .media-card .main-product-img,.main-product-img{height:min(68vh,560px)!important}
+  .product-thumb{flex-basis:58%!important}
+}
+</style>
+</head>
 <body class="order-body">
-<header class="order-header"><nav class="order-wrap order-nav"><a class="order-brand" href="./index.html"><span class="order-logo">B</span><span>Benda Custom Picks</span></a><div class="order-links"><a href="./benda-dark-flag-v4-custom-parts.html#looks">Builds</a><a href="./benda-dark-flag-v4-custom-parts.html#shop-part-by-part">Parts</a><a class="send-moto" href="mailto:support@bendacustompicks.com">Support</a></div></nav></header>
+<header class="order-header"><nav class="order-wrap order-nav"><a class="order-brand" href="./index.html"><span class="order-logo">B</span><span>Benda Custom Picks</span></a><div class="order-links"><a href="./benda-dark-flag-v4-custom-parts.html#looks">Builds</a><a href="./benda-dark-flag-v4-custom-parts.html#shop-part-by-part">Parts</a><a class="send-moto" href="mailto:support@bendacustompicks.com">Support</a><a class="order-cart-link" data-open-cart href="#">Cart <span data-cart-count="">0</span></a></div></nav></header>
 <main class="order-wrap">
 <a class="back-link" href="./benda-dark-flag-v4-custom-parts.html#shop-part-by-part">← Back to Dark Flag V4 parts</a>
 <div class="product-layout">
@@ -173,6 +198,6 @@ html,body{max-width:100%;overflow-x:hidden!important}
 <footer class="order-footer"><div class="order-wrap">© <span id="year">2026</span> Benda Custom Picks — independent, not affiliated with the brands mentioned. · <a href="./terms-and-conditions.html">Terms &amp; Conditions</a></div></footer>
 <script>document.getElementById('year').textContent = new Date().getFullYear();document.querySelectorAll('.product-thumb').forEach(function(btn){btn.addEventListener('click',function(){document.getElementById('mainProductImage').src=btn.getAttribute('data-src');});});</script>
 <script src="./order-flow.js?v=v82-darkflag-product-ux-fix"></script>
-<script src="./cart-flow.js?v=v82-darkflag-product-ux-fix"></script>
+<script src="./cart-flow.js?v=v84-darkflag-gallery-cart-fix"></script>
 </body>
 </html>
