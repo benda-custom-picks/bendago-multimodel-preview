@@ -61,7 +61,10 @@
     'tandem-kit-v4': 'tandem-kit-v4',
     'aircraft-metal-cover-v4': 'aircraft-metal-cover-v4',
     'ghost-metal-cover-v4': 'ghost-metal-cover-v4',
-    'ghost-aluminium-cnc-chain-cover-left-v4': 'ghost-aluminium-cnc-chain-cover-left-v4'
+    'ghost-aluminium-cnc-chain-cover-left-v4': 'ghost-aluminium-cnc-chain-cover-left-v4',
+    'transparent-air-filter-cover-aluminium-v4': 'transparent-air-filter-cover-aluminium-v4',
+    'transparent-air-filter-cover-filter-only-v4': 'transparent-air-filter-cover-filter-only-v4',
+    'ghost-exhaust-heat-shield-v4': 'ghost-exhaust-heat-shield-v4'
   };
 
   const COMPLETE_BUILD_OFFERS = [
@@ -128,6 +131,8 @@
         { code: 'aircraft-metal-cover-v4' },
         { code: 'ghost-metal-cover-v4' },
         { code: 'ghost-aluminium-cnc-chain-cover-left-v4' },
+        { code: 'transparent-air-filter-cover-aluminium-v4', color_option: 'Right' },
+        { code: 'ghost-exhaust-heat-shield-v4' },
         { code: 'midnight-hunter-tank-cover-kit-v4' },
         { code: 'midnight-beast-kit-v4' }
       ]
@@ -207,6 +212,9 @@
       { code: 'ghost-kit-transparent-clutch-cover-v4', options: { color_option: 'Black' } },
       { code: 'aircraft-metal-cover-v4' },
       { code: 'ghost-metal-cover-v4' },
+      { code: 'ghost-aluminium-cnc-chain-cover-left-v4' },
+      { code: 'transparent-air-filter-cover-aluminium-v4', options: { color_option: 'Right' } },
+      { code: 'ghost-exhaust-heat-shield-v4' },
       { code: 'midnight-hunter-tank-cover-kit-v4' },
       { code: 'midnight-beast-kit-v4' }
     ],
@@ -1058,7 +1066,37 @@ async function createStripeCheckout(lines, formData) {
         delivery_estimate: '10 to 15 business days',
         image: './ghost-aluminium-cnc-chain-cover-left-v4-hero.png',
         stripe_url: ''
-      }
+      },
+      'transparent-air-filter-cover-aluminium-v4': {
+        product_code: 'transparent-air-filter-cover-aluminium-v4',
+        product_name: 'Transparent Air Filter Cover Aluminium',
+        product_short: 'Clear aluminium-framed air filter intake cover for Benda Dark Flag V4 950 with Right or Left side choice',
+        fitment: 'Benda Dark Flag V4 950',
+        price: '294 €',
+        delivery_estimate: '10 to 15 business days',
+        image: './transparent-air-filter-cover-aluminium-v4-hero.png',
+        stripe_url: ''
+      },
+      'transparent-air-filter-cover-filter-only-v4': {
+        product_code: 'transparent-air-filter-cover-filter-only-v4',
+        product_name: 'Filter Only — Transparent Air Filter Cover',
+        product_short: 'Replacement filter element for the Transparent Air Filter Cover Aluminium setup',
+        fitment: 'Benda Dark Flag V4 950',
+        price: '108 €',
+        delivery_estimate: '10 to 15 business days',
+        image: './transparent-air-filter-cover-filter-only-v4.png',
+        stripe_url: ''
+      },
+      'ghost-exhaust-heat-shield-v4': {
+        product_code: 'ghost-exhaust-heat-shield-v4',
+        product_name: 'Ghost Exhaust Heat Shield',
+        product_short: 'Black metal high-temperature exhaust heat shield for Benda Dark Flag V4 950',
+        fitment: 'Benda Dark Flag V4 950',
+        price: '181 €',
+        delivery_estimate: '10 to 15 business days',
+        image: './ghost-exhaust-heat-shield-v4-hero.png',
+        stripe_url: ''
+      },
     };
 
     Object.keys(napoleon450Fallbacks).forEach(code => {
@@ -1117,7 +1155,10 @@ async function createStripeCheckout(lines, formData) {
     'tandem-kit-v4': './order-tandem-kit-v4.html',
     'aircraft-metal-cover-v4': './order-aircraft-metal-cover-v4.html',
     'ghost-metal-cover-v4': './order-ghost-metal-cover-v4.html',
-    'ghost-aluminium-cnc-chain-cover-left-v4': './order-ghost-aluminium-cnc-chain-cover-left-v4.html'
+    'ghost-aluminium-cnc-chain-cover-left-v4': './order-ghost-aluminium-cnc-chain-cover-left-v4.html',
+    'transparent-air-filter-cover-aluminium-v4': './order-transparent-air-filter-cover-aluminium-v4.html',
+    'transparent-air-filter-cover-filter-only-v4': './order-transparent-air-filter-cover-aluminium-v4.html',
+    'ghost-exhaust-heat-shield-v4': './order-ghost-exhaust-heat-shield-v4.html'
   };
 
   function productPageUrl(code) {
