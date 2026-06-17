@@ -2323,3 +2323,57 @@ body.model-page .cart-floating-btn,
 .cart-checkout-btn{border-radius:15px !important;}
 .cart-line-details-link,.cart-summary-product-link{color:#d9b875 !important;}
 /* END BENDAGO PATCH V50 */
+
+
+/* BENDAGO V85 — global cart production override: larger mobile drawer + horizontal product swipe */
+.cart-drawer{
+  width:min(520px,calc(100vw - 18px)) !important;
+  max-width:520px !important;
+}
+@media (min-width:901px){
+  .cart-drawer{width:min(520px,38vw) !important;}
+  .order-body .cart-floating-btn{display:none !important;visibility:hidden !important;opacity:0 !important;pointer-events:none !important;}
+}
+@media (max-width:900px){
+  .cart-drawer{
+    top:6px !important;
+    right:6px !important;
+    bottom:6px !important;
+    width:calc(100vw - 12px) !important;
+    max-width:none !important;
+    border-radius:22px !important;
+  }
+  .cart-body{
+    display:flex !important;
+    flex-direction:row !important;
+    gap:12px !important;
+    overflow-x:auto !important;
+    overflow-y:hidden !important;
+    scroll-snap-type:x mandatory !important;
+    -webkit-overflow-scrolling:touch !important;
+    padding:14px !important;
+    min-height:230px !important;
+  }
+  .cart-line{
+    flex:0 0 min(84vw,360px) !important;
+    scroll-snap-align:start !important;
+    align-self:stretch !important;
+  }
+  .cart-footer{max-height:49vh !important;overflow-y:auto !important;}
+  body.cart-drawer-open .cart-floating-btn{display:none !important;visibility:hidden !important;opacity:0 !important;pointer-events:none !important;}
+}
+@media (orientation:landscape) and (max-height:560px) and (max-width:980px){
+  .cart-drawer{top:4px !important;right:4px !important;bottom:4px !important;width:calc(100vw - 8px) !important;border-radius:18px !important;}
+  .cart-body{min-height:150px !important;padding:9px !important;}
+  .cart-line{flex-basis:min(48vw,330px) !important;}
+  .cart-footer{max-height:46vh !important;padding:9px 10px !important;}
+}
+/* END BENDAGO V85 */
+
+
+/* BENDAGO V86 — final header-cart/no-floating override */
+.cart-floating-btn,#bendagoCartButton{display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important}
+.order-header-cart-link,.order-cart-link,.cart-pill{display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:7px!important;min-height:34px!important;height:34px!important;padding:0 11px!important;border-radius:999px!important;border:1px solid rgba(217,184,117,.36)!important;background:linear-gradient(180deg,rgba(255,255,255,.052),rgba(255,255,255,.014)),rgba(7,9,13,.88)!important;color:rgba(247,241,232,.94)!important;text-decoration:none!important;font-size:.78rem!important;font-weight:950!important;box-shadow:none!important;white-space:nowrap!important}
+.order-header-cart-link .cart-count-badge,.order-cart-link .cart-count-badge,.order-header-cart-link [data-cart-count],.order-cart-link [data-cart-count],.cart-pill [data-cart-count]{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-width:18px!important;height:18px!important;padding:0 5px!important;border-radius:999px!important;background:#d9b875!important;color:#0d0905!important;font-size:10px!important;font-weight:950!important;line-height:1!important}
+@media(max-width:900px){.order-header-cart-link .cart-label,.order-cart-link .cart-label{display:none!important}.cart-body{display:flex!important;flex-direction:row!important;gap:12px!important;overflow-x:auto!important;overflow-y:hidden!important;scroll-snap-type:x mandatory!important;-webkit-overflow-scrolling:touch!important}.cart-line{flex:0 0 min(84vw,360px)!important;scroll-snap-align:start!important}.cart-drawer{top:6px!important;right:6px!important;bottom:6px!important;width:calc(100vw - 12px)!important;max-width:none!important;border-radius:22px!important}}
+/* END BENDAGO V86 */

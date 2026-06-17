@@ -2603,3 +2603,23 @@ body.model-page .cart-floating-btn,
   .model-guide-links-five{grid-template-columns:repeat(5,minmax(0,1fr));}
   .model-guide-links-five .model-guide-link{min-height:70px;}
 }
+
+
+/* BENDAGO V85 — production model proof band at top of each motorcycle page */
+.model-proof-top{
+  padding:14px 0 10px !important;
+  border-bottom:1px solid rgba(255,255,255,.08);
+  background:linear-gradient(180deg,rgba(7,9,14,.96),rgba(7,9,14,.82));
+}
+.model-proof-top .model-proof-trust-grid{
+  margin:0 !important;
+}
+.model-proof-top + main .model-start{
+  padding-top:28px;
+}
+@media(max-width:760px){
+  .model-proof-top{padding:10px 0 8px !important;}
+  .model-proof-top .model-proof-trust-grid{display:flex;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:0 2px 6px;scroll-snap-type:x proximity;}
+  .model-proof-top .model-proof-trust-item{min-width:220px;scroll-snap-align:start;}
+}
+/* END BENDAGO V85 */

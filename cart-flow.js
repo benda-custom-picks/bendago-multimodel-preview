@@ -1177,7 +1177,7 @@ async function createStripeCheckout(lines, formData) {
       .cart-body{flex:1 1 auto!important;overflow-y:auto!important;overscroll-behavior:contain!important;padding:14px 18px!important;}
       .cart-footer{flex:0 0 auto!important;padding:14px 18px 18px!important;border-top:1px solid rgba(255,255,255,.10)!important;background:linear-gradient(180deg,rgba(9,10,13,.88),#090a0d)!important;}
       .cart-line{background:rgba(255,255,255,.045)!important;border:1px solid rgba(255,255,255,.10)!important;border-radius:18px!important;padding:12px!important;}
-      .cart-floating-btn{position:fixed!important;right:max(16px,env(safe-area-inset-right))!important;left:auto!important;bottom:max(16px,env(safe-area-inset-bottom))!important;top:auto!important;z-index:9997!important;min-height:48px!important;padding:0 16px!important;border:1px solid rgba(246,196,49,.42)!important;border-radius:999px!important;background:linear-gradient(135deg,#f6c431,#c99028)!important;color:#100b04!important;font-weight:950!important;box-shadow:0 18px 46px rgba(0,0,0,.42)!important;}
+      .cart-floating-btn,#bendagoCartButton{display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important;}
       body.cart-drawer-open .cart-floating-btn{opacity:0!important;pointer-events:none!important;transform:translateY(8px) scale(.96)!important;}
       .order-cart-link,.cart-pill{display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:8px!important;min-height:38px!important;padding:0 13px!important;border-radius:999px!important;border:1px solid rgba(246,196,49,.38)!important;background:rgba(246,196,49,.11)!important;color:#f6c431!important;text-decoration:none!important;font-weight:950!important;white-space:nowrap!important;}
       .order-cart-link span,.cart-pill span{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-width:22px!important;height:22px!important;border-radius:999px!important;background:#f6c431!important;color:#100b04!important;font-size:.78rem!important;}
@@ -1193,9 +1193,13 @@ async function createStripeCheckout(lines, formData) {
         .cart-line-media img{width:100%!important;height:100%!important;object-fit:contain!important;display:block!important;}
         .cart-footer{padding:12px 14px 14px!important;max-height:48vh!important;overflow-y:auto!important;}
         .cart-checkout-btn,.cart-share-btn{min-height:46px!important;border-radius:14px!important;}
-        .cart-floating-btn{display:inline-flex!important;align-items:center!important;justify-content:center!important;}
+        .cart-floating-btn,#bendagoCartButton{display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important;}
       }
       @media (max-width:430px){.cart-line{flex-basis:86vw!important;grid-template-columns:88px minmax(0,1fr)!important}.cart-line-media{width:88px!important;min-width:88px!important;height:88px!important}.cart-footer{max-height:52vh!important}}
+      /* BENDAGO V86 — dynamic no-floating header cart lock */
+      .cart-floating-btn,#bendagoCartButton{display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important;}
+      .order-header-cart-link,.order-cart-link{display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:7px!important;min-height:34px!important;height:34px!important;padding:0 11px!important;border-radius:999px!important;border:1px solid rgba(217,184,117,.36)!important;background:linear-gradient(180deg,rgba(255,255,255,.052),rgba(255,255,255,.014)),rgba(7,9,13,.88)!important;color:rgba(247,241,232,.94)!important;text-decoration:none!important;font-size:.78rem!important;font-weight:950!important;box-shadow:none!important;white-space:nowrap!important;}
+      .order-header-cart-link .cart-count-badge,.order-cart-link .cart-count-badge,.order-header-cart-link [data-cart-count],.order-cart-link [data-cart-count]{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-width:18px!important;height:18px!important;padding:0 5px!important;border-radius:999px!important;background:#d9b875!important;color:#0d0905!important;font-size:10px!important;font-weight:950!important;line-height:1!important;}
     `;
     document.head.appendChild(style);
   }
@@ -1227,7 +1231,7 @@ async function createStripeCheckout(lines, formData) {
     btn.type = 'button';
     btn.id = 'bendagoCartButton';
     btn.className = 'cart-floating-btn';
-    btn.innerHTML = 'Cart <span class="cart-count-badge" data-cart-count>0</span>';
+    btn.innerHTML = '<span class="cart-icon" aria-hidden="true">🛒</span><span class="cart-label">Cart</span><span class="cart-count-badge" data-cart-count>0</span>';
     btn.setAttribute('aria-label', 'Open cart');
 
     const overlay = document.createElement('div');

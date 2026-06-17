@@ -727,3 +727,70 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+
+
+/* BENDAGO V86 PRODUCT GALLERY LIGHTBOX */
+(function () {
+  function ready(fn) {
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn);
+    else fn();
+  }
+
+  ready(function () {
+    var main = document.getElementById('mainProductImage');
+    if (!main) return;
+
+    var box = document.querySelector('.bcp-gallery-lightbox');
+    if (!box) {
+      box = document.createElement('div');
+      box.className = 'bcp-gallery-lightbox';
+      box.setAttribute('role', 'dialog');
+      box.setAttribute('aria-modal', 'true');
+      box.setAttribute('aria-label', 'Product image full view');
+      box.innerHTML = '<div class="bcp-gallery-lightbox-inner"><img class="bcp-gallery-lightbox-img" alt=""><button class="bcp-gallery-lightbox-close" type="button" aria-label="Close image view">×</button><div class="bcp-gallery-lightbox-caption"></div></div>';
+      document.body.appendChild(box);
+    }
+
+    var img = box.querySelector('.bcp-gallery-lightbox-img');
+    var close = box.querySelector('.bcp-gallery-lightbox-close');
+    var caption = box.querySelector('.bcp-gallery-lightbox-caption');
+
+    function open(src, alt) {
+      if (!src || !img) return;
+      img.src = src;
+      img.alt = alt || 'Product image';
+      if (caption) caption.textContent = alt || '';
+      box.classList.add('is-open');
+      document.body.classList.add('bcp-lightbox-open');
+    }
+
+    function closeBox() {
+      box.classList.remove('is-open');
+      document.body.classList.remove('bcp-lightbox-open');
+    }
+
+    main.addEventListener('click', function () {
+      open(main.currentSrc || main.src, main.alt || document.title || 'Product image');
+    });
+
+    document.querySelectorAll('.product-thumb').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var src = btn.getAttribute('data-src') || (btn.querySelector('img') && btn.querySelector('img').src) || '';
+        if (src && main) {
+          main.src = src;
+          var thumbImg = btn.querySelector('img');
+          if (thumbImg && thumbImg.alt) main.alt = thumbImg.alt;
+        }
+      });
+    });
+
+    if (close) close.addEventListener('click', closeBox);
+    box.addEventListener('click', function (event) {
+      if (event.target === box) closeBox();
+    });
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && box.classList.contains('is-open')) closeBox();
+    });
+  });
+})();
+/* END BENDAGO V86 PRODUCT GALLERY LIGHTBOX */
