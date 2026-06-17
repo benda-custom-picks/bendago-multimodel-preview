@@ -3425,3 +3425,37 @@ body.model-page .cart-floating-btn,
   .model-page .model-social-facebook,
   .home-page .model-social-facebook{border-color:rgba(59,130,246,.31) !important;}
 }
+
+
+/* V102 — responsive look-card essentials alignment
+   Fix: align the gold circles perfectly with the essentials titles across all model pages on responsive. */
+@media (max-width: 1024px){
+  #looks .build-essentials-card ul{
+    display:grid !important;
+    gap:6px !important;
+  }
+  #looks .build-essentials-card li{
+    display:flex !important;
+    align-items:center !important;
+    gap:10px !important;
+    padding-left:0 !important;
+    min-height:20px !important;
+  }
+  #looks .build-essentials-card li::before{
+    position:static !important;
+    left:auto !important;
+    top:auto !important;
+    transform:none !important;
+    margin:0 !important;
+    width:10px !important;
+    height:10px !important;
+    flex:0 0 10px !important;
+    align-self:center !important;
+  }
+}
+@media (max-width: 520px){
+  #looks .build-essentials-card li{
+    font-size:12px !important;
+    line-height:1.20 !important;
+  }
+}
