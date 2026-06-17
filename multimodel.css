@@ -2623,3 +2623,46 @@ body.model-page .cart-floating-btn,
   .model-proof-top .model-proof-trust-item{min-width:220px;scroll-snap-align:start;}
 }
 /* END BENDAGO V85 */
+
+
+/* BENDAGO V91 — desktop premium proof layout polish */
+@media (min-width: 1025px){
+  .model-proof-top{padding:18px 0 14px !important;}
+  .model-proof-top .wrap{display:grid !important;gap:16px !important;}
+  .model-proof-top .model-proof-trust-grid{gap:16px !important;margin:0 !important;}
+  .model-proof-top .model-proof-trust-item{min-height:104px !important;padding:18px 20px !important;border-radius:24px !important;}
+  .model-proof-top .model-social-proof-card{
+    grid-template-columns:minmax(0,1fr) !important;
+    align-items:flex-start !important;
+    gap:16px !important;
+    padding:22px 24px !important;
+    border-radius:24px !important;
+  }
+  .model-proof-top .model-social-proof-copy{
+    display:grid !important;
+    gap:8px !important;
+    max-width:980px !important;
+  }
+  .model-proof-top .model-social-kicker{margin:0 !important;}
+  .model-proof-top .model-social-proof-copy strong{
+    font-size:clamp(26px,2.55vw,38px) !important;
+    line-height:1.02 !important;
+    max-width:15ch !important;
+  }
+  .model-proof-top .model-social-proof-copy small{
+    margin-top:0 !important;
+    max-width:760px !important;
+  }
+  .model-proof-top .model-social-links{
+    justify-content:flex-start !important;
+    flex-wrap:wrap !important;
+    gap:10px !important;
+    width:100% !important;
+  }
+  .model-proof-top .model-social-pill{
+    min-height:42px !important;
+    padding:0 16px !important;
+    gap:8px !important;
+  }
+}
+/* END BENDAGO V91 */
