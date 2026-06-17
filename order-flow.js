@@ -1,5 +1,15 @@
 /* BENDAGO ORDER + CART CHECKOUT FLOW */
 const BENDAGO_PRODUCTS = {
+  "black-shield-armor-kit-450": {
+    product_code: "black-shield-armor-kit-450",
+    product_name: 'Black Shield Armor Kit',
+    product_short: 'Black fan heat shield armor kit for Benda Napoleon 450/500',
+    fitment: 'Benda Napoleon 450/500',
+    price: '271 €',
+    delivery_estimate: '10 to 15 business days',
+    image: './black-shield-armor-kit-450-hero.png',
+    stripe_url: ''
+  },
   "carbon-exhaust-protection-kit-450": {
     product_code: "carbon-exhaust-protection-kit-450",
     product_name: 'Carbon Exhaust Protection Kit',

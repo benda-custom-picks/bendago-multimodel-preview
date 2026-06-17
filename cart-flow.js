@@ -52,7 +52,8 @@
     'premium-comfort-foot-kit-450': 'premium-comfort-foot-kit-450',
     'headlight-windscreen-cover-kit-450': 'headlight-windscreen-cover-kit-450',
     'premium-transparent-clutch-cover-kit-450': 'premium-transparent-clutch-cover-kit-450',
-    'carbon-exhaust-protection-kit-450': 'carbon-exhaust-protection-kit-450'
+    'carbon-exhaust-protection-kit-450': 'carbon-exhaust-protection-kit-450',
+    'black-shield-armor-kit-450': 'black-shield-armor-kit-450'
   };
 
   const COMPLETE_BUILD_OFFERS = [
@@ -118,19 +119,75 @@
         { code: 'maverick-air-filter-450' },
         { code: 'premium-comfort-foot-kit-450' },
         { code: 'premium-transparent-clutch-cover-kit-450' },
-        { code: 'carbon-exhaust-protection-kit-450' }
+        { code: 'carbon-exhaust-protection-kit-450' },
+        { code: 'black-shield-armor-kit-450' }
       ]
     }
   ];
 
 
   const BUNDLE_ADD_TO_CART_ITEMS = {
+    'strong-pure-bob-complete': [
+      { code: 'headlight-fairing' },
+      { code: 'chassis-protection' },
+      { code: 'top-bumper' },
+      { code: 'rear-fender', options: { color_option: 'Black' } },
+      { code: 'tank-cover-support-volume', options: { color_option: 'Black' } },
+      { code: 'premium-double-seat' },
+      { code: 'left-premium-engine-cover' },
+      { code: 'metal-foot-controls' }
+    ],
+    'strong-pure-bob-essentials': [
+      { code: 'rear-fender', options: { color_option: 'Black' } },
+      { code: 'tank-cover-support-volume', options: { color_option: 'Black' } }
+    ],
+    'headlight-fairing-complete': [
+      { code: 'future-led-light' },
+      { code: 'chassis-protection' },
+      { code: 'top-bumper' },
+      { code: 'black-striped-clutch-cover' },
+      { code: 'chrome-engine-cover' },
+      { code: 'tank-cover-support-volume', options: { color_option: 'Black' } },
+      { code: 'premium-double-seat' },
+      { code: 'black-foot-control-kit' }
+    ],
+    'headlight-fairing-essentials': [
+      { code: 'future-led-light' },
+      { code: 'black-striped-clutch-cover' }
+    ],
+    'brutal-bob-complete': [
+      { code: 'right-engine-filter-cover' },
+      { code: 'handlebar-riser' },
+      { code: 'transparent-clutch-cover' },
+      { code: 'gold-clutch-flywheel' },
+      { code: 'rear-led-seat-comfort' },
+      { code: 'brutal-rear-fender-kit' },
+      { code: 'closed-metal-hubcap-benda-samurai' },
+      { code: 'dual-exhaust', options: { color_option: 'Chrome' } }
+    ],
+    'brutal-bob-essentials': [
+      { code: 'right-engine-filter-cover' },
+      { code: 'closed-metal-hubcap-benda-samurai' }
+    ],
+    'blackout-predator-complete': [
+      { code: 'dual-exhaust', options: { color_option: 'Black' } },
+      { code: 'maverick-air-filter-cover' },
+      { code: 'headlight-fairing', options: { color_option: 'Black' } },
+      { code: 'black-foot-control-kit' },
+      { code: 'tank-cover-support-volume', options: { color_option: 'Black' } },
+      { code: 'premium-double-seat', options: { color_option: 'Black' } }
+    ],
+    'blackout-predator-essentials': [
+      { code: 'maverick-air-filter-cover' },
+      { code: 'tank-cover-support-volume', options: { color_option: 'Black' } }
+    ],
     'midnight-hunter-complete': [
       { code: 'madmax-double-exhaust-kit-450' },
       { code: 'maverick-air-filter-450' },
       { code: 'premium-comfort-foot-kit-450', options: { color_option: 'Skull Platinum' } },
       { code: 'premium-transparent-clutch-cover-kit-450' },
-      { code: 'carbon-exhaust-protection-kit-450' }
+      { code: 'carbon-exhaust-protection-kit-450' },
+      { code: 'black-shield-armor-kit-450' }
     ],
     'midnight-hunter-essentials': [
       { code: 'premium-comfort-foot-kit-450', options: { color_option: 'Skull Platinum' } }
@@ -847,6 +904,16 @@ async function createStripeCheckout(lines, formData) {
         delivery_estimate: '10 to 15 business days',
         image: './carbon-exhaust-protection-kit-450-hero.png',
         stripe_url: ''
+      },
+      'black-shield-armor-kit-450': {
+        product_code: 'black-shield-armor-kit-450',
+        product_name: 'Black Shield Armor Kit',
+        product_short: 'Black fan heat shield armor kit for Benda Napoleon 450/500',
+        fitment: 'Benda Napoleon 450/500',
+        price: '271 €',
+        delivery_estimate: '10 to 15 business days',
+        image: './black-shield-armor-kit-450-hero.png',
+        stripe_url: ''
       }
     };
 
@@ -897,7 +964,8 @@ async function createStripeCheckout(lines, formData) {
     'premium-comfort-foot-kit-450': './order-premium-comfort-foot-kit-450.html',
     'headlight-windscreen-cover-kit-450': './order-headlight-windscreen-cover-kit-450.html',
     'premium-transparent-clutch-cover-kit-450': './order-premium-transparent-clutch-cover-kit-450.html',
-    'carbon-exhaust-protection-kit-450': './order-carbon-exhaust-protection-kit-450.html'
+    'carbon-exhaust-protection-kit-450': './order-carbon-exhaust-protection-kit-450.html',
+    'black-shield-armor-kit-450': './order-black-shield-armor-kit-450.html'
   };
 
   function productPageUrl(code) {
