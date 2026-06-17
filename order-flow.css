@@ -1392,3 +1392,71 @@ body.order-body .seo-cro-panel span{
   body.order-body .product-detail-panel{padding:13px !important;}
 }
 /* END BENDAGO V97 */
+
+
+/* BENDAGO V98 — slimmer centered option chips on product gallery pages.
+   Scope: product option selector visual polish only. No product / checkout logic changed. */
+.product-option-choice{
+  max-width:560px !important;
+  margin:16px auto 14px !important;
+  padding:12px 14px !important;
+  border-radius:16px !important;
+  text-align:center !important;
+  background:linear-gradient(180deg,rgba(217,184,117,.070),rgba(255,255,255,.022)),rgba(8,10,14,.82) !important;
+  border:1px solid rgba(217,184,117,.24) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.045) !important;
+}
+.product-option-choice-title{
+  margin:0 0 9px !important;
+  text-align:center !important;
+  color:rgba(247,241,232,.82) !important;
+  font-size:.72rem !important;
+  font-weight:860 !important;
+  letter-spacing:.105em !important;
+  text-transform:uppercase !important;
+  line-height:1.2 !important;
+}
+.product-option-actions{
+  display:flex !important;
+  justify-content:center !important;
+  align-items:center !important;
+  gap:8px !important;
+  flex-wrap:wrap !important;
+}
+.product-option-btn{
+  min-height:32px !important;
+  height:32px !important;
+  padding:0 13px !important;
+  border-radius:999px !important;
+  font-size:.74rem !important;
+  font-weight:820 !important;
+  letter-spacing:.035em !important;
+  background:rgba(255,255,255,.040) !important;
+  border:1px solid rgba(217,184,117,.22) !important;
+  color:rgba(247,241,232,.84) !important;
+  box-shadow:none !important;
+}
+.product-option-btn:hover,
+.product-option-btn:focus-visible{
+  border-color:rgba(217,184,117,.48) !important;
+  background:rgba(217,184,117,.08) !important;
+}
+.product-option-btn.is-selected{
+  border-color:rgba(217,184,117,.70) !important;
+  background:linear-gradient(180deg,rgba(217,184,117,.16),rgba(217,184,117,.055)),rgba(8,10,14,.90) !important;
+  color:#f7f1e8 !important;
+  box-shadow:0 0 0 1px rgba(217,184,117,.08),0 8px 18px rgba(0,0,0,.18) !important;
+}
+.product-option-note{
+  margin:8px auto 0 !important;
+  max-width:420px !important;
+  text-align:center !important;
+  font-size:.70rem !important;
+  color:rgba(247,241,232,.55) !important;
+}
+@media(max-width:640px){
+  .product-option-choice{padding:11px !important;border-radius:15px !important;}
+  .product-option-actions{gap:7px !important;}
+  .product-option-btn{height:34px !important;min-height:34px !important;padding:0 12px !important;font-size:.76rem !important;}
+}
+/* END BENDAGO V98 */
