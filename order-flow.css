@@ -1130,3 +1130,76 @@ a.btn.secondary{
 @media(max-width:900px){.order-links a:not(.send-moto):not(.order-cart-link):not(.order-header-cart-link){display:none!important}.order-header-cart-link .cart-label,.order-cart-link .cart-label{display:none!important}.product-layout{grid-template-columns:1fr!important}.product-layout>section,.product-layout>aside.info-card,.product-layout>.info-card{grid-column:1!important;position:static!important;top:auto!important;width:100%!important}.thumb-row,.gallery{display:flex!important;grid-template-columns:none!important;overflow-x:auto!important;overflow-y:hidden!important;scroll-snap-type:x mandatory!important;-webkit-overflow-scrolling:touch!important}.product-thumb{flex:0 0 46%!important;scroll-snap-align:start!important}.bcp-gallery-lightbox-img{max-width:calc(100vw - 20px)!important;max-height:calc(100dvh - 74px)!important}}
 @media(max-width:430px){.product-thumb{flex-basis:58%!important}.order-header-cart-link,.order-cart-link{width:42px!important;padding:0!important}.order-links .send-moto{max-width:64px!important;font-size:.69rem!important;padding:0 8px!important}}
 /* END BENDAGO V86 */
+
+
+/* BENDAGO V87 — desktop product gallery balance correction
+   Scope: desktop/laptop product page balance only. Keeps V86 header cart/lightbox.
+   Goal: avoid the narrow right info rail + large empty left gap seen on PC. */
+@media (min-width:1151px){
+  body.order-body .order-wrap{
+    width:min(1320px,calc(100% - 56px)) !important;
+  }
+  body.order-body .product-layout{
+    display:grid !important;
+    grid-template-columns:minmax(0,1fr) minmax(410px,440px) !important;
+    gap:32px !important;
+    align-items:start !important;
+    max-width:100% !important;
+  }
+  body.order-body .product-layout>section{
+    min-width:0 !important;
+    width:100% !important;
+    grid-column:1 !important;
+  }
+  body.order-body .product-layout>aside.info-card,
+  body.order-body .product-layout>.info-card{
+    grid-column:2 !important;
+    width:100% !important;
+    max-width:440px !important;
+    justify-self:stretch !important;
+    position:sticky !important;
+    top:88px !important;
+  }
+  body.order-body .info-card{
+    padding:22px !important;
+  }
+  body.order-body .technical-specs ul,
+  body.order-body .check-list,
+  body.order-body .trust-list,
+  body.order-body .seo-cro-panel{
+    line-height:1.42 !important;
+  }
+  body.order-body .technical-specs li,
+  body.order-body .check-list div{
+    overflow-wrap:normal !important;
+    word-break:normal !important;
+  }
+}
+@media (min-width:901px) and (max-width:1150px){
+  body.order-body .order-wrap{
+    width:min(860px,calc(100% - 40px)) !important;
+  }
+  body.order-body .product-layout{
+    grid-template-columns:1fr !important;
+    gap:22px !important;
+    max-width:860px !important;
+    margin-inline:auto !important;
+  }
+  body.order-body .product-layout>section,
+  body.order-body .product-layout>aside.info-card,
+  body.order-body .product-layout>.info-card{
+    grid-column:1 !important;
+    width:100% !important;
+    max-width:none !important;
+    position:static !important;
+    top:auto !important;
+  }
+}
+@media (min-width:1151px) and (max-height:760px){
+  body.order-body .product-layout>aside.info-card,
+  body.order-body .product-layout>.info-card{
+    position:static !important;
+    top:auto !important;
+  }
+}
+/* END BENDAGO V87 */
