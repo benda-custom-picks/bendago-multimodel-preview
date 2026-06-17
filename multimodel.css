@@ -3336,3 +3336,92 @@ body.model-page .cart-floating-btn,
   }
 }
 /* END BENDAGO V100 */
+
+/* V101 — desktop translucent proof cards, Terms-style glass finish */
+@media (min-width: 901px){
+  .model-page .model-proof-section.model-proof-top{
+    padding-top:10px !important;
+    padding-bottom:34px !important;
+  }
+  .model-page .model-proof-trust-grid{
+    gap:16px !important;
+    margin-bottom:20px !important;
+  }
+  .model-page .model-proof-trust-item{
+    min-height:96px !important;
+    padding:17px 20px !important;
+    border-radius:24px !important;
+    border:1px solid rgba(226,189,114,.26) !important;
+    background:
+      radial-gradient(circle at 14% 0%,rgba(255,255,255,.095),transparent 38%),
+      linear-gradient(180deg,rgba(255,255,255,.072),rgba(255,255,255,.020)) !important;
+    -webkit-backdrop-filter:blur(16px) saturate(135%) !important;
+    backdrop-filter:blur(16px) saturate(135%) !important;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.13),0 22px 60px rgba(0,0,0,.35) !important;
+  }
+  .model-page .model-proof-icon{
+    border-color:rgba(226,189,114,.32) !important;
+    background:rgba(255,255,255,.052) !important;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.10) !important;
+  }
+  .model-page .model-proof-copy strong{
+    font-weight:900 !important;
+    letter-spacing:-.012em !important;
+  }
+  .model-page .model-proof-copy small{
+    color:rgba(226,232,240,.70) !important;
+    font-weight:560 !important;
+  }
+  .model-page .model-proof-stripe{
+    background:rgba(255,255,255,.060) !important;
+    border-color:rgba(226,189,114,.28) !important;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.09) !important;
+  }
+  .model-page .model-social-proof-card,
+  .home-page .model-social-proof-card{
+    padding:20px 22px !important;
+    border-radius:26px !important;
+    border:1px solid rgba(226,189,114,.28) !important;
+    background:
+      radial-gradient(circle at 8% 0%,rgba(255,255,255,.090),transparent 36%),
+      linear-gradient(180deg,rgba(255,255,255,.070),rgba(255,255,255,.018)) !important;
+    -webkit-backdrop-filter:blur(18px) saturate(135%) !important;
+    backdrop-filter:blur(18px) saturate(135%) !important;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.13),0 24px 66px rgba(0,0,0,.36) !important;
+  }
+  .model-page .model-social-kicker,
+  .home-page .model-social-kicker{
+    color:rgba(230,201,137,.86) !important;
+    letter-spacing:.14em !important;
+  }
+  .model-page .model-social-proof-copy strong,
+  .home-page .model-social-proof-copy strong{
+    font-weight:900 !important;
+    letter-spacing:-.030em !important;
+  }
+  .model-page .model-social-proof-copy small,
+  .home-page .model-social-proof-copy small{
+    color:rgba(226,232,240,.72) !important;
+    font-weight:520 !important;
+  }
+  .model-page .model-social-links,
+  .home-page .model-social-links{
+    gap:10px !important;
+  }
+  .model-page .model-social-pill,
+  .home-page .model-social-pill{
+    min-height:39px !important;
+    padding:0 14px !important;
+    border-color:rgba(226,189,114,.22) !important;
+    background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.025)) !important;
+    -webkit-backdrop-filter:blur(12px) saturate(130%) !important;
+    backdrop-filter:blur(12px) saturate(130%) !important;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 12px 30px rgba(0,0,0,.22) !important;
+  }
+  .model-page .model-social-instagram,
+  .home-page .model-social-instagram{border-color:rgba(236,72,153,.30) !important;}
+  .model-page .model-social-tiktok,
+  .home-page .model-social-tiktok{border-color:rgba(226,232,240,.24) !important;}
+  .model-page .model-social-facebook,
+  .home-page .model-social-facebook{border-color:rgba(59,130,246,.31) !important;}
+}
