@@ -3459,3 +3459,85 @@ body.model-page .cart-floating-btn,
     line-height:1.20 !important;
   }
 }
+
+
+/* V103 — definitive rebuild of Essentials rows
+   Scope: every look card on all model pages. No pseudo-positioning rustine.
+   Each item is now a true row: fixed dot + flexible title, aligned as one component. */
+#looks .build-essentials-card ul{
+  list-style:none !important;
+  margin:0 !important;
+  padding:0 !important;
+  display:grid !important;
+  gap:8px !important;
+}
+#looks .build-essentials-card li.essentials-row{
+  position:relative !important;
+  display:grid !important;
+  grid-template-columns:22px minmax(0,1fr) !important;
+  column-gap:10px !important;
+  align-items:center !important;
+  padding:0 !important;
+  margin:0 !important;
+  min-height:28px !important;
+  color:#f7f2ea !important;
+  font-weight:760 !important;
+  line-height:1.16 !important;
+  text-align:left !important;
+}
+#looks .build-essentials-card li.essentials-row::before{
+  content:none !important;
+  display:none !important;
+}
+#looks .build-essentials-card .essentials-dot{
+  display:block !important;
+  width:15px !important;
+  height:15px !important;
+  min-width:15px !important;
+  border-radius:999px !important;
+  border:2px solid rgba(218,178,111,.92) !important;
+  background:rgba(0,0,0,.16) !important;
+  box-shadow:0 0 0 5px rgba(218,178,111,.10),0 0 18px rgba(218,178,111,.18) !important;
+  align-self:center !important;
+  justify-self:center !important;
+  box-sizing:border-box !important;
+}
+#looks .build-essentials-card .essentials-text{
+  display:block !important;
+  min-width:0 !important;
+  max-width:100% !important;
+  line-height:1.16 !important;
+  overflow-wrap:normal !important;
+  word-break:normal !important;
+}
+@media (max-width:1024px){
+  #looks .build-essentials-card ul{gap:7px !important;}
+  #looks .build-essentials-card li.essentials-row{
+    grid-template-columns:20px minmax(0,1fr) !important;
+    column-gap:9px !important;
+    min-height:26px !important;
+    align-items:center !important;
+    font-size:12px !important;
+    line-height:1.17 !important;
+  }
+  #looks .build-essentials-card .essentials-dot{
+    width:13px !important;
+    height:13px !important;
+    min-width:13px !important;
+    border-width:2px !important;
+    box-shadow:0 0 0 4px rgba(218,178,111,.10),0 0 14px rgba(218,178,111,.16) !important;
+  }
+  #looks .build-essentials-card .essentials-text{line-height:1.17 !important;}
+}
+@media (max-width:520px){
+  #looks .build-essentials-card li.essentials-row{
+    grid-template-columns:19px minmax(0,1fr) !important;
+    column-gap:8px !important;
+    min-height:25px !important;
+  }
+  #looks .build-essentials-card .essentials-dot{
+    width:12px !important;
+    height:12px !important;
+    min-width:12px !important;
+  }
+}
