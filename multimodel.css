@@ -2666,3 +2666,85 @@ body.model-page .cart-floating-btn,
   }
 }
 /* END BENDAGO V91 */
+
+
+/* BENDAGO V92 — desktop card price alignment + full-width single-look bands
+   Scope: model pages desktop polish only. No Stripe/Worker/SKU/cart logic changed. */
+@media (min-width:901px){
+  .model-page #shop-part-by-part .wrap{width:min(1240px,calc(100% - 64px)) !important;}
+  .model-page .product-grid{grid-template-columns:repeat(4,minmax(0,1fr)) !important;gap:18px !important;align-items:stretch !important;}
+  .model-page .product-card .body{padding:18px 18px 20px !important;gap:10px !important;}
+  .model-page .product-card h3{min-height:2.28em !important;display:flex !important;align-items:flex-start !important;}
+  .model-page .product-card p{min-height:5.55em !important;display:block !important;}
+  .model-page .product-card .product-meta{margin-top:0 !important;min-height:34px !important;display:flex !important;align-items:flex-end !important;justify-content:space-between !important;}
+  .model-page .product-card .small{min-height:2.45em !important;display:flex !important;align-items:flex-start !important;}
+  .model-page .product-card .product-details-link{margin-top:auto !important;}
+  .model-page .product-card .add-preview{margin-top:8px !important;}
+
+  .model-500 #looks .wrap,
+  .model-v4 #looks .wrap{width:min(1280px,calc(100% - 72px)) !important;}
+
+  .model-500 #looks .look-grid.look-grid-single,
+  .model-v4 #looks .look-grid.look-grid-single{
+    display:grid !important;
+    grid-template-columns:minmax(0,1fr) !important;
+    max-width:none !important;
+    width:100% !important;
+    margin-inline:0 !important;
+    justify-content:stretch !important;
+    gap:18px !important;
+  }
+
+  .model-500 #looks .look-card,
+  .model-v4 #looks .look-card{
+    display:grid !important;
+    grid-template-columns:minmax(0,1.2fr) minmax(360px,.8fr) !important;
+    grid-template-rows:none !important;
+    align-items:stretch !important;
+    height:auto !important;
+    min-height:460px !important;
+    width:100% !important;
+    max-width:none !important;
+  }
+
+  .model-500 #looks .look-media,
+  .model-500 #looks .look-media-video,
+  .model-v4 #looks .look-media,
+  .model-v4 #looks .look-media-video{
+    height:auto !important;
+    min-height:460px !important;
+    border-radius:20px 0 0 20px !important;
+    background:#030303 !important;
+  }
+
+  .model-500 #looks .look-video,
+  .model-v4 #looks .look-video,
+  .model-500 #looks .look-media img,
+  .model-v4 #looks .look-media img,
+  .model-500 #looks .look-media video,
+  .model-v4 #looks .look-media video{
+    width:100% !important;
+    height:100% !important;
+    object-fit:contain !important;
+    object-position:center center !important;
+    background:#030303 !important;
+  }
+
+  .model-500 #looks .look-body,
+  .model-v4 #looks .look-body{
+    padding:24px 24px 24px 22px !important;
+    gap:10px !important;
+  }
+
+  .model-500 #looks .look-body h3,
+  .model-v4 #looks .look-body h3{min-height:0 !important;font-size:clamp(24px,1.65vw,30px) !important;}
+
+  .model-500 #looks .look-body p,
+  .model-v4 #looks .look-body p,
+  .model-500 #looks .parts-list,
+  .model-v4 #looks .parts-list{min-height:0 !important;}
+
+  .model-500 #looks .build-essentials-card,
+  .model-v4 #looks .build-essentials-card{min-height:0 !important;}
+}
+/* END BENDAGO V92 */
