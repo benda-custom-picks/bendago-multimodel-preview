@@ -1,5 +1,15 @@
 /* BENDAGO ORDER + CART CHECKOUT FLOW */
 const BENDAGO_PRODUCTS = {
+  "midnight-hunter-tank-cover-kit-v4": {
+    product_code: "midnight-hunter-tank-cover-kit-v4",
+    product_name: 'Midnight Hunter Tank Cover Kit',
+    product_short: 'Complete central, left and right tank cover kit for Benda Dark Flag V4 950',
+    fitment: 'Benda Dark Flag V4 950',
+    price: '1604 €',
+    delivery_estimate: '10 to 15 business days',
+    image: './midnight-hunter-tank-cover-kit-v4-hero.png',
+    stripe_url: ''
+  },
   "midnight-beast-kit-v4": {
     product_code: "midnight-beast-kit-v4",
     product_name: 'Midnight Beast Kit',
