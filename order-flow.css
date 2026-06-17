@@ -1132,74 +1132,263 @@ a.btn.secondary{
 /* END BENDAGO V86 */
 
 
-/* BENDAGO V87 — desktop product gallery balance correction
-   Scope: desktop/laptop product page balance only. Keeps V86 header cart/lightbox.
-   Goal: avoid the narrow right info rail + large empty left gap seen on PC. */
-@media (min-width:1151px){
-  body.order-body .order-wrap{
-    width:min(1320px,calc(100% - 56px)) !important;
+/* BENDAGO V97 — product gallery mobile centering + black header unification
+   Scope: product gallery/order pages visual layout only. No cart, Stripe, Worker, SKU or price logic changed. */
+body.order-body{
+  overflow-x:hidden !important;
+  background:
+    radial-gradient(circle at 14% 0%,rgba(201,163,95,.12),transparent 28%),
+    linear-gradient(180deg,#050505 0%,#070707 42%,#030303 100%) !important;
+}
+body.order-body .order-header{
+  position:sticky !important;
+  top:0 !important;
+  z-index:1200 !important;
+  background:rgba(0,0,0,.94) !important;
+  border-bottom:1px solid rgba(255,255,255,.08) !important;
+  box-shadow:0 12px 28px rgba(0,0,0,.34) !important;
+  backdrop-filter:blur(12px) !important;
+  -webkit-backdrop-filter:blur(12px) !important;
+}
+body.order-body .order-nav{
+  height:62px !important;
+  min-height:62px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  gap:14px !important;
+}
+body.order-body .order-brand{
+  display:flex !important;
+  align-items:center !important;
+  gap:11px !important;
+  min-width:0 !important;
+  color:#fff !important;
+  text-decoration:none !important;
+  text-transform:uppercase !important;
+  letter-spacing:.12em !important;
+  font-weight:950 !important;
+}
+body.order-body .order-logo{
+  position:relative !important;
+  flex:0 0 31px !important;
+  width:31px !important;
+  height:31px !important;
+  border-radius:999px !important;
+  display:grid !important;
+  place-items:center !important;
+  background:rgba(255,255,255,.018) !important;
+  border:1px solid rgba(255,255,255,.24) !important;
+  box-shadow:none !important;
+  color:transparent !important;
+  overflow:hidden !important;
+}
+body.order-body .order-logo::before{
+  content:"◆" !important;
+  color:#fff !important;
+  font-size:11px !important;
+  line-height:1 !important;
+  transform:rotate(0deg) !important;
+}
+body.order-body .order-brand span:last-child{
+  display:block !important;
+  color:#fff !important;
+  max-width:none !important;
+  overflow:visible !important;
+  text-overflow:clip !important;
+  white-space:nowrap !important;
+  font-size:13px !important;
+  line-height:1 !important;
+  letter-spacing:.12em !important;
+  text-shadow:none !important;
+}
+body.order-body .order-links{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:flex-end !important;
+  gap:10px !important;
+  min-width:0 !important;
+}
+body.order-body .order-links .send-moto{
+  min-height:34px !important;
+  height:34px !important;
+  padding:0 12px !important;
+  border-radius:999px !important;
+  border:1px solid rgba(217,184,117,.24) !important;
+  background:rgba(255,255,255,.030) !important;
+  color:rgba(247,241,232,.76) !important;
+  font-size:.78rem !important;
+  font-weight:850 !important;
+  box-shadow:none !important;
+}
+body.order-body .order-header-cart-link,
+body.order-body .order-cart-link{
+  flex:0 0 auto !important;
+  background:linear-gradient(180deg,rgba(255,255,255,.052),rgba(255,255,255,.014)),rgba(7,9,13,.90) !important;
+  border-color:rgba(217,184,117,.36) !important;
+}
+
+body.order-body .order-wrap,
+body.order-body main.order-wrap,
+body.order-body footer .order-wrap{
+  width:min(1180px,calc(100vw - 32px)) !important;
+  max-width:1180px !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+  box-sizing:border-box !important;
+}
+body.order-body .product-layout{
+  width:100% !important;
+  max-width:100% !important;
+  box-sizing:border-box !important;
+}
+body.order-body .product-layout > section,
+body.order-body .product-layout > aside.info-card,
+body.order-body .product-layout > .info-card,
+body.order-body .media-card,
+body.order-body .info-card,
+body.order-body .product-detail-panel,
+body.order-body .seo-cro-panel{
+  box-sizing:border-box !important;
+  max-width:100% !important;
+}
+body.order-body .media-card,
+body.order-body .info-card{
+  overflow:hidden !important;
+}
+body.order-body .product-title{
+  overflow-wrap:break-word !important;
+}
+body.order-body .info-card h2,
+body.order-body .info-card p,
+body.order-body .product-detail-row p,
+body.order-body .check-list div,
+body.order-body .seo-cro-panel span{
+  overflow-wrap:break-word !important;
+}
+
+@media(max-width:900px){
+  body.order-body .order-wrap,
+  body.order-body main.order-wrap,
+  body.order-body footer .order-wrap{
+    width:min(100%,calc(100vw - 28px)) !important;
+    max-width:560px !important;
+    margin-left:auto !important;
+    margin-right:auto !important;
+  }
+  body.order-body .order-nav{
+    width:min(100%,calc(100vw - 28px)) !important;
+    max-width:560px !important;
+    height:64px !important;
+    min-height:64px !important;
+  }
+  body.order-body .order-links a:not(.order-cart-link):not(.order-header-cart-link){
+    display:none !important;
+  }
+  body.order-body .order-brand span:last-child{
+    max-width:calc(100vw - 136px) !important;
+    overflow:hidden !important;
+    text-overflow:ellipsis !important;
+    white-space:nowrap !important;
+    font-size:12.5px !important;
+    letter-spacing:.115em !important;
+  }
+  body.order-body .order-logo{
+    flex-basis:30px !important;
+    width:30px !important;
+    height:30px !important;
   }
   body.order-body .product-layout{
-    display:grid !important;
-    grid-template-columns:minmax(0,1fr) minmax(410px,440px) !important;
-    gap:32px !important;
-    align-items:start !important;
-    max-width:100% !important;
-  }
-  body.order-body .product-layout>section{
-    min-width:0 !important;
+    display:block !important;
+    grid-template-columns:1fr !important;
+    gap:0 !important;
+    margin:0 auto !important;
     width:100% !important;
+  }
+  body.order-body .product-layout > section,
+  body.order-body .product-layout > aside.info-card,
+  body.order-body .product-layout > .info-card{
     grid-column:1 !important;
-  }
-  body.order-body .product-layout>aside.info-card,
-  body.order-body .product-layout>.info-card{
-    grid-column:2 !important;
+    position:static !important;
+    top:auto !important;
     width:100% !important;
-    max-width:440px !important;
-    justify-self:stretch !important;
-    position:sticky !important;
-    top:88px !important;
+    max-width:100% !important;
+    margin-left:auto !important;
+    margin-right:auto !important;
+  }
+  body.order-body .media-card{
+    width:100% !important;
+    max-width:100% !important;
+    margin:0 auto !important;
+    padding:12px !important;
+    border-radius:22px !important;
   }
   body.order-body .info-card{
-    padding:22px !important;
-  }
-  body.order-body .technical-specs ul,
-  body.order-body .check-list,
-  body.order-body .trust-list,
-  body.order-body .seo-cro-panel{
-    line-height:1.42 !important;
-  }
-  body.order-body .technical-specs li,
-  body.order-body .check-list div{
-    overflow-wrap:normal !important;
-    word-break:normal !important;
-  }
-}
-@media (min-width:901px) and (max-width:1150px){
-  body.order-body .order-wrap{
-    width:min(860px,calc(100% - 40px)) !important;
-  }
-  body.order-body .product-layout{
-    grid-template-columns:1fr !important;
-    gap:22px !important;
-    max-width:860px !important;
-    margin-inline:auto !important;
-  }
-  body.order-body .product-layout>section,
-  body.order-body .product-layout>aside.info-card,
-  body.order-body .product-layout>.info-card{
-    grid-column:1 !important;
     width:100% !important;
-    max-width:none !important;
-    position:static !important;
-    top:auto !important;
+    max-width:100% !important;
+    margin:18px auto 0 !important;
+    padding:16px !important;
+    border-radius:22px !important;
+  }
+  body.order-body .product-title{
+    font-size:clamp(34px,9vw,46px) !important;
+    line-height:1.03 !important;
+    margin:0 0 18px !important;
+  }
+  body.order-body .back-link{
+    margin:18px 0 16px !important;
+  }
+  body.order-body .main-product-img,
+  body.order-body .main-product-video{
+    width:100% !important;
+    max-width:100% !important;
+    height:auto !important;
+    max-height:none !important;
+    display:block !important;
+    object-fit:contain !important;
+  }
+  body.order-body .thumb-row,
+  body.order-body .gallery{
+    width:100% !important;
+    max-width:100% !important;
+    margin-left:0 !important;
+    margin-right:0 !important;
+    padding:0 0 10px !important;
+  }
+  body.order-body .product-detail-panel{
+    width:100% !important;
+    max-width:100% !important;
+    margin:16px auto !important;
+    padding:14px !important;
+    border-radius:18px !important;
+  }
+  body.order-body .check-list{
+    margin:16px 0 !important;
   }
 }
-@media (min-width:1151px) and (max-height:760px){
-  body.order-body .product-layout>aside.info-card,
-  body.order-body .product-layout>.info-card{
-    position:static !important;
-    top:auto !important;
+@media(max-width:430px){
+  body.order-body .order-wrap,
+  body.order-body main.order-wrap,
+  body.order-body footer .order-wrap,
+  body.order-body .order-nav{
+    width:min(100%,calc(100vw - 24px)) !important;
+    max-width:100% !important;
   }
+  body.order-body .order-brand{gap:9px !important;}
+  body.order-body .order-brand span:last-child{
+    max-width:calc(100vw - 126px) !important;
+    font-size:11.5px !important;
+    letter-spacing:.10em !important;
+  }
+  body.order-body .order-header-cart-link,
+  body.order-body .order-cart-link{
+    width:42px !important;
+    min-width:42px !important;
+    padding:0 !important;
+  }
+  body.order-body .order-header-cart-link .cart-label,
+  body.order-body .order-cart-link .cart-label{display:none !important;}
+  body.order-body .info-card{padding:15px !important;}
+  body.order-body .product-detail-panel{padding:13px !important;}
 }
-/* END BENDAGO V87 */
+/* END BENDAGO V97 */
