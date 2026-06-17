@@ -55,7 +55,8 @@
     'carbon-exhaust-protection-kit-450': 'carbon-exhaust-protection-kit-450',
     'black-shield-armor-kit-450': 'black-shield-armor-kit-450',
     'ghost-kit-maverick-air-filter-v4': 'ghost-kit-maverick-air-filter-v4',
-    'ghost-kit-transparent-clutch-cover-v4': 'ghost-kit-transparent-clutch-cover-v4'
+    'ghost-kit-transparent-clutch-cover-v4': 'ghost-kit-transparent-clutch-cover-v4',
+    'midnight-beast-kit-v4': 'midnight-beast-kit-v4'
   };
 
   const COMPLETE_BUILD_OFFERS = [
@@ -118,7 +119,8 @@
       name: 'Shadow Beast V4',
       items: [
         { code: 'ghost-kit-maverick-air-filter-v4' },
-        { code: 'ghost-kit-transparent-clutch-cover-v4' }
+        { code: 'ghost-kit-transparent-clutch-cover-v4' },
+        { code: 'midnight-beast-kit-v4' }
       ]
     },
     {
@@ -193,7 +195,8 @@
     ],
     'shadow-beast-v4-complete': [
       { code: 'ghost-kit-maverick-air-filter-v4', options: { color_option: 'Full Black' } },
-      { code: 'ghost-kit-transparent-clutch-cover-v4', options: { color_option: 'Black' } }
+      { code: 'ghost-kit-transparent-clutch-cover-v4', options: { color_option: 'Black' } },
+      { code: 'midnight-beast-kit-v4' }
     ],
     'shadow-beast-v4-essentials': [
       { code: 'ghost-kit-maverick-air-filter-v4', options: { color_option: 'Full Black' } }
@@ -931,6 +934,16 @@ async function createStripeCheckout(lines, formData) {
         delivery_estimate: '10 to 15 business days',
         image: './black-shield-armor-kit-450-hero.png',
         stripe_url: ''
+      },
+      'midnight-beast-kit-v4': {
+        product_code: 'midnight-beast-kit-v4',
+        product_name: 'Midnight Beast Kit',
+        product_short: 'Complete rear wide wheel conversion kit for Benda Dark Flag V4 950',
+        fitment: 'Benda Dark Flag V4 950',
+        price: '4961 €',
+        delivery_estimate: '10 to 15 business days',
+        image: './midnight-beast-kit-v4-hero.png',
+        stripe_url: ''
       }
     };
 
@@ -984,7 +997,8 @@ async function createStripeCheckout(lines, formData) {
     'carbon-exhaust-protection-kit-450': './order-carbon-exhaust-protection-kit-450.html',
     'black-shield-armor-kit-450': './order-black-shield-armor-kit-450.html',
     'ghost-kit-transparent-clutch-cover-v4': './order-ghost-kit-transparent-clutch-cover-v4.html',
-    'ghost-kit-maverick-air-filter-v4': './order-ghost-kit-maverick-air-filter-v4.html'
+    'ghost-kit-maverick-air-filter-v4': './order-ghost-kit-maverick-air-filter-v4.html',
+    'midnight-beast-kit-v4': './order-midnight-beast-kit-v4.html'
   };
 
   function productPageUrl(code) {

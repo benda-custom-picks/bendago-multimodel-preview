@@ -1,5 +1,15 @@
 /* BENDAGO ORDER + CART CHECKOUT FLOW */
 const BENDAGO_PRODUCTS = {
+  "midnight-beast-kit-v4": {
+    product_code: "midnight-beast-kit-v4",
+    product_name: 'Midnight Beast Kit',
+    product_short: 'Complete rear wide wheel conversion kit for Benda Dark Flag V4 950',
+    fitment: 'Benda Dark Flag V4 950',
+    price: '4961 €',
+    delivery_estimate: '10 to 15 business days',
+    image: './midnight-beast-kit-v4-hero.png',
+    stripe_url: ''
+  },
   "ghost-kit-maverick-air-filter-v4": {
     product_code: "ghost-kit-maverick-air-filter-v4",
     product_name: 'Ghost Kit | Maverick Air Filter',
