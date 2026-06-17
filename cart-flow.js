@@ -60,7 +60,8 @@
     'midnight-hunter-tank-cover-kit-v4': 'midnight-hunter-tank-cover-kit-v4',
     'tandem-kit-v4': 'tandem-kit-v4',
     'aircraft-metal-cover-v4': 'aircraft-metal-cover-v4',
-    'ghost-metal-cover-v4': 'ghost-metal-cover-v4'
+    'ghost-metal-cover-v4': 'ghost-metal-cover-v4',
+    'ghost-aluminium-cnc-chain-cover-left-v4': 'ghost-aluminium-cnc-chain-cover-left-v4'
   };
 
   const COMPLETE_BUILD_OFFERS = [
@@ -126,6 +127,7 @@
         { code: 'ghost-kit-transparent-clutch-cover-v4' },
         { code: 'aircraft-metal-cover-v4' },
         { code: 'ghost-metal-cover-v4' },
+        { code: 'ghost-aluminium-cnc-chain-cover-left-v4' },
         { code: 'midnight-hunter-tank-cover-kit-v4' },
         { code: 'midnight-beast-kit-v4' }
       ]
@@ -1046,6 +1048,16 @@ async function createStripeCheckout(lines, formData) {
         delivery_estimate: '10 to 15 business days',
         image: './ghost-metal-cover-v4-hero.png',
         stripe_url: ''
+      },
+      'ghost-aluminium-cnc-chain-cover-left-v4': {
+        product_code: 'ghost-aluminium-cnc-chain-cover-left-v4',
+        product_name: 'Ghost Aluminium CNC Chain Cover Left',
+        product_short: 'Premium left-side CNC aluminium chain cover for Benda Dark Flag V4 950',
+        fitment: 'Benda Dark Flag V4 950',
+        price: '302 €',
+        delivery_estimate: '10 to 15 business days',
+        image: './ghost-aluminium-cnc-chain-cover-left-v4-hero.png',
+        stripe_url: ''
       }
     };
 
@@ -1104,7 +1116,8 @@ async function createStripeCheckout(lines, formData) {
     'midnight-hunter-tank-cover-kit-v4': './order-midnight-hunter-tank-cover-kit-v4.html',
     'tandem-kit-v4': './order-tandem-kit-v4.html',
     'aircraft-metal-cover-v4': './order-aircraft-metal-cover-v4.html',
-    'ghost-metal-cover-v4': './order-ghost-metal-cover-v4.html'
+    'ghost-metal-cover-v4': './order-ghost-metal-cover-v4.html',
+    'ghost-aluminium-cnc-chain-cover-left-v4': './order-ghost-aluminium-cnc-chain-cover-left-v4.html'
   };
 
   function productPageUrl(code) {
