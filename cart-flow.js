@@ -59,7 +59,8 @@
     'midnight-beast-kit-v4': 'midnight-beast-kit-v4',
     'midnight-hunter-tank-cover-kit-v4': 'midnight-hunter-tank-cover-kit-v4',
     'tandem-kit-v4': 'tandem-kit-v4',
-    'aircraft-metal-cover-v4': 'aircraft-metal-cover-v4'
+    'aircraft-metal-cover-v4': 'aircraft-metal-cover-v4',
+    'ghost-metal-cover-v4': 'ghost-metal-cover-v4'
   };
 
   const COMPLETE_BUILD_OFFERS = [
@@ -124,6 +125,7 @@
         { code: 'ghost-kit-maverick-air-filter-v4' },
         { code: 'ghost-kit-transparent-clutch-cover-v4' },
         { code: 'aircraft-metal-cover-v4' },
+        { code: 'ghost-metal-cover-v4' },
         { code: 'midnight-hunter-tank-cover-kit-v4' },
         { code: 'midnight-beast-kit-v4' }
       ]
@@ -202,6 +204,7 @@
       { code: 'ghost-kit-maverick-air-filter-v4', options: { color_option: 'Full Black' } },
       { code: 'ghost-kit-transparent-clutch-cover-v4', options: { color_option: 'Black' } },
       { code: 'aircraft-metal-cover-v4' },
+      { code: 'ghost-metal-cover-v4' },
       { code: 'midnight-hunter-tank-cover-kit-v4' },
       { code: 'midnight-beast-kit-v4' }
     ],
@@ -1033,6 +1036,16 @@ async function createStripeCheckout(lines, formData) {
         delivery_estimate: '10 to 15 business days',
         image: './aircraft-metal-cover-v4-hero.png',
         stripe_url: ''
+      },
+      'ghost-metal-cover-v4': {
+        product_code: 'ghost-metal-cover-v4',
+        product_name: 'Ghost Metal Cover',
+        product_short: 'Premium black-metal side cover for Benda Dark Flag V4 950',
+        fitment: 'Benda Dark Flag V4 950',
+        price: '168 €',
+        delivery_estimate: '10 to 15 business days',
+        image: './ghost-metal-cover-v4-hero.png',
+        stripe_url: ''
       }
     };
 
@@ -1090,7 +1103,8 @@ async function createStripeCheckout(lines, formData) {
     'midnight-beast-kit-v4': './order-midnight-beast-kit-v4.html',
     'midnight-hunter-tank-cover-kit-v4': './order-midnight-hunter-tank-cover-kit-v4.html',
     'tandem-kit-v4': './order-tandem-kit-v4.html',
-    'aircraft-metal-cover-v4': './order-aircraft-metal-cover-v4.html'
+    'aircraft-metal-cover-v4': './order-aircraft-metal-cover-v4.html',
+    'ghost-metal-cover-v4': './order-ghost-metal-cover-v4.html'
   };
 
   function productPageUrl(code) {
