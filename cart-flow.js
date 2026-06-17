@@ -57,7 +57,8 @@
     'ghost-kit-maverick-air-filter-v4': 'ghost-kit-maverick-air-filter-v4',
     'ghost-kit-transparent-clutch-cover-v4': 'ghost-kit-transparent-clutch-cover-v4',
     'midnight-beast-kit-v4': 'midnight-beast-kit-v4',
-    'midnight-hunter-tank-cover-kit-v4': 'midnight-hunter-tank-cover-kit-v4'
+    'midnight-hunter-tank-cover-kit-v4': 'midnight-hunter-tank-cover-kit-v4',
+    'tandem-kit-v4': 'tandem-kit-v4'
   };
 
   const COMPLETE_BUILD_OFFERS = [
@@ -957,6 +958,16 @@ async function createStripeCheckout(lines, formData) {
         delivery_estimate: '10 to 15 business days',
         image: './midnight-hunter-tank-cover-kit-v4-hero.png',
         stripe_url: ''
+      },
+      'tandem-kit-v4': {
+        product_code: 'tandem-kit-v4',
+        product_name: 'Tandem Kit',
+        product_short: 'Foldable rider and passenger backrest kit for Benda Dark Flag V4 950',
+        fitment: 'Benda Dark Flag V4 950',
+        price: '861 €',
+        delivery_estimate: '10 to 15 business days',
+        image: './tandem-kit-v4-hero.png',
+        stripe_url: ''
       }
     };
 
@@ -1012,7 +1023,8 @@ async function createStripeCheckout(lines, formData) {
     'ghost-kit-transparent-clutch-cover-v4': './order-ghost-kit-transparent-clutch-cover-v4.html',
     'ghost-kit-maverick-air-filter-v4': './order-ghost-kit-maverick-air-filter-v4.html',
     'midnight-beast-kit-v4': './order-midnight-beast-kit-v4.html',
-    'midnight-hunter-tank-cover-kit-v4': './order-midnight-hunter-tank-cover-kit-v4.html'
+    'midnight-hunter-tank-cover-kit-v4': './order-midnight-hunter-tank-cover-kit-v4.html',
+    'tandem-kit-v4': './order-tandem-kit-v4.html'
   };
 
   function productPageUrl(code) {

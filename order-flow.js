@@ -1,5 +1,15 @@
 /* BENDAGO ORDER + CART CHECKOUT FLOW */
 const BENDAGO_PRODUCTS = {
+  "tandem-kit-v4": {
+    product_code: "tandem-kit-v4",
+    product_name: 'Tandem Kit',
+    product_short: 'Foldable rider and passenger backrest kit for Benda Dark Flag V4 950',
+    fitment: 'Benda Dark Flag V4 950',
+    price: '861 €',
+    delivery_estimate: '10 to 15 business days',
+    image: './tandem-kit-v4-hero.png',
+    stripe_url: ''
+  },
   "midnight-hunter-tank-cover-kit-v4": {
     product_code: "midnight-hunter-tank-cover-kit-v4",
     product_name: 'Midnight Hunter Tank Cover Kit',
