@@ -3286,3 +3286,26 @@ body.model-page .cart-floating-btn,
   }
 }
 /* END BENDAGO V98 */
+
+
+/* BENDAGO V99 — grouped SEO/CRO/performance polish.
+   Scope: non-destructive visual SEO support + model page background clarity. No Worker / Stripe / SKU logic changed. */
+.seo-visually-hidden{
+  position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;
+  overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important;
+}
+@media (min-width:901px){
+  .model-page main::before{
+    opacity:.42!important;
+    filter:blur(.55px) saturate(1.18) brightness(1.52) contrast(1.08)!important;
+    background-position:center center!important;
+  }
+  .model-page main::after{background:rgba(0,0,0,.44)!important;}
+  .model-page .section>.wrap,
+  .model-page .model-proof-section>.wrap,
+  .model-page .order-trust-section>.wrap{max-width:1420px!important;}
+}
+@media (min-width:1200px){
+  .model-page #shop-part-by-part .wrap{width:min(1420px,calc(100% - 76px))!important;}
+}
+/* END BENDAGO V99 */
