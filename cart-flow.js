@@ -622,6 +622,27 @@ async function createStripeCheckout(lines, formData) {
     });
   }
 
+
+  function checkoutFitmentLabel(lines, formData) {
+    const manual = String((formData && formData.motorcycle_model) || '').trim();
+    const fitments = Array.from(new Set((lines || []).map(function (line) {
+      return String(line.fitment || '').trim();
+    }).filter(Boolean)));
+
+    if (fitments.length === 1) return fitments[0];
+    if (manual) return manual;
+    if (fitments.length > 1) return 'Mixed Benda model cart';
+    return 'Benda Custom Picks order';
+  }
+
+  function checkoutGroupedCartLabel(lines, formData) {
+    const fitment = checkoutFitmentLabel(lines, formData);
+    if (/dark flag/i.test(fitment)) return 'Grouped Benda Dark Flag V4 cart';
+    if (/450|500/i.test(fitment)) return 'Grouped Benda Napoleon 450/500 cart';
+    if (/125|250/i.test(fitment)) return 'Grouped Benda Napoleon 125/250 cart';
+    return 'Grouped Benda Custom Picks cart';
+  }
+
   function getValidatedCartFormData() {
     const form = document.getElementById('cartRequestForm');
     if (!form) throw new Error('Cart form not found');
@@ -674,10 +695,10 @@ async function createStripeCheckout(lines, formData) {
       request_date: new Date().toLocaleString(),
       customer_email: formData.email,
       product_code: isSingle ? first.product_code : 'grouped-cart',
-      product_name: isSingle ? first.product_name : 'Grouped Benda Napoleon cart',
-      product_short: isSingle ? first.product_short : 'Grouped Benda Napoleon parts',
+      product_name: isSingle ? first.product_name : checkoutGroupedCartLabel(lines, formData),
+      product_short: isSingle ? first.product_short : 'Grouped Benda Custom Picks parts',
       price: isSingle ? first.price : formatEuro(finalPricing.total),
-      fitment: 'Benda Napoleon 125 / 250',
+      fitment: isSingle ? (first.fitment || checkoutFitmentLabel(lines, formData)) : checkoutFitmentLabel(lines, formData),
       delivery_estimate: '10 to 15 business days',
       payment_provider: 'Stripe',
       payment_url: checkout.checkout_url || '',
