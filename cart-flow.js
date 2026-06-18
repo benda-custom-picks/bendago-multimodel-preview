@@ -1377,10 +1377,11 @@ async function createStripeCheckout(lines, formData) {
       .cart-note{margin-top:2px!important;padding:11px 12px!important;}
       .cart-note strong{display:block!important;margin-bottom:3px!important;color:#f7f1e8!important;}
       .cart-checkout-btn{margin-top:12px!important;min-height:54px!important;font-size:.83rem!important;letter-spacing:.13em!important;text-transform:uppercase!important;}
-      .cart-share-btn{display:none!important;}
+      .cart-share-btn{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-height:34px!important;padding:0 12px!important;border-radius:999px!important;border:1px solid rgba(226,189,114,.26)!important;background:rgba(226,189,114,.055)!important;color:rgba(240,213,143,.86)!important;font-size:.68rem!important;font-weight:850!important;text-decoration:none!important;letter-spacing:.04em!important;}
       .cart-secondary-actions{display:flex!important;gap:8px!important;margin-top:10px!important;align-items:center!important;justify-content:center!important;}
-      .cart-secondary-actions .cart-other-product-btn,.cart-secondary-actions .cart-clear-btn{width:auto!important;min-height:34px!important;padding:0 12px!important;border-radius:999px!important;background:rgba(255,255,255,.025)!important;border:1px solid rgba(255,255,255,.10)!important;color:rgba(255,255,255,.58)!important;font-size:.68rem!important;font-weight:850!important;text-decoration:none!important;letter-spacing:.04em!important;}
-      .cart-secondary-actions .cart-other-product-btn{color:rgba(240,213,143,.80)!important;border-color:rgba(226,189,114,.18)!important;}
+      .cart-secondary-actions .cart-share-btn,.cart-secondary-actions .cart-other-product-btn,.cart-secondary-actions .cart-clear-btn{width:auto!important;min-height:34px!important;padding:0 12px!important;border-radius:999px!important;background:rgba(255,255,255,.025)!important;border:1px solid rgba(255,255,255,.10)!important;color:rgba(255,255,255,.58)!important;font-size:.68rem!important;font-weight:850!important;text-decoration:none!important;letter-spacing:.04em!important;}
+      .cart-secondary-actions .cart-share-btn{color:rgba(240,213,143,.88)!important;border-color:rgba(226,189,114,.24)!important;background:rgba(226,189,114,.050)!important;}
+      .cart-secondary-actions .cart-other-product-btn{color:rgba(255,255,255,.58)!important;border-color:rgba(255,255,255,.10)!important;}
       .cart-secondary-actions .cart-clear-btn{color:rgba(255,255,255,.44)!important;}
       .cart-pricing-row,.cart-total-row{font-size:.88rem!important;}
       .cart-total-row strong{font-size:1.12rem!important;color:#f0d58f!important;}
@@ -1445,20 +1446,20 @@ async function createStripeCheckout(lines, formData) {
     drawer.setAttribute('aria-label', 'Benda Custom Picks cart');
     drawer.innerHTML = [
       '<div class="cart-head">',
-      '<div><h2>Your Benda setup</h2><p>Keep the selected look together. Secure the parts when ready.</p></div>',
+      '<div><h2>Your selected build</h2><p>Your model, options and Launch Access are already grouped here.</p></div>',
       '<button type="button" class="cart-close" data-cart-close aria-label="Close cart">×</button>',
       '</div>',
       '<div class="cart-body" data-cart-body></div>',
       '<div class="cart-footer">',
-      '<div class="cart-look-lock-v16cart"><span>Look preserved</span><strong>Your selected parts stay grouped for this setup.</strong></div>',
+      '<div class="cart-look-lock-v16cart"><span>Selection locked</span><strong>Keep the build together instead of rebuilding it elsewhere.</strong></div>',
       '<div class="cart-pricing-block" data-cart-pricing><div class="cart-total-row"><span>Setup total</span><strong>0 €</strong></div></div>',
-      '<div class="cart-proof-strip-v16cart"><span>Selected for your model</span><span>Stripe secure checkout</span><span>Tracking after dispatch</span></div>',
-      '<div class="cart-note"><strong>Finish the setup here.</strong><br>No need to rebuild the look somewhere else. Secure the selected parts now; the full build remains optional.</div>',
+      '<div class="cart-proof-strip-v16cart"><span>Model matched</span><span>Launch Access applied</span><span>Stripe checkout</span></div>',
+      '<div class="cart-note"><strong>Keep this setup.</strong><br>The parts, options and Launch Access are already grouped. Secure this cart or share it before you lose the exact selection.</div>',
       '<a class="cart-checkout-btn disabled" data-cart-checkout href="./cart-request.html">Secure this setup</a>',
-      '<button type="button" class="cart-share-btn" data-cart-share>Save selection link</button>',
       '<div class="cart-secondary-actions">',
-      '<a class="cart-other-product-btn" href="' + currentPartsHref() + '" data-cart-other-product>Add matching parts</a>',
-      '<button type="button" class="cart-clear-btn" data-cart-clear>Clear cart</button>',
+      '<button type="button" class="cart-share-btn" data-cart-share>Share this cart</button>',
+      '<a class="cart-other-product-btn" href="' + currentPartsHref() + '" data-cart-other-product>Add parts</a>',
+      '<button type="button" class="cart-clear-btn" data-cart-clear>Clear</button>',
       '</div>',
       '</div>'
     ].join('');
@@ -1584,8 +1585,7 @@ async function createStripeCheckout(lines, formData) {
       '<div class="cart-line-media" aria-label="Selected part: ' + escapeHtml(line.product_name) + '"><img src="' + (line.image || './standby-product-visual.png') + '" alt="' + escapeHtml(line.product_name) + '"></div>',
       '<div>',
       '<span class="cart-line-title">' + escapeHtml(line.product_name) + '</span>',
-      '<div class="cart-line-fit-v16cart">Selected Benda upgrade</div>',
-      '<span class="cart-line-details-link cart-line-details-lock-v16d">Selected for this setup</span>',
+      '<div class="cart-line-fit-v16cart">Model-matched part</div>',
       optionText(line) ? '<div class="cart-line-option">' + escapeHtml(optionText(line)) + '</div>' : '',
       '<div class="cart-line-price">' + escapeHtml(line.price) + '</div>',
       '<div class="cart-line-actions">',
