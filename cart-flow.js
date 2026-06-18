@@ -126,7 +126,7 @@
     },
     {
       key: 'shadow-beast-v4',
-      name: 'Shadow Beast V4',
+      name: 'Shadow Monster Bike',
       items: [
         { code: 'ghost-kit-maverick-air-filter-v4' },
         { code: 'ghost-kit-transparent-clutch-cover-v4' },
@@ -251,7 +251,7 @@
         }
         push('build_bundle_add_click', {
           build_key: key,
-          build_name: key.indexOf('midnight-hunter') === 0 ? 'Midnight Hunter Build' : (key.indexOf('shadow-beast-v4') === 0 ? 'Shadow Beast V4' : key),
+          build_name: key.indexOf('midnight-hunter') === 0 ? 'Midnight Hunter Build' : (key.indexOf('shadow-beast-v4') === 0 ? 'Shadow Monster Bike' : key),
           cart_count: cartCount()
         });
         openCart();
