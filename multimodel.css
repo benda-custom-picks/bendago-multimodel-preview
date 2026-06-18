@@ -5795,3 +5795,118 @@ body.model-page .cart-floating-btn,
   }
 }
 /* END V16NZZZK */
+
+
+/* BENDAGO V16NZZZL — responsive native reel cards + compact sticky reference
+   Scope: responsive visual correction only. Look cards keep native reel ratio; sticky returns to compact band. */
+@media (max-width: 900px){
+  html body.model-page section#looks .look-card,
+  html body.model-page.model-125 section#looks .look-card,
+  html body.model-page.model-500 section#looks .look-card,
+  html body.model-page.model-v4 section#looks .look-card{
+    height:auto !important;
+    min-height:0 !important;
+    max-height:none !important;
+    overflow:hidden !important;
+  }
+
+  html body.model-page.model-125 section#looks .look-media,
+  html body.model-page.model-125 section#looks .look-media-video,
+  html body.model-page.model-125 section#looks .look-media-link,
+  html body.model-page.model-v4 section#looks .look-media,
+  html body.model-page.model-v4 section#looks .look-media-video,
+  html body.model-page.model-v4 section#looks .look-media-link{
+    width:100% !important;
+    height:auto !important;
+    min-height:0 !important;
+    max-height:none !important;
+    aspect-ratio:9 / 16 !important;
+    overflow:hidden !important;
+    background:#050505 !important;
+  }
+
+  html body.model-page.model-500 section#looks .look-media,
+  html body.model-page.model-500 section#looks .look-media-video,
+  html body.model-page.model-500 section#looks .look-media-link{
+    width:100% !important;
+    height:auto !important;
+    min-height:0 !important;
+    max-height:none !important;
+    aspect-ratio:16 / 9 !important;
+    overflow:hidden !important;
+    background:#050505 !important;
+  }
+
+  html body.model-page section#looks .look-video,
+  html body.model-page section#looks .look-media video,
+  html body.model-page.model-125 section#looks .look-video,
+  html body.model-page.model-125 section#looks .look-media video,
+  html body.model-page.model-500 section#looks .look-video,
+  html body.model-page.model-500 section#looks .look-media video,
+  html body.model-page.model-v4 section#looks .look-video,
+  html body.model-page.model-v4 section#looks .look-media video{
+    position:absolute !important;
+    inset:0 !important;
+    width:100% !important;
+    height:100% !important;
+    max-width:none !important;
+    max-height:none !important;
+    object-fit:contain !important;
+    object-position:center center !important;
+    background:#050505 !important;
+  }
+
+  html body.model-page .bcp-look-gallery-banner-v16n,
+  html body.model-page.model-125 .bcp-look-gallery-banner-v16n,
+  html body.model-page.model-500 .bcp-look-gallery-banner-v16n,
+  html body.model-page.model-v4 .bcp-look-gallery-banner-v16n,
+  html body.model-page.model-500 .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y,
+  html body.model-page.model-v4 .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y{
+    width:100% !important;
+    height:clamp(158px, 28vh, 220px) !important;
+    min-height:158px !important;
+    max-height:220px !important;
+    aspect-ratio:auto !important;
+    overflow:hidden !important;
+    border-radius:22px !important;
+    background:#050505 !important;
+  }
+
+  html body.model-page .bcp-look-gallery-banner-v16n .bcp-look-sticky-video-v16m,
+  html body.model-page.model-125 .bcp-look-gallery-banner-v16n .bcp-look-sticky-video-v16m,
+  html body.model-page.model-500 .bcp-look-gallery-banner-v16n .bcp-look-sticky-video-v16m,
+  html body.model-page.model-v4 .bcp-look-gallery-banner-v16n .bcp-look-sticky-video-v16m,
+  html body.model-page.model-500 .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y .bcp-look-sticky-video-v16m,
+  html body.model-page.model-v4 .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y .bcp-look-sticky-video-v16m{
+    position:absolute !important;
+    inset:0 !important;
+    width:100% !important;
+    height:100% !important;
+    object-fit:cover !important;
+    object-position:center center !important;
+    background:#050505 !important;
+  }
+
+  html body.model-page .bcp-look-gallery-banner-v16n .bcp-look-sticky-copy-v16m,
+  html body.model-page.model-125 .bcp-look-gallery-banner-v16n .bcp-look-sticky-copy-v16m,
+  html body.model-page.model-500 .bcp-look-gallery-banner-v16n .bcp-look-sticky-copy-v16m,
+  html body.model-page.model-v4 .bcp-look-gallery-banner-v16n .bcp-look-sticky-copy-v16m,
+  html body.model-page.model-500 .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y .bcp-look-sticky-copy-v16m,
+  html body.model-page.model-v4 .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y .bcp-look-sticky-copy-v16m{
+    display:none !important;
+  }
+}
+
+@media (max-width: 900px) and (orientation: landscape){
+  html body.model-page .bcp-look-gallery-banner-v16n,
+  html body.model-page.model-125 .bcp-look-gallery-banner-v16n,
+  html body.model-page.model-500 .bcp-look-gallery-banner-v16n,
+  html body.model-page.model-v4 .bcp-look-gallery-banner-v16n,
+  html body.model-page.model-500 .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y,
+  html body.model-page.model-v4 .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y{
+    height:clamp(108px, 30vh, 148px) !important;
+    min-height:108px !important;
+    max-height:148px !important;
+  }
+}
+/* END V16NZZZL */
