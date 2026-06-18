@@ -3541,3 +3541,85 @@ body.model-page .cart-floating-btn,
     min-width:12px !important;
   }
 }
+
+/* BENDAGO V16L — product-card ADD TO CART green lock
+   Scope: model-page product cards only (Napoleon 125/250, Napoleon 450/500, Dark Flag V4).
+   Purpose: align every product-card Add to cart / Choose options CTA with the existing green Complete the full look · Save 5% CTA.
+   No JS / Worker / Stripe / SKU / price / layout logic changed. */
+.model-page.model-125 .product-card .add-preview:not(:disabled),
+.model-page.model-500 .product-card .add-preview:not(:disabled),
+.model-page.model-v4 .product-card .add-preview:not(:disabled){
+  width:100% !important;
+  min-height:48px !important;
+  margin-top:10px !important;
+  padding:0 14px !important;
+  border-radius:14px !important;
+  border:1px solid rgba(100,232,183,.50) !important;
+  background:linear-gradient(180deg,rgba(100,232,183,.18),rgba(100,232,183,.075)),rgba(8,34,27,.86) !important;
+  color:#eafff6 !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.10),0 10px 24px rgba(0,0,0,.24) !important;
+  text-shadow:0 1px 0 rgba(0,0,0,.35) !important;
+  font-weight:950 !important;
+  font-size:11px !important;
+  line-height:1.05 !important;
+  letter-spacing:.065em !important;
+  text-transform:uppercase !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  text-align:center !important;
+  white-space:normal !important;
+  cursor:pointer !important;
+  appearance:none !important;
+  -webkit-appearance:none !important;
+}
+.model-page.model-125 .product-card .add-preview:not(:disabled):hover,
+.model-page.model-125 .product-card .add-preview:not(:disabled):focus-visible,
+.model-page.model-500 .product-card .add-preview:not(:disabled):hover,
+.model-page.model-500 .product-card .add-preview:not(:disabled):focus-visible,
+.model-page.model-v4 .product-card .add-preview:not(:disabled):hover,
+.model-page.model-v4 .product-card .add-preview:not(:disabled):focus-visible{
+  transform:translateY(-1px) !important;
+  border-color:rgba(118,255,202,.72) !important;
+  background:linear-gradient(180deg,rgba(118,255,202,.24),rgba(100,232,183,.095)),rgba(8,42,33,.88) !important;
+  color:#f3fff9 !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 14px 30px rgba(0,0,0,.28),0 0 0 1px rgba(93,255,188,.07) !important;
+}
+.model-page.model-125 .product-card .add-preview:not(:disabled):active,
+.model-page.model-500 .product-card .add-preview:not(:disabled):active,
+.model-page.model-v4 .product-card .add-preview:not(:disabled):active{
+  transform:translateY(0) scale(.99) !important;
+}
+.model-page.model-125 .product-card .add-preview::before,
+.model-page.model-125 .product-card .add-preview::after,
+.model-page.model-500 .product-card .add-preview::before,
+.model-page.model-500 .product-card .add-preview::after,
+.model-page.model-v4 .product-card .add-preview::before,
+.model-page.model-v4 .product-card .add-preview::after{
+  display:none !important;
+  content:none !important;
+}
+@media (max-width: 900px){
+  .model-page.model-125 .product-card .add-preview:not(:disabled),
+  .model-page.model-500 .product-card .add-preview:not(:disabled),
+  .model-page.model-v4 .product-card .add-preview:not(:disabled){
+    min-height:46px !important;
+    padding:0 12px !important;
+    border-radius:13px !important;
+    font-size:10.4px !important;
+    letter-spacing:.055em !important;
+    line-height:1.08 !important;
+  }
+}
+@media (orientation: landscape) and (max-height: 480px){
+  .model-page.model-125 .product-card .add-preview:not(:disabled),
+  .model-page.model-500 .product-card .add-preview:not(:disabled),
+  .model-page.model-v4 .product-card .add-preview:not(:disabled){
+    min-height:42px !important;
+    margin-top:8px !important;
+    padding:0 10px !important;
+    font-size:9.6px !important;
+    letter-spacing:.045em !important;
+  }
+}
+/* END BENDAGO V16L */
