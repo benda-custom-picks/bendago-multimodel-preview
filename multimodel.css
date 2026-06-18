@@ -6673,3 +6673,55 @@ body:has(.model-start#looks) .model-start#looks .section-head .swipe-hint {
     scroll-snap-align: none !important;
   }
 }
+
+/* V16NZZZZ1 — Napoleon 450/500 responsive Browse sticky 40vh full-bleed
+   Scope: model-500 responsive only / Browse all individual upgrades only. PC untouched. */
+@media (max-width: 900px){
+  html body.model-page.model-500 section#shop-part-by-part .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y{
+    position: sticky !important;
+    top: 58px !important;
+    z-index: 12 !important;
+    display: block !important;
+    width: min(100%, calc(100vw - 32px)) !important;
+    max-width: min(100%, calc(100vw - 32px)) !important;
+    height: 40vh !important;
+    min-height: 270px !important;
+    max-height: 360px !important;
+    aspect-ratio: auto !important;
+    margin: 10px auto 18px !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    border-radius: 24px !important;
+    background: #050505 !important;
+    border: 1px solid rgba(226,189,114,.20) !important;
+    box-shadow: 0 20px 58px rgba(0,0,0,.52), 0 0 0 1px rgba(226,189,114,.12) !important;
+  }
+
+  html body.model-page.model-500 section#shop-part-by-part .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y .bcp-look-sticky-video-v16m,
+  html body.model-page.model-500 section#shop-part-by-part .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y video{
+    position: absolute !important;
+    inset: 0 !important;
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-width: 100% !important;
+    min-height: 100% !important;
+    max-width: none !important;
+    max-height: none !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    background: #050505 !important;
+  }
+
+  html body.model-page.model-500 section#shop-part-by-part .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y .bcp-look-sticky-copy-v16m{
+    display: none !important;
+  }
+}
+
+@media (max-width: 420px){
+  html body.model-page.model-500 section#shop-part-by-part .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y{
+    height: 40vh !important;
+    min-height: 245px !important;
+    max-height: 330px !important;
+  }
+}
