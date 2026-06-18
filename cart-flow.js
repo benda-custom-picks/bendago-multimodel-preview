@@ -387,13 +387,44 @@
   function pricingHtml(pricing) {
     if (pricing && pricing.discountApplied) {
       return [
-        '<div class="cart-pricing-row"><span>Subtotal</span><strong>' + formatEuro(pricing.subtotal) + '</strong></div>',
-        '<div class="cart-pricing-row cart-pricing-discount"><span>Launch Access 5%</span><strong>-' + formatEuro(pricing.discountAmount) + '</strong></div>',
-        '<div class="cart-total-row"><span>Setup total</span><strong>' + formatEuro(pricing.total) + '</strong></div>',
-        '<div class="cart-launch-note">Launch Access applied' + (pricing.buildName ? ': ' + escapeHtml(pricing.buildName) : '') + '. No code needed.</div>'
+        '<div class="cart-pricing-row"><span>Parts value</span><strong>' + formatEuro(pricing.subtotal) + '</strong></div>',
+        '<div class="cart-pricing-row cart-pricing-discount"><span>Launch Access kept</span><strong>-' + formatEuro(pricing.discountAmount) + '</strong></div>',
+        '<div class="cart-total-row"><span>Setup secured today</span><strong>' + formatEuro(pricing.total) + '</strong></div>',
+        '<div class="cart-launch-note">Launch Access kept inside this setup' + (pricing.buildName ? ': ' + escapeHtml(pricing.buildName) : '') + '.</div>'
       ].join('');
     }
-    return '<div class="cart-total-row"><span>Setup total</span><strong>' + formatEuro(pricing ? pricing.total : 0) + '</strong></div>';
+    return '<div class="cart-total-row"><span>Setup secured today</span><strong>' + formatEuro(pricing ? pricing.total : 0) + '</strong></div>';
+  }
+
+
+  function cartSetupDisplay(lines, pricing) {
+    const fitment = checkoutFitmentLabel(lines || [], {});
+    const rawBuild = String((pricing && pricing.buildName) || '').trim();
+    const buildLabel = rawBuild ? rawBuild.replace(/\s+Complete Build\s*$/i, '') : '';
+    let title = buildLabel ? buildLabel + ' setup' : 'Configured Benda setup';
+    if (!buildLabel && /dark flag/i.test(fitment)) title = 'Dark Flag V4 setup';
+    else if (!buildLabel && /450|500/i.test(fitment)) title = 'Napoleon 450/500 setup';
+    else if (!buildLabel && /125|250/i.test(fitment)) title = 'Napoleon 125/250 setup';
+    const count = (lines || []).reduce((sum, line) => sum + (Number(line.qty) || 0), 0);
+    const discount = pricing && pricing.discountApplied;
+    return {
+      title,
+      fitment: fitment || 'Benda model selection',
+      count,
+      detail: discount
+        ? 'Launch Access stays attached to this selected setup.'
+        : 'Parts, options and quantities stay grouped for this selected setup.'
+    };
+  }
+
+  function cartSetupHtml(lines, pricing) {
+    const setup = cartSetupDisplay(lines, pricing);
+    return [
+      '<span class="cart-setup-kicker-v16g">Configured setup</span>',
+      '<strong>' + escapeHtml(setup.title) + '</strong>',
+      '<small>' + escapeHtml(setup.fitment) + ' · ' + setup.count + ' selected part' + (setup.count > 1 ? 's' : '') + '</small>',
+      '<em>' + escapeHtml(setup.detail) + '</em>'
+    ].join('');
   }
 
   function cartSummaryText(lines, pricing) {
@@ -1402,6 +1433,32 @@ async function createStripeCheckout(lines, formData) {
       }
 
       @media(max-width:520px){.cart-proof-strip-v16cart{grid-template-columns:1fr!important}.cart-proof-strip-v16cart span{min-height:28px!important}}
+
+
+      /* BENDAGO V16NZZZG — real setup cart, less price-comparison reflex */
+      .cart-setup-card-v16g{display:grid!important;gap:3px!important;margin:0!important;padding:13px 14px!important;border-radius:18px!important;border:1px solid rgba(226,189,114,.30)!important;background:radial-gradient(circle at 14% 0%,rgba(226,189,114,.16),transparent 44%),linear-gradient(180deg,rgba(255,255,255,.065),rgba(255,255,255,.018)),rgba(10,11,15,.92)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 14px 30px rgba(0,0,0,.24)!important;}
+      .cart-setup-kicker-v16g{display:block!important;color:rgba(226,189,114,.92)!important;font-size:.66rem!important;letter-spacing:.13em!important;text-transform:uppercase!important;font-weight:950!important;}
+      .cart-setup-card-v16g strong{display:block!important;color:#fff!important;font-size:1rem!important;line-height:1.08!important;letter-spacing:-.015em!important;}
+      .cart-setup-card-v16g small{display:block!important;color:rgba(255,255,255,.68)!important;font-size:.74rem!important;line-height:1.22!important;}
+      .cart-setup-card-v16g em{display:block!important;color:rgba(240,213,143,.86)!important;font-size:.74rem!important;line-height:1.22!important;font-style:normal!important;margin-top:2px!important;}
+      .cart-included-label-v16g{display:block!important;margin:0 0 2px!important;color:rgba(226,189,114,.82)!important;font-size:.66rem!important;letter-spacing:.14em!important;text-transform:uppercase!important;font-weight:950!important;}
+      .cart-line{position:relative!important;}
+      .cart-line-fit-v16cart{border-color:rgba(226,189,114,.16)!important;background:rgba(226,189,114,.055)!important;color:rgba(240,213,143,.80)!important;font-size:.62rem!important;}
+      .cart-line-option{color:rgba(255,255,255,.78)!important;font-size:.82rem!important;line-height:1.22!important;margin:2px 0 0!important;}
+      .cart-line-price{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:12px!important;margin:8px 0 0!important;padding-top:7px!important;border-top:1px solid rgba(255,255,255,.07)!important;color:rgba(255,255,255,.58)!important;font-size:.68rem!important;font-weight:800!important;letter-spacing:.02em!important;}
+      .cart-line-price span{display:block!important;color:rgba(255,255,255,.48)!important;font-size:.62rem!important;text-transform:uppercase!important;letter-spacing:.10em!important;font-weight:850!important;}
+      .cart-line-price strong{display:block!important;color:rgba(240,213,143,.92)!important;font-size:.92rem!important;font-weight:950!important;letter-spacing:.01em!important;white-space:nowrap!important;}
+      .cart-pricing-block{padding-top:2px!important;}
+      .cart-pricing-row span,.cart-total-row span{color:rgba(255,255,255,.68)!important;}
+      .cart-pricing-row strong{color:rgba(255,255,255,.86)!important;}
+      .cart-total-row{padding-top:5px!important;margin-top:4px!important;border-top:1px solid rgba(226,189,114,.16)!important;}
+      .cart-total-row strong{font-size:1.22rem!important;color:#f0d58f!important;letter-spacing:.02em!important;}
+      .cart-look-lock-v16cart strong{font-size:.84rem!important;color:rgba(255,255,255,.90)!important;}
+      .cart-note{background:linear-gradient(135deg,rgba(226,189,114,.075),rgba(124,80,255,.050))!important;border-color:rgba(226,189,114,.18)!important;}
+      .cart-note strong{color:#f0d58f!important;}
+      .cart-secondary-actions .cart-share-btn{font-size:.66rem!important;color:rgba(240,213,143,.90)!important;}
+      .cart-secondary-actions .cart-other-product-btn{font-size:.66rem!important;}
+      @media (max-width:900px){.cart-included-label-v16g{display:none!important}.cart-setup-card-v16g{padding:10px 11px!important}.cart-setup-card-v16g strong{font-size:.88rem!important}.cart-setup-card-v16g small,.cart-setup-card-v16g em{font-size:.68rem!important}.cart-line-price strong{font-size:.86rem!important}}
     `;
     document.head.appendChild(style);
   }
@@ -1446,19 +1503,20 @@ async function createStripeCheckout(lines, formData) {
     drawer.setAttribute('aria-label', 'Benda Custom Picks cart');
     drawer.innerHTML = [
       '<div class="cart-head">',
-      '<div><h2>Your selected build</h2><p>Your model, options and Launch Access are already grouped here.</p></div>',
+      '<div><h2>Your Benda setup</h2><p>Keep the selected look, model fit and Launch Access together.</p></div>',
       '<button type="button" class="cart-close" data-cart-close aria-label="Close cart">×</button>',
       '</div>',
       '<div class="cart-body" data-cart-body></div>',
       '<div class="cart-footer">',
-      '<div class="cart-look-lock-v16cart"><span>Selection locked</span><strong>Keep the build together instead of rebuilding it elsewhere.</strong></div>',
-      '<div class="cart-pricing-block" data-cart-pricing><div class="cart-total-row"><span>Setup total</span><strong>0 €</strong></div></div>',
-      '<div class="cart-proof-strip-v16cart"><span>Model matched</span><span>Launch Access applied</span><span>Stripe checkout</span></div>',
-      '<div class="cart-note"><strong>Keep this setup.</strong><br>The parts, options and Launch Access are already grouped. Secure this cart or share it before you lose the exact selection.</div>',
+      '<div class="cart-setup-card-v16g" data-cart-setup style="display:none"></div>',
+      '<div class="cart-look-lock-v16cart"><span>Setup preserved</span><strong>No need to rebuild this look part by part elsewhere.</strong></div>',
+      '<div class="cart-pricing-block" data-cart-pricing><div class="cart-total-row"><span>Setup secured today</span><strong>0 €</strong></div></div>',
+      '<div class="cart-proof-strip-v16cart"><span>Model fit kept</span><span>Options grouped</span><span>Stripe checkout</span></div>',
+      '<div class="cart-note"><strong>Finish here.</strong><br>Your selected parts are already grouped for this setup. Secure it now or share the exact setup link.</div>',
       '<a class="cart-checkout-btn disabled" data-cart-checkout href="./cart-request.html">Secure this setup</a>',
       '<div class="cart-secondary-actions">',
-      '<button type="button" class="cart-share-btn" data-cart-share>Share this cart</button>',
-      '<a class="cart-other-product-btn" href="' + currentPartsHref() + '" data-cart-other-product>Add parts</a>',
+      '<button type="button" class="cart-share-btn" data-cart-share>Share this setup</button>',
+      '<a class="cart-other-product-btn" href="' + currentPartsHref() + '" data-cart-other-product>Continue setup</a>',
       '<button type="button" class="cart-clear-btn" data-cart-clear>Clear</button>',
       '</div>',
       '</div>'
@@ -1510,7 +1568,7 @@ async function createStripeCheckout(lines, formData) {
             document.body.removeChild(temp);
           } catch (e) {}
         }
-        shareBtn.textContent = copied ? 'Cart link copied' : 'Copy failed';
+        shareBtn.textContent = copied ? 'Setup link copied' : 'Copy failed';
         if (copied) push('cart_share_link_copied', { cart_count: cartCount() });
         window.setTimeout(() => { shareBtn.textContent = originalText; }, 1800);
       });
@@ -1569,25 +1627,28 @@ async function createStripeCheckout(lines, formData) {
     if (!body || !pricingEl || !checkout) return;
 
     const shareBtn = document.querySelector('[data-cart-share]');
+    const setupCard = document.querySelector('[data-cart-setup]');
     if (!lines.length) {
-      body.innerHTML = '<div class="cart-empty">Your cart is empty. Open a product page and add one or several parts.</div>';
-      pricingEl.innerHTML = '<div class="cart-total-row"><span>Setup total</span><strong>0 €</strong></div>';
+      body.innerHTML = '<div class="cart-empty">Your setup is empty. Choose a look part first.</div>';
+      pricingEl.innerHTML = '<div class="cart-total-row"><span>Setup secured today</span><strong>0 €</strong></div>';
+      if (setupCard) { setupCard.style.display = 'none'; setupCard.innerHTML = ''; }
       checkout.classList.add('disabled');
       if (shareBtn) shareBtn.disabled = false;
       return;
     }
 
     const pricing = calculateLaunchOffer(lines);
-    body.innerHTML = lines.map(line => {
+    if (setupCard) { setupCard.style.display = ''; setupCard.innerHTML = cartSetupHtml(lines, pricing); }
+    body.innerHTML = '<div class="cart-included-label-v16g">Included upgrades</div>' + lines.map(line => {
       const url = productPageUrl(line.code);
       return [
       '<div class="cart-line">',
       '<div class="cart-line-media" aria-label="Selected part: ' + escapeHtml(line.product_name) + '"><img src="' + (line.image || './standby-product-visual.png') + '" alt="' + escapeHtml(line.product_name) + '"></div>',
       '<div>',
       '<span class="cart-line-title">' + escapeHtml(line.product_name) + '</span>',
-      '<div class="cart-line-fit-v16cart">Model-matched part</div>',
+      '<div class="cart-line-fit-v16cart">Included in setup</div>',
       optionText(line) ? '<div class="cart-line-option">' + escapeHtml(optionText(line)) + '</div>' : '',
-      '<div class="cart-line-price">' + escapeHtml(line.price) + '</div>',
+      '<div class="cart-line-price"><span>Part value</span><strong>' + escapeHtml(line.price) + '</strong></div>',
       '<div class="cart-line-actions">',
       '<button class="cart-qty-btn" type="button" data-cart-dec="' + escapeHtml(itemKey(line)) + '">−</button>',
       '<strong>' + line.qty + '</strong>',
@@ -1616,15 +1677,15 @@ async function createStripeCheckout(lines, formData) {
       return;
     }
     const pricing = calculateLaunchOffer(lines);
-    box.innerHTML = '<h2>Selected parts</h2>' + lines.map(line => {
+    box.innerHTML = '<h2>Your configured setup</h2><p class="cart-summary-context-v16g">Selected upgrades, options and model fit stay grouped until Stripe checkout.</p>' + lines.map(line => {
       const url = productPageUrl(line.code);
       return '<div class="cart-summary-row"><span><a class="cart-summary-product-link" href="' + escapeHtml(url) + '">' + escapeHtml(line.product_name) + '</a> × ' + line.qty + (optionText(line) ? ' — ' + escapeHtml(optionText(line)) : '') + '</span><strong>' + formatEuro(line.line_total) + '</strong></div>';
     }).join('') + (pricing.discountApplied ? [
-      '<div class="cart-summary-total cart-summary-subtotal"><span>Subtotal</span><strong>' + formatEuro(pricing.subtotal) + '</strong></div>',
-      '<div class="cart-summary-total cart-summary-discount"><span>Launch Access 5%</span><strong>-' + formatEuro(pricing.discountAmount) + '</strong></div>',
-      '<div class="cart-summary-total"><span>Total today</span><strong>' + formatEuro(pricing.total) + '</strong></div>',
-      '<p class="cart-summary-launch-note">Launch Access applied: ' + escapeHtml(pricing.buildName) + '. No code needed.</p>'
-    ].join('') : '<div class="cart-summary-total"><span>Total</span><strong>' + formatEuro(pricing.total) + '</strong></div>');
+      '<div class="cart-summary-total cart-summary-subtotal"><span>Parts value</span><strong>' + formatEuro(pricing.subtotal) + '</strong></div>',
+      '<div class="cart-summary-total cart-summary-discount"><span>Launch Access kept</span><strong>-' + formatEuro(pricing.discountAmount) + '</strong></div>',
+      '<div class="cart-summary-total"><span>Setup secured today</span><strong>' + formatEuro(pricing.total) + '</strong></div>',
+      '<p class="cart-summary-launch-note">Launch Access kept inside this setup: ' + escapeHtml(pricing.buildName) + '.</p>'
+    ].join('') : '<div class="cart-summary-total"><span>Setup secured today</span><strong>' + formatEuro(pricing.total) + '</strong></div>');
   }
 
   function bindCartForm() {

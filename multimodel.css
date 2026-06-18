@@ -5067,3 +5067,153 @@ body.model-page .cart-floating-btn,
   }
 }
 /* END V16NZZZE */
+
+
+/* BENDAGO V16NZZZG — real setup cart, less price-comparison reflex */
+.cart-setup-card-v16g{display:grid!important;gap:3px!important;margin:0!important;padding:13px 14px!important;border-radius:18px!important;border:1px solid rgba(226,189,114,.30)!important;background:radial-gradient(circle at 14% 0%,rgba(226,189,114,.16),transparent 44%),linear-gradient(180deg,rgba(255,255,255,.065),rgba(255,255,255,.018)),rgba(10,11,15,.92)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 14px 30px rgba(0,0,0,.24)!important;}
+.cart-setup-kicker-v16g{display:block!important;color:rgba(226,189,114,.92)!important;font-size:.66rem!important;letter-spacing:.13em!important;text-transform:uppercase!important;font-weight:950!important;}
+.cart-setup-card-v16g strong{display:block!important;color:#fff!important;font-size:1rem!important;line-height:1.08!important;letter-spacing:-.015em!important;}
+.cart-setup-card-v16g small{display:block!important;color:rgba(255,255,255,.68)!important;font-size:.74rem!important;line-height:1.22!important;}
+.cart-setup-card-v16g em{display:block!important;color:rgba(240,213,143,.86)!important;font-size:.74rem!important;line-height:1.22!important;font-style:normal!important;margin-top:2px!important;}
+.cart-included-label-v16g{display:block!important;margin:0 0 2px!important;color:rgba(226,189,114,.82)!important;font-size:.66rem!important;letter-spacing:.14em!important;text-transform:uppercase!important;font-weight:950!important;}
+.cart-line{position:relative!important;}
+.cart-line-fit-v16cart{border-color:rgba(226,189,114,.16)!important;background:rgba(226,189,114,.055)!important;color:rgba(240,213,143,.80)!important;font-size:.62rem!important;}
+.cart-line-option{color:rgba(255,255,255,.78)!important;font-size:.82rem!important;line-height:1.22!important;margin:2px 0 0!important;}
+.cart-line-price{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:12px!important;margin:8px 0 0!important;padding-top:7px!important;border-top:1px solid rgba(255,255,255,.07)!important;color:rgba(255,255,255,.58)!important;font-size:.68rem!important;font-weight:800!important;letter-spacing:.02em!important;}
+.cart-line-price span{display:block!important;color:rgba(255,255,255,.48)!important;font-size:.62rem!important;text-transform:uppercase!important;letter-spacing:.10em!important;font-weight:850!important;}
+.cart-line-price strong{display:block!important;color:rgba(240,213,143,.92)!important;font-size:.92rem!important;font-weight:950!important;letter-spacing:.01em!important;white-space:nowrap!important;}
+.cart-pricing-block{padding-top:2px!important;}
+.cart-pricing-row span,.cart-total-row span{color:rgba(255,255,255,.68)!important;}
+.cart-pricing-row strong{color:rgba(255,255,255,.86)!important;}
+.cart-total-row{padding-top:5px!important;margin-top:4px!important;border-top:1px solid rgba(226,189,114,.16)!important;}
+.cart-total-row strong{font-size:1.22rem!important;color:#f0d58f!important;letter-spacing:.02em!important;}
+.cart-look-lock-v16cart strong{font-size:.84rem!important;color:rgba(255,255,255,.90)!important;}
+.cart-note{background:linear-gradient(135deg,rgba(226,189,114,.075),rgba(124,80,255,.050))!important;border-color:rgba(226,189,114,.18)!important;}
+.cart-note strong{color:#f0d58f!important;}
+.cart-secondary-actions .cart-share-btn{font-size:.66rem!important;color:rgba(240,213,143,.90)!important;}
+.cart-secondary-actions .cart-other-product-btn{font-size:.66rem!important;}
+@media (max-width:900px){.cart-included-label-v16g{display:none!important}.cart-setup-card-v16g{padding:10px 11px!important}.cart-setup-card-v16g strong{font-size:.88rem!important}.cart-setup-card-v16g small,.cart-setup-card-v16g em{font-size:.68rem!important}.cart-line-price strong{font-size:.86rem!important}}
+
+/* END V16NZZZG */
+
+/* BENDAGO V16NZZZH — responsive native reel format for look videos
+   Scope: responsive look cards + sticky look media only. No JS/cart/Stripe/Worker/SKU/price changes. */
+@media (max-width:980px){
+  .model-page #looks .look-card,
+  .model-page.model-125 #looks .look-card,
+  .model-page.model-500 #looks .look-card,
+  .model-page.model-v4 #looks .look-card{
+    height:auto !important;
+    min-height:0 !important;
+    max-height:none !important;
+    overflow:hidden !important;
+  }
+
+  .model-page #looks .look-media,
+  .model-page #looks .look-media-video,
+  .model-page #looks .look-media-link,
+  .model-page.model-125 #looks .look-media,
+  .model-page.model-125 #looks .look-media-video,
+  .model-page.model-125 #looks .look-media-link,
+  .model-page.model-500 #looks .look-media,
+  .model-page.model-500 #looks .look-media-video,
+  .model-page.model-500 #looks .look-media-link,
+  .model-page.model-v4 #looks .look-media,
+  .model-page.model-v4 #looks .look-media-video,
+  .model-page.model-v4 #looks .look-media-link{
+    width:100% !important;
+    height:auto !important;
+    min-height:0 !important;
+    max-height:none !important;
+    aspect-ratio:auto !important;
+    display:block !important;
+    background:#000 !important;
+    border-radius:20px 20px 0 0 !important;
+    overflow:hidden !important;
+  }
+
+  .model-page #looks .look-video,
+  .model-page.model-125 #looks .look-video,
+  .model-page.model-500 #looks .look-video,
+  .model-page.model-v4 #looks .look-video{
+    display:block !important;
+    width:100% !important;
+    height:auto !important;
+    min-height:0 !important;
+    max-height:none !important;
+    aspect-ratio:auto !important;
+    object-fit:contain !important;
+    object-position:center center !important;
+    background:#000 !important;
+  }
+
+  .model-page #looks .look-body{
+    padding:24px 26px 26px !important;
+  }
+
+  .model-page .bcp-look-gallery-banner-v16n,
+  .model-page.model-500 .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y,
+  .model-page.model-v4 .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y{
+    position:sticky !important;
+    top:60px !important;
+    z-index:10 !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    width:calc(100% - 22px) !important;
+    height:clamp(320px,52vh,560px) !important;
+    min-height:320px !important;
+    max-height:560px !important;
+    margin:10px auto 16px !important;
+    padding:0 !important;
+    border-radius:22px !important;
+    background:#000 !important;
+    overflow:hidden !important;
+  }
+
+  .model-page .bcp-look-gallery-banner-v16n .bcp-look-sticky-video-v16m,
+  .model-page.model-500 .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y .bcp-look-sticky-video-v16m,
+  .model-page.model-v4 .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y .bcp-look-sticky-video-v16m{
+    display:block !important;
+    width:auto !important;
+    max-width:100% !important;
+    height:100% !important;
+    min-height:100% !important;
+    max-height:100% !important;
+    aspect-ratio:auto !important;
+    object-fit:contain !important;
+    object-position:center center !important;
+    background:#000 !important;
+  }
+
+  .model-page .bcp-look-gallery-banner-v16n .bcp-look-sticky-copy-v16m,
+  .model-page.model-500 .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y .bcp-look-sticky-copy-v16m,
+  .model-page.model-v4 .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y .bcp-look-sticky-copy-v16m{
+    display:none !important;
+  }
+}
+
+@media (max-width:560px){
+  .model-page .bcp-look-gallery-banner-v16n,
+  .model-page.model-500 .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y,
+  .model-page.model-v4 .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y{
+    top:58px !important;
+    height:clamp(300px,50vh,470px) !important;
+    min-height:300px !important;
+    max-height:470px !important;
+    border-radius:20px !important;
+  }
+}
+
+@media (orientation:landscape) and (max-height:520px) and (max-width:980px){
+  .model-page .bcp-look-gallery-banner-v16n,
+  .model-page.model-500 .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y,
+  .model-page.model-v4 .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y{
+    top:48px !important;
+    height:clamp(172px,54vh,230px) !important;
+    min-height:172px !important;
+    max-height:230px !important;
+    margin:8px auto 12px !important;
+  }
+}
+/* END V16NZZZH */
