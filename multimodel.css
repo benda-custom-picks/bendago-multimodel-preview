@@ -3856,3 +3856,116 @@ body.model-page .cart-floating-btn,
   .bcp-browse-look-banner-v16n:target{min-height:76px!important;max-height:86px!important;margin:8px 0 10px!important;scroll-margin-top:64px!important;}
 }
 /* END V16N FINAL */
+
+
+/* V16O — full-look final CTA violet-glass hard lock + remove unused Browse CTA from HTML.
+   Scope: final Add full look buttons inside look product sections only.
+   Safe: no JS, no cart engine, no prices, no SKU, no Stripe/Worker changes. */
+#looks .btn.build-bundle-review.primary.bcp-look-full-add-v16m,
+#looks .build-bundle-actions .btn.build-bundle-review.primary.bcp-look-full-add-v16m,
+.model-page .btn.build-bundle-review.primary.bcp-look-full-add-v16m,
+.model-page .build-bundle-actions .btn.build-bundle-review.primary.bcp-look-full-add-v16m{
+  background:linear-gradient(135deg,rgba(126,72,255,.54),rgba(206,181,255,.28),rgba(255,255,255,.10)) !important;
+  color:#fbf7ff !important;
+  border:1px solid rgba(224,204,255,.66) !important;
+  box-shadow:0 0 0 1px rgba(255,255,255,.08) inset,0 12px 34px rgba(113,72,255,.28),0 0 28px rgba(184,142,255,.12) !important;
+  text-shadow:0 1px 0 rgba(0,0,0,.42) !important;
+  backdrop-filter:blur(12px) saturate(1.08) !important;
+  -webkit-backdrop-filter:blur(12px) saturate(1.08) !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  text-align:center !important;
+}
+#looks .btn.build-bundle-review.primary.bcp-look-full-add-v16m:hover,
+#looks .btn.build-bundle-review.primary.bcp-look-full-add-v16m:focus-visible,
+.model-page .btn.build-bundle-review.primary.bcp-look-full-add-v16m:hover,
+.model-page .btn.build-bundle-review.primary.bcp-look-full-add-v16m:focus-visible{
+  background:linear-gradient(135deg,rgba(146,92,255,.66),rgba(228,212,255,.34),rgba(255,255,255,.13)) !important;
+  border-color:rgba(242,232,255,.82) !important;
+  box-shadow:0 0 0 1px rgba(255,255,255,.12) inset,0 16px 40px rgba(125,82,255,.34),0 0 34px rgba(198,164,255,.18) !important;
+}
+#looks .btn.build-bundle-review.secondary.bcp-look-more-link-v16m,
+.model-page .btn.build-bundle-review.secondary.bcp-look-more-link-v16m{display:none!important;}
+/* END V16O */
+
+/* V16Q — clean full-look CTA icon alignment
+   Scope: full-look anchor/final CTAs only. Removes decorative pseudo icons that created desktop misalignment.
+   Safe: CSS only; no HTML/JS/cart/Stripe/Worker/SKU/price changes. */
+.model-page #looks .btn.build-bundle-review.primary.bcp-look-scroll-link-v16m,
+.model-page #looks .btn.build-bundle-review.primary.bcp-look-full-add-v16m,
+.model-page .bcp-look-bottom-actions-v16m .btn.build-bundle-review.primary.bcp-look-full-add-v16m{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:0 !important;
+  padding-left:18px !important;
+  padding-right:18px !important;
+  text-align:center !important;
+  line-height:1.12 !important;
+  white-space:normal !important;
+}
+.model-page #looks .btn.build-bundle-review.primary.bcp-look-scroll-link-v16m::before,
+.model-page #looks .btn.build-bundle-review.primary.bcp-look-scroll-link-v16m::after,
+.model-page #looks .btn.build-bundle-review.primary.bcp-look-full-add-v16m::before,
+.model-page #looks .btn.build-bundle-review.primary.bcp-look-full-add-v16m::after,
+.model-page .bcp-look-bottom-actions-v16m .btn.build-bundle-review.primary.bcp-look-full-add-v16m::before,
+.model-page .bcp-look-bottom-actions-v16m .btn.build-bundle-review.primary.bcp-look-full-add-v16m::after{
+  display:none !important;
+  content:none !important;
+  margin:0 !important;
+}
+@media(min-width:981px){
+  .model-page #looks .btn.build-bundle-review.primary.bcp-look-scroll-link-v16m,
+  .model-page #looks .btn.build-bundle-review.primary.bcp-look-full-add-v16m,
+  .model-page .bcp-look-bottom-actions-v16m .btn.build-bundle-review.primary.bcp-look-full-add-v16m{
+    min-height:54px !important;
+    letter-spacing:.115em !important;
+  }
+}
+@media(max-width:980px){
+  .model-page #looks .btn.build-bundle-review.primary.bcp-look-scroll-link-v16m,
+  .model-page #looks .btn.build-bundle-review.primary.bcp-look-full-add-v16m,
+  .model-page .bcp-look-bottom-actions-v16m .btn.build-bundle-review.primary.bcp-look-full-add-v16m{
+    min-height:48px !important;
+    padding-left:14px !important;
+    padding-right:14px !important;
+    letter-spacing:.075em !important;
+  }
+}
+/* END V16Q */
+
+/* V16R — desktop look MP4 banner height trim
+   Scope: desktop only. Reduces the look MP4 banner height by roughly 25% while preserving mobile / responsive / landscape rules.
+   Safe: CSS only; no HTML/JS/cart/Stripe/Worker/SKU/price changes. */
+@media (min-width:981px){
+  .model-page .bcp-look-gallery-banner-v16n,
+  .model-page .bcp-browse-look-banner-v16n:target{
+    min-height:126px !important;
+    max-height:178px !important;
+    margin-top:10px !important;
+    margin-bottom:12px !important;
+  }
+  .model-page .bcp-look-gallery-banner-v16n .bcp-look-sticky-video-v16m,
+  .model-page .bcp-browse-look-banner-v16n:target .bcp-look-sticky-video-v16m{
+    min-height:126px !important;
+    max-height:178px !important;
+    height:100% !important;
+    object-fit:contain !important;
+  }
+  .model-page .bcp-look-gallery-banner-v16n .bcp-look-sticky-copy-v16m,
+  .model-page .bcp-browse-look-banner-v16n:target .bcp-look-sticky-copy-v16m{
+    padding:13px 16px !important;
+  }
+  .model-page .bcp-look-gallery-banner-v16n .bcp-look-sticky-copy-v16m strong,
+  .model-page .bcp-browse-look-banner-v16n:target .bcp-look-sticky-copy-v16m strong{
+    font-size:clamp(1rem,1.55vw,1.32rem) !important;
+    line-height:1.02 !important;
+  }
+  .model-page .bcp-look-gallery-banner-v16n .bcp-look-sticky-copy-v16m small,
+  .model-page .bcp-browse-look-banner-v16n:target .bcp-look-sticky-copy-v16m small{
+    font-size:.78rem !important;
+    line-height:1.25 !important;
+  }
+}
+/* END V16R */
