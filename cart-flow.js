@@ -1404,7 +1404,7 @@ async function createStripeCheckout(lines, formData) {
       '<div class="cart-body" data-cart-body></div>',
       '<div class="cart-footer">',
       '<div class="cart-pricing-block" data-cart-pricing><div class="cart-total-row"><span>Total</span><strong>0 €</strong></div></div>',
-      '<div class="cart-note"><strong>Ready to pay securely.</strong><br>Fill your details once, then continue with secure Stripe card checkout. Delivery after payment: 10–15 business days. Local import duties/taxes may apply.</div>',
+      '<div class="cart-note bcp-cart-note-v16i"><strong>Selected parts ready.</strong><br>Start with the pieces you want now, pay securely with Stripe, and complete the build later.</div>',
       '<a class="cart-checkout-btn disabled" data-cart-checkout href="./cart-request.html">Continue to secure payment</a>',
       '<button type="button" class="cart-share-btn" data-cart-share>Copy cart link</button>',
       '<div class="cart-secondary-actions">',
@@ -1647,3 +1647,182 @@ window.BendagoCart = {
     updateStripeCheckoutButtonLabel();
   });
 })();
+
+
+/* BENDAGO V16I — Sticky Look Companion + contextual cart
+   Purpose: keep the selected look visually active from See full look to product pages, cart and checkout. No Stripe, SKU, price or Worker logic changed. */
+(function() {
+  var LOOK_KEY = 'bcp_active_look_v16i';
+  var LOOKS = {
+  "strong-pure-bob": {
+    "key": "strong-pure-bob",
+    "title": "Strong Pure Bob",
+    "video": "strong-pure-bob-look-autoplay.mp4",
+    "page": "benda-napoleon-125-250-custom-parts.html",
+    "anchor": "look-builder-strong-pure-bob",
+    "kicker": "Clean bobber direction"
+  },
+  "headlight-fairing": {
+    "key": "headlight-fairing",
+    "title": "Headlight Fairing Build",
+    "video": "headlight-fairing-look-autoplay-v2.mp4",
+    "page": "benda-napoleon-125-250-custom-parts.html",
+    "anchor": "look-builder-headlight-fairing",
+    "kicker": "Front identity first"
+  },
+  "brutal-bob": {
+    "key": "brutal-bob",
+    "title": "Brutal Bob Build",
+    "video": "brutal-bob-look-autoplay.mp4",
+    "page": "benda-napoleon-125-250-custom-parts.html",
+    "anchor": "look-builder-brutal-bob",
+    "kicker": "Darker, lower, meaner"
+  },
+  "blackout-predator": {
+    "key": "blackout-predator",
+    "title": "Blackout Predator",
+    "video": "blackout-predator-look-autoplay.mp4",
+    "page": "benda-napoleon-125-250-custom-parts.html",
+    "anchor": "look-builder-blackout-predator",
+    "kicker": "Full dark visual impact"
+  },
+  "midnight-hunter": {
+    "key": "midnight-hunter",
+    "title": "Midnight Hunter Build",
+    "video": "napoleon-450-500-selected-builds.mp4",
+    "page": "benda-napoleon-500-custom-parts.html",
+    "anchor": "look-builder-midnight-hunter",
+    "kicker": "Napoleon 450/500 dark custom direction"
+  },
+  "shadow-beast-v4": {
+    "key": "shadow-beast-v4",
+    "title": "Shadow Beast V4",
+    "video": "shadow-beast-v4-look.mp4",
+    "page": "benda-dark-flag-v4-custom-parts.html",
+    "anchor": "look-builder-shadow-beast-v4",
+    "kicker": "Dark Flag V4 full custom direction"
+  }
+};
+  function now() { return Date.now ? Date.now() : new Date().getTime(); }
+  function safeJson(raw) { try { return raw ? JSON.parse(raw) : null; } catch(e) { return null; } }
+  function normalizeKey(key) { key = String(key || '').trim(); return LOOKS[key] ? key : ''; }
+  function saveLook(key, mode) {
+    key = normalizeKey(key); if (!key) return null;
+    var data = Object.assign({}, LOOKS[key]);
+    data.mode = mode || data.mode || 'partial';
+    data.saved_at = now();
+    try { sessionStorage.setItem(LOOK_KEY, JSON.stringify(data)); } catch(e) {}
+    window.BCP_ACTIVE_LOOK_V16I = data;
+    renderCompanion(data);
+    renderCartLookContext(data);
+    return data;
+  }
+  function readLook() {
+    var fallback = window.BCP_ACTIVE_LOOK_V16I;
+    if (fallback && normalizeKey(fallback.key) && now() - Number(fallback.saved_at || 0) <= 6 * 60 * 60 * 1000) return fallback;
+    var data = safeJson((function() { try { return sessionStorage.getItem(LOOK_KEY); } catch(e) { return ''; } })());
+    if (!data || !normalizeKey(data.key)) return null;
+    if (now() - Number(data.saved_at || 0) > 6 * 60 * 60 * 1000) return null;
+    window.BCP_ACTIVE_LOOK_V16I = data;
+    return data;
+  }
+  function qsLook() { try { return new URLSearchParams(window.location.search).get('look') || ''; } catch(e) { return ''; } }
+  function ensureStyles() {
+    if (document.getElementById('bcp-v16i-sticky-look-styles')) return;
+    var style = document.createElement('style');
+    style.id = 'bcp-v16i-sticky-look-styles';
+    style.textContent = `
+      .bcp-sticky-look-companion-v16i{position:sticky;top:40px;z-index:1180;background:linear-gradient(180deg,rgba(8,9,12,.96),rgba(8,9,12,.90));border-bottom:1px solid rgba(217,184,117,.18);box-shadow:0 12px 34px rgba(0,0,0,.32);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+      body.order-body .bcp-sticky-look-companion-v16i{top:62px;z-index:1190}
+      .bcp-sticky-look-inner-v16i{width:min(1180px,calc(100% - 24px));margin:0 auto;display:grid;grid-template-columns:86px minmax(0,1fr) auto;gap:12px;align-items:center;padding:8px 0}
+      .bcp-sticky-look-media-v16i{width:86px;height:66px;border-radius:14px;overflow:hidden;background:#050608;border:1px solid rgba(217,184,117,.22)}
+      .bcp-sticky-look-media-v16i video{width:100%;height:100%;object-fit:cover;display:block}
+      .bcp-sticky-look-copy-v16i{min-width:0}
+      .bcp-sticky-look-copy-v16i span{display:block;color:#d9b875;font-size:10px;font-weight:950;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+      .bcp-sticky-look-copy-v16i strong{display:block;color:#fff;font-size:15px;line-height:1.08;margin:3px 0 2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+      .bcp-sticky-look-copy-v16i p{margin:0;color:rgba(246,241,232,.68);font-size:12px;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+      .bcp-sticky-look-back-v16i{display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:0 12px;border-radius:999px;border:1px solid rgba(217,184,117,.30);background:rgba(217,184,117,.10);color:#f7e1ad;text-decoration:none;font-size:12px;font-weight:950;white-space:nowrap}
+      body.cart-drawer-open .bcp-sticky-look-companion-v16i{z-index:60;filter:saturate(.75);}
+      @media(max-width:640px){.bcp-sticky-look-companion-v16i{top:40px}body.order-body .bcp-sticky-look-companion-v16i{top:62px}.bcp-sticky-look-inner-v16i{grid-template-columns:72px minmax(0,1fr);gap:9px;width:calc(100% - 16px);padding:7px 0}.bcp-sticky-look-media-v16i{width:72px;height:54px;border-radius:12px}.bcp-sticky-look-copy-v16i span{font-size:8.5px;letter-spacing:.10em}.bcp-sticky-look-copy-v16i strong{font-size:13px}.bcp-sticky-look-copy-v16i p{font-size:10.5px}.bcp-sticky-look-back-v16i{grid-column:1/-1;min-height:30px;font-size:11px}}
+      @media(orientation:landscape) and (max-height:480px){.bcp-sticky-look-inner-v16i{grid-template-columns:64px minmax(0,1fr) auto;padding:5px 0}.bcp-sticky-look-media-v16i{width:64px;height:42px}.bcp-sticky-look-copy-v16i p{display:none}.bcp-sticky-look-back-v16i{min-height:30px}}
+    `;
+    document.head.appendChild(style);
+  }
+  function backHref(data) { return './' + (data.page || 'benda-napoleon-125-250-custom-parts.html') + '#' + (data.anchor || 'looks'); }
+  function renderCompanion(data) {
+    data = data || readLook(); if (!data) return;
+    ensureStyles();
+    var existing = document.getElementById('bcpStickyLookCompanionV16I');
+    if (!existing) {
+      existing = document.createElement('section');
+      existing.id = 'bcpStickyLookCompanionV16I';
+      existing.className = 'bcp-sticky-look-companion-v16i';
+      existing.setAttribute('aria-label','Selected look companion');
+      var header = document.querySelector('.order-header') || document.querySelector('.site-header');
+      if (header && header.parentNode) header.insertAdjacentElement('afterend', existing);
+      else document.body.insertBefore(existing, document.body.firstChild);
+    }
+    existing.innerHTML = '<div class="bcp-sticky-look-inner-v16i">' +
+      '<div class="bcp-sticky-look-media-v16i"><video autoplay loop muted playsinline preload="metadata" src="' + escapeAttr(data.video) + '"></video></div>' +
+      '<div class="bcp-sticky-look-copy-v16i"><span>' + escapeHtml(data.kicker || 'Selected Benda look') + '</span><strong>' + escapeHtml(data.title || 'Selected look') + '</strong><p>Keep the look in sight. Start with selected parts now, complete it later.</p></div>' +
+      '<a class="bcp-sticky-look-back-v16i" href="' + escapeAttr(backHref(data)) + '" data-bcp-look-key="' + escapeAttr(data.key) + '">Back to look</a>' +
+      '</div>';
+    document.body.classList.add('bcp-look-context-active-v16i');
+  }
+  function renderCartLookContext(data) {
+    data = data || readLook();
+    var body = document.querySelector('[data-cart-body]');
+    if (!body) return;
+    var old = body.querySelector('.bcp-cart-look-context-v16i');
+    if (old) old.remove();
+    if (!data) return;
+    var div = document.createElement('div');
+    div.className = 'bcp-cart-look-context-v16i';
+    var isComplete = data.mode === 'complete';
+    div.innerHTML = '<span>' + (isComplete ? 'Full look selected' : 'You’re starting this look') + '</span><strong>' + escapeHtml(data.title || 'Selected look') + '</strong><p>' + (isComplete ? 'The complete look is in your cart. Launch Access 5% appears on eligible complete builds.' : 'Selected parts for your Benda look. Pay for these now and complete the build later.') + '</p>';
+    body.insertBefore(div, body.firstChild);
+    var note = document.querySelector('.bcp-cart-note-v16i');
+    if (note) note.innerHTML = isComplete ? '<strong>Full look ready.</strong><br>Review the complete selection, then continue with secure Stripe checkout.' : '<strong>Start the look now.</strong><br>Secure Stripe checkout locks only the parts you choose today. You can complete the build later.';
+  }
+  function appendLookToUrl(url, key) {
+    key = normalizeKey(key); if (!key || !url || url.indexOf('look=') !== -1 || url.indexOf('mailto:') === 0 || url.indexOf('tel:') === 0 || url.charAt(0) === '#') return url;
+    if (/^https?:/i.test(url) && url.indexOf(location.hostname) === -1) return url;
+    var hash = '';
+    var idx = url.indexOf('#');
+    if (idx >= 0) { hash = url.slice(idx); url = url.slice(0, idx); }
+    return url + (url.indexOf('?') >= 0 ? '&' : '?') + 'look=' + encodeURIComponent(key) + hash;
+  }
+  function activeKeyFromTarget(target) {
+    var n = target && target.closest && target.closest('[data-bcp-look-key]');
+    return n ? normalizeKey(n.getAttribute('data-bcp-look-key')) : '';
+  }
+  function activeModeFromTarget(target) {
+    var n = target && target.closest && target.closest('[data-bcp-look-mode]');
+    if (n) return n.getAttribute('data-bcp-look-mode') || 'partial';
+    var bundle = target && target.closest && target.closest('[data-add-bundle]');
+    if (bundle && /-complete$/.test(bundle.getAttribute('data-add-bundle') || '')) return 'complete';
+    return 'partial';
+  }
+  function escapeHtml(value) { return String(value || '').replace(/[&<>"]/g, function(c) { return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  function escapeAttr(value) { return escapeHtml(value).replace(/'/g, '&#39;'); }
+  document.addEventListener('click', function(event) {
+    var key = activeKeyFromTarget(event.target);
+    if (key) saveLook(key, activeModeFromTarget(event.target));
+    var link = event.target.closest && event.target.closest('a[href]');
+    if (link) {
+      var current = key || (readLook() && readLook().key);
+      if (current && /order-.*\.html/.test(link.getAttribute('href') || '')) {
+        link.setAttribute('href', appendLookToUrl(link.getAttribute('href'), current));
+      }
+    }
+  }, true);
+  document.addEventListener('DOMContentLoaded', function() {
+    var q = normalizeKey(qsLook());
+    var data = q ? saveLook(q, 'partial') : readLook();
+    if (data) renderCompanion(data);
+    var observer = new MutationObserver(function() { renderCartLookContext(readLook()); });
+    observer.observe(document.body, { childList:true, subtree:true });
+    renderCartLookContext(data);
+  });
+})();
+/* END BENDAGO V16I */
