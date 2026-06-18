@@ -6674,54 +6674,212 @@ body:has(.model-start#looks) .model-start#looks .section-head .swipe-hint {
   }
 }
 
-/* V16NZZZZ1 — Napoleon 450/500 responsive Browse sticky 40vh full-bleed
-   Scope: model-500 responsive only / Browse all individual upgrades only. PC untouched. */
+
+
+/* BENDAGO V17 — 125 responsive real reel card fix */
+/* V17 — Napoleon 125/250 responsive Choose your build real reel cards.
+   Scope: responsive 125/250 only. PC, sticky sections, cart, Stripe, Worker, SKU and prices untouched.
+   Fix: neutralizes the old mobile flex-basis carousel height that was compressing look cards. */
 @media (max-width: 900px){
-  html body.model-page.model-500 section#shop-part-by-part .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y{
-    position: sticky !important;
-    top: 58px !important;
-    z-index: 12 !important;
-    display: block !important;
-    width: min(100%, calc(100vw - 32px)) !important;
-    max-width: min(100%, calc(100vw - 32px)) !important;
-    height: 40vh !important;
-    min-height: 270px !important;
-    max-height: 360px !important;
-    aspect-ratio: auto !important;
-    margin: 10px auto 18px !important;
-    padding: 0 !important;
-    overflow: hidden !important;
-    border-radius: 24px !important;
-    background: #050505 !important;
-    border: 1px solid rgba(226,189,114,.20) !important;
-    box-shadow: 0 20px 58px rgba(0,0,0,.52), 0 0 0 1px rgba(226,189,114,.12) !important;
+  html body.model-page.model-125 section#looks .section-head .swipe-hint,
+  html body.model-page.model-125 section#looks .swipe-hint{
+    display:none !important;
+    visibility:hidden !important;
+    opacity:0 !important;
+    pointer-events:none !important;
   }
 
-  html body.model-page.model-500 section#shop-part-by-part .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y .bcp-look-sticky-video-v16m,
-  html body.model-page.model-500 section#shop-part-by-part .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y video{
-    position: absolute !important;
-    inset: 0 !important;
-    display: block !important;
-    width: 100% !important;
-    height: 100% !important;
-    min-width: 100% !important;
-    min-height: 100% !important;
-    max-width: none !important;
-    max-height: none !important;
-    object-fit: cover !important;
-    object-position: center center !important;
-    background: #050505 !important;
+  html body.model-page.model-125 section#looks .section-head::after{
+    content:none !important;
+    display:none !important;
   }
 
-  html body.model-page.model-500 section#shop-part-by-part .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y .bcp-look-sticky-copy-v16m{
-    display: none !important;
+  html body.model-page.model-125 section#looks .look-grid{
+    display:grid !important;
+    grid-template-columns:1fr !important;
+    grid-auto-flow:row !important;
+    grid-auto-rows:auto !important;
+    gap:24px !important;
+    width:100% !important;
+    max-width:100% !important;
+    padding:0 !important;
+    margin:0 !important;
+    overflow:visible !important;
+    overflow-x:visible !important;
+    scroll-snap-type:none !important;
+    overscroll-behavior-x:auto !important;
+    -webkit-overflow-scrolling:auto !important;
+  }
+
+  html body.model-page.model-125 section#looks article.look-card,
+  html body.model-page.model-125 #looks .look-card,
+  html body.model-page.model-125 #looks .look-grid > .look-card{
+    position:relative !important;
+    display:block !important;
+    width:100% !important;
+    max-width:100% !important;
+    height:auto !important;
+    min-height:0 !important;
+    max-height:none !important;
+    flex:none !important;
+    flex-basis:auto !important;
+    scroll-snap-align:none !important;
+    aspect-ratio:auto !important;
+    padding:0 !important;
+    margin:0 !important;
+    overflow:hidden !important;
+    border-radius:28px !important;
+    background:#050505 !important;
+    border:1px solid rgba(246,196,49,.20) !important;
+    box-shadow:0 20px 46px rgba(0,0,0,.48) !important;
+  }
+
+  html body.model-page.model-125 section#looks article.look-card > .look-media,
+  html body.model-page.model-125 section#looks article.look-card > .look-media-video,
+  html body.model-page.model-125 section#looks article.look-card > .look-media-link{
+    position:relative !important;
+    display:block !important;
+    width:100% !important;
+    max-width:100% !important;
+    height:auto !important;
+    min-height:0 !important;
+    max-height:none !important;
+    flex:none !important;
+    flex-basis:auto !important;
+    aspect-ratio:9 / 16 !important;
+    padding:0 !important;
+    margin:0 !important;
+    overflow:hidden !important;
+    border-radius:28px !important;
+    background:#050505 !important;
+    line-height:0 !important;
+  }
+
+  html body.model-page.model-125 section#looks article.look-card > .look-media::before,
+  html body.model-page.model-125 section#looks article.look-card > .look-media-video::before,
+  html body.model-page.model-125 section#looks article.look-card > .look-media-link::before{
+    content:"" !important;
+    display:block !important;
+    width:100% !important;
+    padding-top:177.7778% !important;
+  }
+
+  html body.model-page.model-125 section#looks article.look-card > .look-media video,
+  html body.model-page.model-125 section#looks article.look-card > .look-media .look-video,
+  html body.model-page.model-125 section#looks article.look-card > .look-media-video video,
+  html body.model-page.model-125 section#looks article.look-card > .look-media-video .look-video,
+  html body.model-page.model-125 section#looks article.look-card > .look-media-link video,
+  html body.model-page.model-125 section#looks article.look-card > .look-media-link .look-video{
+    position:absolute !important;
+    inset:0 !important;
+    display:block !important;
+    width:100% !important;
+    height:100% !important;
+    min-width:100% !important;
+    min-height:100% !important;
+    max-width:none !important;
+    max-height:none !important;
+    object-fit:cover !important;
+    object-position:center center !important;
+    border-radius:0 !important;
+    background:#050505 !important;
+  }
+
+  html body.model-page.model-125 section#looks article.look-card > .look-body{
+    position:absolute !important;
+    left:0 !important;
+    right:0 !important;
+    bottom:0 !important;
+    z-index:12 !important;
+    display:flex !important;
+    flex-direction:column !important;
+    justify-content:flex-end !important;
+    gap:8px !important;
+    min-height:42% !important;
+    width:auto !important;
+    max-width:none !important;
+    padding:104px 16px 16px !important;
+    margin:0 !important;
+    border-radius:0 0 28px 28px !important;
+    background:linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.48) 34%, rgba(0,0,0,.90) 100%) !important;
+    pointer-events:none !important;
+  }
+
+  html body.model-page.model-125 section#looks article.look-card .look-body h3{
+    margin:0 !important;
+    color:#fff7db !important;
+    font-size:clamp(1.35rem, 6.2vw, 1.95rem) !important;
+    line-height:1.02 !important;
+    letter-spacing:-.035em !important;
+    text-shadow:0 2px 18px rgba(0,0,0,.72) !important;
+  }
+
+  html body.model-page.model-125 section#looks article.look-card .look-body .tagline{
+    display:block !important;
+    margin:0 0 3px !important;
+    color:rgba(255,244,212,.82) !important;
+    font-size:.82rem !important;
+    line-height:1.2 !important;
+    font-weight:850 !important;
+    letter-spacing:.025em !important;
+  }
+
+  html body.model-page.model-125 section#looks article.look-card .look-body p,
+  html body.model-page.model-125 section#looks article.look-card .look-body .parts-list,
+  html body.model-page.model-125 section#looks article.look-card .look-body .bcp-look-anchor-note-v16m,
+  html body.model-page.model-125 section#looks article.look-card .look-body .build-bundle-added{
+    display:none !important;
+  }
+
+  html body.model-page.model-125 section#looks article.look-card .look-bundle-cta,
+  html body.model-page.model-125 section#looks article.look-card .build-bundle-cro-v46{
+    display:block !important;
+    margin:6px 0 0 !important;
+    padding:0 !important;
+    border:0 !important;
+    background:transparent !important;
+    box-shadow:none !important;
+    pointer-events:auto !important;
+  }
+
+  html body.model-page.model-125 section#looks article.look-card .build-bundle-actions{
+    display:flex !important;
+    flex-direction:column !important;
+    gap:9px !important;
+    width:100% !important;
+    margin:0 !important;
+  }
+
+  html body.model-page.model-125 section#looks article.look-card .build-bundle-actions .btn{
+    width:100% !important;
+    min-height:46px !important;
+    border-radius:999px !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    padding:0 16px !important;
+    font-size:.82rem !important;
+    line-height:1 !important;
+    font-weight:950 !important;
+    letter-spacing:.015em !important;
+    text-transform:none !important;
+    backdrop-filter:blur(18px) saturate(1.18) !important;
+    -webkit-backdrop-filter:blur(18px) saturate(1.18) !important;
+  }
+
+  html body.model-page.model-125 section#looks article.look-card .build-bundle-actions .btn.primary{
+    color:#fff8df !important;
+    border:1px solid rgba(157,255,196,.42) !important;
+    background:linear-gradient(135deg, rgba(26,172,92,.54), rgba(12,91,52,.42)) !important;
+    box-shadow:0 16px 34px rgba(0,0,0,.38), inset 0 1px 0 rgba(255,255,255,.22) !important;
+  }
+
+  html body.model-page.model-125 section#looks article.look-card .build-bundle-actions .btn.secondary{
+    color:#ffe8ad !important;
+    border:1px solid rgba(246,196,49,.34) !important;
+    background:linear-gradient(135deg, rgba(255,217,123,.18), rgba(255,255,255,.05)) !important;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.18) !important;
   }
 }
+/* END BENDAGO V17 125 REAL REEL CARD FIX */
 
-@media (max-width: 420px){
-  html body.model-page.model-500 section#shop-part-by-part .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y{
-    height: 40vh !important;
-    min-height: 245px !important;
-    max-height: 330px !important;
-  }
-}
