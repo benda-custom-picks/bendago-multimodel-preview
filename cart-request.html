@@ -731,6 +731,93 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .stripe-checkout-main-btn{min-height:49px !important;font-size:.92rem !important;}
 }
 
+
+
+/* BENDAGO V16W — premium Stripe reassurance card
+   Scope: checkout visual polish only. No form, terms, Stripe button ID or checkout logic changed. */
+@media (min-width: 901px){
+  .checkout-trust-panel.checkout-trust-panel-v105{
+    gap:10px !important;
+    padding:13px !important;
+    border-radius:22px !important;
+    border-color:rgba(226,189,114,.20) !important;
+    background:
+      linear-gradient(180deg,rgba(255,255,255,.038),rgba(255,255,255,.012)),
+      rgba(8,9,13,.88) !important;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.055),0 18px 44px rgba(0,0,0,.34) !important;
+  }
+  .checkout-trust-panel-v105 .checkout-trust-item{
+    min-height:82px !important;
+    display:flex !important;
+    flex-direction:column !important;
+    justify-content:center !important;
+    border-radius:18px !important;
+    border:1px solid rgba(226,189,114,.16) !important;
+    background:linear-gradient(180deg,rgba(255,255,255,.040),rgba(255,255,255,.012)),rgba(9,11,15,.84) !important;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.045) !important;
+  }
+  .checkout-trust-panel-v105 .checkout-trust-item:first-child{
+    position:relative !important;
+    padding:18px 18px 18px 84px !important;
+    border-color:rgba(190,152,255,.28) !important;
+    background:
+      radial-gradient(circle at 16% 50%,rgba(190,152,255,.16),transparent 34%),
+      linear-gradient(180deg,rgba(255,255,255,.050),rgba(255,255,255,.014)),
+      rgba(9,10,16,.92) !important;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.070),0 16px 38px rgba(0,0,0,.28),0 0 24px rgba(190,152,255,.055) !important;
+  }
+  .checkout-trust-panel-v105 .checkout-trust-item:first-child::before{
+    content:"" !important;
+    position:absolute !important;
+    left:22px !important;
+    top:50% !important;
+    width:42px !important;
+    height:42px !important;
+    transform:translateY(-50%) !important;
+    border-radius:50% !important;
+    border:1px solid rgba(226,189,114,.32) !important;
+    background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.014)),rgba(7,8,12,.86) !important;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.070),0 0 22px rgba(226,189,114,.075) !important;
+  }
+  .checkout-trust-panel-v105 .checkout-trust-item:first-child::after{
+    content:"" !important;
+    position:absolute !important;
+    left:38px !important;
+    top:50% !important;
+    width:9px !important;
+    height:9px !important;
+    transform:translateY(-50%) rotate(45deg) !important;
+    border:1px solid rgba(226,189,114,.92) !important;
+    box-shadow:0 0 14px rgba(226,189,114,.22) !important;
+  }
+  .checkout-trust-panel-v105 .checkout-trust-item:first-child strong{
+    display:flex !important;
+    align-items:center !important;
+    gap:10px !important;
+    flex-wrap:wrap !important;
+    margin-bottom:5px !important;
+    font-size:1.02rem !important;
+    letter-spacing:.01em !important;
+  }
+  .checkout-trust-panel-v105 .checkout-trust-item:first-child strong::after{
+    content:"Stripe" !important;
+    display:inline-flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    min-height:24px !important;
+    padding:0 14px !important;
+    border-radius:999px !important;
+    border:1px solid rgba(190,152,255,.42) !important;
+    background:linear-gradient(180deg,rgba(190,152,255,.24),rgba(72,55,126,.30)),rgba(10,10,16,.90) !important;
+    color:#f4efff !important;
+    font-size:.74rem !important;
+    font-weight:950 !important;
+    letter-spacing:.08em !important;
+    text-transform:none !important;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 0 20px rgba(190,152,255,.10) !important;
+  }
+}
+/* END V16W */
 </style>
 
 <!-- BENDAGO V99 SEO social cards -->

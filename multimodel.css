@@ -4138,7 +4138,7 @@ body.model-page .cart-floating-btn,
 
 
 /* BENDAGO V16V — CTA wording + Louis Vuitton desktop CTA alignment lock
-   Scope: model-page product cards only. Replaces option wording in HTML; CSS aligns card CTAs in desktop grids.
+   Scope: model-page product cards only. Replaces visible Choose options wording in HTML; CSS aligns card CTAs in desktop grids.
    Safe: no add-to-cart JS, no order-flow, no Worker, no Stripe, no SKU, no price changes. */
 @media (min-width: 901px){
   .model-page #shop-part-by-part .product-card .body,
@@ -4219,3 +4219,376 @@ body.model-page .cart-floating-btn,
   }
 }
 /* END BENDAGO V16V */
+
+
+/* BENDAGO V16W — premium header cart + final product hover veil kill
+   Scope: CSS only. Fixes cheap CART pill and removes remaining yellow/green card veil.
+   Safe: no HTML product structure, no cart-flow JS, no order-flow, no Worker, no Stripe/SKU/price logic changed. */
+.model-page .cart-pill{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:10px !important;
+  min-height:42px !important;
+  min-width:128px !important;
+  padding:0 14px 0 17px !important;
+  border-radius:999px !important;
+  border:1px solid rgba(226,189,114,.34) !important;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.070),rgba(255,255,255,.018)),
+    rgba(5,6,8,.86) !important;
+  color:rgba(248,245,238,.94) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.070),
+    inset 0 -12px 24px rgba(0,0,0,.28),
+    0 10px 28px rgba(0,0,0,.34),
+    0 0 0 1px rgba(226,189,114,.045) !important;
+  font-size:10px !important;
+  font-weight:950 !important;
+  letter-spacing:.18em !important;
+  text-transform:uppercase !important;
+}
+.model-page .cart-pill::before{
+  content:"" !important;
+  width:7px !important;
+  height:7px !important;
+  flex:0 0 7px !important;
+  border:1px solid rgba(226,189,114,.88) !important;
+  transform:rotate(45deg) !important;
+  border-radius:1px !important;
+  box-shadow:0 0 13px rgba(226,189,114,.22) !important;
+}
+.model-page .cart-pill span{
+  display:inline-grid !important;
+  place-items:center !important;
+  min-width:31px !important;
+  height:31px !important;
+  margin-left:2px !important;
+  padding:0 8px !important;
+  border-radius:999px !important;
+  background:
+    radial-gradient(circle at 38% 28%,#ffe7a3 0,#d9b94f 48%,#9f7927 100%) !important;
+  color:#080704 !important;
+  border:1px solid rgba(255,237,176,.58) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.42),
+    0 0 20px rgba(217,185,79,.18) !important;
+  font-size:11px !important;
+  font-weight:1000 !important;
+  letter-spacing:0 !important;
+}
+.model-page .cart-pill:hover{
+  border-color:rgba(226,189,114,.54) !important;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.092),rgba(255,255,255,.024)),
+    rgba(7,8,11,.92) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.09),
+    0 12px 32px rgba(0,0,0,.38),
+    0 0 20px rgba(226,189,114,.08) !important;
+}
+
+/* hard kill every decorative sweep/veil on product cards, on desktop and touch devices */
+.model-page .product-card::before,
+.model-page .product-card::after,
+.model-page .real-product-card::before,
+.model-page .real-product-card::after,
+.model-page #shop-part-by-part .product-card::before,
+.model-page #shop-part-by-part .product-card::after,
+.model-page .bcp-look-product-grid-v16m .product-card::before,
+.model-page .bcp-look-product-grid-v16m .product-card::after,
+.model-page .product-card .thumb::before,
+.model-page .product-card .thumb::after,
+.model-page .real-product-card .thumb::before,
+.model-page .real-product-card .thumb::after{
+  content:none !important;
+  display:none !important;
+  opacity:0 !important;
+  visibility:hidden !important;
+  background:none !important;
+  box-shadow:none !important;
+  transform:none !important;
+  mix-blend-mode:normal !important;
+}
+.model-page .product-card,
+.model-page .real-product-card,
+.model-page #shop-part-by-part .product-card,
+.model-page .bcp-look-product-grid-v16m .product-card{
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.046),rgba(255,255,255,.014)),
+    rgba(9,10,12,.92) !important;
+  overflow:hidden !important;
+}
+.model-page .product-card:hover,
+.model-page .real-product-card:hover,
+.model-page #shop-part-by-part .product-card:hover,
+.model-page .bcp-look-product-grid-v16m .product-card:hover{
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.056),rgba(255,255,255,.016)),
+    rgba(10,11,13,.95) !important;
+  border-color:rgba(226,189,114,.50) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.075),
+    0 20px 52px rgba(0,0,0,.42),
+    0 0 18px rgba(226,189,114,.075) !important;
+}
+.model-page .product-card .thumb,
+.model-page .real-product-card .thumb{
+  isolation:auto !important;
+}
+
+@media(max-width:900px){
+  .model-page .cart-pill{
+    min-height:32px !important;
+    min-width:76px !important;
+    padding:0 8px 0 10px !important;
+    gap:5px !important;
+    font-size:9px !important;
+    letter-spacing:.10em !important;
+  }
+  .model-page .cart-pill::before{width:5px !important;height:5px !important;flex-basis:5px !important;}
+  .model-page .cart-pill span{min-width:20px !important;height:20px !important;padding:0 6px !important;font-size:10px !important;}
+}
+/* END V16W */
+
+/* BENDAGO V16X — look-card hover veil kill + yellow glass product CTAs
+   Scope: model pages only. Removes the remaining sweep/veil on LOOK cards and turns product-gallery Add to cart CTAs into a premium translucent champagne/yellow glass style.
+   Safe: no HTML structure, no cart-flow logic, no order-flow, no Worker, no Stripe/SKU/price logic changed. */
+.model-page .look-card::before,
+.model-page .look-card::after,
+.model-page #looks .look-card::before,
+.model-page #looks .look-card::after,
+.model-page .look-card .look-media::before,
+.model-page .look-card .look-media::after,
+.model-page .look-card .look-media-video::before,
+.model-page .look-card .look-media-video::after{
+  content:none !important;
+  display:none !important;
+  opacity:0 !important;
+  visibility:hidden !important;
+  background:none !important;
+  box-shadow:none !important;
+  transform:none !important;
+  mix-blend-mode:normal !important;
+}
+.model-page .look-card,
+.model-page #looks .look-card{
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.044),rgba(255,255,255,.013)),
+    rgba(8,9,12,.92) !important;
+  overflow:hidden !important;
+}
+@media (hover:hover) and (pointer:fine){
+  .model-page .look-card:hover,
+  .model-page #looks .look-card:hover{
+    background:
+      linear-gradient(180deg,rgba(255,255,255,.054),rgba(255,255,255,.015)),
+      rgba(9,10,13,.95) !important;
+    border-color:rgba(226,189,114,.48) !important;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.075),
+      0 20px 52px rgba(0,0,0,.42),
+      0 0 18px rgba(226,189,114,.070) !important;
+  }
+}
+
+/* Product gallery CTAs: champagne/yellow glass, not green. Full-look CTAs remain violet via their dedicated selector. */
+.model-page #shop-part-by-part .product-card .add-preview,
+.model-page #shop-part-by-part .real-product-card .add-preview,
+.model-page .bcp-look-product-grid-v16m .product-card .add-preview,
+.model-page .bcp-look-product-grid-v16m .real-product-card .add-preview,
+.model-page .product-card .add-preview,
+.model-page .real-product-card .add-preview{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  text-align:center !important;
+  min-height:48px !important;
+  border-radius:16px !important;
+  border:1px solid rgba(245,215,143,.58) !important;
+  background:
+    linear-gradient(180deg,rgba(255,246,196,.23),rgba(255,230,148,.075)),
+    linear-gradient(135deg,rgba(246,203,101,.24),rgba(98,70,28,.18) 58%,rgba(255,236,169,.12)) !important;
+  color:#fff3cf !important;
+  text-shadow:0 1px 0 rgba(0,0,0,.55) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.24),
+    inset 0 -16px 32px rgba(77,51,16,.18),
+    0 14px 34px rgba(0,0,0,.34),
+    0 0 22px rgba(226,189,114,.12) !important;
+  letter-spacing:.14em !important;
+  line-height:1.05 !important;
+}
+.model-page #shop-part-by-part .product-card .add-preview:hover,
+.model-page #shop-part-by-part .real-product-card .add-preview:hover,
+.model-page .bcp-look-product-grid-v16m .product-card .add-preview:hover,
+.model-page .bcp-look-product-grid-v16m .real-product-card .add-preview:hover,
+.model-page .product-card .add-preview:hover,
+.model-page .real-product-card .add-preview:hover{
+  border-color:rgba(255,229,160,.78) !important;
+  background:
+    linear-gradient(180deg,rgba(255,250,213,.30),rgba(255,229,148,.095)),
+    linear-gradient(135deg,rgba(248,211,123,.31),rgba(103,74,31,.20) 58%,rgba(255,239,180,.15)) !important;
+  color:#fff8df !important;
+  filter:none !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.30),
+    inset 0 -16px 32px rgba(77,51,16,.15),
+    0 16px 38px rgba(0,0,0,.38),
+    0 0 28px rgba(226,189,114,.18) !important;
+}
+@media(max-width:900px){
+  .model-page .product-card .add-preview,
+  .model-page .real-product-card .add-preview{
+    min-height:46px !important;
+    border-radius:15px !important;
+    letter-spacing:.12em !important;
+  }
+}
+/* END V16X */
+
+
+/* V16Y — single-look browse attention lock for Napoleon 450/500 and Dark Flag V4
+   Scope: model-500 + model-v4 only. Keeps the selected-look MP4 visible through Browse all individual upgrades and tightens Quick access → Browse rhythm.
+   Safe: CSS-only plus one scoped HTML class on each single-look browse banner; no cart/Stripe/Worker/SKU/price logic changes. */
+.model-page.model-500 .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y,
+.model-page.model-v4 .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y{
+  position:sticky !important;
+  top:74px !important;
+  z-index:8 !important;
+  display:grid !important;
+  grid-template-columns:minmax(220px,340px) minmax(0,1fr) !important;
+  align-items:stretch !important;
+  width:min(var(--bcp-model-wide,1180px), calc(100% - 32px)) !important;
+  max-width:var(--bcp-model-wide,1180px) !important;
+  height:auto !important;
+  min-height:126px !important;
+  max-height:178px !important;
+  margin:6px auto 10px !important;
+  padding:0 !important;
+  opacity:1 !important;
+  pointer-events:auto !important;
+  overflow:hidden !important;
+  border-radius:22px !important;
+  border:1px solid rgba(190,152,255,.20) !important;
+  background:linear-gradient(135deg,rgba(12,10,20,.96),rgba(6,7,11,.92)) !important;
+  box-shadow:0 18px 48px rgba(0,0,0,.34), inset 0 1px 0 rgba(255,255,255,.055) !important;
+  backdrop-filter:blur(10px) !important;
+  scroll-margin-top:92px !important;
+}
+.model-page.model-500 .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y .bcp-look-sticky-video-v16m,
+.model-page.model-v4 .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y .bcp-look-sticky-video-v16m{
+  width:100% !important;
+  height:100% !important;
+  min-height:126px !important;
+  max-height:178px !important;
+  aspect-ratio:auto !important;
+  object-fit:contain !important;
+  background:radial-gradient(circle at 50% 50%,rgba(70,50,120,.16),#020204 66%) !important;
+  display:block !important;
+}
+.model-page.model-500 .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y .bcp-look-sticky-copy-v16m,
+.model-page.model-v4 .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y .bcp-look-sticky-copy-v16m{
+  position:static !important;
+  display:flex !important;
+  flex-direction:column !important;
+  justify-content:center !important;
+  gap:4px !important;
+  padding:13px 16px !important;
+  border:0 !important;
+  border-left:1px solid rgba(255,255,255,.10) !important;
+  border-radius:0 !important;
+  background:linear-gradient(135deg,rgba(255,255,255,.055),rgba(255,255,255,.016)) !important;
+  backdrop-filter:none !important;
+}
+.model-page.model-500 .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y .bcp-look-sticky-copy-v16m span,
+.model-page.model-v4 .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y .bcp-look-sticky-copy-v16m span{
+  color:#d9c6ff !important;
+  letter-spacing:.17em !important;
+}
+.model-page.model-500 .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y .bcp-look-sticky-copy-v16m strong,
+.model-page.model-v4 .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y .bcp-look-sticky-copy-v16m strong{
+  font-size:clamp(1rem,1.55vw,1.32rem) !important;
+  line-height:1.02 !important;
+  color:#fff !important;
+}
+.model-page.model-500 .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y .bcp-look-sticky-copy-v16m small,
+.model-page.model-v4 .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y .bcp-look-sticky-copy-v16m small{
+  font-size:.78rem !important;
+  line-height:1.25 !important;
+  color:rgba(255,255,255,.72) !important;
+}
+@media (min-width:901px){
+  .model-page.model-500 .model-guide-mini-v59,
+  .model-page.model-v4 .model-guide-mini-v59{
+    padding-top:14px !important;
+    padding-bottom:4px !important;
+    margin-bottom:0 !important;
+  }
+  .model-page.model-500 #shop-part-by-part,
+  .model-page.model-v4 #shop-part-by-part{
+    padding-top:12px !important;
+  }
+}
+@media(max-width:980px){
+  .model-page.model-500 .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y,
+  .model-page.model-v4 .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y{
+    top:62px !important;
+    grid-template-columns:118px minmax(0,1fr) !important;
+    width:calc(100% - 24px) !important;
+    min-height:106px !important;
+    max-height:122px !important;
+    margin:8px auto 10px !important;
+    border-radius:18px !important;
+    scroll-margin-top:76px !important;
+  }
+  .model-page.model-500 .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y .bcp-look-sticky-video-v16m,
+  .model-page.model-v4 .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y .bcp-look-sticky-video-v16m{
+    height:106px !important;
+    min-height:106px !important;
+    max-height:122px !important;
+    object-fit:contain !important;
+  }
+  .model-page.model-500 .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y .bcp-look-sticky-copy-v16m,
+  .model-page.model-v4 .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y .bcp-look-sticky-copy-v16m{
+    padding:10px 11px !important;
+  }
+}
+@media(max-width:560px){
+  .model-page.model-500 .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y,
+  .model-page.model-v4 .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y{
+    grid-template-columns:104px minmax(0,1fr) !important;
+    min-height:96px !important;
+    max-height:108px !important;
+    top:58px !important;
+  }
+  .model-page.model-500 .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y .bcp-look-sticky-video-v16m,
+  .model-page.model-v4 .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y .bcp-look-sticky-video-v16m{
+    height:96px !important;
+    min-height:96px !important;
+    max-height:108px !important;
+  }
+}
+@media(orientation:landscape) and (max-height:520px) and (max-width:980px){
+  .model-page.model-500 .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y,
+  .model-page.model-v4 .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y{
+    top:54px !important;
+    grid-template-columns:96px minmax(0,1fr) !important;
+    min-height:76px !important;
+    max-height:86px !important;
+    margin:6px auto 8px !important;
+    border-radius:16px !important;
+    scroll-margin-top:64px !important;
+  }
+  .model-page.model-500 .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y .bcp-look-sticky-video-v16m,
+  .model-page.model-v4 .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y .bcp-look-sticky-video-v16m{
+    height:76px !important;
+    min-height:76px !important;
+    max-height:86px !important;
+  }
+  .model-page.model-500 .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y .bcp-look-sticky-copy-v16m small,
+  .model-page.model-v4 .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y .bcp-look-sticky-copy-v16m small{
+    display:none !important;
+  }
+}
+/* END V16Y */
