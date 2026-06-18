@@ -132,9 +132,6 @@
         { code: 'aircraft-metal-cover-v4' },
         { code: 'ghost-metal-cover-v4' },
         { code: 'ghost-aluminium-cnc-chain-cover-left-v4' },
-        { code: 'transparent-air-filter-cover-aluminium-v4', color_option: 'Right' },
-        { code: 'ghost-exhaust-heat-shield-v4' },
-        { code: 'aluminum-front-fork-protector-darkflag-500-v4' },
         { code: 'midnight-hunter-tank-cover-kit-v4' },
         { code: 'midnight-beast-kit-v4' }
       ]
@@ -215,9 +212,6 @@
       { code: 'aircraft-metal-cover-v4' },
       { code: 'ghost-metal-cover-v4' },
       { code: 'ghost-aluminium-cnc-chain-cover-left-v4' },
-      { code: 'transparent-air-filter-cover-aluminium-v4', options: { color_option: 'Right' } },
-      { code: 'ghost-exhaust-heat-shield-v4' },
-      { code: 'aluminum-front-fork-protector-darkflag-500-v4' },
       { code: 'midnight-hunter-tank-cover-kit-v4' },
       { code: 'midnight-beast-kit-v4' }
     ],
