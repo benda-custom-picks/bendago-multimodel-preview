@@ -6617,3 +6617,12 @@ body.model-page .cart-floating-btn,
     text-transform:none !important;
   }
 }
+
+
+/* V16NZZZX — remove responsive swipe hint from 125/250 look selector only. PC layout and reels untouched. */
+.model-page.model-125-250 #looks .section-head .swipe-hint,
+.model-125-250 #looks .section-head .swipe-hint,
+body:has(.model-start#looks) .model-start#looks .section-head .swipe-hint {
+  display: none !important;
+  visibility: hidden !important;
+}
