@@ -4592,3 +4592,60 @@ body.model-page .cart-floating-btn,
   }
 }
 /* END V16Y */
+
+
+/* BENDAGO V16CART — cart conversion confidence layer
+   Scope: cart drawer visual/wording support only. No cart logic, Stripe, Worker, SKU or price changes. */
+.cart-drawer{
+  background:
+    radial-gradient(circle at 18% 0%,rgba(226,189,114,.08),transparent 34%),
+    linear-gradient(180deg,rgba(13,14,18,.98),rgba(5,6,8,.98)) !important;
+  border-left-color:rgba(226,189,114,.22) !important;
+}
+.cart-head h2{letter-spacing:-.02em !important;}
+.cart-head p{max-width:360px !important;color:rgba(255,255,255,.66) !important;}
+.cart-line{
+  border-color:rgba(226,189,114,.14) !important;
+  background:linear-gradient(180deg,rgba(255,255,255,.050),rgba(255,255,255,.018)),rgba(10,11,14,.86) !important;
+}
+.cart-line-title{line-height:1.13 !important;}
+.cart-line-fit-v16cart{
+  display:inline-flex !important;
+  width:max-content !important;
+  max-width:100% !important;
+  margin:5px 0 4px !important;
+  padding:4px 8px !important;
+  border-radius:999px !important;
+  border:1px solid rgba(226,189,114,.20) !important;
+  background:rgba(226,189,114,.075) !important;
+  color:rgba(240,213,143,.90) !important;
+  font-size:.66rem !important;
+  font-weight:900 !important;
+  letter-spacing:.02em !important;
+}
+.cart-look-lock-v16cart{
+  margin:0 0 2px !important;
+  padding:12px 13px !important;
+  border-radius:18px !important;
+  border:1px solid rgba(226,189,114,.24) !important;
+  background:radial-gradient(circle at 12% 0%,rgba(226,189,114,.12),transparent 42%),linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.016)),rgba(9,10,13,.86) !important;
+}
+.cart-look-lock-v16cart span{display:block !important;color:rgba(226,189,114,.88) !important;font-size:.68rem !important;letter-spacing:.11em !important;text-transform:uppercase !important;font-weight:950 !important;margin-bottom:4px !important;}
+.cart-look-lock-v16cart strong{display:block !important;color:#fff !important;font-size:.88rem !important;line-height:1.22 !important;}
+.cart-proof-strip-v16cart{display:grid !important;grid-template-columns:repeat(3,minmax(0,1fr)) !important;gap:7px !important;margin:1px 0 !important;}
+.cart-proof-strip-v16cart span{display:flex !important;align-items:center !important;justify-content:center !important;text-align:center !important;min-height:34px !important;padding:6px 7px !important;border-radius:13px !important;border:1px solid rgba(255,255,255,.10) !important;background:rgba(255,255,255,.040) !important;color:rgba(255,255,255,.72) !important;font-size:.68rem !important;font-weight:850 !important;line-height:1.12 !important;}
+.cart-checkout-btn{
+  background:linear-gradient(180deg,rgba(255,255,255,.24),rgba(255,255,255,.045)),linear-gradient(135deg,#f0d58f 0%,#b88945 48%,#ffe2a4 100%) !important;
+  color:#130d06 !important;
+  border:1px solid rgba(255,229,170,.68) !important;
+  border-radius:16px !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.42),inset 0 -18px 34px rgba(95,61,25,.16),0 18px 42px rgba(0,0,0,.40),0 0 28px rgba(226,189,114,.16) !important;
+  text-decoration:none !important;
+}
+.cart-share-btn,.cart-clear-btn,.cart-other-product-btn{
+  border-color:rgba(226,189,114,.20) !important;
+  background:rgba(255,255,255,.035) !important;
+  color:rgba(255,255,255,.82) !important;
+}
+@media(max-width:520px){.cart-proof-strip-v16cart{grid-template-columns:1fr !important}.cart-proof-strip-v16cart span{min-height:28px !important}}
+/* END BENDAGO V16CART */

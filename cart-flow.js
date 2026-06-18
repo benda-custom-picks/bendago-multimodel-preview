@@ -389,11 +389,11 @@
       return [
         '<div class="cart-pricing-row"><span>Subtotal</span><strong>' + formatEuro(pricing.subtotal) + '</strong></div>',
         '<div class="cart-pricing-row cart-pricing-discount"><span>Launch Access 5%</span><strong>-' + formatEuro(pricing.discountAmount) + '</strong></div>',
-        '<div class="cart-total-row"><span>Selected parts total</span><strong>' + formatEuro(pricing.total) + '</strong></div>',
+        '<div class="cart-total-row"><span>Setup total</span><strong>' + formatEuro(pricing.total) + '</strong></div>',
         '<div class="cart-launch-note">Launch Access applied' + (pricing.buildName ? ': ' + escapeHtml(pricing.buildName) : '') + '. No code needed.</div>'
       ].join('');
     }
-    return '<div class="cart-total-row"><span>Selected parts total</span><strong>' + formatEuro(pricing ? pricing.total : 0) + '</strong></div>';
+    return '<div class="cart-total-row"><span>Setup total</span><strong>' + formatEuro(pricing ? pricing.total : 0) + '</strong></div>';
   }
 
   function cartSummaryText(lines, pricing) {
@@ -830,12 +830,12 @@ async function createStripeCheckout(lines, formData) {
     if (!button || button.disabled) return;
     const lines = getLines();
     if (!lines.length) {
-      button.textContent = 'Secure selected parts';
+      button.textContent = 'Secure this setup';
       button.dataset.readyText = button.textContent;
       return;
     }
     const pricing = calculateLaunchOffer(lines);
-    button.textContent = 'Secure selected parts — ' + formatEuro(pricing.total);
+    button.textContent = 'Secure this setup — ' + formatEuro(pricing.total);
     button.dataset.readyText = button.textContent;
   }
 
@@ -852,7 +852,7 @@ async function createStripeCheckout(lines, formData) {
         const context = getValidatedCartFormData();
         button.disabled = true;
         button.textContent = 'Creating Stripe checkout…';
-        showCartStatus('ok', 'Creating secure Stripe card checkout…');
+        showCartStatus('ok', 'Preparing your secure Stripe checkout…');
 
         const checkout = await createStripeCheckout(context.lines, context.formData);
         const emailData = await sendStripePreCheckoutEmails(context, checkout);
@@ -872,7 +872,7 @@ async function createStripeCheckout(lines, formData) {
         push('stripe_checkout_error', { error_message: (err && err.message) ? err.message : 'Stripe checkout could not be created', cart_count: cartCount(), payment_provider: 'stripe' });
         showCartStatus('err', err.message || 'Stripe checkout could not be created. Please contact Benda Custom Picks.');
         button.disabled = false;
-        button.textContent = originalText || button.dataset.readyText || 'Secure selected parts';
+        button.textContent = originalText || button.dataset.readyText || 'Secure this setup';
       }
     });
   }
@@ -1356,7 +1356,51 @@ async function createStripeCheckout(lines, formData) {
       .order-header-cart-link .cart-count-badge,.order-cart-link .cart-count-badge,.order-header-cart-link [data-cart-count],.order-cart-link [data-cart-count]{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-width:18px!important;height:18px!important;padding:0 5px!important;border-radius:999px!important;background:#d9b875!important;color:#0d0905!important;font-size:10px!important;font-weight:950!important;line-height:1!important;}
       .cart-note{border:1px solid rgba(190,152,255,.18)!important;background:linear-gradient(135deg,rgba(156,94,255,.085),rgba(255,255,255,.026))!important;border-radius:16px!important;padding:10px 11px!important;color:rgba(255,255,255,.72)!important;font-size:.84rem!important;line-height:1.36!important;}
       .cart-note strong{color:#fff!important;}
-      .cart-checkout-btn{background:linear-gradient(135deg,#1fa463,#70d99a)!important;color:#041208!important;}
+      .cart-checkout-btn{background:linear-gradient(180deg,rgba(255,255,255,.24),rgba(255,255,255,.045)),linear-gradient(135deg,#f0d58f 0%,#b88945 48%,#ffe2a4 100%)!important;color:#130d06!important;border:1px solid rgba(255,229,170,.68)!important;border-radius:16px!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.42),inset 0 -18px 34px rgba(95,61,25,.16),0 18px 42px rgba(0,0,0,.40),0 0 28px rgba(226,189,114,.16)!important;text-decoration:none!important;}
+      .cart-look-lock-v16cart{margin:0 0 2px!important;padding:12px 13px!important;border-radius:18px!important;border:1px solid rgba(226,189,114,.24)!important;background:radial-gradient(circle at 12% 0%,rgba(226,189,114,.12),transparent 42%),linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.016)),rgba(9,10,13,.86)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.07)!important;}
+      .cart-look-lock-v16cart span{display:block!important;color:rgba(226,189,114,.88)!important;font-size:.68rem!important;letter-spacing:.11em!important;text-transform:uppercase!important;font-weight:950!important;margin-bottom:4px!important;}
+      .cart-look-lock-v16cart strong{display:block!important;color:#fff!important;font-size:.88rem!important;line-height:1.22!important;}
+      .cart-proof-strip-v16cart{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:7px!important;margin:1px 0!important;}
+      .cart-proof-strip-v16cart span{display:flex!important;align-items:center!important;justify-content:center!important;text-align:center!important;min-height:34px!important;padding:6px 7px!important;border-radius:13px!important;border:1px solid rgba(255,255,255,.10)!important;background:rgba(255,255,255,.040)!important;color:rgba(255,255,255,.72)!important;font-size:.68rem!important;font-weight:850!important;line-height:1.12!important;}
+      .cart-line-fit-v16cart{display:inline-flex!important;width:max-content!important;max-width:100%!important;margin:5px 0 4px!important;padding:4px 8px!important;border-radius:999px!important;border:1px solid rgba(226,189,114,.20)!important;background:rgba(226,189,114,.075)!important;color:rgba(240,213,143,.90)!important;font-size:.66rem!important;font-weight:900!important;letter-spacing:.02em!important;}
+      .cart-line-details-link{color:rgba(255,255,255,.66)!important;text-decoration:none!important;font-weight:850!important;}
+      .cart-line-details-link:hover{color:#f0d58f!important;}
+
+      /* BENDAGO V16NZZZD — cart exit-friction reduction */
+      .cart-head h2{letter-spacing:.02em!important;}
+      .cart-head p{max-width:360px!important;color:rgba(255,255,255,.68)!important;}
+      .cart-line{border-color:rgba(255,255,255,.11)!important;background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.014)),rgba(8,9,12,.82)!important;}
+      .cart-line-title{display:block!important;color:rgba(255,255,255,.94)!important;text-decoration:none!important;font-weight:950!important;line-height:1.08!important;}
+      .cart-line-media{pointer-events:none!important;}
+      .cart-line-details-lock-v16d{display:inline-flex!important;width:max-content!important;max-width:100%!important;margin:2px 0 5px!important;padding:4px 8px!important;border-radius:999px!important;border:1px solid rgba(255,255,255,.10)!important;background:rgba(255,255,255,.035)!important;color:rgba(255,255,255,.62)!important;font-size:.64rem!important;font-weight:850!important;letter-spacing:.02em!important;}
+      .cart-look-lock-v16cart{margin-top:2px!important;}
+      .cart-note{margin-top:2px!important;padding:11px 12px!important;}
+      .cart-note strong{display:block!important;margin-bottom:3px!important;color:#f7f1e8!important;}
+      .cart-checkout-btn{margin-top:12px!important;min-height:54px!important;font-size:.83rem!important;letter-spacing:.13em!important;text-transform:uppercase!important;}
+      .cart-share-btn{display:none!important;}
+      .cart-secondary-actions{display:flex!important;gap:8px!important;margin-top:10px!important;align-items:center!important;justify-content:center!important;}
+      .cart-secondary-actions .cart-other-product-btn,.cart-secondary-actions .cart-clear-btn{width:auto!important;min-height:34px!important;padding:0 12px!important;border-radius:999px!important;background:rgba(255,255,255,.025)!important;border:1px solid rgba(255,255,255,.10)!important;color:rgba(255,255,255,.58)!important;font-size:.68rem!important;font-weight:850!important;text-decoration:none!important;letter-spacing:.04em!important;}
+      .cart-secondary-actions .cart-other-product-btn{color:rgba(240,213,143,.80)!important;border-color:rgba(226,189,114,.18)!important;}
+      .cart-secondary-actions .cart-clear-btn{color:rgba(255,255,255,.44)!important;}
+      .cart-pricing-row,.cart-total-row{font-size:.88rem!important;}
+      .cart-total-row strong{font-size:1.12rem!important;color:#f0d58f!important;}
+      .cart-launch-note{font-size:.82rem!important;line-height:1.32!important;color:rgba(255,255,255,.72)!important;margin:8px 0 0!important;}
+      @media(max-width:520px){
+        .cart-head{padding-bottom:8px!important;}
+        .cart-head h2{font-size:1.05rem!important;}
+        .cart-head p{font-size:.76rem!important;line-height:1.25!important;}
+        .cart-body{min-height:185px!important;padding-top:10px!important;padding-bottom:10px!important;}
+        .cart-footer{padding-top:10px!important;}
+        .cart-proof-strip-v16cart{display:none!important;}
+        .cart-look-lock-v16cart{padding:10px 11px!important;}
+        .cart-look-lock-v16cart strong{font-size:.80rem!important;}
+        .cart-note{font-size:.78rem!important;line-height:1.32!important;}
+        .cart-checkout-btn{min-height:52px!important;}
+        .cart-secondary-actions{justify-content:space-between!important;}
+        .cart-secondary-actions .cart-other-product-btn,.cart-secondary-actions .cart-clear-btn{font-size:.62rem!important;padding:0 10px!important;}
+      }
+
+      @media(max-width:520px){.cart-proof-strip-v16cart{grid-template-columns:1fr!important}.cart-proof-strip-v16cart span{min-height:28px!important}}
     `;
     document.head.appendChild(style);
   }
@@ -1401,18 +1445,20 @@ async function createStripeCheckout(lines, formData) {
     drawer.setAttribute('aria-label', 'Benda Custom Picks cart');
     drawer.innerHTML = [
       '<div class="cart-head">',
-      '<div><h2>Your selected parts</h2><p>Your Benda look starts here. Start with these parts now and complete the build later.</p></div>',
+      '<div><h2>Your Benda setup</h2><p>Keep the selected look together. Secure the parts when ready.</p></div>',
       '<button type="button" class="cart-close" data-cart-close aria-label="Close cart">×</button>',
       '</div>',
       '<div class="cart-body" data-cart-body></div>',
       '<div class="cart-footer">',
-      '<div class="cart-pricing-block" data-cart-pricing><div class="cart-total-row"><span>Selected parts total</span><strong>0 €</strong></div></div>',
-      '<div class="cart-note"><strong>Start this look now.</strong><br>You only secure the parts selected today. Complete the full look later if you want more pieces. Stripe checkout · tracking after dispatch · support if needed.</div>',
-      '<a class="cart-checkout-btn disabled" data-cart-checkout href="./cart-request.html">Secure my selected parts</a>',
-      '<button type="button" class="cart-share-btn" data-cart-share>Copy cart link</button>',
+      '<div class="cart-look-lock-v16cart"><span>Look preserved</span><strong>Your selected parts stay grouped for this setup.</strong></div>',
+      '<div class="cart-pricing-block" data-cart-pricing><div class="cart-total-row"><span>Setup total</span><strong>0 €</strong></div></div>',
+      '<div class="cart-proof-strip-v16cart"><span>Selected for your model</span><span>Stripe secure checkout</span><span>Tracking after dispatch</span></div>',
+      '<div class="cart-note"><strong>Finish the setup here.</strong><br>No need to rebuild the look somewhere else. Secure the selected parts now; the full build remains optional.</div>',
+      '<a class="cart-checkout-btn disabled" data-cart-checkout href="./cart-request.html">Secure this setup</a>',
+      '<button type="button" class="cart-share-btn" data-cart-share>Save selection link</button>',
       '<div class="cart-secondary-actions">',
-      '<button type="button" class="cart-clear-btn" data-cart-clear>Clear cart</button>',
       '<a class="cart-other-product-btn" href="' + currentPartsHref() + '" data-cart-other-product>Add matching parts</a>',
+      '<button type="button" class="cart-clear-btn" data-cart-clear>Clear cart</button>',
       '</div>',
       '</div>'
     ].join('');
@@ -1524,7 +1570,7 @@ async function createStripeCheckout(lines, formData) {
     const shareBtn = document.querySelector('[data-cart-share]');
     if (!lines.length) {
       body.innerHTML = '<div class="cart-empty">Your cart is empty. Open a product page and add one or several parts.</div>';
-      pricingEl.innerHTML = '<div class="cart-total-row"><span>Selected parts total</span><strong>0 €</strong></div>';
+      pricingEl.innerHTML = '<div class="cart-total-row"><span>Setup total</span><strong>0 €</strong></div>';
       checkout.classList.add('disabled');
       if (shareBtn) shareBtn.disabled = false;
       return;
@@ -1535,10 +1581,11 @@ async function createStripeCheckout(lines, formData) {
       const url = productPageUrl(line.code);
       return [
       '<div class="cart-line">',
-      '<a class="cart-line-media" href="' + escapeHtml(url) + '" aria-label="View details for ' + escapeHtml(line.product_name) + '"><img src="' + (line.image || './standby-product-visual.png') + '" alt="' + escapeHtml(line.product_name) + '"></a>',
+      '<div class="cart-line-media" aria-label="Selected part: ' + escapeHtml(line.product_name) + '"><img src="' + (line.image || './standby-product-visual.png') + '" alt="' + escapeHtml(line.product_name) + '"></div>',
       '<div>',
-      '<a class="cart-line-title" href="' + escapeHtml(url) + '">' + escapeHtml(line.product_name) + '</a>',
-      '<a class="cart-line-details-link" href="' + escapeHtml(url) + '">View product details</a>',
+      '<span class="cart-line-title">' + escapeHtml(line.product_name) + '</span>',
+      '<div class="cart-line-fit-v16cart">Selected Benda upgrade</div>',
+      '<span class="cart-line-details-link cart-line-details-lock-v16d">Selected for this setup</span>',
       optionText(line) ? '<div class="cart-line-option">' + escapeHtml(optionText(line)) + '</div>' : '',
       '<div class="cart-line-price">' + escapeHtml(line.price) + '</div>',
       '<div class="cart-line-actions">',
@@ -1598,7 +1645,7 @@ async function createStripeCheckout(lines, formData) {
           submitBtn.disabled = true;
           submitBtn.textContent = 'Creating Stripe checkout…';
         }
-        showCartStatus('ok', 'Creating secure Stripe card checkout…');
+        showCartStatus('ok', 'Preparing your secure Stripe checkout…');
 
         const checkout = await createStripeCheckout(context.lines, context.formData);
         const emailData = await sendStripePreCheckoutEmails(context, checkout);
