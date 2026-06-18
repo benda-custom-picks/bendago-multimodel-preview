@@ -65,7 +65,8 @@
     'transparent-air-filter-cover-aluminium-v4': 'transparent-air-filter-cover-aluminium-v4',
     'transparent-air-filter-cover-filter-only-v4': 'transparent-air-filter-cover-filter-only-v4',
     'ghost-exhaust-heat-shield-v4': 'ghost-exhaust-heat-shield-v4',
-    'aluminum-front-fork-protector-darkflag-500-v4': 'aluminum-front-fork-protector-darkflag-500-v4'
+    'aluminum-front-fork-protector-darkflag-500-v4': 'aluminum-front-fork-protector-darkflag-500-v4',
+    'ghost-protector-darkflag-950-v4': 'ghost-protector-darkflag-950-v4'
   };
 
   const COMPLETE_BUILD_OFFERS = [
@@ -132,6 +133,7 @@
         { code: 'aircraft-metal-cover-v4' },
         { code: 'ghost-metal-cover-v4' },
         { code: 'ghost-aluminium-cnc-chain-cover-left-v4' },
+        { code: 'ghost-protector-darkflag-950-v4' },
         { code: 'midnight-hunter-tank-cover-kit-v4' },
         { code: 'midnight-beast-kit-v4' }
       ]
@@ -212,6 +214,7 @@
       { code: 'aircraft-metal-cover-v4' },
       { code: 'ghost-metal-cover-v4' },
       { code: 'ghost-aluminium-cnc-chain-cover-left-v4' },
+      { code: 'ghost-protector-darkflag-950-v4' },
       { code: 'midnight-hunter-tank-cover-kit-v4' },
       { code: 'midnight-beast-kit-v4' }
     ],
@@ -1104,6 +1107,16 @@ async function createStripeCheckout(lines, formData) {
         image: './aluminum-front-fork-protector-darkflag-500-hero.png',
         stripe_url: ''
       },
+      'ghost-protector-darkflag-950-v4': {
+        product_code: 'ghost-protector-darkflag-950-v4',
+        product_name: 'Ghost Protector Darkflag 950',
+        product_short: 'Black tubular protection kit for Benda Dark Flag V4 950',
+        fitment: 'Benda Dark Flag V4 950',
+        price: '441 €',
+        delivery_estimate: '10 to 15 business days',
+        image: './ghost-protector-darkflag-950-hero.png',
+        stripe_url: ''
+      },
     };
 
     Object.keys(napoleon450Fallbacks).forEach(code => {
@@ -1166,7 +1179,8 @@ async function createStripeCheckout(lines, formData) {
     'transparent-air-filter-cover-aluminium-v4': './order-transparent-air-filter-cover-aluminium-v4.html',
     'transparent-air-filter-cover-filter-only-v4': './order-transparent-air-filter-cover-aluminium-v4.html',
     'ghost-exhaust-heat-shield-v4': './order-ghost-exhaust-heat-shield-v4.html',
-    'aluminum-front-fork-protector-darkflag-500-v4': './order-aluminum-front-fork-protector-darkflag-500-v4.html'
+    'aluminum-front-fork-protector-darkflag-500-v4': './order-aluminum-front-fork-protector-darkflag-500-v4.html',
+    'ghost-protector-darkflag-950-v4': './order-ghost-protector-darkflag-950-v4.html'
   };
 
   function productPageUrl(code) {
