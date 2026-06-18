@@ -6198,3 +6198,169 @@ body.model-page .cart-floating-btn,
 }
 /* END V16NZZZO */
 
+
+/* BENDAGO V16NZZZP — PC video window width uniform
+   Scope: PC only. One canonical left MP4 rail width across Choose your build,
+   Choose the parts for your look, and Browse all individual upgrades. */
+@media (min-width: 901px){
+  html body.model-page.model-125,
+  html body.model-page.model-500,
+  html body.model-page.model-v4{
+    --bcp-pc-video-rail: min(100%, 580px);
+    --bcp-pc-video-rail-radius: 26px;
+  }
+
+  /* Same global content width rhythm for the affected model sections. */
+  html body.model-page.model-125 section#looks .look-grid,
+  html body.model-page.model-500 section#looks .look-grid,
+  html body.model-page.model-v4 section#looks .look-grid,
+  html body.model-page.model-v4 section#looks .look-grid.look-grid-single{
+    width: min(1480px, calc(100vw - 72px)) !important;
+    max-width: min(1480px, calc(100vw - 72px)) !important;
+    margin-inline: auto !important;
+  }
+
+  /* CHOOSE YOUR BUILD — use the same left MP4 window size as Choose the parts. */
+  html body.model-page.model-125 section#looks article.look-card,
+  html body.model-page.model-500 section#looks article.look-card,
+  html body.model-page.model-v4 section#looks article.look-card{
+    display: grid !important;
+    grid-template-columns: minmax(500px, 580px) minmax(0, 1fr) !important;
+    column-gap: clamp(42px, 4.4vw, 72px) !important;
+    align-items: center !important;
+    min-height: 0 !important;
+    height: auto !important;
+    max-height: none !important;
+  }
+
+  html body.model-page.model-125 section#looks article.look-card > .look-media,
+  html body.model-page.model-125 section#looks article.look-card > .look-media-video,
+  html body.model-page.model-125 section#looks article.look-card > .look-media-link,
+  html body.model-page.model-500 section#looks article.look-card > .look-media,
+  html body.model-page.model-500 section#looks article.look-card > .look-media-video,
+  html body.model-page.model-500 section#looks article.look-card > .look-media-link,
+  html body.model-page.model-v4 section#looks article.look-card > .look-media,
+  html body.model-page.model-v4 section#looks article.look-card > .look-media-video,
+  html body.model-page.model-v4 section#looks article.look-card > .look-media-link{
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    justify-self: center !important;
+    align-self: center !important;
+    width: var(--bcp-pc-video-rail) !important;
+    max-width: 580px !important;
+    aspect-ratio: 9 / 16 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    border-radius: var(--bcp-pc-video-rail-radius) !important;
+    overflow: hidden !important;
+    background: #050505 !important;
+    box-shadow: 0 28px 90px rgba(0,0,0,.62), 0 0 0 1px rgba(226,189,114,.16) !important;
+  }
+
+  html body.model-page.model-125 section#looks article.look-card > .look-media video,
+  html body.model-page.model-125 section#looks article.look-card > .look-media .look-video,
+  html body.model-page.model-500 section#looks article.look-card > .look-media video,
+  html body.model-page.model-500 section#looks article.look-card > .look-media .look-video,
+  html body.model-page.model-v4 section#looks article.look-card > .look-media video,
+  html body.model-page.model-v4 section#looks article.look-card > .look-media .look-video{
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-width: 100% !important;
+    min-height: 100% !important;
+    max-width: none !important;
+    max-height: none !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    background: #050505 !important;
+    display: block !important;
+  }
+
+  html body.model-page.model-125 section#looks article.look-card > .look-body,
+  html body.model-page.model-500 section#looks article.look-card > .look-body,
+  html body.model-page.model-v4 section#looks article.look-card > .look-body{
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    align-self: center !important;
+    justify-self: stretch !important;
+    min-width: 0 !important;
+  }
+
+  /* CHOOSE THE PARTS — canonical reference window kept at same width. */
+  html body.model-page.model-125 .bcp-look-parts-body-v16m,
+  html body.model-page.model-500 .bcp-look-parts-body-v16m,
+  html body.model-page.model-v4 .bcp-look-parts-body-v16m{
+    grid-template-columns: minmax(500px, 580px) minmax(0, 1fr) !important;
+    column-gap: clamp(34px, 4vw, 64px) !important;
+  }
+
+  html body.model-page.model-125 .bcp-look-gallery-banner-v16n,
+  html body.model-page.model-500 .bcp-look-gallery-banner-v16n,
+  html body.model-page.model-v4 .bcp-look-gallery-banner-v16n{
+    width: var(--bcp-pc-video-rail) !important;
+    max-width: 580px !important;
+    aspect-ratio: 9 / 16 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    border-radius: var(--bcp-pc-video-rail-radius) !important;
+    overflow: hidden !important;
+    background: #050505 !important;
+  }
+
+  html body.model-page.model-125 .bcp-look-gallery-banner-v16n .bcp-look-sticky-video-v16m,
+  html body.model-page.model-500 .bcp-look-gallery-banner-v16n .bcp-look-sticky-video-v16m,
+  html body.model-page.model-v4 .bcp-look-gallery-banner-v16n .bcp-look-sticky-video-v16m{
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-width: 100% !important;
+    min-height: 100% !important;
+    max-width: none !important;
+    max-height: none !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    background: #050505 !important;
+    display: block !important;
+  }
+
+  /* BROWSE ALL INDIVIDUAL UPGRADES — same MP4 rail width as the parts reference. */
+  html body.model-page.model-500 section#shop-part-by-part > .wrap,
+  html body.model-page.model-v4 section#shop-part-by-part > .wrap{
+    grid-template-columns: minmax(500px, 580px) minmax(0, 1fr) !important;
+    column-gap: clamp(34px, 4vw, 64px) !important;
+  }
+
+  html body.model-page.model-500 section#shop-part-by-part .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y,
+  html body.model-page.model-v4 section#shop-part-by-part .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y{
+    width: var(--bcp-pc-video-rail) !important;
+    max-width: 580px !important;
+    aspect-ratio: 9 / 16 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    border-radius: var(--bcp-pc-video-rail-radius) !important;
+    overflow: hidden !important;
+    background: #050505 !important;
+  }
+
+  html body.model-page.model-500 section#shop-part-by-part .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y .bcp-look-sticky-video-v16m,
+  html body.model-page.model-v4 section#shop-part-by-part .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y .bcp-look-sticky-video-v16m{
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-width: 100% !important;
+    min-height: 100% !important;
+    max-width: none !important;
+    max-height: none !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    background: #050505 !important;
+    display: block !important;
+  }
+}
+/* END V16NZZZP */
