@@ -979,6 +979,83 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 }
 </style>
 
+
+<style id="bcp-v16nzzzv-125-responsive-look-reel-lock">
+/* V16NZZZV — responsive portrait / Napoleon 125 only.
+   Fixes Choose your build look cards so each card follows the native reel window height instead of compressing the MP4. PC untouched. */
+@media (max-width: 900px) and (orientation: portrait){
+  html body.model-page.model-125 section#looks .look-grid{
+    display:flex !important;
+    flex-direction:column !important;
+    gap:22px !important;
+    overflow:visible !important;
+  }
+
+  html body.model-page.model-125 section#looks article.look-card{
+    position:relative !important;
+    display:block !important;
+    width:100% !important;
+    max-width:100% !important;
+    height:auto !important;
+    min-height:0 !important;
+    max-height:none !important;
+    padding:0 !important;
+    overflow:hidden !important;
+    border-radius:28px !important;
+    background:#050505 !important;
+  }
+
+  html body.model-page.model-125 section#looks article.look-card > .look-media,
+  html body.model-page.model-125 section#looks article.look-card > .look-media-video,
+  html body.model-page.model-125 section#looks article.look-card > .look-media-link{
+    position:relative !important;
+    display:block !important;
+    width:100% !important;
+    height:calc((100vw - 18px) * 1.7777778) !important;
+    min-height:calc((100vw - 18px) * 1.7777778) !important;
+    max-height:none !important;
+    aspect-ratio:9 / 16 !important;
+    overflow:hidden !important;
+    border-radius:28px !important;
+    background:#050505 !important;
+    padding:0 !important;
+    margin:0 !important;
+    line-height:0 !important;
+  }
+
+  html body.model-page.model-125 section#looks article.look-card > .look-media video,
+  html body.model-page.model-125 section#looks article.look-card > .look-media .look-video,
+  html body.model-page.model-125 section#looks article.look-card > .look-media-video video,
+  html body.model-page.model-125 section#looks article.look-card > .look-media-video .look-video{
+    position:absolute !important;
+    inset:0 !important;
+    display:block !important;
+    width:100% !important;
+    height:100% !important;
+    min-width:100% !important;
+    min-height:100% !important;
+    max-width:none !important;
+    max-height:none !important;
+    object-fit:cover !important;
+    object-position:center center !important;
+    border-radius:0 !important;
+    background:#050505 !important;
+  }
+
+  html body.model-page.model-125 section#looks article.look-card > .look-body{
+    position:absolute !important;
+    left:0 !important;
+    right:0 !important;
+    bottom:0 !important;
+    z-index:4 !important;
+    min-height:0 !important;
+    padding:96px 16px 16px !important;
+    border-radius:0 0 28px 28px !important;
+    background:linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.48) 34%, rgba(0,0,0,.88) 100%) !important;
+  }
+}
+</style>
+
 </head><body class="model-page model-125"><!-- Google Tag Manager (noscript) -->
 <noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-MQHMSX8X" style="display:none;visibility:hidden" width="0"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
