@@ -6453,3 +6453,167 @@ body.model-page .cart-floating-btn,
 
 /* V16NZZZS marker: responsive unified reel architecture is hard-locked in page head styles to override previous responsive layers. */
 /* V16NZZZT marker: responsive native look cards + sticky reduced to 50vh, PC untouched. */
+
+
+/* V16NZZZW — Napoleon 125 responsive look cards HARD LOCK
+   Scope: mobile/tablet responsive only. PC untouched. Sticky untouched.
+   Goal: Choose your build cards must follow native vertical reel geometry, not compact card height. */
+@media (max-width: 900px){
+  html body.model-page.model-125 section#looks,
+  html body.model-page.model-125 section#looks .wrap{
+    overflow:visible !important;
+  }
+
+  html body.model-page.model-125 section#looks .look-grid{
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:stretch !important;
+    gap:24px !important;
+    width:100% !important;
+    max-width:100% !important;
+    overflow:visible !important;
+    grid-template-columns:none !important;
+    grid-auto-rows:auto !important;
+  }
+
+  html body.model-page.model-125 section#looks article.look-card{
+    position:relative !important;
+    display:block !important;
+    width:100% !important;
+    max-width:100% !important;
+    height:auto !important;
+    min-height:auto !important;
+    max-height:none !important;
+    padding:0 !important;
+    overflow:hidden !important;
+    border-radius:28px !important;
+    background:#050505 !important;
+    border:1px solid rgba(246,196,49,.20) !important;
+    box-shadow:0 20px 46px rgba(0,0,0,.48) !important;
+    aspect-ratio:auto !important;
+    grid-template-columns:none !important;
+    grid-template-rows:none !important;
+  }
+
+  html body.model-page.model-125 section#looks article.look-card > .look-media,
+  html body.model-page.model-125 section#looks article.look-card > .look-media-video,
+  html body.model-page.model-125 section#looks article.look-card > .look-media-link{
+    position:relative !important;
+    display:block !important;
+    width:100% !important;
+    max-width:100% !important;
+    height:auto !important;
+    min-height:0 !important;
+    max-height:none !important;
+    aspect-ratio:9 / 16 !important;
+    padding:0 !important;
+    margin:0 !important;
+    overflow:hidden !important;
+    border-radius:28px !important;
+    background:#050505 !important;
+    line-height:0 !important;
+  }
+
+  html body.model-page.model-125 section#looks article.look-card > .look-media::before,
+  html body.model-page.model-125 section#looks article.look-card > .look-media-video::before{
+    content:"" !important;
+    display:block !important;
+    width:100% !important;
+    padding-top:177.7778% !important;
+  }
+
+  html body.model-page.model-125 section#looks article.look-card > .look-media video,
+  html body.model-page.model-125 section#looks article.look-card > .look-media .look-video,
+  html body.model-page.model-125 section#looks article.look-card > .look-media-video video,
+  html body.model-page.model-125 section#looks article.look-card > .look-media-video .look-video{
+    position:absolute !important;
+    inset:0 !important;
+    display:block !important;
+    width:100% !important;
+    height:100% !important;
+    min-width:100% !important;
+    min-height:100% !important;
+    max-width:none !important;
+    max-height:none !important;
+    object-fit:cover !important;
+    object-position:center center !important;
+    border-radius:0 !important;
+    background:#050505 !important;
+  }
+
+  html body.model-page.model-125 section#looks article.look-card > .look-body{
+    position:absolute !important;
+    left:0 !important;
+    right:0 !important;
+    bottom:0 !important;
+    z-index:5 !important;
+    display:flex !important;
+    flex-direction:column !important;
+    justify-content:flex-end !important;
+    gap:8px !important;
+    min-height:42% !important;
+    padding:100px 16px 16px !important;
+    border-radius:0 0 28px 28px !important;
+    background:linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.50) 32%, rgba(0,0,0,.88) 100%) !important;
+    pointer-events:none !important;
+  }
+
+  html body.model-page.model-125 section#looks article.look-card .look-body h3{
+    margin:0 !important;
+    color:#fff7db !important;
+    font-size:clamp(1.35rem, 6.2vw, 1.95rem) !important;
+    line-height:1.02 !important;
+    letter-spacing:-.035em !important;
+  }
+
+  html body.model-page.model-125 section#looks article.look-card .look-body .tagline{
+    display:block !important;
+    margin:0 0 3px !important;
+    color:rgba(255,244,212,.82) !important;
+    font-size:.82rem !important;
+    line-height:1.2 !important;
+    font-weight:850 !important;
+    letter-spacing:.025em !important;
+  }
+
+  html body.model-page.model-125 section#looks article.look-card .look-body p,
+  html body.model-page.model-125 section#looks article.look-card .look-body .parts-list,
+  html body.model-page.model-125 section#looks article.look-card .look-body .bcp-look-anchor-note-v16m,
+  html body.model-page.model-125 section#looks article.look-card .look-body .build-bundle-added{
+    display:none !important;
+  }
+
+  html body.model-page.model-125 section#looks article.look-card .look-bundle-cta,
+  html body.model-page.model-125 section#looks article.look-card .build-bundle-cro-v46{
+    display:block !important;
+    margin:6px 0 0 !important;
+    padding:0 !important;
+    border:0 !important;
+    background:transparent !important;
+    box-shadow:none !important;
+    pointer-events:auto !important;
+  }
+
+  html body.model-page.model-125 section#looks article.look-card .build-bundle-actions{
+    display:flex !important;
+    flex-direction:column !important;
+    gap:9px !important;
+    width:100% !important;
+    margin:0 !important;
+  }
+
+  html body.model-page.model-125 section#looks article.look-card .build-bundle-actions .btn{
+    width:100% !important;
+    min-height:46px !important;
+    border-radius:999px !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    padding:0 16px !important;
+    font-size:.82rem !important;
+    line-height:1 !important;
+    font-weight:950 !important;
+    letter-spacing:.015em !important;
+    text-transform:none !important;
+  }
+}
