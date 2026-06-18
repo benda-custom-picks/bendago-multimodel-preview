@@ -3544,7 +3544,7 @@ body.model-page .cart-floating-btn,
 
 /* BENDAGO V16L — product-card ADD TO CART green lock
    Scope: model-page product cards only (Napoleon 125/250, Napoleon 450/500, Dark Flag V4).
-   Purpose: align every product-card Add to cart / Choose options CTA with the existing green Complete the full look · Save 5% CTA.
+   Purpose: align every product-card Add to cart CTA with the existing green Complete the full look · Save 5% CTA.
    No JS / Worker / Stripe / SKU / price / layout logic changed. */
 .model-page.model-125 .product-card .add-preview:not(:disabled),
 .model-page.model-500 .product-card .add-preview:not(:disabled),
@@ -3969,3 +3969,253 @@ body.model-page .cart-floating-btn,
   }
 }
 /* END V16R */
+
+
+/* V16S — desktop model-page width lock
+   Scope: PC layout alignment only. Aligns the look products panel, Quick access strip and Browse all individual upgrades to the same container width.
+   Safe: no HTML, no cart/Stripe/Worker/SKU/price logic changes. Mobile rules are intentionally untouched. */
+@media (min-width:901px){
+  .model-page .bcp-look-parts-section-v16m > .wrap,
+  .model-page .model-guide-mini-v59 > .wrap,
+  .model-page #shop-part-by-part > .wrap{
+    width:var(--bcp-model-wide) !important;
+    max-width:var(--bcp-model-wide) !important;
+    margin-left:auto !important;
+    margin-right:auto !important;
+    box-sizing:border-box !important;
+  }
+
+  .model-page .bcp-look-parts-stack-v16m,
+  .model-page .bcp-look-parts-panel-v16m,
+  .model-page .model-guide-mini-bar-v59,
+  .model-page #shop-part-by-part .section-head,
+  .model-page #shop-part-by-part .product-grid,
+  .model-page #shop-part-by-part .product-grid-full{
+    width:100% !important;
+    max-width:100% !important;
+    margin-left:0 !important;
+    margin-right:0 !important;
+    box-sizing:border-box !important;
+  }
+
+  .model-page #shop-part-by-part .section-head{
+    display:grid !important;
+    grid-template-columns:minmax(220px,360px) minmax(0,1fr) !important;
+    align-items:end !important;
+    gap:22px !important;
+  }
+
+  .model-page #shop-part-by-part .section-head h2,
+  .model-page #shop-part-by-part .section-head p{
+    margin-left:0 !important;
+    margin-right:0 !important;
+  }
+
+  .model-page #shop-part-by-part .section-head p{
+    max-width:760px !important;
+  }
+}
+
+@media (min-width:1200px){
+  .model-page #shop-part-by-part > .wrap,
+  .model-page #shop-part-by-part .wrap{
+    width:var(--bcp-model-wide) !important;
+    max-width:var(--bcp-model-wide) !important;
+  }
+}
+/* END V16S */
+
+/* V16T — desktop rhythm polish after N→S
+   Scope: desktop model pages only. Centers the final full-look CTA, tightens Quick access → Browse spacing, and gives the Quick access bar proper inner breathing room.
+   Safe: CSS only; no HTML/JS/cart/Stripe/Worker/SKU/price changes. Mobile rules are intentionally untouched. */
+@media (min-width:901px){
+  /* Center final violet full-look CTA under the look product cards */
+  .model-page .bcp-look-bottom-actions-v16m{
+    width:100% !important;
+    display:flex !important;
+    justify-content:center !important;
+    align-items:center !important;
+    margin-top:18px !important;
+    padding-top:2px !important;
+    text-align:center !important;
+  }
+  .model-page .bcp-look-bottom-actions-v16m .btn.build-bundle-review.primary.bcp-look-full-add-v16m{
+    width:min(100%, 340px) !important;
+    max-width:340px !important;
+    margin-left:auto !important;
+    margin-right:auto !important;
+    text-align:center !important;
+  }
+
+  /* Reduce the empty vertical air before Browse all individual upgrades */
+  .model-page .model-guide-mini-v59{
+    padding-top:18px !important;
+    padding-bottom:10px !important;
+    margin-bottom:0 !important;
+  }
+  .model-page .bcp-browse-look-banner-v16n:not(:target){
+    margin:0 !important;
+  }
+  .model-page #shop-part-by-part{
+    padding-top:22px !important;
+  }
+
+  /* Premium Quick access breathing room: no item glued to cell edge */
+  .model-page .model-guide-mini-bar-v59{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:flex-start !important;
+    flex-wrap:wrap !important;
+    gap:10px !important;
+    padding:12px 26px !important;
+    min-height:52px !important;
+    box-sizing:border-box !important;
+  }
+  .model-page .model-guide-mini-label-v59{
+    flex:0 0 auto !important;
+    margin-right:4px !important;
+  }
+  .model-page .model-guide-mini-bar-v59 a{
+    flex:0 0 auto !important;
+    width:auto !important;
+    min-width:132px !important;
+    padding-left:18px !important;
+    padding-right:18px !important;
+  }
+
+  /* Keep Browse title professional on wide desktop */
+  .model-page #shop-part-by-part .section-head{
+    grid-template-columns:minmax(390px,470px) minmax(0,1fr) !important;
+    gap:26px !important;
+    align-items:center !important;
+    margin-bottom:18px !important;
+  }
+}
+/* END V16T */
+
+
+/* BENDAGO V16U — remove product-card hover veil
+   Scope: CSS-only. Removes the yellow/champagne sweep veil on model product cards while preserving premium hover lift, border glow, green CTAs and V16N→T layout. */
+@media (hover:hover) and (pointer:fine){
+  .model-page .product-card::after,
+  .model-page .real-product-card::after,
+  .model-page #shop-part-by-part .product-card::after,
+  .model-page .bcp-look-product-grid-v16m .product-card::after{
+    content:none !important;
+    display:none !important;
+    opacity:0 !important;
+    background:none !important;
+    transform:none !important;
+    box-shadow:none !important;
+  }
+  .model-page .product-card::before,
+  .model-page .real-product-card::before,
+  .model-page #shop-part-by-part .product-card::before,
+  .model-page .bcp-look-product-grid-v16m .product-card::before{
+    content:"" !important;
+    display:block !important;
+    opacity:.18 !important;
+    background:none !important;
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.055) !important;
+  }
+  .model-page .product-card:hover::before,
+  .model-page .real-product-card:hover::before,
+  .model-page #shop-part-by-part .product-card:hover::before,
+  .model-page .bcp-look-product-grid-v16m .product-card:hover::before{
+    opacity:.24 !important;
+    background:none !important;
+    box-shadow:inset 0 0 0 1px rgba(239,211,154,.12) !important;
+  }
+  .model-page .product-card:hover,
+  .model-page .real-product-card:hover{
+    border-color:rgba(239,211,154,.58) !important;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.08),
+      0 24px 58px rgba(0,0,0,.42),
+      0 0 22px rgba(185,147,99,.10) !important;
+  }
+}
+
+
+/* BENDAGO V16V — CTA wording + Louis Vuitton desktop CTA alignment lock
+   Scope: model-page product cards only. Replaces option wording in HTML; CSS aligns card CTAs in desktop grids.
+   Safe: no add-to-cart JS, no order-flow, no Worker, no Stripe, no SKU, no price changes. */
+@media (min-width: 901px){
+  .model-page #shop-part-by-part .product-card .body,
+  .model-page #shop-part-by-part .real-product-card .body,
+  .model-page .bcp-look-product-grid-v16m .product-card .body,
+  .model-page .bcp-look-product-grid-v16m .real-product-card .body{
+    display:flex !important;
+    flex-direction:column !important;
+    height:100% !important;
+    min-height:0 !important;
+  }
+  .model-page #shop-part-by-part .product-card h3,
+  .model-page #shop-part-by-part .real-product-card h3,
+  .model-page .bcp-look-product-grid-v16m .product-card h3,
+  .model-page .bcp-look-product-grid-v16m .real-product-card h3{
+    min-height:2.35em !important;
+    display:flex !important;
+    align-items:flex-start !important;
+  }
+  .model-page #shop-part-by-part .product-card p,
+  .model-page #shop-part-by-part .real-product-card p,
+  .model-page .bcp-look-product-grid-v16m .product-card p,
+  .model-page .bcp-look-product-grid-v16m .real-product-card p{
+    min-height:5.55em !important;
+    max-height:5.55em !important;
+    overflow:hidden !important;
+    display:-webkit-box !important;
+    -webkit-line-clamp:4 !important;
+    -webkit-box-orient:vertical !important;
+  }
+  .model-page #shop-part-by-part .product-card .product-meta,
+  .model-page #shop-part-by-part .real-product-card .product-meta,
+  .model-page .bcp-look-product-grid-v16m .product-card .product-meta,
+  .model-page .bcp-look-product-grid-v16m .real-product-card .product-meta{
+    min-height:34px !important;
+    display:flex !important;
+    align-items:flex-end !important;
+    justify-content:space-between !important;
+  }
+  .model-page #shop-part-by-part .product-card .small,
+  .model-page #shop-part-by-part .real-product-card .small,
+  .model-page .bcp-look-product-grid-v16m .product-card .small,
+  .model-page .bcp-look-product-grid-v16m .real-product-card .small{
+    min-height:2.45em !important;
+    display:flex !important;
+    align-items:flex-start !important;
+  }
+  .model-page #shop-part-by-part .product-card .product-details-link,
+  .model-page #shop-part-by-part .real-product-card .product-details-link,
+  .model-page .bcp-look-product-grid-v16m .product-card .product-details-link,
+  .model-page .bcp-look-product-grid-v16m .real-product-card .product-details-link{
+    margin-top:auto !important;
+    min-height:44px !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    text-align:center !important;
+  }
+  .model-page #shop-part-by-part .product-card .add-preview,
+  .model-page #shop-part-by-part .real-product-card .add-preview,
+  .model-page .bcp-look-product-grid-v16m .product-card .add-preview,
+  .model-page .bcp-look-product-grid-v16m .real-product-card .add-preview{
+    min-height:48px !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    text-align:center !important;
+    line-height:1.05 !important;
+  }
+}
+@media (max-width: 900px){
+  .model-page .product-card .add-preview,
+  .model-page .real-product-card .add-preview{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    text-align:center !important;
+  }
+}
+/* END BENDAGO V16V */
