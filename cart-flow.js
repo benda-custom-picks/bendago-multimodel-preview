@@ -64,7 +64,8 @@
     'ghost-aluminium-cnc-chain-cover-left-v4': 'ghost-aluminium-cnc-chain-cover-left-v4',
     'transparent-air-filter-cover-aluminium-v4': 'transparent-air-filter-cover-aluminium-v4',
     'transparent-air-filter-cover-filter-only-v4': 'transparent-air-filter-cover-filter-only-v4',
-    'ghost-exhaust-heat-shield-v4': 'ghost-exhaust-heat-shield-v4'
+    'ghost-exhaust-heat-shield-v4': 'ghost-exhaust-heat-shield-v4',
+    'aluminum-front-fork-protector-darkflag-500-v4': 'aluminum-front-fork-protector-darkflag-500-v4'
   };
 
   const COMPLETE_BUILD_OFFERS = [
@@ -133,6 +134,7 @@
         { code: 'ghost-aluminium-cnc-chain-cover-left-v4' },
         { code: 'transparent-air-filter-cover-aluminium-v4', color_option: 'Right' },
         { code: 'ghost-exhaust-heat-shield-v4' },
+        { code: 'aluminum-front-fork-protector-darkflag-500-v4' },
         { code: 'midnight-hunter-tank-cover-kit-v4' },
         { code: 'midnight-beast-kit-v4' }
       ]
@@ -215,6 +217,7 @@
       { code: 'ghost-aluminium-cnc-chain-cover-left-v4' },
       { code: 'transparent-air-filter-cover-aluminium-v4', options: { color_option: 'Right' } },
       { code: 'ghost-exhaust-heat-shield-v4' },
+      { code: 'aluminum-front-fork-protector-darkflag-500-v4' },
       { code: 'midnight-hunter-tank-cover-kit-v4' },
       { code: 'midnight-beast-kit-v4' }
     ],
@@ -1097,6 +1100,16 @@ async function createStripeCheckout(lines, formData) {
         image: './ghost-exhaust-heat-shield-v4-hero.png',
         stripe_url: ''
       },
+      'aluminum-front-fork-protector-darkflag-500-v4': {
+        product_code: 'aluminum-front-fork-protector-darkflag-500-v4',
+        product_name: 'Aluminum Front Fork Protector Darkflag 500',
+        product_short: 'Black aluminium front fork protector for Benda Darkflag 500',
+        fitment: 'Benda Darkflag 500',
+        price: '479 €',
+        delivery_estimate: '10 to 15 business days',
+        image: './aluminum-front-fork-protector-darkflag-500-hero.png',
+        stripe_url: ''
+      },
     };
 
     Object.keys(napoleon450Fallbacks).forEach(code => {
@@ -1158,7 +1171,8 @@ async function createStripeCheckout(lines, formData) {
     'ghost-aluminium-cnc-chain-cover-left-v4': './order-ghost-aluminium-cnc-chain-cover-left-v4.html',
     'transparent-air-filter-cover-aluminium-v4': './order-transparent-air-filter-cover-aluminium-v4.html',
     'transparent-air-filter-cover-filter-only-v4': './order-transparent-air-filter-cover-aluminium-v4.html',
-    'ghost-exhaust-heat-shield-v4': './order-ghost-exhaust-heat-shield-v4.html'
+    'ghost-exhaust-heat-shield-v4': './order-ghost-exhaust-heat-shield-v4.html',
+    'aluminum-front-fork-protector-darkflag-500-v4': './order-aluminum-front-fork-protector-darkflag-500-v4.html'
   };
 
   function productPageUrl(code) {
