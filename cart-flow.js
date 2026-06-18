@@ -133,7 +133,6 @@
         { code: 'aircraft-metal-cover-v4' },
         { code: 'ghost-metal-cover-v4' },
         { code: 'ghost-aluminium-cnc-chain-cover-left-v4' },
-        { code: 'ghost-protector-darkflag-950-v4' },
         { code: 'midnight-hunter-tank-cover-kit-v4' },
         { code: 'midnight-beast-kit-v4' }
       ]
@@ -214,7 +213,6 @@
       { code: 'aircraft-metal-cover-v4' },
       { code: 'ghost-metal-cover-v4' },
       { code: 'ghost-aluminium-cnc-chain-cover-left-v4' },
-      { code: 'ghost-protector-darkflag-950-v4' },
       { code: 'midnight-hunter-tank-cover-kit-v4' },
       { code: 'midnight-beast-kit-v4' }
     ],
