@@ -389,11 +389,11 @@
       return [
         '<div class="cart-pricing-row"><span>Subtotal</span><strong>' + formatEuro(pricing.subtotal) + '</strong></div>',
         '<div class="cart-pricing-row cart-pricing-discount"><span>Launch Access 5%</span><strong>-' + formatEuro(pricing.discountAmount) + '</strong></div>',
-        '<div class="cart-total-row"><span>Total</span><strong>' + formatEuro(pricing.total) + '</strong></div>',
+        '<div class="cart-total-row"><span>Selected parts total</span><strong>' + formatEuro(pricing.total) + '</strong></div>',
         '<div class="cart-launch-note">Launch Access applied' + (pricing.buildName ? ': ' + escapeHtml(pricing.buildName) : '') + '. No code needed.</div>'
       ].join('');
     }
-    return '<div class="cart-total-row"><span>Total</span><strong>' + formatEuro(pricing ? pricing.total : 0) + '</strong></div>';
+    return '<div class="cart-total-row"><span>Selected parts total</span><strong>' + formatEuro(pricing ? pricing.total : 0) + '</strong></div>';
   }
 
   function cartSummaryText(lines, pricing) {
@@ -830,12 +830,12 @@ async function createStripeCheckout(lines, formData) {
     if (!button || button.disabled) return;
     const lines = getLines();
     if (!lines.length) {
-      button.textContent = 'Pay securely now';
+      button.textContent = 'Secure selected parts';
       button.dataset.readyText = button.textContent;
       return;
     }
     const pricing = calculateLaunchOffer(lines);
-    button.textContent = 'Pay securely now — ' + formatEuro(pricing.total);
+    button.textContent = 'Secure selected parts — ' + formatEuro(pricing.total);
     button.dataset.readyText = button.textContent;
   }
 
@@ -872,7 +872,7 @@ async function createStripeCheckout(lines, formData) {
         push('stripe_checkout_error', { error_message: (err && err.message) ? err.message : 'Stripe checkout could not be created', cart_count: cartCount(), payment_provider: 'stripe' });
         showCartStatus('err', err.message || 'Stripe checkout could not be created. Please contact Benda Custom Picks.');
         button.disabled = false;
-        button.textContent = originalText || button.dataset.readyText || 'Pay securely now';
+        button.textContent = originalText || button.dataset.readyText || 'Secure selected parts';
       }
     });
   }
@@ -1354,6 +1354,9 @@ async function createStripeCheckout(lines, formData) {
       .cart-floating-btn,#bendagoCartButton{display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important;}
       .order-header-cart-link,.order-cart-link{display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:7px!important;min-height:34px!important;height:34px!important;padding:0 11px!important;border-radius:999px!important;border:1px solid rgba(217,184,117,.36)!important;background:linear-gradient(180deg,rgba(255,255,255,.052),rgba(255,255,255,.014)),rgba(7,9,13,.88)!important;color:rgba(247,241,232,.94)!important;text-decoration:none!important;font-size:.78rem!important;font-weight:950!important;box-shadow:none!important;white-space:nowrap!important;}
       .order-header-cart-link .cart-count-badge,.order-cart-link .cart-count-badge,.order-header-cart-link [data-cart-count],.order-cart-link [data-cart-count]{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-width:18px!important;height:18px!important;padding:0 5px!important;border-radius:999px!important;background:#d9b875!important;color:#0d0905!important;font-size:10px!important;font-weight:950!important;line-height:1!important;}
+      .cart-note{border:1px solid rgba(190,152,255,.18)!important;background:linear-gradient(135deg,rgba(156,94,255,.085),rgba(255,255,255,.026))!important;border-radius:16px!important;padding:10px 11px!important;color:rgba(255,255,255,.72)!important;font-size:.84rem!important;line-height:1.36!important;}
+      .cart-note strong{color:#fff!important;}
+      .cart-checkout-btn{background:linear-gradient(135deg,#1fa463,#70d99a)!important;color:#041208!important;}
     `;
     document.head.appendChild(style);
   }
@@ -1398,18 +1401,18 @@ async function createStripeCheckout(lines, formData) {
     drawer.setAttribute('aria-label', 'Benda Custom Picks cart');
     drawer.innerHTML = [
       '<div class="cart-head">',
-      '<div><h2>Your cart</h2><p>Swipe selected products, then continue with secure checkout.</p></div>',
+      '<div><h2>Your selected parts</h2><p>Your Benda look starts here. Start with these parts now and complete the build later.</p></div>',
       '<button type="button" class="cart-close" data-cart-close aria-label="Close cart">×</button>',
       '</div>',
       '<div class="cart-body" data-cart-body></div>',
       '<div class="cart-footer">',
-      '<div class="cart-pricing-block" data-cart-pricing><div class="cart-total-row"><span>Total</span><strong>0 €</strong></div></div>',
-      '<div class="cart-note"><strong>Ready to pay securely.</strong><br>Fill your details once, then continue with secure Stripe card checkout. Delivery after payment: 10–15 business days. Local import duties/taxes may apply.</div>',
-      '<a class="cart-checkout-btn disabled" data-cart-checkout href="./cart-request.html">Continue to secure payment</a>',
+      '<div class="cart-pricing-block" data-cart-pricing><div class="cart-total-row"><span>Selected parts total</span><strong>0 €</strong></div></div>',
+      '<div class="cart-note"><strong>Start this look now.</strong><br>You only secure the parts selected today. Complete the full look later if you want more pieces. Stripe checkout · tracking after dispatch · support if needed.</div>',
+      '<a class="cart-checkout-btn disabled" data-cart-checkout href="./cart-request.html">Secure my selected parts</a>',
       '<button type="button" class="cart-share-btn" data-cart-share>Copy cart link</button>',
       '<div class="cart-secondary-actions">',
       '<button type="button" class="cart-clear-btn" data-cart-clear>Clear cart</button>',
-      '<a class="cart-other-product-btn" href="' + currentPartsHref() + '" data-cart-other-product>Add another product</a>',
+      '<a class="cart-other-product-btn" href="' + currentPartsHref() + '" data-cart-other-product>Add matching parts</a>',
       '</div>',
       '</div>'
     ].join('');
@@ -1521,7 +1524,7 @@ async function createStripeCheckout(lines, formData) {
     const shareBtn = document.querySelector('[data-cart-share]');
     if (!lines.length) {
       body.innerHTML = '<div class="cart-empty">Your cart is empty. Open a product page and add one or several parts.</div>';
-      pricingEl.innerHTML = '<div class="cart-total-row"><span>Total</span><strong>0 €</strong></div>';
+      pricingEl.innerHTML = '<div class="cart-total-row"><span>Selected parts total</span><strong>0 €</strong></div>';
       checkout.classList.add('disabled');
       if (shareBtn) shareBtn.disabled = false;
       return;
