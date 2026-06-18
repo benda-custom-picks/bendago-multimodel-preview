@@ -5797,116 +5797,219 @@ body.model-page .cart-floating-btn,
 /* END V16NZZZK */
 
 
-/* BENDAGO V16NZZZL — responsive native reel cards + compact sticky reference
-   Scope: responsive visual correction only. Look cards keep native reel ratio; sticky returns to compact band. */
-@media (max-width: 900px){
-  html body.model-page section#looks .look-card,
-  html body.model-page.model-125 section#looks .look-card,
-  html body.model-page.model-500 section#looks .look-card,
-  html body.model-page.model-v4 section#looks .look-card{
-    height:auto !important;
+/* BENDAGO V16NZZZL — PC uniform MP4 left rail lock
+   Scope: visual only. Makes all desktop look MP4 blocks match the successful "Choose the parts for your look" rail dimensions, and forces full-frame cover for sticky/browse videos. */
+@media (min-width: 901px){
+  html body.model-page{
+    --bcp-look-rail-w: clamp(420px, 31vw, 560px);
+    --bcp-look-rail-w-wide: clamp(560px, 42vw, 720px);
+  }
+
+  html body.model-page section#looks .look-grid,
+  html body.model-page.model-125 section#looks .look-grid,
+  html body.model-page.model-v4 section#looks .look-grid,
+  html body.model-page.model-500 section#looks .look-grid{
+    display:flex !important;
+    flex-direction:column !important;
+    gap:34px !important;
+    align-items:stretch !important;
+    width:min(100%, 1640px) !important;
+    max-width:1640px !important;
+    margin-inline:auto !important;
+  }
+
+  html body.model-page section#looks article.look-card,
+  html body.model-page.model-125 section#looks article.look-card,
+  html body.model-page.model-v4 section#looks article.look-card{
+    display:grid !important;
+    grid-template-columns:var(--bcp-look-rail-w) minmax(0,1fr) !important;
+    column-gap:clamp(34px,4vw,68px) !important;
+    align-items:center !important;
+    width:100% !important;
     min-height:0 !important;
-    max-height:none !important;
+    height:auto !important;
+    padding:clamp(24px,2.1vw,34px) !important;
     overflow:hidden !important;
   }
 
-  html body.model-page.model-125 section#looks .look-media,
-  html body.model-page.model-125 section#looks .look-media-video,
-  html body.model-page.model-125 section#looks .look-media-link,
-  html body.model-page.model-v4 section#looks .look-media,
-  html body.model-page.model-v4 section#looks .look-media-video,
-  html body.model-page.model-v4 section#looks .look-media-link{
+  html body.model-page.model-500 section#looks article.look-card{
+    display:grid !important;
+    grid-template-columns:var(--bcp-look-rail-w-wide) minmax(0,1fr) !important;
+    column-gap:clamp(34px,4vw,68px) !important;
+    align-items:center !important;
     width:100% !important;
-    height:auto !important;
     min-height:0 !important;
-    max-height:none !important;
+    height:auto !important;
+    padding:clamp(24px,2.1vw,34px) !important;
+    overflow:hidden !important;
+  }
+
+  html body.model-page section#looks article.look-card > .look-media,
+  html body.model-page section#looks article.look-card > .look-media-video,
+  html body.model-page section#looks article.look-card > a.look-media,
+  html body.model-page.model-125 section#looks article.look-card > .look-media,
+  html body.model-page.model-125 section#looks article.look-card > .look-media-video,
+  html body.model-page.model-v4 section#looks article.look-card > .look-media,
+  html body.model-page.model-v4 section#looks article.look-card > .look-media-video,
+  html body.model-page.model-v4 section#looks article.look-card > a.look-media{
+    grid-column:1 !important;
+    grid-row:1 !important;
+    display:block !important;
+    position:relative !important;
+    width:100% !important;
+    max-width:none !important;
+    min-width:0 !important;
+    height:auto !important;
     aspect-ratio:9 / 16 !important;
     overflow:hidden !important;
+    border-radius:28px !important;
     background:#050505 !important;
+    justify-self:stretch !important;
+    align-self:center !important;
   }
 
-  html body.model-page.model-500 section#looks .look-media,
-  html body.model-page.model-500 section#looks .look-media-video,
-  html body.model-page.model-500 section#looks .look-media-link{
+  html body.model-page.model-500 section#looks article.look-card > .look-media,
+  html body.model-page.model-500 section#looks article.look-card > .look-media-video,
+  html body.model-page.model-500 section#looks article.look-card > a.look-media{
+    grid-column:1 !important;
+    grid-row:1 !important;
+    display:block !important;
+    position:relative !important;
     width:100% !important;
+    max-width:none !important;
+    min-width:0 !important;
     height:auto !important;
-    min-height:0 !important;
-    max-height:none !important;
     aspect-ratio:16 / 9 !important;
     overflow:hidden !important;
+    border-radius:28px !important;
     background:#050505 !important;
+    justify-self:stretch !important;
+    align-self:center !important;
   }
 
-  html body.model-page section#looks .look-video,
-  html body.model-page section#looks .look-media video,
-  html body.model-page.model-125 section#looks .look-video,
-  html body.model-page.model-125 section#looks .look-media video,
-  html body.model-page.model-500 section#looks .look-video,
-  html body.model-page.model-500 section#looks .look-media video,
-  html body.model-page.model-v4 section#looks .look-video,
-  html body.model-page.model-v4 section#looks .look-media video{
+  html body.model-page section#looks article.look-card > .look-media video,
+  html body.model-page section#looks article.look-card > a.look-media video,
+  html body.model-page section#looks article.look-card video.look-video,
+  html body.model-page.model-125 section#looks article.look-card video,
+  html body.model-page.model-v4 section#looks article.look-card video,
+  html body.model-page.model-500 section#looks article.look-card video{
     position:absolute !important;
     inset:0 !important;
     width:100% !important;
     height:100% !important;
+    min-width:100% !important;
+    min-height:100% !important;
     max-width:none !important;
     max-height:none !important;
-    object-fit:contain !important;
-    object-position:center center !important;
-    background:#050505 !important;
-  }
-
-  html body.model-page .bcp-look-gallery-banner-v16n,
-  html body.model-page.model-125 .bcp-look-gallery-banner-v16n,
-  html body.model-page.model-500 .bcp-look-gallery-banner-v16n,
-  html body.model-page.model-v4 .bcp-look-gallery-banner-v16n,
-  html body.model-page.model-500 .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y,
-  html body.model-page.model-v4 .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y{
-    width:100% !important;
-    height:clamp(158px, 28vh, 220px) !important;
-    min-height:158px !important;
-    max-height:220px !important;
-    aspect-ratio:auto !important;
-    overflow:hidden !important;
-    border-radius:22px !important;
-    background:#050505 !important;
-  }
-
-  html body.model-page .bcp-look-gallery-banner-v16n .bcp-look-sticky-video-v16m,
-  html body.model-page.model-125 .bcp-look-gallery-banner-v16n .bcp-look-sticky-video-v16m,
-  html body.model-page.model-500 .bcp-look-gallery-banner-v16n .bcp-look-sticky-video-v16m,
-  html body.model-page.model-v4 .bcp-look-gallery-banner-v16n .bcp-look-sticky-video-v16m,
-  html body.model-page.model-500 .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y .bcp-look-sticky-video-v16m,
-  html body.model-page.model-v4 .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y .bcp-look-sticky-video-v16m{
-    position:absolute !important;
-    inset:0 !important;
-    width:100% !important;
-    height:100% !important;
     object-fit:cover !important;
     object-position:center center !important;
     background:#050505 !important;
   }
 
-  html body.model-page .bcp-look-gallery-banner-v16n .bcp-look-sticky-copy-v16m,
-  html body.model-page.model-125 .bcp-look-gallery-banner-v16n .bcp-look-sticky-copy-v16m,
-  html body.model-page.model-500 .bcp-look-gallery-banner-v16n .bcp-look-sticky-copy-v16m,
-  html body.model-page.model-v4 .bcp-look-gallery-banner-v16n .bcp-look-sticky-copy-v16m,
-  html body.model-page.model-500 .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y .bcp-look-sticky-copy-v16m,
-  html body.model-page.model-v4 .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y .bcp-look-sticky-copy-v16m{
-    display:none !important;
+  html body.model-page section#looks article.look-card > .look-body,
+  html body.model-page.model-125 section#looks article.look-card > .look-body,
+  html body.model-page.model-v4 section#looks article.look-card > .look-body,
+  html body.model-page.model-500 section#looks article.look-card > .look-body{
+    grid-column:2 !important;
+    grid-row:1 !important;
+    width:100% !important;
+    max-width:none !important;
+    min-width:0 !important;
+    justify-self:stretch !important;
+    align-self:center !important;
+    padding:0 !important;
+    text-align:left !important;
+  }
+
+  html body.model-page section#looks article.look-card > .look-body h3,
+  html body.model-page.model-125 section#looks article.look-card > .look-body h3,
+  html body.model-page.model-v4 section#looks article.look-card > .look-body h3,
+  html body.model-page.model-500 section#looks article.look-card > .look-body h3{
+    font-size:clamp(34px,2.65vw,54px) !important;
+    line-height:1 !important;
+    margin-bottom:14px !important;
+  }
+
+  html body.model-page section#looks article.look-card > .look-body p,
+  html body.model-page.model-125 section#looks article.look-card > .look-body p,
+  html body.model-page.model-v4 section#looks article.look-card > .look-body p,
+  html body.model-page.model-500 section#looks article.look-card > .look-body p,
+  html body.model-page section#looks article.look-card > .look-body li{
+    font-size:clamp(15px,.95vw,18px) !important;
+    line-height:1.5 !important;
+  }
+
+  html body.model-page .bcp-look-parts-panel-v16m .bcp-look-parts-body-v16m,
+  html body.model-page.model-125 .bcp-look-parts-panel-v16m .bcp-look-parts-body-v16m,
+  html body.model-page.model-v4 .bcp-look-parts-panel-v16m .bcp-look-parts-body-v16m{
+    display:grid !important;
+    grid-template-columns:var(--bcp-look-rail-w) minmax(0,1fr) !important;
+    column-gap:clamp(34px,4vw,68px) !important;
+    align-items:start !important;
+  }
+
+  html body.model-page.model-500 .bcp-look-parts-panel-v16m .bcp-look-parts-body-v16m{
+    display:grid !important;
+    grid-template-columns:var(--bcp-look-rail-w-wide) minmax(0,1fr) !important;
+    column-gap:clamp(34px,4vw,68px) !important;
+    align-items:start !important;
+  }
+
+  html body.model-page .bcp-look-gallery-banner-v16n,
+  html body.model-page.model-125 .bcp-look-gallery-banner-v16n,
+  html body.model-page.model-v4 .bcp-look-gallery-banner-v16n{
+    width:100% !important;
+    max-width:none !important;
+    aspect-ratio:9 / 16 !important;
+    height:auto !important;
+    min-height:0 !important;
+    overflow:hidden !important;
+    background:#050505 !important;
+    border-radius:28px !important;
+  }
+
+  html body.model-page.model-500 .bcp-look-gallery-banner-v16n{
+    width:100% !important;
+    max-width:none !important;
+    aspect-ratio:16 / 9 !important;
+    height:auto !important;
+    min-height:0 !important;
+    overflow:hidden !important;
+    background:#050505 !important;
+    border-radius:28px !important;
+  }
+
+  html body.model-page .bcp-look-gallery-banner-v16n .bcp-look-sticky-video-v16m,
+  html body.model-page.model-125 .bcp-look-gallery-banner-v16n .bcp-look-sticky-video-v16m,
+  html body.model-page.model-v4 .bcp-look-gallery-banner-v16n .bcp-look-sticky-video-v16m,
+  html body.model-page.model-500 .bcp-look-gallery-banner-v16n .bcp-look-sticky-video-v16m{
+    position:absolute !important;
+    inset:0 !important;
+    width:100% !important;
+    height:100% !important;
+    min-width:100% !important;
+    min-height:100% !important;
+    object-fit:cover !important;
+    object-position:center center !important;
+    background:#050505 !important;
+  }
+
+  html body.model-page .bcp-look-gallery-banner-v16n .bcp-look-sticky-copy-v16m{
+    left:22px !important;
+    right:22px !important;
+    bottom:22px !important;
+    max-width:none !important;
+  }
+
+  html body.model-page .bcp-look-product-grid-v16m,
+  html body.model-page.model-125 .bcp-look-product-grid-v16m,
+  html body.model-page.model-v4 .bcp-look-product-grid-v16m,
+  html body.model-page.model-500 .bcp-look-product-grid-v16m,
+  html body.model-page.model-v4 #shop-part-by-part .product-grid,
+  html body.model-page.model-500 #shop-part-by-part .product-grid{
+    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+    gap:18px !important;
   }
 }
 
-@media (max-width: 900px) and (orientation: landscape){
-  html body.model-page .bcp-look-gallery-banner-v16n,
-  html body.model-page.model-125 .bcp-look-gallery-banner-v16n,
-  html body.model-page.model-500 .bcp-look-gallery-banner-v16n,
-  html body.model-page.model-v4 .bcp-look-gallery-banner-v16n,
-  html body.model-page.model-500 .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y,
-  html body.model-page.model-v4 .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y{
-    height:clamp(108px, 30vh, 148px) !important;
-    min-height:108px !important;
-    max-height:148px !important;
-  }
-}
 /* END V16NZZZL */
