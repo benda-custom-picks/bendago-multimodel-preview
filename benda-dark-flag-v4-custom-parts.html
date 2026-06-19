@@ -480,6 +480,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 </style>
 
+
 <style id="bcp-v18-browse-fullbleed-35-30-cta-restore">
 /* BENDAGO V18 — Browse-only full-bleed aligned with the validated responsive sticky standard.
    Scope: responsive Browse + full-look CTA geometry only. Desktop and validated look sticky media untouched. */
@@ -572,6 +573,241 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
 }
 </style>
+
+
+<style id="bcp-v18-darkflag-pc-shared-sticky-template">
+/* BENDAGO V18 — Dark Flag V4 desktop shared sticky template.
+   Scope: Dark Flag desktop only. Aligns the existing model-template structure with the validated Napoleon desktop pattern:
+   sticky video rail left / copy + product cards + full-look CTA right, with matching sticky width, radius and top offset in both sections.
+   Responsive Browse/CTA layer remains untouched. */
+@media (min-width: 901px){
+  html body.model-page.model-v4{
+    --bcp-v4-pc-sticky-width:min(100%, 480px);
+    --bcp-v4-pc-sticky-radius:26px;
+  }
+
+  /* Choose the parts for your look: fixed left rail / selected parts and CTA right. */
+  html body.model-page.model-v4 #full-look-parts .bcp-look-parts-body-v16m{
+    display:grid !important;
+    grid-template-columns:minmax(420px, 520px) minmax(0, 1fr) !important;
+    gap:12px clamp(34px, 4vw, 64px) !important;
+    align-items:start !important;
+    width:100% !important;
+  }
+
+  html body.model-page.model-v4 #full-look-parts .bcp-look-gallery-banner-v16n{
+    grid-column:1 !important;
+    grid-row:1 / span 20 !important;
+    justify-self:center !important;
+    align-self:start !important;
+    position:sticky !important;
+    top:88px !important;
+    display:block !important;
+    width:var(--bcp-v4-pc-sticky-width) !important;
+    max-width:480px !important;
+    height:auto !important;
+    min-height:0 !important;
+    max-height:none !important;
+    aspect-ratio:9 / 16 !important;
+    margin:0 !important;
+    overflow:hidden !important;
+    border-radius:var(--bcp-v4-pc-sticky-radius) !important;
+    background:#050505 !important;
+    border:1px solid rgba(226,189,114,.20) !important;
+    box-shadow:0 28px 90px rgba(0,0,0,.62), 0 0 0 1px rgba(226,189,114,.16) !important;
+  }
+
+  html body.model-page.model-v4 #full-look-parts .bcp-look-gallery-banner-v16n .bcp-look-sticky-video-v16m{
+    position:absolute !important;
+    inset:0 !important;
+    display:block !important;
+    width:100% !important;
+    height:100% !important;
+    min-width:100% !important;
+    min-height:100% !important;
+    max-width:none !important;
+    max-height:none !important;
+    object-fit:cover !important;
+    object-position:center center !important;
+    background:#050505 !important;
+  }
+
+  html body.model-page.model-v4 #full-look-parts .bcp-look-kicker-v16m,
+  html body.model-page.model-v4 #full-look-parts .bcp-look-parts-body-v16m > h3,
+  html body.model-page.model-v4 #full-look-parts .bcp-look-parts-body-v16m > p,
+  html body.model-page.model-v4 #full-look-parts .bcp-look-product-grid-v16m,
+  html body.model-page.model-v4 #full-look-parts .bcp-look-bottom-actions-v16m,
+  html body.model-page.model-v4 #full-look-parts .bcp-look-bottom-note-v16m{
+    grid-column:2 !important;
+  }
+
+  html body.model-page.model-v4 #full-look-parts .bcp-look-product-grid-v16m{
+    grid-template-columns:repeat(3, minmax(0, 1fr)) !important;
+    gap:14px !important;
+  }
+
+  /* Browse all individual upgrades: use the same left sticky rail and same right-hand catalogue alignment. */
+  html body.model-page.model-v4 section#shop-part-by-part > .wrap{
+    display:grid !important;
+    grid-template-columns:minmax(420px, 520px) minmax(0, 1fr) !important;
+    column-gap:clamp(34px, 4vw, 64px) !important;
+    align-items:start !important;
+    width:min(1480px, calc(100vw - 72px)) !important;
+    max-width:min(1480px, calc(100vw - 72px)) !important;
+  }
+
+  html body.model-page.model-v4 section#shop-part-by-part .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y{
+    grid-column:1 !important;
+    grid-row:1 / span 3 !important;
+    justify-self:center !important;
+    align-self:start !important;
+    position:sticky !important;
+    top:88px !important;
+    display:block !important;
+    width:var(--bcp-v4-pc-sticky-width) !important;
+    max-width:480px !important;
+    height:auto !important;
+    min-height:0 !important;
+    max-height:none !important;
+    aspect-ratio:9 / 16 !important;
+    margin:0 !important;
+    overflow:hidden !important;
+    border-radius:var(--bcp-v4-pc-sticky-radius) !important;
+    background:#050505 !important;
+    border:1px solid rgba(226,189,114,.20) !important;
+    box-shadow:0 28px 90px rgba(0,0,0,.62), 0 0 0 1px rgba(226,189,114,.16) !important;
+  }
+
+  html body.model-page.model-v4 section#shop-part-by-part .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y .bcp-look-sticky-video-v16m{
+    position:absolute !important;
+    inset:0 !important;
+    display:block !important;
+    width:100% !important;
+    height:100% !important;
+    min-width:100% !important;
+    min-height:100% !important;
+    max-width:none !important;
+    max-height:none !important;
+    object-fit:cover !important;
+    object-position:center center !important;
+    background:#050505 !important;
+  }
+
+  html body.model-page.model-v4 section#shop-part-by-part > .wrap > .section-head,
+  html body.model-page.model-v4 section#shop-part-by-part > .wrap > .product-grid{
+    grid-column:2 !important;
+    width:100% !important;
+    min-width:0 !important;
+  }
+
+  html body.model-page.model-v4 section#shop-part-by-part > .wrap > .product-grid{
+    grid-template-columns:repeat(3, minmax(0, 1fr)) !important;
+    gap:18px !important;
+  }
+}
+</style>
+
+
+<style id="bcp-v18-watch-links-pc-recovery">
+/* BENDAGO V18 — recovery only.
+   Restores the six model-card watch-page title links and normalizes the shared desktop 450/500 presentation.
+   Responsive media rules are deliberately not selected. */
+html body.model-page section#looks article.look-card > .look-body > h3 > a.bcp-watch-title-link-v18{
+  color:inherit !important;
+  text-decoration:none !important;
+  cursor:pointer !important;
+}
+html body.model-page section#looks article.look-card > .look-body > h3 > a.bcp-watch-title-link-v18:hover,
+html body.model-page section#looks article.look-card > .look-body > h3 > a.bcp-watch-title-link-v18:focus-visible{
+  color:#f6c431 !important;
+  text-decoration:none !important;
+}
+@media (min-width:901px){
+  /* Prevent the note inside the green full-look panel from collapsing its two lines together. */
+  html body.model-page section#looks .bcp-look-anchor-note-v16m{
+    display:grid !important;
+    grid-template-columns:minmax(0,1fr) !important;
+    gap:4px !important;
+    align-items:start !important;
+    margin:0 0 14px !important;
+  }
+  html body.model-page section#looks .bcp-look-anchor-note-v16m > strong,
+  html body.model-page section#looks .bcp-look-anchor-note-v16m > span{
+    display:block !important;
+    min-width:0 !important;
+  }
+
+  /* Napoleon 450/500 — reassert the approved desktop model template only. */
+  html body.model-page.model-500 section#looks .look-grid,
+  html body.model-page.model-500 section#looks .look-grid.look-grid-single{
+    display:grid !important;
+    grid-template-columns:1fr !important;
+    gap:34px !important;
+    width:min(1480px, calc(100vw - 72px)) !important;
+    max-width:min(1480px, calc(100vw - 72px)) !important;
+    margin-inline:auto !important;
+    overflow:visible !important;
+  }
+  html body.model-page.model-500 section#looks article.look-card{
+    display:grid !important;
+    grid-template-columns:minmax(420px, 520px) minmax(0, 1fr) !important;
+    column-gap:clamp(44px, 5vw, 86px) !important;
+    align-items:center !important;
+    min-height:auto !important;
+    height:auto !important;
+    max-height:none !important;
+    padding:clamp(34px, 3vw, 52px) !important;
+    border-radius:32px !important;
+    overflow:hidden !important;
+  }
+  html body.model-page.model-500 section#looks article.look-card > .look-media,
+  html body.model-page.model-500 section#looks article.look-card > .look-media-video,
+  html body.model-page.model-500 section#looks article.look-card > .look-media-link{
+    grid-column:1 !important;
+    grid-row:1 !important;
+    justify-self:center !important;
+    align-self:center !important;
+    position:relative !important;
+    display:block !important;
+    width:min(100%, 480px) !important;
+    max-width:480px !important;
+    height:auto !important;
+    min-height:0 !important;
+    max-height:none !important;
+    aspect-ratio:9 / 16 !important;
+    border-radius:26px !important;
+    overflow:hidden !important;
+    background:#050505 !important;
+    box-shadow:0 28px 90px rgba(0,0,0,.62), 0 0 0 1px rgba(226,189,114,.16) !important;
+  }
+  html body.model-page.model-500 section#looks article.look-card > .look-media video,
+  html body.model-page.model-500 section#looks article.look-card > .look-media .look-video{
+    position:absolute !important;
+    inset:0 !important;
+    width:100% !important;
+    height:100% !important;
+    min-width:100% !important;
+    min-height:100% !important;
+    max-width:none !important;
+    max-height:none !important;
+    object-fit:cover !important;
+    object-position:center center !important;
+    background:#050505 !important;
+  }
+  html body.model-page.model-500 section#looks article.look-card > .look-body{
+    grid-column:2 !important;
+    grid-row:1 !important;
+    align-self:center !important;
+    justify-self:stretch !important;
+    width:100% !important;
+    min-width:0 !important;
+    max-width:860px !important;
+    padding:0 !important;
+    text-align:left !important;
+  }
+}
+</style>
+
 </head><body class="model-page model-v4"><!-- Google Tag Manager (noscript) -->
 <noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-MQHMSX8X" style="display:none;visibility:hidden" width="0"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
@@ -610,7 +846,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </div>
 </div>
 </section>
-<main><h1 class="seo-visually-hidden">Benda Dark Flag V4 Custom Parts</h1><section class="section model-start" id="looks"><div class="wrap"><div class="section-head"><h2>Dark Flag V4 — choose your build</h2><p>Choose your build direction first, then shop selected parts.</p><span aria-hidden="true" class="swipe-hint">Swipe →</span></div><div class="look-grid look-grid-single"><article class="look-card" id="shadow-beast-v4-full-build"><a aria-label="Open Shadow Monster Bike video in full screen" class="look-media look-media-video look-media-link" href="shadow-monster-bike-look.mp4" rel="noopener noreferrer" target="_blank"><video autoplay="" class="look-video" loop="" muted="" playsinline="" preload="metadata"><source src="shadow-monster-bike-look.mp4" type="video/mp4"/></video><span class="look-media-expand-badge">Tap to expand</span></a><div class="look-body"><h3>Shadow Monster Bike</h3><div class="tagline">Ghost turbine. Transparent detail. Full black presence.</div><p>Open the full-look parts first, keep the video reference visible, then choose the pieces you want before using the complete build option.</p><ul class="parts-list"><li>Ghost Kit Maverick Air Filter available in Full Black or Platinum Silver</li><li>Ghost Kit Transparent Clutch Cover available in Black, Gold or Green</li><li>Aircraft Metal Cover added as the lightweight cylinder-side detail in the full Shadow Monster Bike configuration</li><li>Ghost Metal Cover added as the machined black-and-silver side detail in the full Shadow Monster Bike configuration</li><li>Ghost Aluminium CNC Chain Cover Left added as the left-side CNC aluminium chain cover detail in the full Shadow Monster Bike configuration</li><li>Midnight Hunter Tank Cover Kit included in the full Shadow Monster Bike configuration</li><li>Midnight Beast rear wheel conversion kit included in the full Shadow Monster Bike configuration</li><li>Launch Access 5% stays reserved for the full Shadow Monster Bike configuration</li></ul><div class="look-bundle-cta build-bundle-cro-v46" data-bundle-box="shadow-beast-v4"><div class="bcp-look-anchor-note-v16m"><strong>Choose parts before cart</strong><span>No full-look total is loaded until you decide to add the complete setup.</span></div><div class="build-bundle-actions"><a class="btn build-bundle-review primary bcp-look-scroll-link-v16m" href="#look-parts-shadow-beast-v4">Complete the full look · Save 5%</a>
+<main><h1 class="seo-visually-hidden">Benda Dark Flag V4 Custom Parts</h1><section class="section model-start" id="looks"><div class="wrap"><div class="section-head"><h2>Dark Flag V4 — choose your build</h2><p>Choose your build direction first, then shop selected parts.</p><span aria-hidden="true" class="swipe-hint">Swipe →</span></div><div class="look-grid look-grid-single"><article class="look-card" id="shadow-beast-v4-full-build"><a aria-label="Open Shadow Monster Bike video in full screen" class="look-media look-media-video look-media-link" href="shadow-monster-bike-look.mp4" rel="noopener noreferrer" target="_blank"><video autoplay="" class="look-video" loop="" muted="" playsinline="" preload="metadata"><source src="shadow-monster-bike-look.mp4" type="video/mp4"/></video><span class="look-media-expand-badge">Tap to expand</span></a><div class="look-body"><h3><a class="bcp-watch-title-link-v18" href="shadow-monster-benda-dark-flag-v4-custom-build.html">Shadow Monster Bike</a></h3><div class="tagline">Ghost turbine. Transparent detail. Full black presence.</div><p>Open the full-look parts first, keep the video reference visible, then choose the pieces you want before using the complete build option.</p><ul class="parts-list"><li>Ghost Kit Maverick Air Filter available in Full Black or Platinum Silver</li><li>Ghost Kit Transparent Clutch Cover available in Black, Gold or Green</li><li>Aircraft Metal Cover added as the lightweight cylinder-side detail in the full Shadow Monster Bike configuration</li><li>Ghost Metal Cover added as the machined black-and-silver side detail in the full Shadow Monster Bike configuration</li><li>Ghost Aluminium CNC Chain Cover Left added as the left-side CNC aluminium chain cover detail in the full Shadow Monster Bike configuration</li><li>Midnight Hunter Tank Cover Kit included in the full Shadow Monster Bike configuration</li><li>Midnight Beast rear wheel conversion kit included in the full Shadow Monster Bike configuration</li><li>Launch Access 5% stays reserved for the full Shadow Monster Bike configuration</li></ul><div class="look-bundle-cta build-bundle-cro-v46" data-bundle-box="shadow-beast-v4"><div class="bcp-look-anchor-note-v16m"><strong>Choose parts before cart</strong><span>No full-look total is loaded until you decide to add the complete setup.</span></div><div class="build-bundle-actions"><a class="btn build-bundle-review primary bcp-look-scroll-link-v16m" href="#look-parts-shadow-beast-v4">Complete the full look · Save 5%</a>
 <a class="btn build-bundle-review secondary bcp-look-scroll-link-v16m" href="#look-parts-shadow-beast-v4">Choose the parts</a></div><span class="build-bundle-added">Choose the parts first. Full look remains optional.</span></div></div></article></div></div></section><section class="section bcp-look-parts-section-v16m" id="full-look-parts"><div class="wrap"><div class="section-head bcp-look-parts-head-v16m"><h2>Choose the parts for your look</h2><p>The full-look button now brings you here first. Keep the video reference visible, select the parts you want now, and use the full 5% build only if you want the complete setup.</p></div><div class="bcp-look-parts-stack-v16m"><article class="bcp-look-parts-panel-v16m" id="look-parts-shadow-beast-v4"><div class="bcp-look-parts-body-v16m"><span class="bcp-look-kicker-v16m">Parts included in this look</span><h3>Shadow Monster Bike</h3><p>Keep the Shadow Monster Bike video visible while you choose the parts you want now. Add the complete build only if you want the full setup.</p><div class="bcp-look-sticky-media-v16m bcp-look-gallery-banner-v16n">
 <video autoplay="" class="bcp-look-sticky-video-v16m" loop="" muted="" playsinline="" preload="metadata" src="shadow-monster-bike-look.mp4"></video>
 <div class="bcp-look-sticky-copy-v16m"><span>Full look reference</span><strong>Shadow Monster Bike</strong><small>Choose parts now · complete later</small></div>
