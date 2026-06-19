@@ -706,6 +706,98 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 </style>
 
+<style id="bcp-v18-browse-fullbleed-35-30-cta-restore">
+/* BENDAGO V18 — Browse-only full-bleed aligned with the validated responsive sticky standard.
+   Scope: responsive Browse + full-look CTA geometry only. Desktop and validated look sticky media untouched. */
+@media (max-width: 900px){
+  /* Browse all individual upgrades only: override legacy sticky-50 / vertical-card residue. */
+  html body.model-page section#shop-part-by-part,
+  html body.model-page section#shop-part-by-part > .wrap{
+    overflow:visible !important;
+  }
+
+  html body.model-page section#shop-part-by-part .bcp-browse-look-banner-v16n,
+  html body.model-page section#shop-part-by-part .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y{
+    position:sticky !important;
+    top:8px !important;
+    z-index:7 !important;
+    display:block !important;
+    width:100vw !important;
+    min-width:100vw !important;
+    max-width:100vw !important;
+    height:35vh !important;
+    height:35svh !important;
+    min-height:0 !important;
+    max-height:35vh !important;
+    max-height:35svh !important;
+    aspect-ratio:auto !important;
+    box-sizing:border-box !important;
+    margin:0 calc(50% - 50vw) 16px !important;
+    padding:0 !important;
+    overflow:hidden !important;
+    border-radius:0 !important;
+    border-left:0 !important;
+    border-right:0 !important;
+  }
+
+  html body.model-page section#shop-part-by-part .bcp-browse-look-banner-v16n .bcp-look-sticky-video-v16m{
+    position:absolute !important;
+    inset:0 !important;
+    display:block !important;
+    width:100% !important;
+    height:100% !important;
+    min-width:100% !important;
+    min-height:100% !important;
+    max-width:none !important;
+    max-height:none !important;
+    object-fit:cover !important;
+    object-position:center center !important;
+  }
+
+  /* Full-look CTA only: keep the original button treatment, restore product-flow placement and width. */
+  html body.model-page .bcp-look-parts-body-v16m > .bcp-look-bottom-actions-v16m{
+    position:static !important;
+    display:block !important;
+    float:none !important;
+    clear:both !important;
+    grid-column:1 / -1 !important;
+    grid-row:auto !important;
+    align-self:stretch !important;
+    justify-self:stretch !important;
+    width:100% !important;
+    min-width:0 !important;
+    max-width:none !important;
+    margin:18px 0 0 !important;
+    padding:0 !important;
+  }
+
+  html body.model-page .bcp-look-parts-body-v16m > .bcp-look-bottom-actions-v16m > .bcp-look-full-add-v16m{
+    display:flex !important;
+    flex:0 0 100% !important;
+    align-items:center !important;
+    justify-content:center !important;
+    box-sizing:border-box !important;
+    width:100% !important;
+    min-width:0 !important;
+    max-width:none !important;
+    min-height:52px !important;
+    margin:0 !important;
+    padding-inline:18px !important;
+    white-space:nowrap !important;
+  }
+}
+
+/* Final responsive standard: portrait 35svh, landscape 30svh. */
+@media (max-width: 900px) and (orientation: landscape){
+  html body.model-page section#shop-part-by-part .bcp-browse-look-banner-v16n,
+  html body.model-page section#shop-part-by-part .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y{
+    height:30vh !important;
+    height:30svh !important;
+    max-height:30vh !important;
+    max-height:30svh !important;
+  }
+}
+</style>
 </head><body class="model-page model-500"><!-- Google Tag Manager (noscript) -->
 <noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-MQHMSX8X" style="display:none;visibility:hidden" width="0"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
