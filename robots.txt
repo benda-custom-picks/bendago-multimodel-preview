@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
 Sitemap: https://bendacustompicks.com/sitemap.xml
+Sitemap: https://bendacustompicks.com/video-sitemap.xml
