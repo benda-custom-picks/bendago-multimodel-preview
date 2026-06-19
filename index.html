@@ -217,29 +217,29 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </header>
 <main><h1 class="seo-visually-hidden">Benda Custom Parts for Napoleon 125/250, Napoleon 450/500 and Dark Flag V4</h1>
 <section aria-label="Benda Custom Picks hero" class="hero-band">
-<video autoplay="" class="hero-video" loop="" muted="" playsinline="" preload="auto">
-<source src="hero-home-responsive-darkflag.mp4" type="video/mp4"/>
+<video autoplay="" class="hero-video" loop="" muted="" playsinline="" preload="none" data-bcp-perf-video="1">
+<source type="video/mp4"/ data-bcp-src="hero-home-responsive-darkflag.mp4">
 </video>
 <div class="hero-dim"></div>
 <img alt="Benda Custom Picks" class="hero-logo" src="logo-white.png" decoding="async">
 <a aria-label="Scroll to models" class="scroll-dot" href="#models">↓</a>
 </section>
 <section aria-label="Choose your Benda model" class="model-bands" id="models">
-<a id="model-napoleon-125-250" aria-label="Napoleon 125/250 Selected Builds" class="model-band half model-band-video" href="benda-napoleon-125-250-custom-parts.html"><video autoplay="" class="band-video" loop="" muted="" playsinline="" preload="metadata"><source src="napoleon-125-250-selected-builds.mp4" type="video/mp4"/></video>
+<a id="model-napoleon-125-250" aria-label="Napoleon 125/250 Selected Builds" class="model-band half model-band-video" href="benda-napoleon-125-250-custom-parts.html"><video autoplay="" class="band-video" loop="" muted="" playsinline="" preload="none" data-bcp-perf-video="1"><source type="video/mp4"/ data-bcp-src="napoleon-125-250-selected-builds.mp4"></video>
 <span class="band-shade"></span>
 <span class="band-copy">
 <strong>NAPOLEON 125/250</strong>
 <em>Selected builds</em>
 </span>
 </a>
-<a id="model-napoleon-450-500" aria-label="Napoleon 450/500 Selected Builds" class="model-band half model-band-video" href="benda-napoleon-500-custom-parts.html"><video autoplay="" class="band-video" loop="" muted="" playsinline="" preload="metadata"><source src="napoleon-450-500-selected-builds.mp4" type="video/mp4"/></video>
+<a id="model-napoleon-450-500" aria-label="Napoleon 450/500 Selected Builds" class="model-band half model-band-video" href="benda-napoleon-500-custom-parts.html"><video autoplay="" class="band-video" loop="" muted="" playsinline="" preload="none" data-bcp-perf-video="1"><source type="video/mp4"/ data-bcp-src="napoleon-450-500-selected-builds.mp4"></video>
 <span class="band-shade"></span>
 <span class="band-copy">
 <strong>NAPOLEON 450/500</strong>
 <em>Selected builds</em>
 </span>
 </a>
-<a id="model-dark-flag-v4" aria-label="Darkflag V4 Selected Builds" class="model-band full model-band-video darkflag-band-video" href="benda-dark-flag-v4-custom-parts.html"><video autoplay="" class="band-video" loop="" muted="" playsinline="" preload="metadata"><source src="dark-flag-v4-selected-builds.mp4" type="video/mp4"/></video><span class="band-shade"></span><span class="band-copy center"><strong>DARKFLAG V4</strong>
+<a id="model-dark-flag-v4" aria-label="Darkflag V4 Selected Builds" class="model-band full model-band-video darkflag-band-video" href="benda-dark-flag-v4-custom-parts.html"><video autoplay="" class="band-video" loop="" muted="" playsinline="" preload="none" data-bcp-perf-video="1"><source type="video/mp4"/ data-bcp-src="dark-flag-v4-selected-builds.mp4"></video><span class="band-shade"></span><span class="band-copy center"><strong>DARKFLAG V4</strong>
 <em>Selected builds</em></span></a>
 <a class="model-band full low" href="#order-trust">
 <span class="band-img" style="background-image:url('napoleon-125-250.jpg')"></span>
@@ -328,5 +328,107 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <footer class="bcp-footer footer"><div class="wrap footer-legal-block"><p>© 2026 Benda Custom Picks — independent, not affiliated with the brands mentioned.</p><p>French registered business · SIREN 849 889 514 · RCS Lisieux · Based in Normandy, France · <a href="mailto:support@bendacustompicks.com">support@bendacustompicks.com</a> · <a href="privacy-policy.html">Privacy Policy</a> · <a href="terms-and-conditions.html">Terms &amp; Conditions</a></p></div></footer>
 <script src="order-flow.js?v=v90-gtm-emailjs-anticopy"></script><script src="cart-flow.js?v=v90-gtm-emailjs-anticopy"></script>
 <script src="./anti-copy.js?v=v90-gtm-emailjs-anticopy"></script>
+<script id="bcp-v17-mp4-lazy-load-queue">
+/* BENDAGO V17 — MP4 performance gate
+   Loads autoplay videos only when they are close to the viewport and starts them in a small queue.
+   This prevents several heavy look/sticky videos from downloading at the same time on PC/mobile. */
+(function () {
+  var videos = Array.prototype.slice.call(document.querySelectorAll('video[data-bcp-perf-video="1"]'));
+  if (!videos.length) return;
+
+  var queue = [];
+  var active = 0;
+  var maxActive = 1;
+
+  function hydrate(video) {
+    if (!video || video.dataset.bcpLoaded === '1') return;
+
+    var ownSrc = video.getAttribute('data-bcp-src');
+    if (ownSrc && !video.getAttribute('src')) {
+      video.setAttribute('src', ownSrc);
+    }
+
+    var sources = video.querySelectorAll('source[data-bcp-src]');
+    sources.forEach(function (source) {
+      if (!source.getAttribute('src')) {
+        source.setAttribute('src', source.getAttribute('data-bcp-src'));
+      }
+    });
+
+    video.dataset.bcpLoaded = '1';
+    video.load();
+
+    var playVideo = function () {
+      var attempt = video.play();
+      if (attempt && typeof attempt.catch === 'function') {
+        attempt.catch(function () {});
+      }
+    };
+
+    if (video.readyState >= 2) {
+      playVideo();
+    } else {
+      video.addEventListener('canplay', playVideo, { once: true });
+    }
+  }
+
+  function pump() {
+    if (active >= maxActive || !queue.length) return;
+
+    var video = queue.shift();
+    if (!video || video.dataset.bcpLoaded === '1') {
+      pump();
+      return;
+    }
+
+    active += 1;
+    hydrate(video);
+
+    var released = false;
+    var release = function () {
+      if (released) return;
+      released = true;
+      active -= 1;
+      pump();
+    };
+
+    video.addEventListener('canplaythrough', release, { once: true });
+    video.addEventListener('error', release, { once: true });
+    window.setTimeout(release, 1400);
+  }
+
+  function enqueue(video) {
+    if (!video || video.dataset.bcpQueued === '1' || video.dataset.bcpLoaded === '1') return;
+    video.dataset.bcpQueued = '1';
+    queue.push(video);
+    pump();
+  }
+
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          enqueue(entry.target);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      root: null,
+      rootMargin: '360px 0px 360px 0px',
+      threshold: 0.01
+    });
+
+    videos.forEach(function (video, index) {
+      if (index === 0) {
+        enqueue(video);
+      } else {
+        observer.observe(video);
+      }
+    });
+  } else {
+    videos.forEach(enqueue);
+  }
+})();
+</script>
 </body>
 </html>
