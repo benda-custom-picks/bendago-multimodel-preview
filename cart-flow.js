@@ -152,82 +152,155 @@
   ];
 
 
-  /* BENDAGO V18 — full-build cart visual lock: one muted autoplay build reel only when a complete eligible build is in cart. */
+  /* BENDAGO V18.1 — cart visual lock: exact reel for eligible full builds, model reel for any single-model cart. */
   const BUILD_VISUALS_V18 = {
     'strong-pure-bob': {
+      kind: 'build',
       title: 'Strong Pure Bob',
       video: './strong-pure-bob-look-autoplay.mp4',
       poster: './strong-pure-bob-look-autoplay-poster.jpg',
       model: 'Benda Napoleon 125/250',
       position: 'center 52%',
+      kicker: 'Your selected build',
+      status: 'Launch Access 5% applied',
       note: 'Your selected parts below form one complete Benda direction.'
     },
     'headlight-fairing': {
+      kind: 'build',
       title: 'Headlight Fairing Build',
       video: './headlight-fairing-look-autoplay-v2.mp4',
       poster: './headlight-fairing-look-autoplay-v2-poster.jpg',
       model: 'Benda Napoleon 125/250',
       position: 'center 50%',
+      kicker: 'Your selected build',
+      status: 'Launch Access 5% applied',
       note: 'Your selected parts below form one complete Benda direction.'
     },
     'black-fat-bob': {
+      kind: 'build',
       title: 'Brutal Bob Build',
       video: './brutal-bob-look-autoplay.mp4',
       poster: './brutal-bob-look-autoplay-poster.jpg',
       model: 'Benda Napoleon 125/250',
       position: 'center 52%',
+      kicker: 'Your selected build',
+      status: 'Launch Access 5% applied',
       note: 'Your selected parts below form one complete Benda direction.'
     },
     'blackout-predator': {
+      kind: 'build',
       title: 'Blackout Predator',
       video: './blackout-predator-look-autoplay.mp4',
       poster: './blackout-predator-look-autoplay-poster.jpg',
       model: 'Benda Napoleon 125/250',
       position: 'center 52%',
+      kicker: 'Your selected build',
+      status: 'Launch Access 5% applied',
       note: 'Your selected parts below form one complete Benda direction.'
     },
     'midnight-hunter': {
+      kind: 'build',
       title: 'Midnight Hunter Build',
       video: './napoleon-450-500-selected-builds.mp4',
       poster: './napoleon-450-500-selected-builds-poster.jpg',
       model: 'Benda Napoleon 450/500',
       position: 'center 50%',
+      kicker: 'Your selected build',
+      status: 'Launch Access 5% applied',
       note: 'Your selected parts below form one complete Benda direction.'
     },
     'shadow-beast-v4': {
+      kind: 'build',
       title: 'Shadow Monster Bike',
       video: './shadow-monster-bike-look.mp4',
       poster: './shadow-monster-bike-look-poster.jpg',
       model: 'Benda Dark Flag V4',
       position: 'center 50%',
+      kicker: 'Your selected build',
+      status: 'Launch Access 5% applied',
       note: 'Your selected parts below form one complete Benda direction.'
     }
   };
 
-  function cartBuildVisualV18(pricing) {
-    const key = String((pricing && pricing.buildKey) || '').trim();
-    return key ? (BUILD_VISUALS_V18[key] || null) : null;
+  const MODEL_VISUALS_V18 = {
+    'napoleon-125-250': {
+      kind: 'model',
+      title: 'Benda Napoleon 125/250',
+      video: './strong-pure-bob-look-autoplay.mp4',
+      poster: './strong-pure-bob-look-autoplay-poster.jpg',
+      model: 'Benda Napoleon 125/250',
+      position: 'center 50%',
+      kicker: 'Your Benda direction',
+      status: '',
+      note: 'Keep your final custom direction in view before secure checkout.'
+    },
+    'napoleon-450-500': {
+      kind: 'model',
+      title: 'Benda Napoleon 450/500',
+      video: './napoleon-450-500-selected-builds.mp4',
+      poster: './napoleon-450-500-selected-builds-poster.jpg',
+      model: 'Benda Napoleon 450/500',
+      position: 'center 50%',
+      kicker: 'Your Benda direction',
+      status: '',
+      note: 'Keep your final custom direction in view before secure checkout.'
+    },
+    'dark-flag-v4': {
+      kind: 'model',
+      title: 'Benda Dark Flag V4',
+      video: './shadow-monster-bike-look.mp4',
+      poster: './shadow-monster-bike-look-poster.jpg',
+      model: 'Benda Dark Flag V4',
+      position: 'center 50%',
+      kicker: 'Your Benda direction',
+      status: '',
+      note: 'Keep your final custom direction in view before secure checkout.'
+    }
+  };
+
+  function modelKeyFromFitmentV18(value) {
+    const fitment = String(value || '').toLowerCase();
+    if (/dark\s*flag|darkflag/.test(fitment)) return 'dark-flag-v4';
+    if (/450|500/.test(fitment)) return 'napoleon-450-500';
+    if (/125|250/.test(fitment)) return 'napoleon-125-250';
+    return '';
   }
 
-  function cartBuildPreviewHtmlV18(pricing, placement) {
-    const build = cartBuildVisualV18(pricing);
-    if (!build) return '';
+  function cartModelKeyV18(lines) {
+    const keys = Array.from(new Set((lines || []).map(function (line) {
+      return modelKeyFromFitmentV18(line && line.fitment);
+    }).filter(Boolean)));
+    return keys.length === 1 ? keys[0] : '';
+  }
+
+  function cartBuildVisualV18(pricing, lines) {
+    const buildKey = String((pricing && pricing.buildKey) || '').trim();
+    if (buildKey && BUILD_VISUALS_V18[buildKey]) return BUILD_VISUALS_V18[buildKey];
+    const modelKey = cartModelKeyV18(lines);
+    return modelKey ? (MODEL_VISUALS_V18[modelKey] || null) : null;
+  }
+
+  function cartBuildPreviewHtmlV18(pricing, placement, lines) {
+    const visual = cartBuildVisualV18(pricing, lines);
+    if (!visual) return '';
     const modifier = placement === 'summary' ? ' cart-summary-build-preview-v18' : '';
+    const status = visual.status ? '<div class="cart-build-preview-status-v18">' + escapeHtml(visual.status) + '</div>' : '';
+    const ariaLabel = visual.kind === 'build' ? 'Selected build: ' : 'Selected Benda direction: ';
     return [
-      '<section class="cart-build-preview-v18' + modifier + '" aria-label="Selected build: ' + escapeHtml(build.title) + '">',
+      '<section class="cart-build-preview-v18' + modifier + ' cart-build-preview-' + escapeHtml(visual.kind) + '-v18" aria-label="' + ariaLabel + escapeHtml(visual.title) + '">',
       '<div class="cart-build-preview-media-v18">',
-      '<video class="cart-build-preview-video-v18" autoplay muted loop playsinline preload="metadata" poster="' + escapeHtml(build.poster) + '" style="object-position:' + escapeHtml(build.position || 'center center') + '">',
-      '<source src="' + escapeHtml(build.video) + '" type="video/mp4">',
+      '<video class="cart-build-preview-video-v18" autoplay muted loop playsinline preload="metadata" poster="' + escapeHtml(visual.poster) + '" style="object-position:' + escapeHtml(visual.position || 'center center') + '">',
+      '<source src="' + escapeHtml(visual.video) + '" type="video/mp4">',
       '</video>',
       '</div>',
       '<div class="cart-build-preview-shade-v18"></div>',
       '<div class="cart-build-preview-copy-v18">',
-      '<span>Your selected build</span>',
-      '<strong>' + escapeHtml(build.title) + '</strong>',
-      '<small>' + escapeHtml(build.model) + '</small>',
+      '<span>' + escapeHtml(visual.kicker) + '</span>',
+      '<strong>' + escapeHtml(visual.title) + '</strong>',
+      '<small>' + escapeHtml(visual.model) + '</small>',
       '</div>',
-      '<div class="cart-build-preview-status-v18">Launch Access 5% applied</div>',
-      '<p class="cart-build-preview-note-v18">' + escapeHtml(build.note) + '</p>',
+      status,
+      '<p class="cart-build-preview-note-v18">' + escapeHtml(visual.note) + '</p>',
       '</section>'
     ].join('');
   }
@@ -947,8 +1020,8 @@ async function createStripeCheckout(lines, formData) {
       return;
     }
     const pricing = calculateLaunchOffer(lines);
-    const build = cartBuildVisualV18(pricing);
-    const label = build ? 'Secure this build' : 'Secure these parts';
+    const visual = cartBuildVisualV18(pricing, lines);
+    const label = visual && visual.kind === 'build' ? 'Secure this build' : 'Secure these parts';
     button.textContent = label + ' — ' + formatEuro(pricing.total);
     button.dataset.readyText = button.textContent;
   }
@@ -1544,7 +1617,7 @@ async function createStripeCheckout(lines, formData) {
       @media (max-width:900px){.cart-included-label-v16g{display:none!important}.cart-setup-card-v16g{padding:10px 11px!important}.cart-setup-card-v16g strong{font-size:.88rem!important}.cart-setup-card-v16g small,.cart-setup-card-v16g em{font-size:.68rem!important}.cart-line-price strong{font-size:.86rem!important}}
 
 
-      /* BENDAGO V18 — autoplay build visual lock. One muted reel only for complete eligible builds. */
+      /* BENDAGO V18.1 — autoplay visual lock. Exact reel for full builds; model reel for single-model carts. */
       .cart-build-preview-v18{position:relative!important;isolation:isolate!important;display:grid!important;min-height:236px!important;width:100%!important;margin:0!important;border:1px solid rgba(226,189,114,.38)!important;border-radius:22px!important;overflow:hidden!important;background:#050608!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.10),0 20px 46px rgba(0,0,0,.42)!important;}
       .cart-build-preview-media-v18{position:absolute!important;inset:0!important;z-index:-2!important;overflow:hidden!important;background:#030405!important;}
       .cart-build-preview-video-v18{display:block!important;width:100%!important;height:100%!important;object-fit:cover!important;filter:saturate(.92) contrast(1.06) brightness(.82)!important;}
@@ -1554,6 +1627,8 @@ async function createStripeCheckout(lines, formData) {
       .cart-build-preview-copy-v18 strong{color:#fff!important;font-size:1.34rem!important;line-height:1.03!important;letter-spacing:-.024em!important;}
       .cart-build-preview-copy-v18 small{color:rgba(255,255,255,.76)!important;font-size:.76rem!important;line-height:1.18!important;}
       .cart-build-preview-status-v18{position:absolute!important;top:14px!important;right:14px!important;z-index:1!important;display:inline-flex!important;align-items:center!important;min-height:25px!important;padding:0 10px!important;border:1px solid rgba(157,225,183,.44)!important;border-radius:999px!important;background:rgba(8,76,48,.78)!important;color:rgba(229,255,239,.96)!important;font-size:.61rem!important;font-weight:950!important;letter-spacing:.06em!important;text-transform:uppercase!important;backdrop-filter:blur(9px)!important;}
+      .cart-build-preview-model-v18 .cart-build-preview-copy-v18{max-width:76%!important;}
+      .cart-build-preview-model-v18 .cart-build-preview-note-v18{max-width:48%!important;}
       .cart-build-preview-note-v18{position:absolute!important;right:16px!important;bottom:16px!important;z-index:1!important;max-width:38%!important;margin:0!important;color:rgba(255,255,255,.74)!important;font-size:.68rem!important;line-height:1.26!important;text-align:right!important;}
       .cart-drawer.has-cart-build-preview-v18 .cart-setup-card-v16g,.cart-drawer.has-cart-build-preview-v18 .cart-look-lock-v16cart{display:none!important;}
       .cart-body.has-cart-build-preview-v18{display:grid!important;grid-template-columns:1fr!important;grid-auto-rows:max-content!important;align-content:start!important;overflow-y:auto!important;overflow-x:hidden!important;scroll-snap-type:none!important;}
@@ -1778,23 +1853,26 @@ async function createStripeCheckout(lines, formData) {
     }
 
     const pricing = calculateLaunchOffer(lines);
-    const build = cartBuildVisualV18(pricing);
-    body.classList.toggle('has-cart-build-preview-v18', !!build);
-    if (drawer) drawer.classList.toggle('has-cart-build-preview-v18', !!build);
+    const visual = cartBuildVisualV18(pricing, lines);
+    const isCompleteBuild = !!(visual && visual.kind === 'build');
+    body.classList.toggle('has-cart-build-preview-v18', !!visual);
+    if (drawer) drawer.classList.toggle('has-cart-build-preview-v18', !!visual);
     if (setupCard) {
-      setupCard.style.display = build ? 'none' : '';
-      setupCard.innerHTML = build ? '' : cartSetupHtml(lines, pricing);
+      setupCard.style.display = visual ? 'none' : '';
+      setupCard.innerHTML = visual ? '' : cartSetupHtml(lines, pricing);
     }
 
-    const buildPreview = build ? cartBuildPreviewHtmlV18(pricing, 'drawer') : '';
-    const label = build ? '<div class="cart-included-label-v16g">Selected parts in this build</div>' : '<div class="cart-included-label-v16g">Selected upgrades</div>';
+    const buildPreview = visual ? cartBuildPreviewHtmlV18(pricing, 'drawer', lines) : '';
+    const label = isCompleteBuild
+      ? '<div class="cart-included-label-v16g">Selected parts for this build</div>'
+      : (visual ? '<div class="cart-included-label-v16g">Selected parts for your Benda direction</div>' : '<div class="cart-included-label-v16g">Selected upgrades</div>');
     body.innerHTML = buildPreview + label + lines.map(line => {
       return [
         '<div class="cart-line">',
         '<div class="cart-line-media" aria-label="Selected part: ' + escapeHtml(line.product_name) + '"><img src="' + (line.image || './standby-product-visual.png') + '" alt="' + escapeHtml(line.product_name) + '"></div>',
         '<div>',
         '<span class="cart-line-title">' + escapeHtml(line.product_name) + '</span>',
-        '<div class="cart-line-fit-v16cart">' + (build ? 'Included in this build' : 'Selected for your setup') + '</div>',
+        '<div class="cart-line-fit-v16cart">' + (isCompleteBuild ? 'Selected for this build' : (visual ? 'Selected for your Benda direction' : 'Selected for your setup')) + '</div>',
         optionText(line) ? '<div class="cart-line-option">' + escapeHtml(optionText(line)) + '</div>' : '',
         '<div class="cart-line-price"><span>Part value</span><strong>' + escapeHtml(line.price) + '</strong></div>',
         '<div class="cart-line-actions">',
@@ -1808,7 +1886,7 @@ async function createStripeCheckout(lines, formData) {
       ].join('');
     }).join('');
     pricingEl.innerHTML = pricingHtml(pricing);
-    checkout.textContent = build ? 'Secure this build' : 'Secure these parts';
+    checkout.textContent = isCompleteBuild ? 'Secure this build' : 'Secure these parts';
     checkout.classList.remove('disabled');
     if (shareBtn) shareBtn.disabled = false;
   }
@@ -1826,13 +1904,16 @@ async function createStripeCheckout(lines, formData) {
       return;
     }
     const pricing = calculateLaunchOffer(lines);
-    const build = cartBuildVisualV18(pricing);
-    const heading = build ? 'Your selected build' : 'Your selected parts';
-    const context = build
+    const visual = cartBuildVisualV18(pricing, lines);
+    const isCompleteBuild = !!(visual && visual.kind === 'build');
+    const heading = isCompleteBuild ? 'Your selected build' : (visual ? 'Your Benda direction' : 'Your selected parts');
+    const context = isCompleteBuild
       ? 'Keep the final custom direction in view while you confirm the selected parts and secure checkout.'
-      : 'Selected upgrades, options and model fit stay grouped until Stripe checkout.';
-    const preview = build ? cartBuildPreviewHtmlV18(pricing, 'summary') : '';
-    const partsLabel = build ? '<span class="cart-summary-parts-label-v18">Selected parts in this build</span>' : '';
+      : (visual ? 'Keep the Benda direction in view while your selected parts and model fit stay grouped until Stripe checkout.' : 'Selected upgrades, options and model fit stay grouped until Stripe checkout.');
+    const preview = visual ? cartBuildPreviewHtmlV18(pricing, 'summary', lines) : '';
+    const partsLabel = isCompleteBuild
+      ? '<span class="cart-summary-parts-label-v18">Selected parts for this build</span>'
+      : (visual ? '<span class="cart-summary-parts-label-v18">Selected parts for your Benda direction</span>' : '');
     box.innerHTML = '<h2>' + heading + '</h2><p class="cart-summary-context-v16g">' + context + '</p>' + preview + partsLabel + lines.map(line => {
       const url = productPageUrl(line.code);
       return '<div class="cart-summary-row"><span><a class="cart-summary-product-link" href="' + escapeHtml(url) + '">' + escapeHtml(line.product_name) + '</a> × ' + line.qty + (optionText(line) ? ' — ' + escapeHtml(optionText(line)) : '') + '</span><strong>' + formatEuro(line.line_total) + '</strong></div>';
