@@ -1625,10 +1625,285 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </style>
 
 
-<style id="bcp-v18-watch-links-pc-recovery">
-/* BENDAGO V18 — recovery only.
-   Restores the six model-card watch-page title links and normalizes the shared desktop 450/500 presentation.
-   Responsive media rules are deliberately not selected. */
+<style id="bcp-v17-pc-look-card-cta-unified">
+
+/* BENDAGO V17 — PC-only unified look-card copy and CTA system.
+   Scope: model pages / Choose your build / desktop only. No mobile, no JS, no cart, no Stripe, no SKU, no price. */
+@media (min-width: 901px){
+  html body.model-page section#looks .wrap{
+    width:min(1480px,calc(100vw - 72px))!important;
+    max-width:min(1480px,calc(100vw - 72px))!important;
+    margin-inline:auto!important;
+  }
+
+  html body.model-page section#looks .section-head{
+    margin:0 auto 24px!important;
+    text-align:center!important;
+  }
+
+  html body.model-page section#looks .section-head h2{
+    margin:0 0 8px!important;
+    font-size:clamp(38px,3.2vw,56px)!important;
+    line-height:.94!important;
+    letter-spacing:-.045em!important;
+    text-wrap:balance!important;
+  }
+
+  html body.model-page section#looks .section-head p{
+    margin:0 auto!important;
+    max-width:720px!important;
+    color:rgba(247,241,232,.60)!important;
+    font-size:.92rem!important;
+    line-height:1.45!important;
+  }
+
+  html body.model-page section#looks .look-grid,
+  html body.model-page.model-500 section#looks .look-grid.look-grid-single,
+  html body.model-page.model-v4 section#looks .look-grid.look-grid-single{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    gap:32px!important;
+    overflow:visible!important;
+    width:100%!important;
+    max-width:100%!important;
+    margin-inline:auto!important;
+  }
+
+  html body.model-page section#looks article.look-card{
+    display:grid!important;
+    grid-template-columns:minmax(340px,440px) minmax(0,1fr)!important;
+    grid-template-rows:none!important;
+    column-gap:clamp(46px,5.4vw,88px)!important;
+    align-items:center!important;
+    width:100%!important;
+    min-height:clamp(560px,64vh,760px)!important;
+    height:auto!important;
+    padding:clamp(30px,3vw,46px)!important;
+    overflow:hidden!important;
+    border-radius:32px!important;
+    background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.018)),rgba(7,9,12,.90)!important;
+    border:1px solid rgba(217,184,117,.18)!important;
+    box-shadow:0 30px 90px rgba(0,0,0,.42)!important;
+  }
+
+  html body.model-page.model-500 section#looks article.look-card,
+  html body.model-page.model-v4 section#looks article.look-card{
+    grid-template-columns:minmax(420px,520px) minmax(0,1fr)!important;
+    min-height:clamp(520px,60vh,720px)!important;
+  }
+
+  html body.model-page section#looks article.look-card > .look-media,
+  html body.model-page section#looks article.look-card > .look-media-video,
+  html body.model-page section#looks article.look-card > .look-media-link{
+    grid-column:1!important;
+    grid-row:1!important;
+    justify-self:center!important;
+    align-self:center!important;
+    position:relative!important;
+    display:block!important;
+    width:min(100%,420px)!important;
+    max-width:420px!important;
+    aspect-ratio:9 / 16!important;
+    height:auto!important;
+    min-height:0!important;
+    max-height:min(68vh,680px)!important;
+    overflow:hidden!important;
+    border-radius:28px!important;
+    background:#050505!important;
+    box-shadow:0 26px 78px rgba(0,0,0,.56),0 0 0 1px rgba(217,184,117,.16)!important;
+  }
+
+  html body.model-page.model-500 section#looks article.look-card > .look-media,
+  html body.model-page.model-500 section#looks article.look-card > .look-media-video,
+  html body.model-page.model-500 section#looks article.look-card > .look-media-link,
+  html body.model-page.model-v4 section#looks article.look-card > .look-media,
+  html body.model-page.model-v4 section#looks article.look-card > .look-media-video,
+  html body.model-page.model-v4 section#looks article.look-card > .look-media-link{
+    width:min(100%,500px)!important;
+    max-width:500px!important;
+    max-height:min(70vh,700px)!important;
+  }
+
+  html body.model-page section#looks article.look-card > .look-media video,
+  html body.model-page section#looks article.look-card > .look-media .look-video,
+  html body.model-page section#looks article.look-card > .look-media-video video,
+  html body.model-page section#looks article.look-card > .look-media-video .look-video{
+    position:absolute!important;
+    inset:0!important;
+    display:block!important;
+    width:100%!important;
+    height:100%!important;
+    min-width:100%!important;
+    min-height:100%!important;
+    max-width:none!important;
+    max-height:none!important;
+    object-fit:cover!important;
+    object-position:center center!important;
+    background:#050505!important;
+    border-radius:0!important;
+  }
+
+  html body.model-page section#looks article.look-card > .look-body{
+    grid-column:2!important;
+    grid-row:1!important;
+    align-self:center!important;
+    justify-self:center!important;
+    display:flex!important;
+    flex-direction:column!important;
+    justify-content:center!important;
+    align-items:stretch!important;
+    width:100%!important;
+    max-width:760px!important;
+    min-width:0!important;
+    height:auto!important;
+    padding:0!important;
+    text-align:center!important;
+  }
+
+  html body.model-page section#looks article.look-card .look-body h3{
+    margin:0 0 10px!important;
+    color:#f8f3e8!important;
+    font-size:clamp(34px,2.8vw,52px)!important;
+    line-height:.96!important;
+    letter-spacing:-.045em!important;
+    text-align:center!important;
+    text-wrap:balance!important;
+  }
+
+  html body.model-page section#looks article.look-card .look-body .tagline{
+    display:block!important;
+    margin:0 0 18px!important;
+    color:#d9b875!important;
+    font-size:.78rem!important;
+    line-height:1.25!important;
+    font-weight:950!important;
+    letter-spacing:.26em!important;
+    text-transform:uppercase!important;
+    text-align:center!important;
+  }
+
+  html body.model-page section#looks article.look-card .look-body p{
+    margin:0 auto 16px!important;
+    max-width:680px!important;
+    color:rgba(247,241,232,.68)!important;
+    font-size:clamp(.94rem,.92vw,1.05rem)!important;
+    line-height:1.48!important;
+    text-align:center!important;
+  }
+
+  html body.model-page section#looks article.look-card .parts-list{
+    display:grid!important;
+    gap:7px!important;
+    width:100%!important;
+    max-width:650px!important;
+    margin:0 auto 18px!important;
+    padding:0 0 0 20px!important;
+    color:rgba(247,241,232,.76)!important;
+    text-align:left!important;
+  }
+
+  html body.model-page section#looks article.look-card .parts-list li{
+    margin:0!important;
+    padding-left:4px!important;
+    font-size:clamp(.88rem,.82vw,.98rem)!important;
+    line-height:1.38!important;
+  }
+
+  html body.model-page section#looks article.look-card .look-bundle-cta,
+  html body.model-page section#looks article.look-card .build-bundle-cro-v46{
+    display:grid!important;
+    gap:12px!important;
+    width:100%!important;
+    max-width:760px!important;
+    margin:4px auto 0!important;
+    padding:0!important;
+    border:0!important;
+    background:transparent!important;
+    box-shadow:none!important;
+  }
+
+  html body.model-page section#looks article.look-card .bcp-look-anchor-note-v16m{
+    display:grid!important;
+    grid-template-columns:auto minmax(0,1fr)!important;
+    gap:8px!important;
+    align-items:baseline!important;
+    width:100%!important;
+    margin:0!important;
+    padding:14px 0 0!important;
+    border-top:1px solid rgba(217,184,117,.16)!important;
+    color:rgba(247,241,232,.76)!important;
+    text-align:left!important;
+    line-height:1.32!important;
+  }
+
+  html body.model-page section#looks article.look-card .bcp-look-anchor-note-v16m strong{
+    display:inline-flex!important;
+    color:#f7f1e8!important;
+    font-size:1.02rem!important;
+    line-height:1.22!important;
+    font-weight:950!important;
+    letter-spacing:-.01em!important;
+    white-space:nowrap!important;
+  }
+
+  html body.model-page section#looks article.look-card .bcp-look-anchor-note-v16m span{
+    display:block!important;
+    color:rgba(247,241,232,.70)!important;
+    font-size:.96rem!important;
+    line-height:1.28!important;
+  }
+
+  html body.model-page section#looks article.look-card .build-bundle-actions{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    gap:12px!important;
+    width:100%!important;
+    margin:0!important;
+  }
+
+  html body.model-page section#looks article.look-card .build-bundle-actions .btn{
+    width:100%!important;
+    min-height:52px!important;
+    height:52px!important;
+    padding:0 18px!important;
+    border-radius:16px!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    text-align:center!important;
+    font-size:.76rem!important;
+    line-height:1!important;
+    font-weight:950!important;
+    letter-spacing:.18em!important;
+    text-transform:uppercase!important;
+    text-decoration:none!important;
+    white-space:nowrap!important;
+    overflow:hidden!important;
+  }
+
+  html body.model-page section#looks article.look-card .build-bundle-actions .btn.primary{
+    color:#fff8df!important;
+    border:1px solid rgba(78,230,155,.48)!important;
+    background:linear-gradient(135deg,rgba(17,114,72,.78),rgba(8,52,36,.54))!important;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 16px 34px rgba(0,0,0,.28)!important;
+  }
+
+  html body.model-page section#looks article.look-card .build-bundle-actions .btn.secondary{
+    color:#f3e7c8!important;
+    border:1px solid rgba(217,184,117,.34)!important;
+    background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.012)),rgba(5,7,10,.86)!important;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.08)!important;
+  }
+
+  html body.model-page section#looks article.look-card .build-bundle-added{
+    display:none!important;
+  }
+}
+
+</style><style id="bcp-v18-watch-links-pc-recovery">
+
+/* BENDAGO V18 — watch-page title links only.
+   The PC template is restored by the dedicated stable V17 blocks below. */
 html body.model-page section#looks article.look-card > .look-body > h3 > a.bcp-watch-title-link-v18{
   color:inherit !important;
   text-decoration:none !important;
@@ -1638,90 +1913,6 @@ html body.model-page section#looks article.look-card > .look-body > h3 > a.bcp-w
 html body.model-page section#looks article.look-card > .look-body > h3 > a.bcp-watch-title-link-v18:focus-visible{
   color:#f6c431 !important;
   text-decoration:none !important;
-}
-@media (min-width:901px){
-  /* Prevent the note inside the green full-look panel from collapsing its two lines together. */
-  html body.model-page section#looks .bcp-look-anchor-note-v16m{
-    display:grid !important;
-    grid-template-columns:minmax(0,1fr) !important;
-    gap:4px !important;
-    align-items:start !important;
-    margin:0 0 14px !important;
-  }
-  html body.model-page section#looks .bcp-look-anchor-note-v16m > strong,
-  html body.model-page section#looks .bcp-look-anchor-note-v16m > span{
-    display:block !important;
-    min-width:0 !important;
-  }
-
-  /* Napoleon 450/500 — reassert the approved desktop model template only. */
-  html body.model-page.model-500 section#looks .look-grid,
-  html body.model-page.model-500 section#looks .look-grid.look-grid-single{
-    display:grid !important;
-    grid-template-columns:1fr !important;
-    gap:34px !important;
-    width:min(1480px, calc(100vw - 72px)) !important;
-    max-width:min(1480px, calc(100vw - 72px)) !important;
-    margin-inline:auto !important;
-    overflow:visible !important;
-  }
-  html body.model-page.model-500 section#looks article.look-card{
-    display:grid !important;
-    grid-template-columns:minmax(420px, 520px) minmax(0, 1fr) !important;
-    column-gap:clamp(44px, 5vw, 86px) !important;
-    align-items:center !important;
-    min-height:auto !important;
-    height:auto !important;
-    max-height:none !important;
-    padding:clamp(34px, 3vw, 52px) !important;
-    border-radius:32px !important;
-    overflow:hidden !important;
-  }
-  html body.model-page.model-500 section#looks article.look-card > .look-media,
-  html body.model-page.model-500 section#looks article.look-card > .look-media-video,
-  html body.model-page.model-500 section#looks article.look-card > .look-media-link{
-    grid-column:1 !important;
-    grid-row:1 !important;
-    justify-self:center !important;
-    align-self:center !important;
-    position:relative !important;
-    display:block !important;
-    width:min(100%, 480px) !important;
-    max-width:480px !important;
-    height:auto !important;
-    min-height:0 !important;
-    max-height:none !important;
-    aspect-ratio:9 / 16 !important;
-    border-radius:26px !important;
-    overflow:hidden !important;
-    background:#050505 !important;
-    box-shadow:0 28px 90px rgba(0,0,0,.62), 0 0 0 1px rgba(226,189,114,.16) !important;
-  }
-  html body.model-page.model-500 section#looks article.look-card > .look-media video,
-  html body.model-page.model-500 section#looks article.look-card > .look-media .look-video{
-    position:absolute !important;
-    inset:0 !important;
-    width:100% !important;
-    height:100% !important;
-    min-width:100% !important;
-    min-height:100% !important;
-    max-width:none !important;
-    max-height:none !important;
-    object-fit:cover !important;
-    object-position:center center !important;
-    background:#050505 !important;
-  }
-  html body.model-page.model-500 section#looks article.look-card > .look-body{
-    grid-column:2 !important;
-    grid-row:1 !important;
-    align-self:center !important;
-    justify-self:stretch !important;
-    width:100% !important;
-    min-width:0 !important;
-    max-width:860px !important;
-    padding:0 !important;
-    text-align:left !important;
-  }
 }
 </style>
 
