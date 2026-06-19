@@ -209,13 +209,14 @@
       status: 'Launch Access 5% applied',
       note: 'Your selected parts below form one complete Benda direction.'
     },
+    /* Dark Flag cart crop: lower focal point keeps more motorcycle in frame. */
     'shadow-beast-v4': {
       kind: 'build',
       title: 'Shadow Monster Bike',
       video: './shadow-monster-bike-look.mp4',
       poster: './shadow-monster-bike-look-poster.jpg',
       model: 'Benda Dark Flag V4',
-      position: 'center 50%',
+      position: 'center 72%',
       kicker: 'Your selected build',
       status: 'Launch Access 5% applied',
       note: 'Your selected parts below form one complete Benda direction.'
@@ -249,7 +250,7 @@
       video: './shadow-monster-bike-look.mp4',
       poster: './shadow-monster-bike-look-poster.jpg',
       model: 'Benda Dark Flag V4',
-      position: 'center 50%',
+      position: 'center 72%',
       kicker: 'Your Benda direction',
       status: '',
       note: 'Keep your final custom direction in view before secure checkout.'
