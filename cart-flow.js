@@ -224,15 +224,13 @@
 
   const MODEL_VISUALS_V18 = {
     'napoleon-125-250': {
-      kind: 'model',
+      kind: 'carousel',
       title: 'Benda Napoleon 125/250',
-      video: './strong-pure-bob-look-autoplay.mp4',
-      poster: './strong-pure-bob-look-autoplay-poster.jpg',
       model: 'Benda Napoleon 125/250',
-      position: 'center 50%',
-      kicker: 'Your Benda direction',
+      kicker: '4 Benda directions',
       status: '',
-      note: 'Keep your final custom direction in view before secure checkout.'
+      note: 'Explore four custom directions while your selected parts stay grouped.',
+      slides: ['strong-pure-bob', 'headlight-fairing', 'black-fat-bob', 'blackout-predator']
     },
     'napoleon-450-500': {
       kind: 'model',
@@ -280,29 +278,114 @@
     return modelKey ? (MODEL_VISUALS_V18[modelKey] || null) : null;
   }
 
+  function cartCarouselSlidesV18(visual) {
+    if (!visual || visual.kind !== 'carousel' || !Array.isArray(visual.slides)) return [];
+    return visual.slides.map(function (key) {
+      const slide = BUILD_VISUALS_V18[String(key || '').trim()];
+      return slide ? {
+        key: String(key || '').trim(),
+        title: slide.title,
+        video: slide.video,
+        poster: slide.poster,
+        position: slide.position || 'center center'
+      } : null;
+    }).filter(Boolean);
+  }
+
   function cartBuildPreviewHtmlV18(pricing, placement, lines) {
     const visual = cartBuildVisualV18(pricing, lines);
     if (!visual) return '';
     const modifier = placement === 'summary' ? ' cart-summary-build-preview-v18' : '';
+    const isCarousel = visual.kind === 'carousel';
+    const slides = isCarousel ? cartCarouselSlidesV18(visual) : [];
+    const active = slides.length ? slides[0] : visual;
     const status = visual.status ? '<div class="cart-build-preview-status-v18">' + escapeHtml(visual.status) + '</div>' : '';
-    const ariaLabel = visual.kind === 'build' ? 'Selected build: ' : 'Selected Benda direction: ';
+    const ariaLabel = visual.kind === 'build' ? 'Selected build: ' : (isCarousel ? 'Benda Napoleon 125/250 build directions: ' : 'Selected Benda direction: ');
+    const carouselData = isCarousel ? encodeURIComponent(JSON.stringify(slides)) : '';
+    const carouselClass = isCarousel ? ' cart-build-preview-carousel-v18' : '';
+    const carouselNav = isCarousel ? [
+      '<div class="cart-build-preview-carousel-nav-v18" role="tablist" aria-label="Choose a Napoleon 125/250 build direction">',
+      slides.map(function (slide, index) {
+        return '<button type="button" class="cart-build-preview-dot-v18' + (index === 0 ? ' is-active' : '') + '" data-cart-carousel-index-v18="' + index + '" aria-label="Show ' + escapeHtml(slide.title) + '" aria-pressed="' + (index === 0 ? 'true' : 'false') + '"></button>';
+      }).join(''),
+      '</div>'
+    ].join('') : '';
     return [
-      '<section class="cart-build-preview-v18' + modifier + ' cart-build-preview-' + escapeHtml(visual.kind) + '-v18" aria-label="' + ariaLabel + escapeHtml(visual.title) + '">',
+      '<section class="cart-build-preview-v18' + modifier + carouselClass + ' cart-build-preview-' + escapeHtml(visual.kind) + '-v18" aria-label="' + ariaLabel + escapeHtml(visual.title) + '"' + (isCarousel ? ' data-cart-carousel-v18="1" data-cart-carousel-slides-v18="' + escapeHtml(carouselData) + '"' : '') + '>',
       '<div class="cart-build-preview-media-v18">',
-      '<video class="cart-build-preview-video-v18" autoplay muted loop playsinline preload="metadata" poster="' + escapeHtml(visual.poster) + '" style="object-position:' + escapeHtml(visual.position || 'center center') + '">',
-      '<source src="' + escapeHtml(visual.video) + '" type="video/mp4">',
+      '<video class="cart-build-preview-video-v18" autoplay muted loop playsinline preload="metadata" poster="' + escapeHtml(active.poster) + '" style="object-position:' + escapeHtml(active.position || 'center center') + '">',
+      '<source src="' + escapeHtml(active.video) + '" type="video/mp4">',
       '</video>',
       '</div>',
       '<div class="cart-build-preview-shade-v18"></div>',
       '<div class="cart-build-preview-copy-v18">',
       '<span>' + escapeHtml(visual.kicker) + '</span>',
-      '<strong>' + escapeHtml(visual.title) + '</strong>',
+      '<strong data-cart-carousel-title-v18>' + escapeHtml(active.title) + '</strong>',
       '<small>' + escapeHtml(visual.model) + '</small>',
       '</div>',
+      carouselNav,
       status,
       '<p class="cart-build-preview-note-v18">' + escapeHtml(visual.note) + '</p>',
       '</section>'
     ].join('');
+  }
+
+  function initCartBuildCarouselsV18(scope) {
+    const root = scope && scope.querySelectorAll ? scope : document;
+    root.querySelectorAll('[data-cart-carousel-v18]').forEach(function (carousel) {
+      if (carousel.dataset.cartCarouselReadyV18 === '1') return;
+      carousel.dataset.cartCarouselReadyV18 = '1';
+      let slides = [];
+      try { slides = JSON.parse(decodeURIComponent(carousel.getAttribute('data-cart-carousel-slides-v18') || '')); } catch (e) { slides = []; }
+      if (!Array.isArray(slides) || slides.length < 2) return;
+      const video = carousel.querySelector('.cart-build-preview-video-v18');
+      const source = video ? video.querySelector('source') : null;
+      const title = carousel.querySelector('[data-cart-carousel-title-v18]');
+      const dots = Array.from(carousel.querySelectorAll('[data-cart-carousel-index-v18]'));
+      if (!video || !source) return;
+      let current = 0;
+      let timer = null;
+
+      function setSlide(index) {
+        current = ((Number(index) || 0) % slides.length + slides.length) % slides.length;
+        const slide = slides[current];
+        video.pause();
+        video.poster = slide.poster || '';
+        video.style.objectPosition = slide.position || 'center center';
+        source.src = slide.video || '';
+        video.load();
+        const play = video.play();
+        if (play && typeof play.catch === 'function') play.catch(function () {});
+        if (title) title.textContent = slide.title || '';
+        dots.forEach(function (dot, dotIndex) {
+          const active = dotIndex === current;
+          dot.classList.toggle('is-active', active);
+          dot.setAttribute('aria-pressed', active ? 'true' : 'false');
+        });
+      }
+
+      function startRotation() {
+        if (timer || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        timer = window.setInterval(function () {
+          if (!document.body.contains(carousel)) { window.clearInterval(timer); timer = null; return; }
+          setSlide(current + 1);
+        }, 6200);
+      }
+      function stopRotation() { if (timer) { window.clearInterval(timer); timer = null; } }
+
+      dots.forEach(function (dot) {
+        dot.addEventListener('click', function () {
+          setSlide(dot.getAttribute('data-cart-carousel-index-v18'));
+          stopRotation();
+          startRotation();
+        });
+      });
+      carousel.addEventListener('mouseenter', stopRotation);
+      carousel.addEventListener('mouseleave', startRotation);
+      carousel.addEventListener('focusin', stopRotation);
+      carousel.addEventListener('focusout', startRotation);
+      startRotation();
+    });
   }
 
 
@@ -1670,6 +1753,33 @@ async function createStripeCheckout(lines, formData) {
         .cart-build-preview-copy-v18 small,.cart-build-preview-note-v18{display:none!important;}
         .cart-build-preview-status-v18{top:8px!important;right:8px!important;min-height:20px!important;font-size:.52rem!important;}
       }
+
+      /* BENDAGO V18.2 — brighter videos + 125/250 individual-upgrade build carousel. */
+      .cart-build-preview-video-v18{filter:saturate(1.06) contrast(1.02) brightness(1.12)!important;}
+      .cart-build-preview-shade-v18{background:linear-gradient(90deg,rgba(4,6,10,.60) 0%,rgba(4,6,10,.28) 54%,rgba(4,6,10,.04) 100%),linear-gradient(0deg,rgba(4,6,10,.46) 0%,transparent 66%)!important;}
+      .cart-build-preview-copy-v18{filter:none!important;text-shadow:0 2px 14px rgba(0,0,0,.82)!important;}
+      .cart-build-preview-copy-v18 strong,.cart-build-preview-copy-v18 small,.cart-build-preview-copy-v18 span{position:relative!important;z-index:1!important;}
+      .cart-build-preview-carousel-nav-v18{position:absolute!important;left:18px!important;top:16px!important;z-index:2!important;display:flex!important;align-items:center!important;gap:7px!important;padding:7px 9px!important;border-radius:999px!important;border:1px solid rgba(255,255,255,.16)!important;background:rgba(5,7,10,.35)!important;backdrop-filter:blur(9px)!important;}
+      .cart-build-preview-dot-v18{width:8px!important;height:8px!important;margin:0!important;padding:0!important;border:1px solid rgba(255,255,255,.70)!important;border-radius:999px!important;background:rgba(255,255,255,.24)!important;box-shadow:none!important;cursor:pointer!important;transition:transform .18s ease,background .18s ease!important;}
+      .cart-build-preview-dot-v18.is-active{width:21px!important;background:#f0d58f!important;border-color:#f0d58f!important;}
+      .cart-build-preview-carousel-v18 .cart-build-preview-copy-v18{max-width:72%!important;}
+      .cart-build-preview-carousel-v18 .cart-build-preview-note-v18{max-width:45%!important;}
+      @media(max-width:900px){
+        .cart-build-preview-carousel-nav-v18{left:13px!important;top:12px!important;padding:6px 8px!important;gap:6px!important;}
+        .cart-build-preview-dot-v18{width:7px!important;height:7px!important;}
+        .cart-build-preview-dot-v18.is-active{width:18px!important;}
+        .cart-build-preview-carousel-v18 .cart-build-preview-copy-v18{max-width:78%!important;}
+      }
+      @media(max-width:430px){
+        .cart-build-preview-carousel-nav-v18{left:10px!important;top:10px!important;padding:5px 7px!important;}
+        .cart-build-preview-dot-v18{width:6px!important;height:6px!important;}
+        .cart-build-preview-dot-v18.is-active{width:16px!important;}
+      }
+      @media(orientation:landscape) and (max-height:520px) and (max-width:980px){
+        .cart-build-preview-carousel-nav-v18{left:9px!important;top:8px!important;padding:4px 6px!important;gap:5px!important;}
+        .cart-build-preview-dot-v18{width:5px!important;height:5px!important;}
+        .cart-build-preview-dot-v18.is-active{width:13px!important;}
+      }
     `;
     document.head.appendChild(style);
   }
@@ -1889,6 +1999,7 @@ async function createStripeCheckout(lines, formData) {
     checkout.textContent = isCompleteBuild ? 'Secure this build' : 'Secure these parts';
     checkout.classList.remove('disabled');
     if (shareBtn) shareBtn.disabled = false;
+    initCartBuildCarouselsV18(body);
   }
 
   function escapeHtml(value) {
@@ -1923,6 +2034,7 @@ async function createStripeCheckout(lines, formData) {
       '<div class="cart-summary-total"><span>Setup secured today</span><strong>' + formatEuro(pricing.total) + '</strong></div>',
       '<p class="cart-summary-launch-note">Launch Access kept inside this build: ' + escapeHtml(pricing.buildName) + '.</p>'
     ].join('') : '<div class="cart-summary-total"><span>Setup secured today</span><strong>' + formatEuro(pricing.total) + '</strong></div>');
+    initCartBuildCarouselsV18(box);
   }
 
   function bindCartForm() {
