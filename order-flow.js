@@ -286,7 +286,9 @@ const BENDAGO_PRODUCTS = {
     price: '961 €',
     delivery_estimate: '10 to 15 business days',
     image: './premium-double-seat-hero-v3.webp',
-    stripe_url: ''
+    stripe_url: '',
+    color_required: true,
+    color_options: 'Black / Brown'
   },
   "ultra-single-seat-comfort": {
     product_code: "ultra-single-seat-comfort",
