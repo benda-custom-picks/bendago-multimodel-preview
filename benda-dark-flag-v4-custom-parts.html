@@ -423,11 +423,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </style>
 
 
-<style id="bcp-v18-responsive-sticky-30-all-models">
-/* BENDAGO V18 — responsive sticky media capped at 30vh.
-   Scope: only sticky look references and Browse all individual upgrades.
-   Preserves Choose your build cards and all desktop rules. */
-@media (max-width: 900px) and (orientation: portrait){
+<style id="bcp-v18-responsive-sticky-fullbleed-35-all-models">
+/* BENDAGO V18 — responsive sticky media full-bleed / 35%.
+   Scope: sticky look references + Browse all individual upgrades only.
+   Full viewport width / 35svh in responsive portrait and landscape.
+   Preserves PC and Choose your build cards. */
+@media (max-width: 900px){
   html body.model-page .bcp-look-sticky-media-v16m,
   html body.model-page .bcp-look-gallery-banner-v16n,
   html body.model-page .bcp-browse-look-banner-v16n,
@@ -436,36 +437,47 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   html body.model-page.model-v4 .bcp-look-sticky-media-v16m{
     position:sticky !important;
     top:8px !important;
-    width:min(100%, 33.75vh) !important;
-    max-width:100% !important;
-    height:30vh !important;
+    z-index:7 !important;
+    display:block !important;
+    width:100vw !important;
+    max-width:100vw !important;
+    height:35vh !important;
+    height:35svh !important;
     min-height:0 !important;
-    max-height:30vh !important;
-    aspect-ratio:9 / 16 !important;
-    margin:0 auto 14px !important;
+    max-height:35vh !important;
+    max-height:35svh !important;
+    aspect-ratio:auto !important;
+    box-sizing:border-box !important;
+    margin:0 calc(50% - 50vw) 14px !important;
+    padding:0 !important;
     overflow:hidden !important;
+    border-radius:0 !important;
+    border-left:0 !important;
+    border-right:0 !important;
+  }
+
+  html body.model-page .bcp-look-sticky-media-v16m video,
+  html body.model-page .bcp-look-gallery-banner-v16n video,
+  html body.model-page .bcp-browse-look-banner-v16n video,
+  html body.model-page .bcp-look-sticky-video-v16m{
+    position:absolute !important;
+    inset:0 !important;
+    width:100% !important;
+    height:100% !important;
+    min-width:100% !important;
+    min-height:100% !important;
+    max-width:none !important;
+    max-height:none !important;
+    object-fit:cover !important;
+    object-position:center center !important;
+    border-radius:0 !important;
+  }
+
+  html body.model-page .bcp-look-sticky-copy-v16m{
+    padding:38px 16px 14px !important;
   }
 }
 
-@media (max-width: 900px) and (orientation: landscape){
-  html body.model-page .bcp-look-sticky-media-v16m,
-  html body.model-page .bcp-look-gallery-banner-v16n,
-  html body.model-page .bcp-browse-look-banner-v16n,
-  html body.model-page.model-125 .bcp-look-sticky-media-v16m,
-  html body.model-page.model-500 .bcp-look-sticky-media-v16m,
-  html body.model-page.model-v4 .bcp-look-sticky-media-v16m{
-    position:sticky !important;
-    top:8px !important;
-    width:100% !important;
-    max-width:100% !important;
-    height:30vh !important;
-    min-height:0 !important;
-    max-height:30vh !important;
-    aspect-ratio:16 / 9 !important;
-    margin:0 0 12px !important;
-    overflow:hidden !important;
-  }
-}
 </style>
 
 </head><body class="model-page model-v4"><!-- Google Tag Manager (noscript) -->
