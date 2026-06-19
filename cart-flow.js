@@ -152,6 +152,87 @@
   ];
 
 
+  /* BENDAGO V18 — full-build cart visual lock: one muted autoplay build reel only when a complete eligible build is in cart. */
+  const BUILD_VISUALS_V18 = {
+    'strong-pure-bob': {
+      title: 'Strong Pure Bob',
+      video: './strong-pure-bob-look-autoplay.mp4',
+      poster: './strong-pure-bob-look-autoplay-poster.jpg',
+      model: 'Benda Napoleon 125/250',
+      position: 'center 52%',
+      note: 'Your selected parts below form one complete Benda direction.'
+    },
+    'headlight-fairing': {
+      title: 'Headlight Fairing Build',
+      video: './headlight-fairing-look-autoplay-v2.mp4',
+      poster: './headlight-fairing-look-autoplay-v2-poster.jpg',
+      model: 'Benda Napoleon 125/250',
+      position: 'center 50%',
+      note: 'Your selected parts below form one complete Benda direction.'
+    },
+    'black-fat-bob': {
+      title: 'Brutal Bob Build',
+      video: './brutal-bob-look-autoplay.mp4',
+      poster: './brutal-bob-look-autoplay-poster.jpg',
+      model: 'Benda Napoleon 125/250',
+      position: 'center 52%',
+      note: 'Your selected parts below form one complete Benda direction.'
+    },
+    'blackout-predator': {
+      title: 'Blackout Predator',
+      video: './blackout-predator-look-autoplay.mp4',
+      poster: './blackout-predator-look-autoplay-poster.jpg',
+      model: 'Benda Napoleon 125/250',
+      position: 'center 52%',
+      note: 'Your selected parts below form one complete Benda direction.'
+    },
+    'midnight-hunter': {
+      title: 'Midnight Hunter Build',
+      video: './napoleon-450-500-selected-builds.mp4',
+      poster: './napoleon-450-500-selected-builds-poster.jpg',
+      model: 'Benda Napoleon 450/500',
+      position: 'center 50%',
+      note: 'Your selected parts below form one complete Benda direction.'
+    },
+    'shadow-beast-v4': {
+      title: 'Shadow Monster Bike',
+      video: './shadow-monster-bike-look.mp4',
+      poster: './shadow-monster-bike-look-poster.jpg',
+      model: 'Benda Dark Flag V4',
+      position: 'center 50%',
+      note: 'Your selected parts below form one complete Benda direction.'
+    }
+  };
+
+  function cartBuildVisualV18(pricing) {
+    const key = String((pricing && pricing.buildKey) || '').trim();
+    return key ? (BUILD_VISUALS_V18[key] || null) : null;
+  }
+
+  function cartBuildPreviewHtmlV18(pricing, placement) {
+    const build = cartBuildVisualV18(pricing);
+    if (!build) return '';
+    const modifier = placement === 'summary' ? ' cart-summary-build-preview-v18' : '';
+    return [
+      '<section class="cart-build-preview-v18' + modifier + '" aria-label="Selected build: ' + escapeHtml(build.title) + '">',
+      '<div class="cart-build-preview-media-v18">',
+      '<video class="cart-build-preview-video-v18" autoplay muted loop playsinline preload="metadata" poster="' + escapeHtml(build.poster) + '" style="object-position:' + escapeHtml(build.position || 'center center') + '">',
+      '<source src="' + escapeHtml(build.video) + '" type="video/mp4">',
+      '</video>',
+      '</div>',
+      '<div class="cart-build-preview-shade-v18"></div>',
+      '<div class="cart-build-preview-copy-v18">',
+      '<span>Your selected build</span>',
+      '<strong>' + escapeHtml(build.title) + '</strong>',
+      '<small>' + escapeHtml(build.model) + '</small>',
+      '</div>',
+      '<div class="cart-build-preview-status-v18">Launch Access 5% applied</div>',
+      '<p class="cart-build-preview-note-v18">' + escapeHtml(build.note) + '</p>',
+      '</section>'
+    ].join('');
+  }
+
+
   const BUNDLE_ADD_TO_CART_ITEMS = {
     'strong-pure-bob-complete': [
       { code: 'headlight-fairing' },
@@ -866,7 +947,9 @@ async function createStripeCheckout(lines, formData) {
       return;
     }
     const pricing = calculateLaunchOffer(lines);
-    button.textContent = 'Secure this setup — ' + formatEuro(pricing.total);
+    const build = cartBuildVisualV18(pricing);
+    const label = build ? 'Secure this build' : 'Secure these parts';
+    button.textContent = label + ' — ' + formatEuro(pricing.total);
     button.dataset.readyText = button.textContent;
   }
 
@@ -1459,6 +1542,59 @@ async function createStripeCheckout(lines, formData) {
       .cart-secondary-actions .cart-share-btn{font-size:.66rem!important;color:rgba(240,213,143,.90)!important;}
       .cart-secondary-actions .cart-other-product-btn{font-size:.66rem!important;}
       @media (max-width:900px){.cart-included-label-v16g{display:none!important}.cart-setup-card-v16g{padding:10px 11px!important}.cart-setup-card-v16g strong{font-size:.88rem!important}.cart-setup-card-v16g small,.cart-setup-card-v16g em{font-size:.68rem!important}.cart-line-price strong{font-size:.86rem!important}}
+
+
+      /* BENDAGO V18 — autoplay build visual lock. One muted reel only for complete eligible builds. */
+      .cart-build-preview-v18{position:relative!important;isolation:isolate!important;display:grid!important;min-height:236px!important;width:100%!important;margin:0!important;border:1px solid rgba(226,189,114,.38)!important;border-radius:22px!important;overflow:hidden!important;background:#050608!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.10),0 20px 46px rgba(0,0,0,.42)!important;}
+      .cart-build-preview-media-v18{position:absolute!important;inset:0!important;z-index:-2!important;overflow:hidden!important;background:#030405!important;}
+      .cart-build-preview-video-v18{display:block!important;width:100%!important;height:100%!important;object-fit:cover!important;filter:saturate(.92) contrast(1.06) brightness(.82)!important;}
+      .cart-build-preview-shade-v18{position:absolute!important;inset:0!important;z-index:-1!important;background:linear-gradient(90deg,rgba(4,6,10,.90) 0%,rgba(4,6,10,.57) 54%,rgba(4,6,10,.10) 100%),linear-gradient(0deg,rgba(4,6,10,.76) 0%,transparent 58%)!important;}
+      .cart-build-preview-copy-v18{position:relative!important;z-index:1!important;align-self:end!important;display:grid!important;gap:4px!important;max-width:68%!important;padding:20px!important;}
+      .cart-build-preview-copy-v18 span{color:rgba(240,213,143,.94)!important;font-size:.66rem!important;letter-spacing:.14em!important;text-transform:uppercase!important;font-weight:950!important;}
+      .cart-build-preview-copy-v18 strong{color:#fff!important;font-size:1.34rem!important;line-height:1.03!important;letter-spacing:-.024em!important;}
+      .cart-build-preview-copy-v18 small{color:rgba(255,255,255,.76)!important;font-size:.76rem!important;line-height:1.18!important;}
+      .cart-build-preview-status-v18{position:absolute!important;top:14px!important;right:14px!important;z-index:1!important;display:inline-flex!important;align-items:center!important;min-height:25px!important;padding:0 10px!important;border:1px solid rgba(157,225,183,.44)!important;border-radius:999px!important;background:rgba(8,76,48,.78)!important;color:rgba(229,255,239,.96)!important;font-size:.61rem!important;font-weight:950!important;letter-spacing:.06em!important;text-transform:uppercase!important;backdrop-filter:blur(9px)!important;}
+      .cart-build-preview-note-v18{position:absolute!important;right:16px!important;bottom:16px!important;z-index:1!important;max-width:38%!important;margin:0!important;color:rgba(255,255,255,.74)!important;font-size:.68rem!important;line-height:1.26!important;text-align:right!important;}
+      .cart-drawer.has-cart-build-preview-v18 .cart-setup-card-v16g,.cart-drawer.has-cart-build-preview-v18 .cart-look-lock-v16cart{display:none!important;}
+      .cart-body.has-cart-build-preview-v18{display:grid!important;grid-template-columns:1fr!important;grid-auto-rows:max-content!important;align-content:start!important;overflow-y:auto!important;overflow-x:hidden!important;scroll-snap-type:none!important;}
+      .cart-body.has-cart-build-preview-v18 .cart-included-label-v16g{display:block!important;margin:5px 2px 0!important;}
+      .cart-body.has-cart-build-preview-v18 .cart-line{width:100%!important;max-width:100%!important;flex:none!important;}
+      .cart-summary-build-preview-v18{min-height:330px!important;margin:0 0 18px!important;border-radius:24px!important;}
+      .cart-summary-build-preview-v18 .cart-build-preview-copy-v18{padding:26px!important;}
+      .cart-summary-build-preview-v18 .cart-build-preview-copy-v18 strong{font-size:1.70rem!important;}
+      .cart-summary-build-preview-v18 .cart-build-preview-status-v18{top:18px!important;right:18px!important;}
+      .cart-summary-build-preview-v18 .cart-build-preview-note-v18{right:20px!important;bottom:20px!important;max-width:40%!important;font-size:.74rem!important;}
+      .cart-summary-parts-label-v18{display:block!important;margin:0 0 7px!important;color:rgba(226,189,114,.84)!important;font-size:.70rem!important;letter-spacing:.13em!important;text-transform:uppercase!important;font-weight:950!important;}
+      @media(max-width:900px){
+        .cart-body.has-cart-build-preview-v18{min-height:0!important;padding:12px!important;gap:11px!important;}
+        .cart-body.has-cart-build-preview-v18 .cart-build-preview-v18{min-height:208px!important;}
+        .cart-build-preview-copy-v18{max-width:74%!important;padding:16px!important;}
+        .cart-build-preview-copy-v18 strong{font-size:1.14rem!important;}
+        .cart-build-preview-status-v18{top:12px!important;right:12px!important;font-size:.57rem!important;min-height:23px!important;padding:0 8px!important;}
+        .cart-build-preview-note-v18{right:14px!important;bottom:14px!important;max-width:42%!important;font-size:.62rem!important;}
+        .cart-summary-build-preview-v18{min-height:270px!important;margin-bottom:15px!important;}
+        .cart-summary-build-preview-v18 .cart-build-preview-copy-v18{padding:19px!important;}
+        .cart-summary-build-preview-v18 .cart-build-preview-copy-v18 strong{font-size:1.38rem!important;}
+        .cart-summary-build-preview-v18 .cart-build-preview-note-v18{right:16px!important;bottom:16px!important;font-size:.66rem!important;}
+      }
+      @media(max-width:430px){
+        .cart-body.has-cart-build-preview-v18 .cart-build-preview-v18{min-height:190px!important;}
+        .cart-build-preview-copy-v18{padding:13px!important;max-width:78%!important;}
+        .cart-build-preview-copy-v18 span{font-size:.57rem!important;}
+        .cart-build-preview-copy-v18 strong{font-size:1.02rem!important;}
+        .cart-build-preview-note-v18{display:none!important;}
+        .cart-build-preview-status-v18{top:10px!important;right:10px!important;min-height:21px!important;font-size:.53rem!important;}
+        .cart-summary-build-preview-v18{min-height:238px!important;}
+        .cart-summary-build-preview-v18 .cart-build-preview-copy-v18{padding:16px!important;}
+        .cart-summary-build-preview-v18 .cart-build-preview-copy-v18 strong{font-size:1.20rem!important;}
+      }
+      @media(orientation:landscape) and (max-height:520px) and (max-width:980px){
+        .cart-body.has-cart-build-preview-v18 .cart-build-preview-v18{min-height:128px!important;}
+        .cart-build-preview-copy-v18{padding:10px!important;}
+        .cart-build-preview-copy-v18 strong{font-size:.88rem!important;}
+        .cart-build-preview-copy-v18 small,.cart-build-preview-note-v18{display:none!important;}
+        .cart-build-preview-status-v18{top:8px!important;right:8px!important;min-height:20px!important;font-size:.52rem!important;}
+      }
     `;
     document.head.appendChild(style);
   }
@@ -1624,42 +1760,55 @@ async function createStripeCheckout(lines, formData) {
     const body = document.querySelector('[data-cart-body]');
     const pricingEl = document.querySelector('[data-cart-pricing]');
     const checkout = document.querySelector('[data-cart-checkout]');
+    const drawer = document.getElementById('bendagoCartDrawer');
     if (!body || !pricingEl || !checkout) return;
 
     const shareBtn = document.querySelector('[data-cart-share]');
     const setupCard = document.querySelector('[data-cart-setup]');
     if (!lines.length) {
+      body.classList.remove('has-cart-build-preview-v18');
+      if (drawer) drawer.classList.remove('has-cart-build-preview-v18');
       body.innerHTML = '<div class="cart-empty">Your setup is empty. Choose a look part first.</div>';
       pricingEl.innerHTML = '<div class="cart-total-row"><span>Setup secured today</span><strong>0 €</strong></div>';
       if (setupCard) { setupCard.style.display = 'none'; setupCard.innerHTML = ''; }
+      checkout.textContent = 'Secure this setup';
       checkout.classList.add('disabled');
       if (shareBtn) shareBtn.disabled = false;
       return;
     }
 
     const pricing = calculateLaunchOffer(lines);
-    if (setupCard) { setupCard.style.display = ''; setupCard.innerHTML = cartSetupHtml(lines, pricing); }
-    body.innerHTML = '<div class="cart-included-label-v16g">Included upgrades</div>' + lines.map(line => {
-      const url = productPageUrl(line.code);
+    const build = cartBuildVisualV18(pricing);
+    body.classList.toggle('has-cart-build-preview-v18', !!build);
+    if (drawer) drawer.classList.toggle('has-cart-build-preview-v18', !!build);
+    if (setupCard) {
+      setupCard.style.display = build ? 'none' : '';
+      setupCard.innerHTML = build ? '' : cartSetupHtml(lines, pricing);
+    }
+
+    const buildPreview = build ? cartBuildPreviewHtmlV18(pricing, 'drawer') : '';
+    const label = build ? '<div class="cart-included-label-v16g">Selected parts in this build</div>' : '<div class="cart-included-label-v16g">Selected upgrades</div>';
+    body.innerHTML = buildPreview + label + lines.map(line => {
       return [
-      '<div class="cart-line">',
-      '<div class="cart-line-media" aria-label="Selected part: ' + escapeHtml(line.product_name) + '"><img src="' + (line.image || './standby-product-visual.png') + '" alt="' + escapeHtml(line.product_name) + '"></div>',
-      '<div>',
-      '<span class="cart-line-title">' + escapeHtml(line.product_name) + '</span>',
-      '<div class="cart-line-fit-v16cart">Included in setup</div>',
-      optionText(line) ? '<div class="cart-line-option">' + escapeHtml(optionText(line)) + '</div>' : '',
-      '<div class="cart-line-price"><span>Part value</span><strong>' + escapeHtml(line.price) + '</strong></div>',
-      '<div class="cart-line-actions">',
-      '<button class="cart-qty-btn" type="button" data-cart-dec="' + escapeHtml(itemKey(line)) + '">−</button>',
-      '<strong>' + line.qty + '</strong>',
-      '<button class="cart-qty-btn" type="button" data-cart-inc="' + escapeHtml(itemKey(line)) + '">+</button>',
-      '<button class="cart-remove-btn" type="button" data-cart-remove="' + escapeHtml(itemKey(line)) + '">Remove</button>',
-      '</div>',
-      '</div>',
-      '</div>'
+        '<div class="cart-line">',
+        '<div class="cart-line-media" aria-label="Selected part: ' + escapeHtml(line.product_name) + '"><img src="' + (line.image || './standby-product-visual.png') + '" alt="' + escapeHtml(line.product_name) + '"></div>',
+        '<div>',
+        '<span class="cart-line-title">' + escapeHtml(line.product_name) + '</span>',
+        '<div class="cart-line-fit-v16cart">' + (build ? 'Included in this build' : 'Selected for your setup') + '</div>',
+        optionText(line) ? '<div class="cart-line-option">' + escapeHtml(optionText(line)) + '</div>' : '',
+        '<div class="cart-line-price"><span>Part value</span><strong>' + escapeHtml(line.price) + '</strong></div>',
+        '<div class="cart-line-actions">',
+        '<button class="cart-qty-btn" type="button" data-cart-dec="' + escapeHtml(itemKey(line)) + '">−</button>',
+        '<strong>' + line.qty + '</strong>',
+        '<button class="cart-qty-btn" type="button" data-cart-inc="' + escapeHtml(itemKey(line)) + '">+</button>',
+        '<button class="cart-remove-btn" type="button" data-cart-remove="' + escapeHtml(itemKey(line)) + '">Remove</button>',
+        '</div>',
+        '</div>',
+        '</div>'
       ].join('');
     }).join('');
     pricingEl.innerHTML = pricingHtml(pricing);
+    checkout.textContent = build ? 'Secure this build' : 'Secure these parts';
     checkout.classList.remove('disabled');
     if (shareBtn) shareBtn.disabled = false;
   }
@@ -1677,14 +1826,21 @@ async function createStripeCheckout(lines, formData) {
       return;
     }
     const pricing = calculateLaunchOffer(lines);
-    box.innerHTML = '<h2>Your configured setup</h2><p class="cart-summary-context-v16g">Selected upgrades, options and model fit stay grouped until Stripe checkout.</p>' + lines.map(line => {
+    const build = cartBuildVisualV18(pricing);
+    const heading = build ? 'Your selected build' : 'Your selected parts';
+    const context = build
+      ? 'Keep the final custom direction in view while you confirm the selected parts and secure checkout.'
+      : 'Selected upgrades, options and model fit stay grouped until Stripe checkout.';
+    const preview = build ? cartBuildPreviewHtmlV18(pricing, 'summary') : '';
+    const partsLabel = build ? '<span class="cart-summary-parts-label-v18">Selected parts in this build</span>' : '';
+    box.innerHTML = '<h2>' + heading + '</h2><p class="cart-summary-context-v16g">' + context + '</p>' + preview + partsLabel + lines.map(line => {
       const url = productPageUrl(line.code);
       return '<div class="cart-summary-row"><span><a class="cart-summary-product-link" href="' + escapeHtml(url) + '">' + escapeHtml(line.product_name) + '</a> × ' + line.qty + (optionText(line) ? ' — ' + escapeHtml(optionText(line)) : '') + '</span><strong>' + formatEuro(line.line_total) + '</strong></div>';
     }).join('') + (pricing.discountApplied ? [
       '<div class="cart-summary-total cart-summary-subtotal"><span>Parts value</span><strong>' + formatEuro(pricing.subtotal) + '</strong></div>',
       '<div class="cart-summary-total cart-summary-discount"><span>Launch Access kept</span><strong>-' + formatEuro(pricing.discountAmount) + '</strong></div>',
       '<div class="cart-summary-total"><span>Setup secured today</span><strong>' + formatEuro(pricing.total) + '</strong></div>',
-      '<p class="cart-summary-launch-note">Launch Access kept inside this setup: ' + escapeHtml(pricing.buildName) + '.</p>'
+      '<p class="cart-summary-launch-note">Launch Access kept inside this build: ' + escapeHtml(pricing.buildName) + '.</p>'
     ].join('') : '<div class="cart-summary-total"><span>Setup secured today</span><strong>' + formatEuro(pricing.total) + '</strong></div>');
   }
 
