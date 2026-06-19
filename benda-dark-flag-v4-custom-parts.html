@@ -423,16 +423,108 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </style>
 
 
-<style id="bcp-v17-darkflag-pc-look-parts-side-video">
-/* BENDAGO V17 — Dark Flag PC look-parts side video
-   Scope: Dark Flag V4 / PC only / Choose the parts for your look.
-   Aligns the section with Napoleon 450/500: sticky MP4 rail on the left, product cards on the right. */
+<style id="bcp-v17-darkflag-pc-all-sections-side-video">
+/* BENDAGO V17 — Dark Flag PC side-video architecture
+   Scope: Dark Flag V4 / PC only.
+   Aligns Choose your build, Choose the parts for your look, and Browse all individual upgrades with the Napoleon 450/500 PC architecture:
+   sticky/full MP4 rail on the left, copy/cards/catalogue on the right. Mobile/responsive untouched. */
 @media (min-width: 901px){
-  html body.model-page.model-v4 .bcp-look-parts-section-v16m .wrap{
-    width: min(1480px, calc(100vw - 72px)) !important;
-    max-width: min(1480px, calc(100vw - 72px)) !important;
+  html body.model-page.model-v4{
+    --bcp-v4-pc-rail-w: min(100%, 480px);
+    --bcp-v4-pc-radius: 26px;
   }
 
+  html body.model-page.model-v4 section#looks .wrap,
+  html body.model-page.model-v4 .bcp-look-parts-section-v16m .wrap,
+  html body.model-page.model-v4 section#shop-part-by-part > .wrap{
+    width: min(1480px, calc(100vw - 72px)) !important;
+    max-width: min(1480px, calc(100vw - 72px)) !important;
+    margin-inline: auto !important;
+  }
+
+  html body.model-page.model-v4 section#looks .swipe-hint,
+  html body.model-page.model-v4 section#shop-part-by-part .swipe-hint{
+    display: none !important;
+  }
+
+  /* 1) Choose your build — video rail left, build copy/actions right */
+  html body.model-page.model-v4 section#looks .look-grid,
+  html body.model-page.model-v4 section#looks .look-grid.look-grid-single{
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 34px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-inline: auto !important;
+    overflow: visible !important;
+  }
+
+  html body.model-page.model-v4 section#looks article.look-card{
+    display: grid !important;
+    grid-template-columns: minmax(420px, 520px) minmax(0, 1fr) !important;
+    column-gap: clamp(44px, 5vw, 86px) !important;
+    align-items: center !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: auto !important;
+    height: auto !important;
+    max-height: none !important;
+    padding: clamp(34px, 3vw, 52px) !important;
+    border-radius: 32px !important;
+    overflow: hidden !important;
+  }
+
+  html body.model-page.model-v4 section#looks article.look-card > .look-media,
+  html body.model-page.model-v4 section#looks article.look-card > .look-media-video,
+  html body.model-page.model-v4 section#looks article.look-card > .look-media-link{
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    justify-self: center !important;
+    align-self: center !important;
+    position: relative !important;
+    display: block !important;
+    width: var(--bcp-v4-pc-rail-w) !important;
+    max-width: 480px !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    aspect-ratio: 9 / 16 !important;
+    border-radius: var(--bcp-v4-pc-radius) !important;
+    overflow: hidden !important;
+    background: #050505 !important;
+    box-shadow: 0 28px 90px rgba(0,0,0,.62), 0 0 0 1px rgba(226,189,114,.16) !important;
+  }
+
+  html body.model-page.model-v4 section#looks article.look-card > .look-media video,
+  html body.model-page.model-v4 section#looks article.look-card > .look-media .look-video,
+  html body.model-page.model-v4 section#looks article.look-card > .look-media-video video{
+    position: absolute !important;
+    inset: 0 !important;
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-width: 100% !important;
+    min-height: 100% !important;
+    max-width: none !important;
+    max-height: none !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    background: #050505 !important;
+  }
+
+  html body.model-page.model-v4 section#looks article.look-card > .look-body{
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    align-self: center !important;
+    justify-self: stretch !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 860px !important;
+    padding: 0 !important;
+    text-align: left !important;
+  }
+
+  /* 2) Choose the parts for your look — sticky video left, product cards right */
   html body.model-page.model-v4 .bcp-look-parts-section-v16m .bcp-look-parts-body-v16m{
     display: grid !important;
     grid-template-columns: minmax(420px, 520px) minmax(0, 1fr) !important;
@@ -450,14 +542,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     position: sticky !important;
     top: 88px !important;
     display: block !important;
-    width: min(100%, 480px) !important;
+    width: var(--bcp-v4-pc-rail-w) !important;
     max-width: 480px !important;
     height: auto !important;
     min-height: 0 !important;
     max-height: none !important;
     aspect-ratio: 9 / 16 !important;
     margin: 0 !important;
-    border-radius: 26px !important;
+    border-radius: var(--bcp-v4-pc-radius) !important;
     overflow: hidden !important;
     background: #050505 !important;
     border: 1px solid rgba(226,189,114,.20) !important;
@@ -496,8 +588,66 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     gap: 14px !important;
     width: 100% !important;
   }
+
+  /* 3) Browse all individual upgrades — same sticky video left, full catalogue right */
+  html body.model-page.model-v4 section#shop-part-by-part > .wrap{
+    display: grid !important;
+    grid-template-columns: minmax(420px, 520px) minmax(0, 1fr) !important;
+    column-gap: clamp(34px, 4vw, 64px) !important;
+    align-items: start !important;
+  }
+
+  html body.model-page.model-v4 section#shop-part-by-part .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y{
+    grid-column: 1 !important;
+    grid-row: 1 / span 3 !important;
+    justify-self: center !important;
+    align-self: start !important;
+    position: sticky !important;
+    top: 88px !important;
+    display: block !important;
+    width: var(--bcp-v4-pc-rail-w) !important;
+    max-width: 480px !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    aspect-ratio: 9 / 16 !important;
+    margin: 0 !important;
+    border-radius: var(--bcp-v4-pc-radius) !important;
+    overflow: hidden !important;
+    background: #050505 !important;
+    border: 1px solid rgba(226,189,114,.20) !important;
+    box-shadow: 0 28px 90px rgba(0,0,0,.62), 0 0 0 1px rgba(226,189,114,.16) !important;
+  }
+
+  html body.model-page.model-v4 section#shop-part-by-part .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y .bcp-look-sticky-video-v16m{
+    position: absolute !important;
+    inset: 0 !important;
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-width: 100% !important;
+    min-height: 100% !important;
+    max-width: none !important;
+    max-height: none !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    background: #050505 !important;
+  }
+
+  html body.model-page.model-v4 section#shop-part-by-part > .wrap > .section-head,
+  html body.model-page.model-v4 section#shop-part-by-part > .wrap > .product-grid{
+    grid-column: 2 !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  html body.model-page.model-v4 section#shop-part-by-part > .wrap > .product-grid{
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 18px !important;
+  }
 }
-/* END BENDAGO V17 — Dark Flag PC look-parts side video */
+/* END BENDAGO V17 — Dark Flag PC side-video architecture */
 </style>
 
 </head><body class="model-page model-v4"><!-- Google Tag Manager (noscript) -->
