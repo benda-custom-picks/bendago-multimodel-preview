@@ -3610,3 +3610,186 @@ body.model-page .cart-floating-btn,
   }
 }
 /* END BENDAGO V17 — Dark Flag browse sticky full-format media */
+
+/* BENDAGO V17 — Napoleon 125/250 PC choose-your-build side video alignment
+   Scope: PC only / Napoleon 125-250 / #looks section. Fixes cropped look videos and top-heavy text cells without touching mobile, cart, Worker, SKU or prices. */
+@media (min-width: 901px){
+  html body.model-page.model-125 section#looks .wrap{
+    width:min(1360px, calc(100% - 72px)) !important;
+    max-width:min(1360px, calc(100% - 72px)) !important;
+  }
+
+  html body.model-page.model-125 section#looks .look-grid{
+    display:grid !important;
+    grid-template-columns:1fr !important;
+    width:100% !important;
+    max-width:none !important;
+    margin-inline:auto !important;
+    gap:26px !important;
+    align-items:stretch !important;
+    justify-content:stretch !important;
+    overflow:visible !important;
+  }
+
+  html body.model-page.model-125 section#looks article.look-card{
+    display:grid !important;
+    grid-template-columns:clamp(300px, 31vw, 390px) minmax(0, 1fr) !important;
+    grid-template-rows:none !important;
+    align-items:stretch !important;
+    width:100% !important;
+    max-width:none !important;
+    height:auto !important;
+    min-height:0 !important;
+    max-height:none !important;
+    overflow:hidden !important;
+    border-radius:26px !important;
+  }
+
+  html body.model-page.model-125 section#looks article.look-card > .look-media,
+  html body.model-page.model-125 section#looks article.look-card > .look-media-video,
+  html body.model-page.model-125 section#looks article.look-card > .look-media-link{
+    grid-column:1 !important;
+    grid-row:1 !important;
+    position:relative !important;
+    display:block !important;
+    width:100% !important;
+    height:auto !important;
+    min-height:0 !important;
+    max-height:none !important;
+    aspect-ratio:9 / 16 !important;
+    align-self:stretch !important;
+    justify-self:stretch !important;
+    flex:none !important;
+    flex-basis:auto !important;
+    border-radius:26px 0 0 26px !important;
+    overflow:hidden !important;
+    background:#030303 !important;
+  }
+
+  html body.model-page.model-125 section#looks article.look-card > .look-media video,
+  html body.model-page.model-125 section#looks article.look-card > .look-media .look-video,
+  html body.model-page.model-125 section#looks article.look-card > .look-media-video video,
+  html body.model-page.model-125 section#looks article.look-card > .look-media-video .look-video,
+  html body.model-page.model-125 section#looks article.look-card > .look-media img{
+    position:absolute !important;
+    inset:0 !important;
+    display:block !important;
+    width:100% !important;
+    height:100% !important;
+    min-width:100% !important;
+    min-height:100% !important;
+    max-width:none !important;
+    max-height:none !important;
+    object-fit:cover !important;
+    object-position:center center !important;
+    border-radius:0 !important;
+    background:#030303 !important;
+  }
+
+  html body.model-page.model-125 section#looks article.look-card > .look-body{
+    grid-column:2 !important;
+    grid-row:1 !important;
+    display:flex !important;
+    flex-direction:column !important;
+    justify-content:center !important;
+    align-self:stretch !important;
+    min-width:0 !important;
+    width:100% !important;
+    height:auto !important;
+    min-height:0 !important;
+    padding:clamp(26px, 2.8vw, 42px) clamp(28px, 3.2vw, 48px) !important;
+    gap:12px !important;
+    text-align:left !important;
+  }
+
+  html body.model-page.model-125 section#looks article.look-card .look-body h3{
+    min-height:0 !important;
+    margin:0 !important;
+    font-size:clamp(30px, 2.45vw, 46px) !important;
+    line-height:.98 !important;
+    letter-spacing:-.035em !important;
+  }
+
+  html body.model-page.model-125 section#looks article.look-card .tagline{
+    min-height:0 !important;
+    margin:0 !important;
+    font-size:11px !important;
+    line-height:1.2 !important;
+    letter-spacing:.18em !important;
+  }
+
+  html body.model-page.model-125 section#looks article.look-card .look-body p,
+  html body.model-page.model-125 section#looks article.look-card .parts-list{
+    min-height:0 !important;
+    max-height:none !important;
+    overflow:visible !important;
+  }
+
+  html body.model-page.model-125 section#looks article.look-card .look-body p{
+    margin:0 !important;
+    max-width:760px !important;
+    font-size:14px !important;
+    line-height:1.48 !important;
+  }
+
+  html body.model-page.model-125 section#looks article.look-card .parts-list{
+    margin:2px 0 0 !important;
+    padding-left:18px !important;
+    font-size:13px !important;
+    line-height:1.38 !important;
+  }
+
+  html body.model-page.model-125 section#looks article.look-card .look-bundle-cta{
+    width:100% !important;
+    max-width:760px !important;
+    margin-top:10px !important;
+    padding-top:12px !important;
+    display:grid !important;
+    gap:12px !important;
+    align-self:stretch !important;
+    flex:0 0 auto !important;
+  }
+
+  html body.model-page.model-125 section#looks article.look-card .build-essentials-card{
+    min-height:0 !important;
+    padding:15px 16px !important;
+    border-radius:17px !important;
+  }
+
+  html body.model-page.model-125 section#looks article.look-card .build-bundle-actions{
+    display:grid !important;
+    grid-template-columns:1fr !important;
+    gap:10px !important;
+  }
+
+  html body.model-page.model-125 section#looks article.look-card .build-bundle-actions .btn{
+    width:100% !important;
+    min-height:46px !important;
+    white-space:normal !important;
+    text-align:center !important;
+    justify-content:center !important;
+    align-items:center !important;
+  }
+}
+
+@media (min-width:901px) and (max-width:1180px){
+  html body.model-page.model-125 section#looks article.look-card{
+    grid-template-columns:clamp(270px, 30vw, 330px) minmax(0, 1fr) !important;
+  }
+  html body.model-page.model-125 section#looks article.look-card > .look-body{
+    padding:24px 30px !important;
+    gap:10px !important;
+  }
+  html body.model-page.model-125 section#looks article.look-card .look-body h3{
+    font-size:clamp(27px, 2.7vw, 34px) !important;
+  }
+  html body.model-page.model-125 section#looks article.look-card .look-body p{
+    font-size:13px !important;
+    line-height:1.42 !important;
+  }
+  html body.model-page.model-125 section#looks article.look-card .parts-list{
+    font-size:12.5px !important;
+    line-height:1.32 !important;
+  }
+}
+/* END BENDAGO V17 — Napoleon 125/250 PC choose-your-build side video alignment */
