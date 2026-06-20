@@ -125,6 +125,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
   ]
 }</script>
+<style id="bcp-premium-double-seat-colour-selector-v1">
+/* Premium Double Seat — required seat colour selector. Scope: this page only. */
+.order-colour-choice{margin:16px 0 12px;padding:14px;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.14);box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
+.order-colour-choice label{display:block;margin:0 0 8px;color:#f8fafc;font-size:14px;font-weight:900}
+.order-colour-choice select{width:100%;min-height:48px;padding:0 14px;border-radius:13px;border:1px solid rgba(255,255,255,.18);background:#12161d;color:#f8fafc;font:inherit;font-weight:850;outline:none}
+.order-colour-choice select:focus{border-color:rgba(77,247,168,.85);box-shadow:0 0 0 3px rgba(77,247,168,.14)}
+.order-colour-choice p{margin:8px 0 0;color:rgba(226,232,240,.74);font-size:12.5px;line-height:1.42}
+</style>
 <style id="bcp-used-builds-v54-style">
 .bcp-used-builds-v54{margin:16px 0 0;padding:15px;border-radius:18px;border:1px solid rgba(246,196,49,.22);background:linear-gradient(135deg,rgba(246,196,49,.08),rgba(255,255,255,.035));color:#f8fafc}
 .bcp-used-builds-v54 h3{margin:0 0 8px;font-size:1rem;line-height:1.2;color:#f6c431}
@@ -249,6 +257,15 @@ body.bcp-lightbox-open{overflow:hidden!important}
 <strong>961 €</strong>
 <p class="delivery-included-line">Delivery included</p>
 <p>Add to cart, then proceed to secure card checkout with Stripe.</p>
+</div>
+<div aria-label="Premium double seat colour selection" class="order-colour-choice">
+<label for="premiumDoubleSeatColour">Select seat colour</label>
+<select data-product-option-label="Seat colour" data-product-option-required="" data-product-option-select="color_option" id="premiumDoubleSeatColour" required="">
+<option value="">Choose colour before adding to cart</option>
+<option value="Black">Black</option>
+<option value="Brown">Brown</option>
+</select>
+<p>The selected colour will appear in your cart and order confirmation.</p>
 </div>
 <div class="high-value-support-note"><strong>High-value order check</strong>For premium parts, we may contact you before processing to confirm your model, selected options and delivery details. Need support first? <a href="mailto:support@bendacustompicks.com">Contact support</a>.</div>
 <a aria-label="Add to cart" class="buy-btn js-request-link" data-product-name="Premium Comfort Double Seat" data-product-price="961 €" href="./request-part.html?part=premium-double-seat" target="_self">Add to cart</a>
