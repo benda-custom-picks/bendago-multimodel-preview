@@ -1,4 +1,4 @@
-/* BENDAGO CART FLOW V1.14 — Stripe-only checkout */
+/* BENDAGO CART FLOW V1.15 — product links from cart drawer / Stripe-only checkout */
 (function () {
   const CART_KEY = 'bendago_cart_v1';
   const CHECKOUT_WORKER_URL = ['https://bendago-', 'sum', 'up-checkout.custom125picks.workers.dev/'].join('');
@@ -1723,7 +1723,7 @@ async function createStripeCheckout(lines, formData) {
       .cart-head p{max-width:360px!important;color:rgba(255,255,255,.68)!important;}
       .cart-line{border-color:rgba(255,255,255,.11)!important;background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.014)),rgba(8,9,12,.82)!important;}
       .cart-line-title{display:block!important;color:rgba(255,255,255,.94)!important;text-decoration:none!important;font-weight:950!important;line-height:1.08!important;}
-      .cart-line-media{pointer-events:none!important;}
+      .cart-line-media{pointer-events:none!important;}.cart-line-media.cart-line-media-link{pointer-events:auto!important;cursor:pointer!important;}
       .cart-line-details-lock-v16d{display:inline-flex!important;width:max-content!important;max-width:100%!important;margin:2px 0 5px!important;padding:4px 8px!important;border-radius:999px!important;border:1px solid rgba(255,255,255,.10)!important;background:rgba(255,255,255,.035)!important;color:rgba(255,255,255,.62)!important;font-size:.64rem!important;font-weight:850!important;letter-spacing:.02em!important;}
       .cart-look-lock-v16cart{margin-top:2px!important;}
       .cart-note{margin-top:2px!important;padding:11px 12px!important;}
@@ -2059,11 +2059,12 @@ async function createStripeCheckout(lines, formData) {
       ? '<div class="cart-included-label-v16g">Selected parts for this build</div>'
       : (visual ? '<div class="cart-included-label-v16g">Selected parts for your Benda direction</div>' : '<div class="cart-included-label-v16g">Selected upgrades</div>');
     body.innerHTML = buildPreview + label + lines.map(line => {
+      const productUrl = productPageUrl(line.code);
       return [
         '<div class="cart-line">',
-        '<div class="cart-line-media" aria-label="Selected part: ' + escapeHtml(line.product_name) + '"><img src="' + (line.image || './standby-product-visual.png') + '" alt="' + escapeHtml(line.product_name) + '"></div>',
+        '<a class="cart-line-media cart-line-media-link" href="' + escapeHtml(productUrl) + '" aria-label="Open ' + escapeHtml(line.product_name) + '"><img src="' + (line.image || './standby-product-visual.png') + '" alt="' + escapeHtml(line.product_name) + '"></a>',
         '<div>',
-        '<span class="cart-line-title">' + escapeHtml(line.product_name) + '</span>',
+        '<a class="cart-line-title" href="' + escapeHtml(productUrl) + '">' + escapeHtml(line.product_name) + '</a>',
         '<div class="cart-line-fit-v16cart">' + (isCompleteBuild ? 'Selected for this build' : (visual ? 'Selected for your Benda direction' : 'Selected for your setup')) + '</div>',
         optionText(line) ? '<div class="cart-line-option">' + escapeHtml(optionText(line)) + '</div>' : '',
         '<div class="cart-line-price"><span>Part value</span><strong>' + escapeHtml(line.price) + '</strong></div>',
