@@ -732,11 +732,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
 <style id="bcp-v16nzzzt-responsive-native-card-and-sticky-50">
-/* V16NZZZT — responsive only: native reel look cards + sticky video reduced to ~50vh. PC untouched. */
+/* V16NZZZT — responsive only: native reel top cards apply to 125/V4. Napoleon 450/500 top cards use the canonical responsive reel template above; sticky video rules below remain unchanged. PC untouched. */
 @media (max-width: 900px) and (orientation: portrait){
-  html body.model-page section#looks article.look-card,
+  html body.model-page:not(.model-500) section#looks article.look-card,
   html body.model-page.model-125 section#looks article.look-card,
-  html body.model-page.model-500 section#looks article.look-card,
   html body.model-page.model-v4 section#looks article.look-card{
     height:auto !important;
     min-height:0 !important;
@@ -744,11 +743,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     overflow:hidden !important;
   }
 
-  html body.model-page section#looks article.look-card > .look-media,
+  html body.model-page:not(.model-500) section#looks article.look-card > .look-media,
   html body.model-page section#looks article.look-card > .look-media-video,
   html body.model-page section#looks article.look-card > .look-media-link,
   html body.model-page.model-125 section#looks article.look-card > .look-media,
-  html body.model-page.model-500 section#looks article.look-card > .look-media,
   html body.model-page.model-v4 section#looks article.look-card > .look-media{
     position:relative !important;
     display:block !important;
@@ -763,11 +761,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     background:#050505 !important;
   }
 
-  html body.model-page section#looks article.look-card > .look-media video,
+  html body.model-page:not(.model-500) section#looks article.look-card > .look-media video,
   html body.model-page section#looks article.look-card > .look-media .look-video,
   html body.model-page section#looks article.look-card > .look-media-video video,
   html body.model-page.model-125 section#looks article.look-card > .look-media video,
-  html body.model-page.model-500 section#looks article.look-card > .look-media video,
   html body.model-page.model-v4 section#looks article.look-card > .look-media video{
     position:relative !important;
     inset:auto !important;
