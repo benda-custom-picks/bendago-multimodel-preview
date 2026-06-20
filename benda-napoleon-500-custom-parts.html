@@ -1427,6 +1427,43 @@ html body.model-page section#looks article.look-card > .look-body > h3 > a.bcp-w
 }
 </style>
 
+
+<style id="bcp-v1-desktop-choose-options-click-integrity">
+/* BENDAGO V1 — desktop click integrity for option-required product cards.
+   Scope: Napoleon 450/500 + Dark Flag V4 only. No layout, mobile, cart or checkout change. */
+@media (min-width:901px){
+  html body.model-page.model-500 .product-card,
+  html body.model-page.model-v4 .product-card{
+    position:relative !important;
+    isolation:isolate !important;
+  }
+
+  html body.model-page.model-500 .product-card .body,
+  html body.model-page.model-v4 .product-card .body{
+    position:relative !important;
+    z-index:30 !important;
+    pointer-events:auto !important;
+  }
+
+  html body.model-page.model-500 .product-card a.choose-options-card,
+  html body.model-page.model-v4 .product-card a.choose-options-card{
+    position:relative !important;
+    z-index:31 !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    pointer-events:auto !important;
+    cursor:pointer !important;
+  }
+
+  html body.model-page.model-500 .product-card::before,
+  html body.model-page.model-500 .product-card::after,
+  html body.model-page.model-v4 .product-card::before,
+  html body.model-page.model-v4 .product-card::after{
+    pointer-events:none !important;
+  }
+}
+</style>
 </head><body class="model-page model-500"><!-- Google Tag Manager (noscript) -->
 <noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-MQHMSX8X" style="display:none;visibility:hidden" width="0"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
