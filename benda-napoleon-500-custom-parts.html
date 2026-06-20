@@ -1194,15 +1194,14 @@ html body.model-page section#looks article.look-card > .look-body > h3 > a.bcp-w
 }
 </style>
 
-<style id="bcp-v29-450-responsive-full-reel-look-cards">
-/* BENDAGO V29 — Napoleon 450/500 responsive look cards:
-   show each top presentation reel in its complete native frame.
-   Scope is strictly section #looks; sticky reference media and Browse remain unchanged. */
+<style id="bcp-v31-450-responsive-native-look-reels">
+/* BENDAGO V31 — Napoleon 450/500 top look cards only.
+   Responsive presentation media now follows the native-media branch already used
+   in the shared look-card system: no source-aspect assumption in portrait, no crop,
+   no transform. Landscape preserves the shared 78vh presentation-frame ceiling. */
 @media (max-width:900px){
-  html body.model-page.model-500 section#looks article.look-card > .look-media,
-  html body.model-page.model-500 section#looks article.look-card > .look-media-video,
-  html body.model-page.model-500 section#looks article.look-card > .look-media-link,
-  html body.model-page.model-500 section#looks article.look-card > .look-media-sound-card{
+  html body.model-page.model-500 section#looks #storm-rider-66-full-build > .look-media,
+  html body.model-page.model-500 section#looks #midnight-hunter-full-build > .look-media{
     position:relative !important;
     display:block !important;
     width:100% !important;
@@ -1212,12 +1211,11 @@ html body.model-page section#looks article.look-card > .look-body > h3 > a.bcp-w
     aspect-ratio:auto !important;
     overflow:hidden !important;
     line-height:0 !important;
+    transform:none !important;
   }
 
-  html body.model-page.model-500 section#looks article.look-card > .look-media video,
-  html body.model-page.model-500 section#looks article.look-card > .look-media-video video,
-  html body.model-page.model-500 section#looks article.look-card > .look-media-link video,
-  html body.model-page.model-500 section#looks article.look-card > .look-media-sound-card video{
+  html body.model-page.model-500 section#looks #storm-rider-66-full-build > .look-media video,
+  html body.model-page.model-500 section#looks #midnight-hunter-full-build > .look-media video{
     position:relative !important;
     inset:auto !important;
     display:block !important;
@@ -1230,58 +1228,38 @@ html body.model-page section#looks article.look-card > .look-body > h3 > a.bcp-w
     aspect-ratio:auto !important;
     object-fit:contain !important;
     object-position:center center !important;
+    transform:none !important;
+    clip-path:none !important;
     background:#050505 !important;
   }
 }
-</style>
-<style id="bcp-v30-450-responsive-look-reel-template">
-/* BENDAGO V30 — exact responsive look-reel frame for Napoleon 450/500.
-   Applies on touch devices in portrait AND landscape. Only top #looks cards are scoped. */
-@media (pointer:coarse), (hover:none) and (max-width:1200px), (max-width:520px){
-  html body.model-page.model-500 section#looks article.look-card > .look-media,
-  html body.model-page.model-500 section#looks article.look-card > .look-media-video,
-  html body.model-page.model-500 section#looks article.look-card > .look-media-link,
-  html body.model-page.model-500 section#looks article.look-card > .look-media-sound-card{
-    position:relative !important;
-    display:block !important;
-    width:100% !important;
-    height:auto !important;
-    min-height:0 !important;
-    max-height:none !important;
-    aspect-ratio:9 / 16 !important;
-    overflow:hidden !important;
+
+@media (max-width:900px) and (orientation:landscape){
+  html body.model-page.model-500 section#looks #storm-rider-66-full-build > .look-media,
+  html body.model-page.model-500 section#looks #midnight-hunter-full-build > .look-media{
+    height:78vh !important;
+    max-height:78vh !important;
+    aspect-ratio:16 / 9 !important;
+    display:grid !important;
+    place-items:center !important;
     isolation:isolate !important;
     background:#050505 !important;
-    line-height:0 !important;
   }
 
-  html body.model-page.model-500 section#looks article.look-card > .look-media::before,
-  html body.model-page.model-500 section#looks article.look-card > .look-media-video::before,
-  html body.model-page.model-500 section#looks article.look-card > .look-media-link::before,
-  html body.model-page.model-500 section#looks article.look-card > .look-media-sound-card::before{
-    display:none !important;
-    content:none !important;
-  }
-
-  html body.model-page.model-500 section#looks article.look-card > .look-media video,
-  html body.model-page.model-500 section#looks article.look-card > .look-media-video video,
-  html body.model-page.model-500 section#looks article.look-card > .look-media-link video,
-  html body.model-page.model-500 section#looks article.look-card > .look-media-sound-card video{
+  html body.model-page.model-500 section#looks #storm-rider-66-full-build > .look-media video,
+  html body.model-page.model-500 section#looks #midnight-hunter-full-build > .look-media video{
     position:absolute !important;
     inset:0 !important;
-    display:block !important;
     width:100% !important;
     height:100% !important;
     min-width:0 !important;
     min-height:0 !important;
     max-width:none !important;
     max-height:none !important;
-    aspect-ratio:auto !important;
     object-fit:contain !important;
     object-position:center center !important;
     transform:none !important;
     clip-path:none !important;
-    background:#050505 !important;
   }
 }
 </style>
