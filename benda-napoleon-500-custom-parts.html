@@ -1234,6 +1234,57 @@ html body.model-page section#looks article.look-card > .look-body > h3 > a.bcp-w
   }
 }
 </style>
+<style id="bcp-v30-450-responsive-look-reel-template">
+/* BENDAGO V30 — exact responsive look-reel frame for Napoleon 450/500.
+   Applies on touch devices in portrait AND landscape. Only top #looks cards are scoped. */
+@media (pointer:coarse), (hover:none) and (max-width:1200px), (max-width:520px){
+  html body.model-page.model-500 section#looks article.look-card > .look-media,
+  html body.model-page.model-500 section#looks article.look-card > .look-media-video,
+  html body.model-page.model-500 section#looks article.look-card > .look-media-link,
+  html body.model-page.model-500 section#looks article.look-card > .look-media-sound-card{
+    position:relative !important;
+    display:block !important;
+    width:100% !important;
+    height:auto !important;
+    min-height:0 !important;
+    max-height:none !important;
+    aspect-ratio:9 / 16 !important;
+    overflow:hidden !important;
+    isolation:isolate !important;
+    background:#050505 !important;
+    line-height:0 !important;
+  }
+
+  html body.model-page.model-500 section#looks article.look-card > .look-media::before,
+  html body.model-page.model-500 section#looks article.look-card > .look-media-video::before,
+  html body.model-page.model-500 section#looks article.look-card > .look-media-link::before,
+  html body.model-page.model-500 section#looks article.look-card > .look-media-sound-card::before{
+    display:none !important;
+    content:none !important;
+  }
+
+  html body.model-page.model-500 section#looks article.look-card > .look-media video,
+  html body.model-page.model-500 section#looks article.look-card > .look-media-video video,
+  html body.model-page.model-500 section#looks article.look-card > .look-media-link video,
+  html body.model-page.model-500 section#looks article.look-card > .look-media-sound-card video{
+    position:absolute !important;
+    inset:0 !important;
+    display:block !important;
+    width:100% !important;
+    height:100% !important;
+    min-width:0 !important;
+    min-height:0 !important;
+    max-width:none !important;
+    max-height:none !important;
+    aspect-ratio:auto !important;
+    object-fit:contain !important;
+    object-position:center center !important;
+    transform:none !important;
+    clip-path:none !important;
+    background:#050505 !important;
+  }
+}
+</style>
 </head><body class="model-page model-500"><!-- Google Tag Manager (noscript) -->
 <noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-MQHMSX8X" style="display:none;visibility:hidden" width="0"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
@@ -1513,7 +1564,7 @@ html body.model-page section#looks article.look-card > .look-body > h3 > a.bcp-w
 </div>
 </div>
 </section>
-</main><footer class="bcp-footer footer"><div class="wrap"><p>Benda Custom Picks — selected custom parts for Benda riders.</p><p>Independent custom parts selection · Secure Stripe checkout · Support: <a href="mailto:support@bendacustompicks.com">support@bendacustompicks.com</a></p></div></footer><script src="order-flow.js?v=v98-restore-midnight"></script><script src="cart-flow.js?v=v22-restore-midnight"></script><script src="./anti-copy.js?v=v90-gtm-emailjs-anticopy"></script>
+</main><footer class="bcp-footer footer"><div class="wrap"><p>Benda Custom Picks — selected custom parts for Benda riders.</p><p>Independent custom parts selection · Secure Stripe checkout · Support: <a href="mailto:support@bendacustompicks.com">support@bendacustompicks.com</a></p></div></footer><script src="order-flow.js?v=v99-450-reel-template"></script><script src="cart-flow.js?v=v23-450-reel-template"></script><script src="./anti-copy.js?v=v90-gtm-emailjs-anticopy"></script>
 <script>
 /* BENDAGO V27 — user-initiated sound only for Storm Rider 66 presentation card.
    Autoplay remains muted because mobile and desktop browsers block autoplay with sound. */
