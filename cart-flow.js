@@ -157,7 +157,10 @@
       items: [
         { code: 'chrome-air-filter-450-500-sr66' },
         { code: 'black-night-clutch-cover-450-500-sr66' },
-        { code: 'brutal-storm-exhaust-450-500-sr66' }
+        { code: 'brutal-storm-exhaust-450-500-sr66' },
+        { code: 'premium-comfort-foot-kit-450', options: { color_option: 'Skull Platinum' } },
+        { code: 'premium-rear-fender-450' },
+        { code: 'double-seat-comfort-premium-plus' }
       ]
     },
   ];
@@ -489,7 +492,10 @@
     'storm-rider-66-complete': [
       { code: 'chrome-air-filter-450-500-sr66' },
       { code: 'black-night-clutch-cover-450-500-sr66' },
-      { code: 'brutal-storm-exhaust-450-500-sr66' }
+      { code: 'brutal-storm-exhaust-450-500-sr66' },
+      { code: 'premium-comfort-foot-kit-450', options: { color_option: 'Skull Platinum' } },
+      { code: 'premium-rear-fender-450' },
+      { code: 'double-seat-comfort-premium-plus' }
     ],
     'midnight-hunter-essentials': [
       { code: 'premium-comfort-foot-kit-450', options: { color_option: 'Skull Platinum' } }
@@ -627,6 +633,7 @@
     const subtotalCents = Math.round((lines || []).reduce((sum, line) => sum + line.line_total, 0) * 100);
     let best = null;
 
+    // A shared product can belong to more than one look. The pricing logic keeps only the highest eligible full-build discount, never stacks two build discounts.
     COMPLETE_BUILD_OFFERS.forEach(build => {
       const eligible = build.items.every(item => matchingQty(lines, item) >= (Number(item.qty) || 1));
       if (!eligible) return;
