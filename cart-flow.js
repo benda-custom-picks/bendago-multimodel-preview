@@ -133,8 +133,7 @@
         { code: 'aircraft-metal-cover-v4' },
         { code: 'ghost-metal-cover-v4' },
         { code: 'ghost-aluminium-cnc-chain-cover-left-v4' },
-        { code: 'midnight-hunter-tank-cover-kit-v4' },
-        { code: 'midnight-beast-kit-v4' }
+        { code: 'midnight-hunter-tank-cover-kit-v4' }
       ]
     },
     {
@@ -451,8 +450,7 @@
       { code: 'aircraft-metal-cover-v4' },
       { code: 'ghost-metal-cover-v4' },
       { code: 'ghost-aluminium-cnc-chain-cover-left-v4' },
-      { code: 'midnight-hunter-tank-cover-kit-v4' },
-      { code: 'midnight-beast-kit-v4' }
+      { code: 'midnight-hunter-tank-cover-kit-v4' }
     ],
     'shadow-beast-v4-essentials': [
       { code: 'ghost-kit-maverick-air-filter-v4', options: { color_option: 'Full Black' } }
@@ -611,14 +609,29 @@
       }
     });
 
-    const discountCents = best ? best.discountCents : 0;
+    const midnightBeastSubtotalCents = Math.round((lines || []).reduce((sum, line) => {
+      return line.code === 'midnight-beast-kit-v4' ? sum + line.line_total : sum;
+    }, 0) * 100);
+    const midnightBeastDiscountCents = Math.round(midnightBeastSubtotalCents * LAUNCH_DISCOUNT_RATE);
+    const discountCents = (best ? best.discountCents : 0) + midnightBeastDiscountCents;
+    const discountNames = [];
+    const discountKeys = [];
+    if (best) {
+      discountNames.push(best.name);
+      discountKeys.push(best.key);
+    }
+    if (midnightBeastDiscountCents > 0) {
+      discountNames.push('Midnight Beast Kit');
+      discountKeys.push('midnight-beast-kit-v4');
+    }
+
     return {
       subtotal: subtotalCents / 100,
       discountAmount: discountCents / 100,
       total: (subtotalCents - discountCents) / 100,
       discountApplied: discountCents > 0,
-      buildName: best ? best.name : '',
-      buildKey: best ? best.key : ''
+      buildName: discountNames.join(' + '),
+      buildKey: discountKeys.join('+')
     };
   }
 
