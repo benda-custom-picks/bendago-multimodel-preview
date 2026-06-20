@@ -1194,6 +1194,46 @@ html body.model-page section#looks article.look-card > .look-body > h3 > a.bcp-w
 }
 </style>
 
+<style id="bcp-v29-450-responsive-full-reel-look-cards">
+/* BENDAGO V29 — Napoleon 450/500 responsive look cards:
+   show each top presentation reel in its complete native frame.
+   Scope is strictly section #looks; sticky reference media and Browse remain unchanged. */
+@media (max-width:900px){
+  html body.model-page.model-500 section#looks article.look-card > .look-media,
+  html body.model-page.model-500 section#looks article.look-card > .look-media-video,
+  html body.model-page.model-500 section#looks article.look-card > .look-media-link,
+  html body.model-page.model-500 section#looks article.look-card > .look-media-sound-card{
+    position:relative !important;
+    display:block !important;
+    width:100% !important;
+    height:auto !important;
+    min-height:0 !important;
+    max-height:none !important;
+    aspect-ratio:auto !important;
+    overflow:hidden !important;
+    line-height:0 !important;
+  }
+
+  html body.model-page.model-500 section#looks article.look-card > .look-media video,
+  html body.model-page.model-500 section#looks article.look-card > .look-media-video video,
+  html body.model-page.model-500 section#looks article.look-card > .look-media-link video,
+  html body.model-page.model-500 section#looks article.look-card > .look-media-sound-card video{
+    position:relative !important;
+    inset:auto !important;
+    display:block !important;
+    width:100% !important;
+    height:auto !important;
+    min-width:0 !important;
+    min-height:0 !important;
+    max-width:100% !important;
+    max-height:none !important;
+    aspect-ratio:auto !important;
+    object-fit:contain !important;
+    object-position:center center !important;
+    background:#050505 !important;
+  }
+}
+</style>
 </head><body class="model-page model-500"><!-- Google Tag Manager (noscript) -->
 <noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-MQHMSX8X" style="display:none;visibility:hidden" width="0"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
