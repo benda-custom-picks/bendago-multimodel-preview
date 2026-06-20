@@ -3877,3 +3877,65 @@ body.model-page .cart-floating-btn,
   }
 }
 /* END BENDAGO V23 */
+
+/* BENDAGO V24 — Napoleon 125/250 responsive product-card alignment
+   Scope: Browse all individual upgrades carousel only.
+   Locks a single card rhythm: equal card height, fixed media/title/description zones,
+   and bottom-aligned actions. No change to sticky video/header, CTA style, cart or checkout. */
+@media (max-width:900px){
+  .model-125 #shop-part-by-part .product-grid{
+    align-items:stretch !important;
+  }
+
+  .model-125 #shop-part-by-part .product-card{
+    display:flex !important;
+    flex-direction:column !important;
+    height:548px !important;
+    min-height:548px !important;
+    max-height:548px !important;
+    align-self:stretch !important;
+    overflow:hidden !important;
+  }
+
+  .model-125 #shop-part-by-part .product-card .thumb{
+    height:158px !important;
+    flex:0 0 158px !important;
+  }
+
+  .model-125 #shop-part-by-part .product-card .body{
+    flex:1 1 auto !important;
+    min-height:0 !important;
+    display:flex !important;
+    flex-direction:column !important;
+  }
+
+  .model-125 #shop-part-by-part .product-card h3{
+    min-height:3.30em !important;
+    display:flex !important;
+    align-items:flex-start !important;
+    overflow:hidden !important;
+  }
+
+  .model-125 #shop-part-by-part .product-card p{
+    min-height:4.05em !important;
+    max-height:4.05em !important;
+    overflow:hidden !important;
+  }
+
+  .model-125 #shop-part-by-part .product-card .product-meta{
+    min-height:30px !important;
+    display:flex !important;
+    align-items:flex-end !important;
+  }
+
+  .model-125 #shop-part-by-part .product-card .small{
+    min-height:28px !important;
+    display:flex !important;
+    align-items:flex-start !important;
+  }
+
+  .model-125 #shop-part-by-part .product-card .product-details-link{
+    margin-top:auto !important;
+  }
+}
+/* END BENDAGO V24 */
