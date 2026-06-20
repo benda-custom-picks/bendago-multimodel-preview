@@ -54,6 +54,9 @@
     'premium-transparent-clutch-cover-kit-450': 'premium-transparent-clutch-cover-kit-450',
     'carbon-exhaust-protection-kit-450': 'carbon-exhaust-protection-kit-450',
     'black-shield-armor-kit-450': 'black-shield-armor-kit-450',
+    'chrome-air-filter-450-500-sr66': 'chrome-air-filter-450-500-sr66',
+    'black-night-clutch-cover-450-500-sr66': 'black-night-clutch-cover-450-500-sr66',
+    'brutal-storm-exhaust-450-500-sr66': 'brutal-storm-exhaust-450-500-sr66',
     'ghost-kit-maverick-air-filter-v4': 'ghost-kit-maverick-air-filter-v4',
     'ghost-kit-transparent-clutch-cover-v4': 'ghost-kit-transparent-clutch-cover-v4',
     'midnight-beast-kit-v4': 'midnight-beast-kit-v4',
@@ -147,7 +150,16 @@
         { code: 'carbon-exhaust-protection-kit-450' },
         { code: 'black-shield-armor-kit-450' }
       ]
-    }
+    },
+    {
+      key: 'storm-rider-66',
+      name: 'Storm Rider 66 Complete Build',
+      items: [
+        { code: 'chrome-air-filter-450-500-sr66' },
+        { code: 'black-night-clutch-cover-450-500-sr66' },
+        { code: 'brutal-storm-exhaust-450-500-sr66' }
+      ]
+    },
   ];
 
 
@@ -202,6 +214,17 @@
       title: 'Midnight Hunter Build',
       video: './napoleon-450-500-selected-builds.mp4',
       poster: './napoleon-450-500-selected-builds-poster.jpg',
+      model: 'Benda Napoleon 450/500',
+      position: 'center 50%',
+      kicker: 'Your selected build',
+      status: 'Launch Access 5% applied',
+      note: 'Your selected parts below form one complete Benda direction.'
+    },
+    'storm-rider-66': {
+      kind: 'build',
+      title: 'Storm Rider 66 Build',
+      video: './storm-rider-66-look.mp4',
+      poster: './storm-rider-66-look-poster.jpg',
       model: 'Benda Napoleon 450/500',
       position: 'center 50%',
       kicker: 'Your selected build',
@@ -463,6 +486,11 @@
       { code: 'carbon-exhaust-protection-kit-450' },
       { code: 'black-shield-armor-kit-450' }
     ],
+    'storm-rider-66-complete': [
+      { code: 'chrome-air-filter-450-500-sr66' },
+      { code: 'black-night-clutch-cover-450-500-sr66' },
+      { code: 'brutal-storm-exhaust-450-500-sr66' }
+    ],
     'midnight-hunter-essentials': [
       { code: 'premium-comfort-foot-kit-450', options: { color_option: 'Skull Platinum' } }
     ]
@@ -487,7 +515,7 @@
         }
         push('build_bundle_add_click', {
           build_key: key,
-          build_name: key.indexOf('midnight-hunter') === 0 ? 'Midnight Hunter Build' : (key.indexOf('shadow-beast-v4') === 0 ? 'Shadow Monster Bike' : key),
+          build_name: key.indexOf('storm-rider-66') === 0 ? 'Storm Rider 66 Build' : (key.indexOf('midnight-hunter') === 0 ? 'Midnight Hunter Build' : (key.indexOf('shadow-beast-v4') === 0 ? 'Shadow Monster Bike' : key)),
           cart_count: cartCount()
         });
         openCart();
@@ -1399,6 +1427,36 @@ async function createStripeCheckout(lines, formData) {
         image: './ghost-protector-darkflag-950-hero.png',
         stripe_url: ''
       },
+      'chrome-air-filter-450-500-sr66': {
+        product_code: 'chrome-air-filter-450-500-sr66',
+        product_name: 'Chrome Air Filter',
+        product_short: 'Premium chrome air filter upgrade for Benda Napoleon 450/500',
+        fitment: 'Benda Napoleon 450/500',
+        price: '406 €',
+        delivery_estimate: '10 to 15 business days',
+        image: './chrome-air-filter-hero.png',
+        stripe_url: ''
+      },
+      'black-night-clutch-cover-450-500-sr66': {
+        product_code: 'black-night-clutch-cover-450-500-sr66',
+        product_name: 'Black Night Clutch Cover',
+        product_short: 'Blacked-out clutch cover upgrade for Benda Napoleon 450/500',
+        fitment: 'Benda Napoleon 450/500',
+        price: '178 €',
+        delivery_estimate: '10 to 15 business days',
+        image: './black-night-clutch-cover-hero.png',
+        stripe_url: ''
+      },
+      'brutal-storm-exhaust-450-500-sr66': {
+        product_code: 'brutal-storm-exhaust-450-500-sr66',
+        product_name: 'Brutal Storm Exhaust',
+        product_short: 'Premium full exhaust transformation for Benda Napoleon 450/500',
+        fitment: 'Benda Napoleon 450/500',
+        price: '1806 €',
+        delivery_estimate: '10 to 15 business days',
+        image: './brutal-storm-exhaust-hero.png',
+        stripe_url: ''
+      },
     };
 
     Object.keys(napoleon450Fallbacks).forEach(code => {
@@ -1450,6 +1508,9 @@ async function createStripeCheckout(lines, formData) {
     'premium-transparent-clutch-cover-kit-450': './order-premium-transparent-clutch-cover-kit-450.html',
     'carbon-exhaust-protection-kit-450': './order-carbon-exhaust-protection-kit-450.html',
     'black-shield-armor-kit-450': './order-black-shield-armor-kit-450.html',
+    'chrome-air-filter-450-500-sr66': './order-chrome-air-filter-450-500-sr66.html',
+    'black-night-clutch-cover-450-500-sr66': './order-black-night-clutch-cover-450-500-sr66.html',
+    'brutal-storm-exhaust-450-500-sr66': './order-brutal-storm-exhaust-450-500-sr66.html',
     'ghost-kit-transparent-clutch-cover-v4': './order-ghost-kit-transparent-clutch-cover-v4.html',
     'ghost-kit-maverick-air-filter-v4': './order-ghost-kit-maverick-air-filter-v4.html',
     'midnight-beast-kit-v4': './order-midnight-beast-kit-v4.html',

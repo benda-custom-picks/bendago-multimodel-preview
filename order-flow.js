@@ -136,6 +136,37 @@ const BENDAGO_PRODUCTS = {
     image: './double-seat-comfort-premium-plus-hero.png',
     stripe_url: ''
   },
+
+  "chrome-air-filter-450-500-sr66": {
+    product_code: "chrome-air-filter-450-500-sr66",
+    product_name: 'Chrome Air Filter',
+    product_short: 'Premium chrome air filter upgrade for Benda Napoleon 450/500',
+    fitment: 'Benda Napoleon 450/500',
+    price: '406 €',
+    delivery_estimate: '10 to 15 business days',
+    image: './chrome-air-filter-hero.png',
+    stripe_url: ''
+  },
+  "black-night-clutch-cover-450-500-sr66": {
+    product_code: "black-night-clutch-cover-450-500-sr66",
+    product_name: 'Black Night Clutch Cover',
+    product_short: 'Blacked-out clutch cover upgrade for Benda Napoleon 450/500',
+    fitment: 'Benda Napoleon 450/500',
+    price: '178 €',
+    delivery_estimate: '10 to 15 business days',
+    image: './black-night-clutch-cover-hero.png',
+    stripe_url: ''
+  },
+  "brutal-storm-exhaust-450-500-sr66": {
+    product_code: "brutal-storm-exhaust-450-500-sr66",
+    product_name: 'Brutal Storm Exhaust',
+    product_short: 'Premium full exhaust transformation for Benda Napoleon 450/500',
+    fitment: 'Benda Napoleon 450/500',
+    price: '1806 €',
+    delivery_estimate: '10 to 15 business days',
+    image: './brutal-storm-exhaust-hero.png',
+    stripe_url: ''
+  },
   "maverick-air-filter-cover": {
     product_code: "maverick-air-filter-cover",
     product_name: 'Maverick Air Filter Cover',
@@ -273,7 +304,7 @@ const BENDAGO_PRODUCTS = {
     fitment: 'Benda Napoleon 125/250',
     price: '729 €',
     delivery_estimate: '10 to 15 business days',
-    image: './premium-double-seat-hero-v3.webp',
+    image: './comfort-seat-footpeg-01.png',
     stripe_url: '',
     color_required: true,
     color_options: "Black / Brown"

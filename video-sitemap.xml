@@ -72,4 +72,16 @@
       <video:family_friendly>yes</video:family_friendly>
     </video:video>
   </url>
+  <url>
+    <loc>https://bendacustompicks.com/storm-rider-66-benda-napoleon-450-500-custom-build.html</loc>
+    <video:video>
+      <video:thumbnail_loc>https://bendacustompicks.com/storm-rider-66-look-poster.jpg</video:thumbnail_loc>
+      <video:title>Storm Rider 66 — Benda Napoleon 450/500 Custom Build</video:title>
+      <video:description>Watch the Storm Rider 66 custom direction for Benda Napoleon 450/500. Explore selected parts, full-look inspiration and the shop.</video:description>
+      <video:content_loc>https://bendacustompicks.com/storm-rider-66-look.mp4</video:content_loc>
+      <video:duration>8</video:duration>
+      <video:publication_date>2026-06-20T00:00:00+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
 </urlset>
