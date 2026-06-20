@@ -3793,3 +3793,60 @@ body.model-page .cart-floating-btn,
   }
 }
 /* END BENDAGO V17 — Napoleon 125/250 PC choose-your-build side video alignment */
+
+/* BENDAGO V20 — desktop product-card action click integrity
+   Scope: desktop pointer stacking only. Keeps the premium hover effect while ensuring
+   the Add to cart and View gallery controls remain above decorative card layers. */
+@media (min-width:901px) and (hover:hover) and (pointer:fine){
+  .model-page .product-card .thumb.product-card-thumb-link{
+    position:relative !important;
+    z-index:1 !important;
+  }
+  .model-page .product-card .body{
+    position:relative !important;
+    z-index:5 !important;
+    pointer-events:auto !important;
+  }
+  .model-page .product-card .product-details-link,
+  .model-page .product-card .add-preview{
+    position:relative !important;
+    z-index:6 !important;
+    pointer-events:auto !important;
+  }
+  .model-page .product-card::before,
+  .model-page .product-card::after{
+    pointer-events:none !important;
+  }
+}
+/* END BENDAGO V20 */
+
+/* BENDAGO V21 — real desktop Add to cart control integrity
+   Scope: desktop catalogue cards only, all three model universes.
+   Keeps gallery links, hover treatment, responsive behavior and real option-required cards intact. */
+@media (min-width:901px) and (hover:hover) and (pointer:fine){
+  .model-page .product-card .body{
+    position:relative !important;
+    z-index:10 !important;
+    pointer-events:auto !important;
+  }
+
+  .model-page .product-card .product-details-link{
+    position:relative !important;
+    z-index:11 !important;
+    pointer-events:auto !important;
+    cursor:pointer !important;
+  }
+
+  .model-page .product-card button.add-preview[data-add-preview]:not([disabled]):not(.is-disabled){
+    position:relative !important;
+    z-index:12 !important;
+    pointer-events:auto !important;
+    cursor:pointer !important;
+  }
+
+  .model-page .product-card button.add-preview[data-add-preview][disabled],
+  .model-page .product-card button.add-preview[data-add-preview].is-disabled{
+    cursor:not-allowed !important;
+  }
+}
+/* END BENDAGO V21 — real desktop Add to cart control integrity */

@@ -273,7 +273,7 @@ const BENDAGO_PRODUCTS = {
     fitment: 'Benda Napoleon 125/250',
     price: '729 €',
     delivery_estimate: '10 to 15 business days',
-    image: './comfort-seat-footpeg-01.png',
+    image: './premium-double-seat-hero-v3.webp',
     stripe_url: '',
     color_required: true,
     color_options: "Black / Brown"
@@ -575,6 +575,17 @@ document.addEventListener('DOMContentLoaded', () => {
     node.textContent = 'Independent custom parts selection — not affiliated with Benda or the brands mentioned.';
   });
 
+
+  /* BENDAGO V21 — desktop model-card Add to cart recovery
+     Only normal catalogue buttons with a SKU are restored.
+     Option-required product links stay untouched and continue to open their product page. */
+  document.querySelectorAll('.model-page .product-card button.add-preview[data-add-preview]').forEach(button => {
+    if (button.hasAttribute('data-add-disabled')) return;
+    button.disabled = false;
+    button.removeAttribute('disabled');
+    button.removeAttribute('aria-disabled');
+    button.classList.remove('is-disabled');
+  });
 
   document.querySelectorAll('[data-add-preview]').forEach(button => {
     button.addEventListener('click', (event) => {
