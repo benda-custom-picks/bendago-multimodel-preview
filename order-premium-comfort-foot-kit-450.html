@@ -283,18 +283,18 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  /* BENDAGO V26 — only the Storm Rider entry path starts on its shown Design Black finish. */
+  /* BENDAGO V27 — Storm Rider opens on its shown Design Black finish; other entry paths keep a free choice. */
   try {
     var stormLook = new URLSearchParams(window.location.search || '').get('look') === 'storm-rider-66';
-    if (stormLook && select && !select.value) {
+    if (stormLook && select) {
       var stormDefault = box.querySelector('[data-foot-kit-design="Design Black"]');
-      if (stormDefault) stormDefault.click();
+      if (stormDefault && select.value !== 'Design Black') stormDefault.click();
     }
   } catch (e) {}
 });
 </script>
 <script src="./order-flow.js?v=v124-storm-cart-context-force"></script>
-<script src="./cart-flow.js?v=v128-storm-design-default"></script>
+<script src="./cart-flow.js?v=v129-storm-design-black-default"></script>
 <script src="./anti-copy.js?v=v90-gtm-emailjs-anticopy"></script>
 </body>
 </html>

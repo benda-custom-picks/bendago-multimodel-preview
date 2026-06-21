@@ -1665,7 +1665,7 @@ async function createStripeCheckout(lines, formData) {
     'ghost-protector-darkflag-950-v4': './order-ghost-protector-darkflag-950-v4.html'
   };
 
-  /* BENDAGO V26 — cart thumbnail follows the selected Foot Kit design. Pricing/SKU/look context are untouched. */
+  /* BENDAGO V27 — cart thumbnail follows the selected Foot Kit design. Pricing/SKU/look context are untouched. */
   const FOOT_KIT_OPTION_IMAGES_V26 = Object.freeze({
     'Black Strass': './premium-comfort-foot-kit-450-black-strass.png',
     'Skull Platinum': './premium-comfort-foot-kit-450-skull-platinum.png',
