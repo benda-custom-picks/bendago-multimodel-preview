@@ -297,13 +297,36 @@
     return keys.length === 1 ? keys[0] : '';
   }
 
+  function cartLookCarouselVisualV125(keys) {
+    const ordered = (Array.isArray(keys) ? keys : []).map(String).filter(function (key) {
+      return !!BUILD_VISUALS_V18[key];
+    });
+    if (ordered.length < 2) return null;
+    const models = Array.from(new Set(ordered.map(function (key) { return BUILD_VISUALS_V18[key].model; }).filter(Boolean)));
+    if (models.length !== 1) return null;
+    return {
+      kind: 'carousel',
+      title: 'Selected build directions',
+      model: models[0],
+      kicker: ordered.length + ' selected looks',
+      status: '',
+      note: 'Your cart combines parts selected from these exact build directions.',
+      slides: ordered
+    };
+  }
+
   function cartBuildVisualV18(pricing, lines) {
+    /* Several declared look origins must never collapse into a random fallback reel. */
+    const lookContexts = cartLookContextsV125(lines);
+    const multiLookVisual = cartLookCarouselVisualV125(lookContexts);
+    if (multiLookVisual) return multiLookVisual;
+
+    /* A single part added from a mapped look keeps that exact look reel. */
+    const lookContext = lookContexts.length === 1 ? lookContexts[0] : '';
+    if (lookContext && BUILD_VISUALS_V18[lookContext]) return BUILD_VISUALS_V18[lookContext];
+
     const buildKey = String((pricing && pricing.buildKey) || '').trim();
     if (buildKey && BUILD_VISUALS_V18[buildKey]) return BUILD_VISUALS_V18[buildKey];
-
-    /* A part added from a mapped look keeps that exact look reel until the cart contains competing mapped looks. */
-    const lookContext = cartLookContextV19(lines);
-    if (lookContext && BUILD_VISUALS_V18[lookContext]) return BUILD_VISUALS_V18[lookContext];
 
     /* Last-resort visual only: exclusive Storm Rider part(s) with no foreign SKU. */
     if (cartStormRiderFallbackV20(lines)) return BUILD_VISUALS_V18['storm-rider-66'];
@@ -334,11 +357,11 @@
     const slides = isCarousel ? cartCarouselSlidesV18(visual) : [];
     const active = slides.length ? slides[0] : visual;
     const status = visual.status ? '<div class="cart-build-preview-status-v18">' + escapeHtml(visual.status) + '</div>' : '';
-    const ariaLabel = visual.kind === 'build' ? 'Selected build: ' : (isCarousel ? 'Benda Napoleon 125/250 build directions: ' : 'Selected Benda direction: ');
+    const ariaLabel = visual.kind === 'build' ? 'Selected build: ' : (isCarousel ? ((visual.model || 'Selected') + ' build directions: ') : 'Selected Benda direction: ');
     const carouselData = isCarousel ? encodeURIComponent(JSON.stringify(slides)) : '';
     const carouselClass = isCarousel ? ' cart-build-preview-carousel-v18' : '';
     const carouselNav = isCarousel ? [
-      '<div class="cart-build-preview-carousel-nav-v18" role="tablist" aria-label="Choose a Napoleon 125/250 build direction">',
+      '<div class="cart-build-preview-carousel-nav-v18" role="tablist" aria-label="Choose a ' + escapeHtml(visual.model || 'Benda') + ' build direction">',
       slides.map(function (slide, index) {
         return '<button type="button" class="cart-build-preview-dot-v18' + (index === 0 ? ' is-active' : '') + '" data-cart-carousel-index-v18="' + index + '" aria-label="Show ' + escapeHtml(slide.title) + '" aria-pressed="' + (index === 0 ? 'true' : 'false') + '"></button>';
       }).join(''),
@@ -519,7 +542,8 @@
         const key = String(button.getAttribute('data-add-bundle') || '').trim();
         const items = BUNDLE_ADD_TO_CART_ITEMS[key];
         if (!items || !items.length) return;
-        upsertMany(items);
+        const lookContext = cleanLookContextV19(key.replace(/-(complete|essentials)$/, ''));
+        upsertMany(items, lookContext ? { look_context: lookContext } : {});
         const box = button.closest('[data-bundle-box]');
         const msg = box ? box.querySelector('.build-bundle-added') : null;
         if (msg) {
@@ -573,7 +597,13 @@
   function readCart() {
     try {
       const cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
-      return Array.isArray(cart) ? cart.filter(item => item && item.code && Number(item.qty) > 0) : [];
+      return Array.isArray(cart) ? cart.filter(function (item) {
+        return item && item.code && Number(item.qty) > 0;
+      }).map(function (item) {
+        const next = Object.assign({}, item);
+        syncLineLookContextsV125(next);
+        return next;
+      }) : [];
     } catch (e) {
       return [];
     }
@@ -607,9 +637,13 @@
     return String(value || '').trim();
   }
 
-  /* BENDAGO V19 — preserve the originating look when a single part is added.
-     This drives the correct cart reel without changing SKU, price, quantity or discount logic. */
+  /* BENDAGO V125 — preserve every real source look for a cart line.
+     This changes visual attribution only: SKU, price, quantity and discount logic stay untouched. */
   const CART_LOOK_CONTEXTS_V19 = Object.freeze({
+    'strong-pure-bob': true,
+    'headlight-fairing': true,
+    'black-fat-bob': true,
+    'blackout-predator': true,
     'storm-rider-66': true
   });
 
@@ -644,12 +678,33 @@
     return CART_LOOK_CONTEXTS_V19[key] ? key : '';
   }
 
-  function cartLookContextV19(lines) {
-    const raw = (lines || []).map(function (line) {
-      return String(line && line.look_context || '').trim();
+  function lineLookContextsV125(line) {
+    const raw = line && Array.isArray(line.look_contexts) ? line.look_contexts : [];
+    const legacy = line && line.look_context ? [line.look_context] : [];
+    return Array.from(new Set(raw.concat(legacy).map(cleanLookContextV19).filter(Boolean)));
+  }
+
+  function cartLookContextsV125(lines) {
+    const keys = [];
+    (lines || []).forEach(function (line) {
+      lineLookContextsV125(line).forEach(function (key) {
+        if (!keys.includes(key)) keys.push(key);
+      });
     });
-    if (raw.includes('mixed')) return '';
-    const keys = Array.from(new Set(raw.map(cleanLookContextV19).filter(Boolean)));
+    return keys;
+  }
+
+  function syncLineLookContextsV125(line, lookContext) {
+    const merged = lineLookContextsV125(line);
+    const clean = cleanLookContextV19(lookContext);
+    if (clean && !merged.includes(clean)) merged.push(clean);
+    line.look_contexts = merged;
+    line.look_context = merged.length === 1 ? merged[0] : (merged.length > 1 ? 'mixed' : '');
+    return merged;
+  }
+
+  function cartLookContextV19(lines) {
+    const keys = cartLookContextsV125(lines);
     return keys.length === 1 ? keys[0] : '';
   }
 
@@ -1599,7 +1654,8 @@ async function createStripeCheckout(lines, formData) {
       if (!product) return null;
       const qty = Math.max(1, Number(item.qty) || 1);
       const unit = euroToNumber(product.price);
-      return { ...product, code: item.code, qty, color_option: optionLabel(item), look_context: cleanLookContextV19(item.look_context), line_total: unit * qty };
+      const lookContexts = lineLookContextsV125(item);
+      return { ...product, code: item.code, qty, color_option: optionLabel(item), look_context: lookContexts.length === 1 ? lookContexts[0] : '', look_contexts: lookContexts, line_total: unit * qty };
     }).filter(Boolean);
   }
 
@@ -1609,12 +1665,16 @@ async function createStripeCheckout(lines, formData) {
 
 
   function encodeSharedCart(cart) {
-    const safeCart = (Array.isArray(cart) ? cart : []).map(item => ({
-      code: String(item.code || '').trim(),
-      qty: Math.max(1, Number(item.qty) || 1),
-      color_option: cleanOption(item.color_option),
-      look_context: cleanLookContextV19(item.look_context)
-    })).filter(item => item.code);
+    const safeCart = (Array.isArray(cart) ? cart : []).map(function (item) {
+      const lookContexts = lineLookContextsV125(item);
+      return {
+        code: String(item.code || '').trim(),
+        qty: Math.max(1, Number(item.qty) || 1),
+        color_option: cleanOption(item.color_option),
+        look_context: lookContexts.length === 1 ? lookContexts[0] : '',
+        look_contexts: lookContexts
+      };
+    }).filter(item => item.code);
     try {
       return btoa(unescape(encodeURIComponent(JSON.stringify(safeCart))));
     } catch (e) {
@@ -1629,12 +1689,17 @@ async function createStripeCheckout(lines, formData) {
       const parsed = JSON.parse(decoded);
       if (!Array.isArray(parsed)) return [];
       const map = products();
-      return parsed.map(item => ({
-        code: String(item.code || '').trim(),
-        qty: Math.max(1, Number(item.qty) || 1),
-        color_option: cleanOption(item.color_option),
-        look_context: cleanLookContextV19(item.look_context)
-      })).filter(item => item.code && map[item.code]);
+      return parsed.map(function (item) {
+        const next = {
+          code: String(item.code || '').trim(),
+          qty: Math.max(1, Number(item.qty) || 1),
+          color_option: cleanOption(item.color_option),
+          look_context: cleanLookContextV19(item.look_context),
+          look_contexts: Array.isArray(item.look_contexts) ? item.look_contexts : []
+        };
+        syncLineLookContextsV125(next);
+        return next;
+      }).filter(item => item.code && map[item.code]);
     } catch (e) {
       return [];
     }
@@ -1692,11 +1757,11 @@ async function createStripeCheckout(lines, formData) {
     const existing = cart.find(item => item.code === code && optionLabel(item) === colorOption);
     if (existing) {
       existing.qty += qty;
-      const previousContext = String(existing.look_context || '').trim();
-      if (lookContext && !previousContext) existing.look_context = lookContext;
-      else if (lookContext && previousContext !== lookContext) existing.look_context = 'mixed';
+      syncLineLookContextsV125(existing, lookContext);
     } else {
-      cart.push({ code, qty, color_option: colorOption, look_context: lookContext });
+      const next = { code: code, qty: qty, color_option: colorOption, look_context: '', look_contexts: [] };
+      syncLineLookContextsV125(next, lookContext);
+      cart.push(next);
     }
     saveCart(cart);
     push('add_to_cart', {
@@ -1710,21 +1775,24 @@ async function createStripeCheckout(lines, formData) {
     return true;
   }
 
-  function upsertMany(items = []) {
+  function upsertMany(items = [], options = {}) {
     const map = products();
     const cart = readCart();
+    const defaultLookContext = cleanLookContextV19(options.look_context);
     let changed = 0;
     (Array.isArray(items) ? items : []).forEach(item => {
       const code = String(item && item.code || '').trim();
       if (!code || !map[code]) return;
       const colorOption = cleanOption(item.options && item.options.color_option);
-      const lookContext = cleanLookContextV19(item.look_context);
+      const lookContext = cleanLookContextV19(item.look_context || defaultLookContext);
       const existing = cart.find(line => line.code === code && optionLabel(line) === colorOption);
       if (existing) {
         existing.qty = Math.max(1, Number(existing.qty) || 1);
-        if (lookContext && !String(existing.look_context || '').trim()) existing.look_context = lookContext;
+        syncLineLookContextsV125(existing, lookContext);
       } else {
-        cart.push({ code, qty: 1, color_option: colorOption, look_context: lookContext });
+        const next = { code: code, qty: 1, color_option: colorOption, look_context: '', look_contexts: [] };
+        syncLineLookContextsV125(next, lookContext);
+        cart.push(next);
         changed += 1;
       }
     });
