@@ -196,10 +196,13 @@ body.bcp-lightbox-open{overflow:hidden!important}
 <meta name="twitter:description" content="Dual Exhaust Custom Kit for Benda Napoleon 125/250. Complete dual exhaust look, stronger right-side custom style, product photos and secure Stripe checkout."/>
 <meta name="twitter:image" content="https://bendacustompicks.com/dual-exhaust-card-hero.webp"/>
 
-<style id="bcp-v1-dual-exhaust-hero-gallery-fix">
-/* BENDAGO V1 — Dual Exhaust product page only: better hero crop + adaptive full-format gallery */
-.dual-exhaust-media #mainProductImage{
-  object-position:center 72% !important;
+<style id="bcp-v2-dual-exhaust-hero-gallery-fix">
+/* BENDAGO V2 — Dual Exhaust page only: close-up hero + full-format adaptive gallery */
+.dual-exhaust-media #mainProductImage,
+.dual-exhaust-media #mainProductVideo{
+  aspect-ratio:16/9 !important;
+  object-fit:cover !important;
+  object-position:center center !important;
 }
 .dual-exhaust-gallery{
   display:grid !important;
@@ -207,6 +210,7 @@ body.bcp-lightbox-open{overflow:hidden!important}
   gap:12px !important;
 }
 .dual-exhaust-gallery .product-thumb{
+  position:relative !important;
   display:flex !important;
   align-items:center !important;
   justify-content:center !important;
@@ -225,16 +229,13 @@ body.bcp-lightbox-open{overflow:hidden!important}
   border-radius:12px !important;
   background:#05070b !important;
 }
-.dual-exhaust-gallery .video-thumb{
-  min-height:124px !important;
-}
 .dual-exhaust-gallery .video-thumb::after{
   inset:6px !important;
   border-radius:12px !important;
 }
 @media (max-width: 900px){
   .dual-exhaust-gallery{grid-template-columns:repeat(3,minmax(0,1fr)) !important;}
-  .dual-exhaust-gallery .product-thumb{min-height:110px !important;}
+  .dual-exhaust-gallery .product-thumb{min-height:112px !important;}
   .dual-exhaust-gallery .product-thumb img{max-height:150px !important;}
 }
 @media (max-width: 640px){
@@ -267,20 +268,20 @@ body.bcp-lightbox-open{overflow:hidden!important}
 <section>
 <h1 class="product-title">Dual Exhaust Custom Kit for Benda Napoleon 125/250</h1>
 <div class="media-card dual-exhaust-media">
-<img alt="Dual Exhaust Custom Kit for Benda Napoleon 125/250" class="main-product-img" decoding="async" id="mainProductImage" src="./dual-exhaust-gallery-01.webp" fetchpriority="high">
+<img alt="Premium installed Dual Exhaust Custom Kit exhaust close-up" class="main-product-img" decoding="async" id="mainProductImage" src="./dual-exhaust-premium-bike-closeup-01.webp" fetchpriority="high">
 <video autoplay="" class="main-product-video" controls="" hidden="" id="mainProductVideo" loop="" muted="" playsinline="" poster="./dual-exhaust-video-poster.webp" preload="auto">
 <source src="./dual-exhaust-product-video.mp4" type="video/mp4"/>
 Your browser cannot play this MP4.
 </video>
 <div aria-label="Dual Exhaust Custom Kit gallery" class="thumb-row gallery dual-exhaust-gallery">
-<button class="product-thumb active" data-alt="Dual Exhaust Custom Kit installed chrome side view" data-src="./dual-exhaust-gallery-01.webp" data-type="image" type="button"><img alt="Dual Exhaust Custom Kit installed chrome side view" decoding="async" loading="lazy" src="./dual-exhaust-gallery-01.webp"/></button>
+<button class="product-thumb" data-alt="Dual Exhaust Custom Kit installed chrome side view" data-src="./dual-exhaust-gallery-01.webp" data-type="image" type="button"><img alt="Dual Exhaust Custom Kit installed chrome side view" decoding="async" loading="lazy" src="./dual-exhaust-gallery-01.webp"/></button>
 <button class="product-thumb" data-alt="Dual Exhaust Custom Kit before and after modification view" data-src="./dual-exhaust-gallery-02.webp" data-type="image" type="button"><img alt="Dual Exhaust Custom Kit before and after modification view" decoding="async" loading="lazy" src="./dual-exhaust-gallery-02.webp"/></button>
 <button class="product-thumb" data-alt="Dual Exhaust Custom Kit standalone chrome pipes product view" data-src="./dual-exhaust-gallery-03.webp" data-type="image" type="button"><img alt="Dual Exhaust Custom Kit standalone chrome pipes product view" decoding="async" loading="lazy" src="./dual-exhaust-gallery-03.webp"/></button>
 <button class="product-thumb" data-alt="Dual Exhaust Custom Kit installed Benda Napoleon side detail view" data-src="./dual-exhaust-gallery-04.webp" data-type="image" type="button"><img alt="Dual Exhaust Custom Kit installed Benda Napoleon side detail view" decoding="async" loading="lazy" src="./dual-exhaust-gallery-04.webp"/></button>
 <button aria-label="Show premium black dual exhaust studio photo" class="product-thumb" data-alt="Premium black Dual Exhaust Custom Kit studio photo" data-src="./dual-exhaust-premium-black-gallery.webp" data-type="image" type="button">
 <img alt="Premium black Dual Exhaust Custom Kit studio photo" decoding="async" loading="lazy" src="./dual-exhaust-premium-black-gallery.webp"/>
 </button>
-<button aria-label="Show premium installed Dual Exhaust photo 1" class="product-thumb" data-alt="Premium installed Dual Exhaust Custom Kit photo 1" data-src="./dual-exhaust-premium-bike-closeup-01.webp" data-type="image" type="button">
+<button aria-label="Show premium installed Dual Exhaust photo 1" class="product-thumb active" data-alt="Premium installed Dual Exhaust Custom Kit photo 1" data-src="./dual-exhaust-premium-bike-closeup-01.webp" data-type="image" type="button">
 <img alt="Premium installed Dual Exhaust Custom Kit photo 1" decoding="async" loading="lazy" src="./dual-exhaust-premium-bike-closeup-01.webp"/>
 </button>
 <button aria-label="Show premium installed Dual Exhaust photo 2" class="product-thumb" data-alt="Premium installed Dual Exhaust Custom Kit photo 2" data-src="./dual-exhaust-premium-bike-closeup-02.webp" data-type="image" type="button">
