@@ -196,53 +196,18 @@ body.bcp-lightbox-open{overflow:hidden!important}
 <meta name="twitter:description" content="Dual Exhaust Custom Kit for Benda Napoleon 125/250. Complete dual exhaust look, stronger right-side custom style, product photos and secure Stripe checkout."/>
 <meta name="twitter:image" content="https://bendacustompicks.com/dual-exhaust-card-hero.webp"/>
 
-<style id="bcp-v2-dual-exhaust-hero-gallery-fix">
-/* BENDAGO V2 — Dual Exhaust page only: close-up hero + full-format adaptive gallery */
-.dual-exhaust-media #mainProductImage,
-.dual-exhaust-media #mainProductVideo{
-  aspect-ratio:16/9 !important;
-  object-fit:cover !important;
-  object-position:center center !important;
-}
-.dual-exhaust-gallery{
-  display:grid !important;
-  grid-template-columns:repeat(4,minmax(0,1fr)) !important;
-  gap:12px !important;
-}
-.dual-exhaust-gallery .product-thumb{
-  position:relative !important;
-  display:flex !important;
-  align-items:center !important;
-  justify-content:center !important;
-  min-height:124px !important;
-  padding:6px !important;
-  border-radius:16px !important;
-  background:rgba(5,7,11,.92) !important;
-}
-.dual-exhaust-gallery .product-thumb img{
-  width:100% !important;
-  height:auto !important;
-  max-height:170px !important;
-  aspect-ratio:auto !important;
-  object-fit:contain !important;
-  object-position:center center !important;
-  border-radius:12px !important;
-  background:#05070b !important;
-}
-.dual-exhaust-gallery .video-thumb::after{
-  inset:6px !important;
-  border-radius:12px !important;
-}
-@media (max-width: 900px){
-  .dual-exhaust-gallery{grid-template-columns:repeat(3,minmax(0,1fr)) !important;}
-  .dual-exhaust-gallery .product-thumb{min-height:112px !important;}
-  .dual-exhaust-gallery .product-thumb img{max-height:150px !important;}
-}
-@media (max-width: 640px){
-  .dual-exhaust-gallery{grid-template-columns:repeat(2,minmax(0,1fr)) !important;}
-  .dual-exhaust-gallery .product-thumb{min-height:124px !important;}
-  .dual-exhaust-gallery .product-thumb img{max-height:180px !important;}
-}
+<style id="bcp-v3-dual-exhaust-hero-full-gallery">
+/* Dual Exhaust only: exact wide hero with engine + twin chrome pipes; gallery images retain native ratio in main viewer. */
+.dual-exhaust-media{overflow:visible!important}
+.dual-exhaust-media .main-product-img,.dual-exhaust-media .main-product-video{width:100%!important;max-width:100%!important;display:block!important;border-radius:18px!important;background:#05070b!important}
+.dual-exhaust-media:not(.is-gallery-image) .main-product-img,.dual-exhaust-media:not(.is-gallery-image) .main-product-video{aspect-ratio:16/9!important;height:auto!important;object-fit:cover!important;object-position:center center!important}
+.dual-exhaust-media.is-gallery-image .main-product-img{aspect-ratio:auto!important;height:auto!important;max-height:none!important;object-fit:contain!important;object-position:center center!important}
+.dual-exhaust-gallery{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:12px!important}
+.dual-exhaust-gallery .product-thumb{position:relative!important;display:flex!important;align-items:center!important;justify-content:center!important;min-height:128px!important;padding:6px!important;border-radius:16px!important;background:rgba(5,7,11,.92)!important}
+.dual-exhaust-gallery .product-thumb img{width:100%!important;height:auto!important;max-height:176px!important;aspect-ratio:auto!important;object-fit:contain!important;object-position:center center!important;border-radius:12px!important;background:#05070b!important}
+.dual-exhaust-gallery .video-thumb::after{inset:6px!important;border-radius:12px!important}
+@media(max-width:900px){.dual-exhaust-gallery{grid-template-columns:repeat(3,minmax(0,1fr))!important}.dual-exhaust-gallery .product-thumb{min-height:112px!important}.dual-exhaust-gallery .product-thumb img{max-height:154px!important}}
+@media(max-width:640px){.dual-exhaust-gallery{grid-template-columns:repeat(2,minmax(0,1fr))!important}.dual-exhaust-gallery .product-thumb{min-height:126px!important}.dual-exhaust-gallery .product-thumb img{max-height:184px!important}}
 </style>
 
 </head>
@@ -268,12 +233,14 @@ body.bcp-lightbox-open{overflow:hidden!important}
 <section>
 <h1 class="product-title">Dual Exhaust Custom Kit for Benda Napoleon 125/250</h1>
 <div class="media-card dual-exhaust-media">
-<img alt="Premium installed Dual Exhaust Custom Kit exhaust close-up" class="main-product-img" decoding="async" id="mainProductImage" src="./dual-exhaust-premium-bike-closeup-01.webp" fetchpriority="high">
+<img alt="Dual Exhaust Custom Kit installed detail with chrome dual pipes" class="main-product-img" data-hero-src="./dual-exhaust-card-hero.webp" decoding="async" id="mainProductImage" src="./dual-exhaust-card-hero.webp" fetchpriority="high">
 <video autoplay="" class="main-product-video" controls="" hidden="" id="mainProductVideo" loop="" muted="" playsinline="" poster="./dual-exhaust-video-poster.webp" preload="auto">
 <source src="./dual-exhaust-product-video.mp4" type="video/mp4"/>
 Your browser cannot play this MP4.
 </video>
 <div aria-label="Dual Exhaust Custom Kit gallery" class="thumb-row gallery dual-exhaust-gallery">
+<button aria-label="Show Dual Exhaust Custom Kit hero detail" class="product-thumb active" data-alt="Dual Exhaust Custom Kit installed detail with chrome dual pipes" data-display-mode="hero" data-src="./dual-exhaust-card-hero.webp" data-type="image" type="button"><img alt="Dual Exhaust Custom Kit installed detail with chrome dual pipes" decoding="async" loading="lazy" src="./dual-exhaust-card-hero.webp"/></button>
+
 <button class="product-thumb" data-alt="Dual Exhaust Custom Kit installed chrome side view" data-src="./dual-exhaust-gallery-01.webp" data-type="image" type="button"><img alt="Dual Exhaust Custom Kit installed chrome side view" decoding="async" loading="lazy" src="./dual-exhaust-gallery-01.webp"/></button>
 <button class="product-thumb" data-alt="Dual Exhaust Custom Kit before and after modification view" data-src="./dual-exhaust-gallery-02.webp" data-type="image" type="button"><img alt="Dual Exhaust Custom Kit before and after modification view" decoding="async" loading="lazy" src="./dual-exhaust-gallery-02.webp"/></button>
 <button class="product-thumb" data-alt="Dual Exhaust Custom Kit standalone chrome pipes product view" data-src="./dual-exhaust-gallery-03.webp" data-type="image" type="button"><img alt="Dual Exhaust Custom Kit standalone chrome pipes product view" decoding="async" loading="lazy" src="./dual-exhaust-gallery-03.webp"/></button>
@@ -281,7 +248,7 @@ Your browser cannot play this MP4.
 <button aria-label="Show premium black dual exhaust studio photo" class="product-thumb" data-alt="Premium black Dual Exhaust Custom Kit studio photo" data-src="./dual-exhaust-premium-black-gallery.webp" data-type="image" type="button">
 <img alt="Premium black Dual Exhaust Custom Kit studio photo" decoding="async" loading="lazy" src="./dual-exhaust-premium-black-gallery.webp"/>
 </button>
-<button aria-label="Show premium installed Dual Exhaust photo 1" class="product-thumb active" data-alt="Premium installed Dual Exhaust Custom Kit photo 1" data-src="./dual-exhaust-premium-bike-closeup-01.webp" data-type="image" type="button">
+<button aria-label="Show premium installed Dual Exhaust photo 1" class="product-thumb" data-alt="Premium installed Dual Exhaust Custom Kit photo 1" data-src="./dual-exhaust-premium-bike-closeup-01.webp" data-type="image" type="button">
 <img alt="Premium installed Dual Exhaust Custom Kit photo 1" decoding="async" loading="lazy" src="./dual-exhaust-premium-bike-closeup-01.webp"/>
 </button>
 <button aria-label="Show premium installed Dual Exhaust photo 2" class="product-thumb" data-alt="Premium installed Dual Exhaust Custom Kit photo 2" data-src="./dual-exhaust-premium-bike-closeup-02.webp" data-type="image" type="button">
@@ -372,6 +339,8 @@ document.getElementById('year').textContent = new Date().getFullYear();
   function showImage(button) {
     hideVideo();
     if (!mainImg) return;
+    var isHero = button.getAttribute('data-display-mode') === 'hero';
+    if (mediaCard) mediaCard.classList.toggle('is-gallery-image', !isHero);
     mainImg.src = button.getAttribute('data-src');
     mainImg.alt = button.getAttribute('data-alt') || 'Dual Exhaust Custom Kit product view';
     mainImg.hidden = false;
@@ -407,7 +376,7 @@ document.getElementById('year').textContent = new Date().getFullYear();
     mainVideo.removeAttribute('hidden');
     mainVideo.style.display = 'block';
 
-    if (mediaCard) mediaCard.classList.add('is-video-mode');
+    if (mediaCard) { mediaCard.classList.remove('is-gallery-image'); mediaCard.classList.add('is-video-mode'); }
 
     mainVideo.load();
     var playAttempt = mainVideo.play();
@@ -429,6 +398,6 @@ document.getElementById('year').textContent = new Date().getFullYear();
 })();
 </script>
 <script src="./order-flow.js?v=v90-gtm-emailjs-anticopy"></script>
-<script src="./cart-flow.js?v=v90-gtm-emailjs-anticopy"></script>
+<script src="./cart-flow.js?v=v116-cart-product-links"></script>
 <script src="./anti-copy.js?v=v90-gtm-emailjs-anticopy"></script>
 </body></html>
