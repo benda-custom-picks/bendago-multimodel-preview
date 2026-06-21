@@ -158,9 +158,7 @@
         { code: 'chrome-air-filter-450-500-sr66' },
         { code: 'black-night-clutch-cover-450-500-sr66' },
         { code: 'brutal-storm-exhaust-450-500-sr66' },
-        { code: 'premium-comfort-foot-kit-450', options: { color_option: 'Skull Platinum' } },
-        { code: 'premium-rear-fender-450' },
-        { code: 'double-seat-comfort-premium-plus' }
+        { code: 'premium-comfort-foot-kit-450', options: { color_option: 'Skull Platinum' } }
       ]
     },
   ];
@@ -525,9 +523,7 @@
       { code: 'chrome-air-filter-450-500-sr66' },
       { code: 'black-night-clutch-cover-450-500-sr66' },
       { code: 'brutal-storm-exhaust-450-500-sr66' },
-      { code: 'premium-comfort-foot-kit-450', options: { color_option: 'Skull Platinum' } },
-      { code: 'premium-rear-fender-450' },
-      { code: 'double-seat-comfort-premium-plus' }
+      { code: 'premium-comfort-foot-kit-450', options: { color_option: 'Skull Platinum' } }
     ],
     'midnight-hunter-essentials': [
       { code: 'premium-comfort-foot-kit-450', options: { color_option: 'Skull Platinum' } }
@@ -647,16 +643,14 @@
     'storm-rider-66': true
   });
 
-  /* BENDAGO V20 — hard fallback for Storm Rider 66 product cards.
-     The cart retains the explicit look_context first. This fallback only protects
-     a Storm-only selection if a legacy button/session arrives without context. */
-  const STORM_RIDER_66_CODES_V20 = Object.freeze({
+  /* BENDAGO V24 — hard fallback for the four genuine Storm Rider 66 parts only.
+     Explicit look_context stays primary. Standalone seat and rear-fender products
+     must never force the Storm Rider visual. */
+  const STORM_RIDER_66_CODES_V24 = Object.freeze({
     'chrome-air-filter-450-500-sr66': true,
     'black-night-clutch-cover-450-500-sr66': true,
     'brutal-storm-exhaust-450-500-sr66': true,
-    'premium-comfort-foot-kit-450': true,
-    'premium-rear-fender-450': true,
-    'double-seat-comfort-premium-plus': true
+    'premium-comfort-foot-kit-450': true
   });
   const STORM_RIDER_66_EXCLUSIVE_CODES_V20 = Object.freeze({
     'chrome-air-filter-450-500-sr66': true,
@@ -669,7 +663,7 @@
       return String(line && (line.code || line.product_code) || '').trim();
     }).filter(Boolean);
     return codes.length > 0 &&
-      codes.every(function (code) { return !!STORM_RIDER_66_CODES_V20[code]; }) &&
+      codes.every(function (code) { return !!STORM_RIDER_66_CODES_V24[code]; }) &&
       codes.some(function (code) { return !!STORM_RIDER_66_EXCLUSIVE_CODES_V20[code]; });
   }
 
@@ -679,9 +673,13 @@
   }
 
   function lineLookContextsV125(line) {
+    const code = String(line && (line.code || line.product_code) || '').trim();
     const raw = line && Array.isArray(line.look_contexts) ? line.look_contexts : [];
     const legacy = line && line.look_context ? [line.look_context] : [];
-    return Array.from(new Set(raw.concat(legacy).map(cleanLookContextV19).filter(Boolean)));
+    return Array.from(new Set(raw.concat(legacy).map(cleanLookContextV19).filter(Boolean))).filter(function (key) {
+      /* V24 migration: these products are independent and must never retain a legacy Storm context. */
+      return !(key === 'storm-rider-66' && (code === 'premium-rear-fender-450' || code === 'double-seat-comfort-premium-plus'));
+    });
   }
 
   function cartLookContextsV125(lines) {
