@@ -297,9 +297,26 @@
     return keys.length === 1 ? keys[0] : '';
   }
 
+  /* BENDAGO V123 — preserve the originating look for individual look-part additions.
+     A completed build still wins. If individual items come from one visible look, the cart keeps that exact reel.
+     Mixed known looks fall back to the model reel so no false direction is implied. */
+  function normalizeLookContextV123(value) {
+    const key = String(value || '').trim();
+    return BUILD_VISUALS_V18[key] ? key : '';
+  }
+
+  function cartLookContextV123(lines) {
+    const keys = Array.from(new Set((lines || []).map(function (line) {
+      return normalizeLookContextV123(line && line.look_context);
+    }).filter(Boolean)));
+    return keys.length === 1 ? keys[0] : '';
+  }
+
   function cartBuildVisualV18(pricing, lines) {
     const buildKey = String((pricing && pricing.buildKey) || '').trim();
     if (buildKey && BUILD_VISUALS_V18[buildKey]) return BUILD_VISUALS_V18[buildKey];
+    const lookKey = cartLookContextV123(lines);
+    if (lookKey) return BUILD_VISUALS_V18[lookKey];
     const modelKey = cartModelKeyV18(lines);
     return modelKey ? (MODEL_VISUALS_V18[modelKey] || null) : null;
   }
@@ -510,8 +527,9 @@
       button.addEventListener('click', () => {
         const key = String(button.getAttribute('data-add-bundle') || '').trim();
         const items = BUNDLE_ADD_TO_CART_ITEMS[key];
+        const lookContext = normalizeLookContextV123(key.replace(/-(?:complete|essentials)$/i, ''));
         if (!items || !items.length) return;
-        upsertMany(items);
+        upsertMany(items, lookContext);
         const box = button.closest('[data-bundle-box]');
         const msg = box ? box.querySelector('.build-bundle-added') : null;
         if (msg) {
@@ -1545,7 +1563,7 @@ async function createStripeCheckout(lines, formData) {
       if (!product) return null;
       const qty = Math.max(1, Number(item.qty) || 1);
       const unit = euroToNumber(product.price);
-      return { ...product, code: item.code, qty, color_option: optionLabel(item), line_total: unit * qty };
+      return { ...product, code: item.code, qty, color_option: optionLabel(item), look_context: normalizeLookContextV123(item.look_context), line_total: unit * qty };
     }).filter(Boolean);
   }
 
@@ -1558,7 +1576,8 @@ async function createStripeCheckout(lines, formData) {
     const safeCart = (Array.isArray(cart) ? cart : []).map(item => ({
       code: String(item.code || '').trim(),
       qty: Math.max(1, Number(item.qty) || 1),
-      color_option: cleanOption(item.color_option)
+      color_option: cleanOption(item.color_option),
+      look_context: normalizeLookContextV123(item.look_context)
     })).filter(item => item.code);
     try {
       return btoa(unescape(encodeURIComponent(JSON.stringify(safeCart))));
@@ -1577,7 +1596,8 @@ async function createStripeCheckout(lines, formData) {
       return parsed.map(item => ({
         code: String(item.code || '').trim(),
         qty: Math.max(1, Number(item.qty) || 1),
-        color_option: cleanOption(item.color_option)
+        color_option: cleanOption(item.color_option),
+        look_context: normalizeLookContextV123(item.look_context)
       })).filter(item => item.code && map[item.code]);
     } catch (e) {
       return [];
@@ -1631,24 +1651,31 @@ async function createStripeCheckout(lines, formData) {
     const map = products();
     if (!code || !map[code]) return false;
     const colorOption = cleanOption(options.color_option);
+    const lookContext = normalizeLookContextV123(options.look_context);
     const cart = readCart();
     const existing = cart.find(item => item.code === code && optionLabel(item) === colorOption);
-    if (existing) existing.qty += qty;
-    else cart.push({ code, qty, color_option: colorOption });
+    if (existing) {
+      existing.qty += qty;
+      if (lookContext) existing.look_context = lookContext;
+    } else {
+      cart.push({ code, qty, color_option: colorOption, look_context: lookContext });
+    }
     saveCart(cart);
     push('add_to_cart', {
       product_code: code,
       product_name: map[code].product_name,
       price: map[code].price,
       color_option: colorOption,
+      look_context: lookContext,
       cart_count: cartCount()
     });
     return true;
   }
 
-  function upsertMany(items = []) {
+  function upsertMany(items = [], lookContext = '') {
     const map = products();
     const cart = readCart();
+    const normalizedLookContext = normalizeLookContextV123(lookContext);
     let changed = 0;
     (Array.isArray(items) ? items : []).forEach(item => {
       const code = String(item && item.code || '').trim();
@@ -1657,14 +1684,16 @@ async function createStripeCheckout(lines, formData) {
       const existing = cart.find(line => line.code === code && optionLabel(line) === colorOption);
       if (existing) {
         existing.qty = Math.max(1, Number(existing.qty) || 1);
+        if (normalizedLookContext) existing.look_context = normalizedLookContext;
       } else {
-        cart.push({ code, qty: 1, color_option: colorOption });
+        cart.push({ code, qty: 1, color_option: colorOption, look_context: normalizedLookContext });
         changed += 1;
       }
     });
     saveCart(cart);
     push('cart_bundle_upsert', {
       inserted_count: changed,
+      look_context: normalizedLookContext,
       cart_count: cartCount()
     });
     return changed;
