@@ -93,7 +93,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     "@type": "Offer",
     "url": "https://bendacustompicks.com/order-headlight-fairing.html",
     "priceCurrency": "EUR",
-    "price": "199",
+    "price": "169.15",
     "seller": {
       "@type": "OnlineStore",
       "name": "Benda Custom Picks"
@@ -301,10 +301,10 @@ body.bcp-lightbox-open{overflow:hidden!important}
 </div>
 <div class="price-line">
 <span>Price</span><br/>
-<strong>199 €</strong>
+<strong>169.15 €</strong>
 <p>Add this part to cart, then continue to secure Stripe checkout.</p>
 </div>
-<a aria-label="Add to cart" class="buy-btn js-request-link" data-product-name="Front Fairing Style Kit" data-product-price="199 €" href="./request-part.html?part=headlight-fairing" target="_self">Add to cart</a>
+<a aria-label="Add to cart" class="buy-btn js-request-link" data-product-name="Front Fairing Style Kit" data-product-price="169.15 €" href="./request-part.html?part=headlight-fairing" target="_self">Add to cart</a>
 <a class="secondary-btn" href="./benda-napoleon-125-250-custom-parts.html#shop-part-by-part">Continue the build</a>
 <div aria-label="Fitment, delivery and checkout reassurance" class="seo-cro-panel">
 <div><strong>Fitment</strong><span>Selected for Benda Napoleon 125/250 custom builds.</span></div>
@@ -341,8 +341,8 @@ document.getElementById('year').textContent = new Date().getFullYear(); document
 }); document.querySelectorAll('.color-option').forEach(function(btn) { btn.addEventListener('click', function() { document.querySelectorAll('.color-option').forEach(function(b) { b.classList.remove('active'); }); btn.classList.add('active'); document.getElementById('selectedColor').textContent = btn.getAttribute('data-color'); });
 });
 </script>
-<script src="./order-flow.js?v=v90-gtm-emailjs-anticopy"></script>
-<script src="./cart-flow.js?v=v116-cart-product-links"></script>
+<script src="./order-flow.js?v=v122-price-reset"></script>
+<script src="./cart-flow.js?v=v122-price-reset"></script>
 <script>
 /* BENDAGO PATCH V37 — muted autoplay for product MP4 previews, excluding sound clips */
 (function () { function isSoundVideo(video) { var source = video.querySelector('source'); var haystack = [ video.getAttribute('id') || '', video.getAttribute('class') || '', video.getAttribute('poster') || '', video.getAttribute('aria-label') || '', video.currentSrc || '', video.src || '', source ? source.getAttribute('src') || '' : '' ].join(' ').toLowerCase(); return haystack.indexOf('sound') !== -1 || haystack.indexOf('audio') !== -1; } function isVisible(video) { if (video.hidden) return false; var style = window.getComputedStyle(video); return style.display !== 'none' && style.visibility !== 'hidden' && video.offsetParent !== null; } function prepare(video) { if (isSoundVideo(video)) { video.removeAttribute('autoplay'); video.removeAttribute('loop'); video.muted = false; return; } video.muted = true; video.loop = true; video.playsInline = true; video.setAttribute('muted', ''); video.setAttribute('loop', ''); video.setAttribute('playsinline', ''); video.setAttribute('autoplay', ''); video.setAttribute('preload', 'auto'); if (isVisible(video)) { var playAttempt = video.play(); if (playAttempt && playAttempt.catch) playAttempt.catch(function () {}); } } function prepareAll() { document.querySelectorAll('video').forEach(prepare); } if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', prepareAll); } else { prepareAll(); } document.addEventListener('click', function () { window.setTimeout(prepareAll, 80); }, true);

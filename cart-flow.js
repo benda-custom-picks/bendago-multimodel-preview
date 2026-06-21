@@ -1205,7 +1205,7 @@ async function createStripeCheckout(lines, formData) {
         product_name: 'Ultra Single Seat Comfort',
         product_short: 'Ultra single bobber comfort seat Napoleon 125/250',
         fitment: 'Benda Napoleon 125/250',
-        price: '411 €',
+        price: '349.35 €',
         delivery_estimate: '10 to 15 business days',
         image: './ultra-single-seat-comfort-hero.webp',
         stripe_url: ''
@@ -1218,7 +1218,7 @@ async function createStripeCheckout(lines, formData) {
         product_name: 'Kit Double Seat Comfort Premium +',
         product_short: 'Premium double-seat comfort kit for Benda Napoleon 450/500',
         fitment: 'Benda Napoleon 450/500',
-        price: '683 €',
+        price: '580.55 €',
         delivery_estimate: '10 to 15 business days',
         image: './double-seat-comfort-premium-plus-hero.png',
         stripe_url: ''
@@ -1228,7 +1228,7 @@ async function createStripeCheckout(lines, formData) {
         product_name: 'Top Bumper Protection',
         product_short: 'Premium top-mounted protection bar for Benda Napoleon 450',
         fitment: 'Benda Napoleon 450',
-        price: '459 €',
+        price: '390.15 €',
         delivery_estimate: '10 to 15 business days',
         image: './top-bumper-protection-450-hero.png',
         stripe_url: ''
@@ -1238,7 +1238,7 @@ async function createStripeCheckout(lines, formData) {
         product_name: 'Premium Rear Fender',
         product_short: 'Premium rear fender kit with rear shelf detail for Benda Napoleon 450',
         fitment: 'Benda Napoleon 450',
-        price: '323 €',
+        price: '274.55 €',
         delivery_estimate: '10 to 15 business days',
         image: './premium-rear-fender-450-hero.png',
         stripe_url: ''
@@ -1248,7 +1248,7 @@ async function createStripeCheckout(lines, formData) {
         product_name: 'Maverick Air Filter',
         product_short: 'Premium turbine-style air filter upgrade for Benda Napoleon 450/500',
         fitment: 'Benda Napoleon 450/500',
-        price: '391 €',
+        price: '332.35 €',
         delivery_estimate: '10 to 15 business days',
         image: './maverick-air-filter-450-hero.png',
         stripe_url: ''
@@ -1258,7 +1258,7 @@ async function createStripeCheckout(lines, formData) {
         product_name: 'Transparent Gold Clutch Cover Kit',
         product_short: 'Premium black-and-gold clutch cover kit for Benda Napoleon 450/500',
         fitment: 'Benda Napoleon 450/500',
-        price: '871 €',
+        price: '740.35 €',
         delivery_estimate: '10 to 15 business days',
         image: './transparent-gold-clutch-cover-kit-450-hero.png',
         stripe_url: ''
@@ -1268,7 +1268,7 @@ async function createStripeCheckout(lines, formData) {
         product_name: 'Madmax Double Exhaust Kit',
         product_short: 'Madmax-style double exhaust kit for Benda Napoleon 450/500',
         fitment: 'Benda Napoleon 450/500',
-        price: '910 €',
+        price: '773.50 €',
         delivery_estimate: '10 to 15 business days',
         image: './madmax-double-exhaust-kit-450-hero.png',
         stripe_url: ''
@@ -1278,7 +1278,7 @@ async function createStripeCheckout(lines, formData) {
         product_name: 'Premium Comfort Foot Kit',
         product_short: 'Premium wide foot kit with selectable designs for Benda Napoleon 450/500',
         fitment: 'Benda Napoleon 450/500',
-        price: '271 €',
+        price: '230.35 €',
         delivery_estimate: '10 to 15 business days',
         image: './premium-comfort-foot-kit-450-skull-platinum.png',
         stripe_url: '',
@@ -1290,7 +1290,7 @@ async function createStripeCheckout(lines, formData) {
         product_name: 'Headlight Windscreen Cover Kit',
         product_short: 'Gloss black headlight windscreen cover kit for Benda Napoleon 450/500',
         fitment: 'Benda Napoleon 450/500',
-        price: '191 €',
+        price: '162.35 €',
         delivery_estimate: '10 to 15 business days',
         image: './headlight-windscreen-cover-kit-450-hero.png',
         stripe_url: ''
@@ -1300,7 +1300,7 @@ async function createStripeCheckout(lines, formData) {
         product_name: 'Premium Transparent Clutch Cover Kit',
         product_short: 'Premium transparent clutch cover kit for Benda Napoleon 450/500',
         fitment: 'Benda Napoleon 450/500',
-        price: '471 €',
+        price: '400.35 €',
         delivery_estimate: '10 to 15 business days',
         image: './premium-transparent-clutch-cover-kit-450-hero.png',
         stripe_url: ''
@@ -1310,7 +1310,7 @@ async function createStripeCheckout(lines, formData) {
         product_name: 'Carbon Exhaust Protection Kit',
         product_short: 'Carbon-look exhaust heat shield kit for Benda Napoleon 450/500',
         fitment: 'Benda Napoleon 450/500',
-        price: '271 €',
+        price: '230.35 €',
         delivery_estimate: '10 to 15 business days',
         image: './carbon-exhaust-protection-kit-450-hero.png',
         stripe_url: ''
@@ -1320,7 +1320,7 @@ async function createStripeCheckout(lines, formData) {
         product_name: 'Black Shield Armor Kit',
         product_short: 'Black fan heat shield armor kit for Benda Napoleon 450/500',
         fitment: 'Benda Napoleon 450/500',
-        price: '271 €',
+        price: '230.35 €',
         delivery_estimate: '10 to 15 business days',
         image: './black-shield-armor-kit-450-hero.png',
         stripe_url: ''
@@ -1330,7 +1330,7 @@ async function createStripeCheckout(lines, formData) {
         product_name: 'Midnight Beast Kit',
         product_short: 'Complete rear wide wheel conversion kit for Benda Dark Flag V4 950',
         fitment: 'Benda Dark Flag V4 950',
-        price: '4961 €',
+        price: '4216.85 €',
         delivery_estimate: '10 to 15 business days',
         image: './midnight-beast-kit-v4-hero.png',
         stripe_url: ''
@@ -1340,7 +1340,7 @@ async function createStripeCheckout(lines, formData) {
         product_name: 'Midnight Hunter Tank Cover Kit',
         product_short: 'Complete central, left and right tank cover kit for Benda Dark Flag V4 950',
         fitment: 'Benda Dark Flag V4 950',
-        price: '1604 €',
+        price: '1363.40 €',
         delivery_estimate: '10 to 15 business days',
         image: './midnight-hunter-tank-cover-kit-v4-hero.png',
         stripe_url: ''
@@ -1350,7 +1350,7 @@ async function createStripeCheckout(lines, formData) {
         product_name: 'Tandem Kit',
         product_short: 'Foldable rider and passenger backrest kit for Benda Dark Flag V4 950',
         fitment: 'Benda Dark Flag V4 950',
-        price: '861 €',
+        price: '731.85 €',
         delivery_estimate: '10 to 15 business days',
         image: './tandem-kit-v4-hero.png',
         stripe_url: ''
@@ -1360,7 +1360,7 @@ async function createStripeCheckout(lines, formData) {
         product_name: 'Aircraft Metal Cover',
         product_short: 'Premium cylinder decorative cover for Benda Dark Flag V4 950',
         fitment: 'Benda Dark Flag V4 950',
-        price: '128 €',
+        price: '108.80 €',
         delivery_estimate: '10 to 15 business days',
         image: './aircraft-metal-cover-v4-hero.png',
         stripe_url: ''
@@ -1370,7 +1370,7 @@ async function createStripeCheckout(lines, formData) {
         product_name: 'Ghost Metal Cover',
         product_short: 'Premium black-metal side cover for Benda Dark Flag V4 950',
         fitment: 'Benda Dark Flag V4 950',
-        price: '168 €',
+        price: '142.80 €',
         delivery_estimate: '10 to 15 business days',
         image: './ghost-metal-cover-v4-hero.png',
         stripe_url: ''
@@ -1380,7 +1380,7 @@ async function createStripeCheckout(lines, formData) {
         product_name: 'Ghost Aluminium CNC Chain Cover Left',
         product_short: 'Premium left-side CNC aluminium chain cover for Benda Dark Flag V4 950',
         fitment: 'Benda Dark Flag V4 950',
-        price: '302 €',
+        price: '256.70 €',
         delivery_estimate: '10 to 15 business days',
         image: './ghost-aluminium-cnc-chain-cover-left-v4-hero.png',
         stripe_url: ''
@@ -1390,7 +1390,7 @@ async function createStripeCheckout(lines, formData) {
         product_name: 'Transparent Air Filter Cover Aluminium',
         product_short: 'Clear aluminium-framed air filter intake cover for Benda Dark Flag V4 950 with Right or Left side choice',
         fitment: 'Benda Dark Flag V4 950',
-        price: '294 €',
+        price: '249.90 €',
         delivery_estimate: '10 to 15 business days',
         image: './transparent-air-filter-cover-aluminium-v4-hero.png',
         stripe_url: ''
@@ -1400,7 +1400,7 @@ async function createStripeCheckout(lines, formData) {
         product_name: 'Filter Only — Transparent Air Filter Cover',
         product_short: 'Replacement filter element for the Transparent Air Filter Cover Aluminium setup',
         fitment: 'Benda Dark Flag V4 950',
-        price: '108 €',
+        price: '91.80 €',
         delivery_estimate: '10 to 15 business days',
         image: './transparent-air-filter-cover-filter-only-v4.png',
         stripe_url: ''
@@ -1410,7 +1410,7 @@ async function createStripeCheckout(lines, formData) {
         product_name: 'Ghost Exhaust Heat Shield',
         product_short: 'Black metal high-temperature exhaust heat shield for Benda Dark Flag V4 950',
         fitment: 'Benda Dark Flag V4 950',
-        price: '181 €',
+        price: '153.85 €',
         delivery_estimate: '10 to 15 business days',
         image: './ghost-exhaust-heat-shield-v4-hero.png',
         stripe_url: ''
@@ -1420,7 +1420,7 @@ async function createStripeCheckout(lines, formData) {
         product_name: 'Aluminum Front Fork Protector Darkflag 500',
         product_short: 'Black aluminium front fork protector for Benda Darkflag 500',
         fitment: 'Benda Darkflag 500',
-        price: '479 €',
+        price: '407.15 €',
         delivery_estimate: '10 to 15 business days',
         image: './aluminum-front-fork-protector-darkflag-500-hero.png',
         stripe_url: ''
@@ -1430,7 +1430,7 @@ async function createStripeCheckout(lines, formData) {
         product_name: 'Ghost Protector Darkflag 950',
         product_short: 'Black tubular protection kit for Benda Dark Flag V4 950',
         fitment: 'Benda Dark Flag V4 950',
-        price: '441 €',
+        price: '374.85 €',
         delivery_estimate: '10 to 15 business days',
         image: './ghost-protector-darkflag-950-hero.png',
         stripe_url: ''
@@ -1440,7 +1440,7 @@ async function createStripeCheckout(lines, formData) {
         product_name: 'Chrome Air Filter',
         product_short: 'Premium chrome air filter upgrade for Benda Napoleon 450/500',
         fitment: 'Benda Napoleon 450/500',
-        price: '406 €',
+        price: '345.10 €',
         delivery_estimate: '10 to 15 business days',
         image: './chrome-air-filter-hero.png',
         stripe_url: ''
@@ -1450,7 +1450,7 @@ async function createStripeCheckout(lines, formData) {
         product_name: 'Black Night Clutch Cover',
         product_short: 'Blacked-out clutch cover upgrade for Benda Napoleon 450/500',
         fitment: 'Benda Napoleon 450/500',
-        price: '178 €',
+        price: '151.30 €',
         delivery_estimate: '10 to 15 business days',
         image: './black-night-clutch-cover-hero.png',
         stripe_url: ''

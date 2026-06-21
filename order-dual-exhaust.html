@@ -45,7 +45,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     "@type": "Offer",
     "url": "https://bendacustompicks.com/order-dual-exhaust.html",
     "priceCurrency": "EUR",
-    "price": "749",
+    "price": "636.65",
     "seller": {
       "@type": "OnlineStore",
       "name": "Benda Custom Picks"
@@ -197,17 +197,74 @@ body.bcp-lightbox-open{overflow:hidden!important}
 <meta name="twitter:image" content="https://bendacustompicks.com/dual-exhaust-card-hero.webp"/>
 
 <style id="bcp-v3-dual-exhaust-hero-full-gallery">
-/* Dual Exhaust only: exact wide hero with engine + twin chrome pipes; gallery images retain native ratio in main viewer. */
-.dual-exhaust-media{overflow:visible!important}
-.dual-exhaust-media .main-product-img,.dual-exhaust-media .main-product-video{width:100%!important;max-width:100%!important;display:block!important;border-radius:18px!important;background:#05070b!important}
-.dual-exhaust-media:not(.is-gallery-image) .main-product-img,.dual-exhaust-media:not(.is-gallery-image) .main-product-video{aspect-ratio:16/9!important;height:auto!important;object-fit:cover!important;object-position:center center!important}
-.dual-exhaust-media.is-gallery-image .main-product-img{aspect-ratio:auto!important;height:auto!important;max-height:none!important;object-fit:contain!important;object-position:center center!important}
-.dual-exhaust-gallery{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:12px!important}
-.dual-exhaust-gallery .product-thumb{position:relative!important;display:flex!important;align-items:center!important;justify-content:center!important;min-height:128px!important;padding:6px!important;border-radius:16px!important;background:rgba(5,7,11,.92)!important}
-.dual-exhaust-gallery .product-thumb img{width:100%!important;height:auto!important;max-height:176px!important;aspect-ratio:auto!important;object-fit:contain!important;object-position:center center!important;border-radius:12px!important;background:#05070b!important}
-.dual-exhaust-gallery .video-thumb::after{inset:6px!important;border-radius:12px!important}
-@media(max-width:900px){.dual-exhaust-gallery{grid-template-columns:repeat(3,minmax(0,1fr))!important}.dual-exhaust-gallery .product-thumb{min-height:112px!important}.dual-exhaust-gallery .product-thumb img{max-height:154px!important}}
-@media(max-width:640px){.dual-exhaust-gallery{grid-template-columns:repeat(2,minmax(0,1fr))!important}.dual-exhaust-gallery .product-thumb{min-height:126px!important}.dual-exhaust-gallery .product-thumb img{max-height:184px!important}}
+/* BENDAGO V3 — Dual Exhaust Custom Kit only.
+   Hero: original wide close-up showing engine + twin chrome pipes.
+   Gallery: every selected image displays at its native ratio; no 16:9 crop. */
+.dual-exhaust-media{
+  overflow:visible !important;
+}
+.dual-exhaust-media .main-product-img,
+.dual-exhaust-media .main-product-video{
+  width:100% !important;
+  max-width:100% !important;
+  display:block !important;
+  border-radius:18px !important;
+  background:#05070b !important;
+}
+.dual-exhaust-media:not(.is-gallery-image) .main-product-img,
+.dual-exhaust-media:not(.is-gallery-image) .main-product-video{
+  aspect-ratio:16 / 9 !important;
+  height:auto !important;
+  object-fit:cover !important;
+  object-position:center center !important;
+}
+/* A gallery image is intentionally not forced into the hero's 16:9 crop. */
+.dual-exhaust-media.is-gallery-image .main-product-img{
+  aspect-ratio:auto !important;
+  height:auto !important;
+  max-height:none !important;
+  object-fit:contain !important;
+  object-position:center center !important;
+}
+.dual-exhaust-gallery{
+  display:grid !important;
+  grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+  gap:12px !important;
+}
+.dual-exhaust-gallery .product-thumb{
+  position:relative !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  min-height:128px !important;
+  padding:6px !important;
+  border-radius:16px !important;
+  background:rgba(5,7,11,.92) !important;
+}
+.dual-exhaust-gallery .product-thumb img{
+  width:100% !important;
+  height:auto !important;
+  max-height:176px !important;
+  aspect-ratio:auto !important;
+  object-fit:contain !important;
+  object-position:center center !important;
+  border-radius:12px !important;
+  background:#05070b !important;
+}
+.dual-exhaust-gallery .video-thumb::after{
+  inset:6px !important;
+  border-radius:12px !important;
+}
+@media (max-width:900px){
+  .dual-exhaust-gallery{grid-template-columns:repeat(3,minmax(0,1fr)) !important;}
+  .dual-exhaust-gallery .product-thumb{min-height:112px !important;}
+  .dual-exhaust-gallery .product-thumb img{max-height:154px !important;}
+}
+@media (max-width:640px){
+  .dual-exhaust-gallery{grid-template-columns:repeat(2,minmax(0,1fr)) !important;}
+  .dual-exhaust-gallery .product-thumb{min-height:126px !important;}
+  .dual-exhaust-gallery .product-thumb img{max-height:184px !important;}
+}
 </style>
 
 </head>
@@ -273,7 +330,7 @@ Your browser cannot play this MP4.
 </div>
 <div class="price-line">
 <span>Price</span><br/>
-<strong>749 €</strong>
+<strong>636.65 €</strong>
 <p>Add this part to cart, then continue to secure Stripe checkout.</p>
 </div>
 <div aria-label="Dual exhaust finish selection" class="order-colour-choice">
@@ -285,7 +342,7 @@ Your browser cannot play this MP4.
 </select>
 <p>The selected finish will appear in your cart and order confirmation.</p>
 </div>
-<a aria-label="Add to cart" class="buy-btn js-request-link" data-product-name="Dual Exhaust Custom Kit" data-product-price="749 €" href="./request-part.html?part=dual-exhaust" target="_self">Add to cart</a>
+<a aria-label="Add to cart" class="buy-btn js-request-link" data-product-name="Dual Exhaust Custom Kit" data-product-price="636.65 €" href="./request-part.html?part=dual-exhaust" target="_self">Add to cart</a>
 <a class="secondary-btn" href="./benda-napoleon-125-250-custom-parts.html#shop-part-by-part">Continue the build</a>
 <div aria-label="Fitment, delivery and checkout reassurance" class="seo-cro-panel">
 <div><strong>Fitment</strong><span>Selected for Benda Napoleon 125/250 custom builds.</span></div>
@@ -397,7 +454,7 @@ document.getElementById('year').textContent = new Date().getFullYear();
   });
 })();
 </script>
-<script src="./order-flow.js?v=v90-gtm-emailjs-anticopy"></script>
-<script src="./cart-flow.js?v=v116-cart-product-links"></script>
+<script src="./order-flow.js?v=v122-price-reset"></script>
+<script src="./cart-flow.js?v=v122-price-reset"></script>
 <script src="./anti-copy.js?v=v90-gtm-emailjs-anticopy"></script>
 </body></html>

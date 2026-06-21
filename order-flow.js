@@ -5,7 +5,7 @@ const BENDAGO_PRODUCTS = {
     product_name: 'Tandem Kit',
     product_short: 'Foldable rider and passenger backrest kit for Benda Dark Flag V4 950',
     fitment: 'Benda Dark Flag V4 950',
-    price: '861 €',
+    price: '731.85 €',
     delivery_estimate: '10 to 15 business days',
     image: './tandem-kit-v4-hero.png',
     stripe_url: ''
@@ -15,7 +15,7 @@ const BENDAGO_PRODUCTS = {
     product_name: 'Midnight Hunter Tank Cover Kit',
     product_short: 'Complete central, left and right tank cover kit for Benda Dark Flag V4 950',
     fitment: 'Benda Dark Flag V4 950',
-    price: '1604 €',
+    price: '1363.40 €',
     delivery_estimate: '10 to 15 business days',
     image: './midnight-hunter-tank-cover-kit-v4-hero.png',
     stripe_url: ''
@@ -25,7 +25,7 @@ const BENDAGO_PRODUCTS = {
     product_name: 'Midnight Beast Kit',
     product_short: 'Complete rear wide wheel conversion kit for Benda Dark Flag V4 950',
     fitment: 'Benda Dark Flag V4 950',
-    price: '4961 €',
+    price: '4216.85 €',
     delivery_estimate: '10 to 15 business days',
     image: './midnight-beast-kit-v4-hero.png',
     stripe_url: ''
@@ -35,7 +35,7 @@ const BENDAGO_PRODUCTS = {
     product_name: 'Ghost Kit | Maverick Air Filter',
     product_short: 'Turbine-style Maverick air filter for Dark Flag V4',
     fitment: 'Benda Dark Flag V4 950',
-    price: '411 €',
+    price: '349.35 €',
     delivery_estimate: '10 to 15 business days',
     image: './ghost-kit-maverick-air-filter-v4-hero.png',
     stripe_url: '',
@@ -47,7 +47,7 @@ const BENDAGO_PRODUCTS = {
     product_name: 'Ghost Kit | Transparent Clutch Cover',
     product_short: 'Transparent clutch cover kit for Dark Flag V4',
     fitment: 'Benda Dark Flag V4 950',
-    price: '481 €',
+    price: '408.85 €',
     delivery_estimate: '10 to 15 business days',
     image: './ghost-kit-darkflag-v4-engine-overview.png',
     stripe_url: '',
@@ -59,7 +59,7 @@ const BENDAGO_PRODUCTS = {
     product_name: 'Black Shield Armor Kit',
     product_short: 'Black fan heat shield armor kit for Benda Napoleon 450/500',
     fitment: 'Benda Napoleon 450/500',
-    price: '271 €',
+    price: '230.35 €',
     delivery_estimate: '10 to 15 business days',
     image: './black-shield-armor-kit-450-hero.png',
     stripe_url: ''
@@ -69,7 +69,7 @@ const BENDAGO_PRODUCTS = {
     product_name: 'Carbon Exhaust Protection Kit',
     product_short: 'Carbon-look exhaust heat shield kit for Benda Napoleon 450/500',
     fitment: 'Benda Napoleon 450/500',
-    price: '271 €',
+    price: '230.35 €',
     delivery_estimate: '10 to 15 business days',
     image: './carbon-exhaust-protection-kit-450-hero.png',
     stripe_url: ''
@@ -79,7 +79,7 @@ const BENDAGO_PRODUCTS = {
     product_name: 'Premium Transparent Clutch Cover Kit',
     product_short: 'Premium transparent clutch cover kit for Benda Napoleon 450/500',
     fitment: 'Benda Napoleon 450/500',
-    price: '471 €',
+    price: '400.35 €',
     delivery_estimate: '10 to 15 business days',
     image: './premium-transparent-clutch-cover-kit-450-hero.png',
     stripe_url: ''
@@ -89,7 +89,7 @@ const BENDAGO_PRODUCTS = {
     product_name: 'Premium Comfort Foot Kit',
     product_short: 'Premium wide foot kit with selectable designs for Benda Napoleon 450/500',
     fitment: 'Benda Napoleon 450/500',
-    price: '271 €',
+    price: '230.35 €',
     delivery_estimate: '10 to 15 business days',
     image: './premium-comfort-foot-kit-450-skull-platinum.png',
     stripe_url: '',
@@ -101,7 +101,7 @@ const BENDAGO_PRODUCTS = {
     product_name: 'Headlight Windscreen Cover Kit',
     product_short: 'Gloss black headlight windscreen cover kit for Benda Napoleon 450/500',
     fitment: 'Benda Napoleon 450/500',
-    price: '191 €',
+    price: '162.35 €',
     delivery_estimate: '10 to 15 business days',
     image: './headlight-windscreen-cover-kit-450-hero.png',
     stripe_url: ''
@@ -111,7 +111,7 @@ const BENDAGO_PRODUCTS = {
     product_name: 'Premium Rear Fender',
     product_short: 'Premium rear fender kit Napoleon 450',
     fitment: 'Benda Napoleon 450',
-    price: '323 €',
+    price: '274.55 €',
     delivery_estimate: '10 to 15 business days',
     image: './premium-rear-fender-450-hero.png',
     stripe_url: ''
@@ -121,7 +121,7 @@ const BENDAGO_PRODUCTS = {
     product_name: 'Top Bumper Protection',
     product_short: 'Top protection bar Napoleon 450',
     fitment: 'Benda Napoleon 450',
-    price: '459 €',
+    price: '390.15 €',
     delivery_estimate: '10 to 15 business days',
     image: './top-bumper-protection-450-hero.png',
     stripe_url: ''
@@ -131,7 +131,7 @@ const BENDAGO_PRODUCTS = {
     product_name: 'Kit Double Seat Comfort Premium +',
     product_short: 'Premium double-seat comfort kit Napoleon 450/500',
     fitment: 'Benda Napoleon 450/500',
-    price: '683 €',
+    price: '580.55 €',
     delivery_estimate: '10 to 15 business days',
     image: './double-seat-comfort-premium-plus-hero.png',
     stripe_url: ''
@@ -142,7 +142,7 @@ const BENDAGO_PRODUCTS = {
     product_name: 'Chrome Air Filter',
     product_short: 'Premium chrome air filter upgrade for Benda Napoleon 450/500',
     fitment: 'Benda Napoleon 450/500',
-    price: '406 €',
+    price: '345.10 €',
     delivery_estimate: '10 to 15 business days',
     image: './chrome-air-filter-hero.png',
     stripe_url: ''
@@ -152,7 +152,7 @@ const BENDAGO_PRODUCTS = {
     product_name: 'Black Night Clutch Cover',
     product_short: 'Blacked-out clutch cover upgrade for Benda Napoleon 450/500',
     fitment: 'Benda Napoleon 450/500',
-    price: '178 €',
+    price: '151.30 €',
     delivery_estimate: '10 to 15 business days',
     image: './black-night-clutch-cover-hero.png',
     stripe_url: ''
@@ -172,7 +172,7 @@ const BENDAGO_PRODUCTS = {
     product_name: 'Maverick Air Filter Cover',
     product_short: 'Maverick turbine air filter cover Napoleon 125/250',
     fitment: 'Benda Napoleon 125/250',
-    price: '241 €',
+    price: '204.85 €',
     delivery_estimate: '10 to 15 business days',
     image: './maverick-air-filter-cover-hero.webp',
     stripe_url: '',
@@ -185,7 +185,7 @@ const BENDAGO_PRODUCTS = {
     product_name: 'Decorative Cover Side',
     product_short: 'Decorative side cover detail Napoleon 125/250',
     fitment: 'Benda Napoleon 125/250',
-    price: '163 €',
+    price: '138.55 €',
     delivery_estimate: '10 to 15 business days',
     image: './decorative-cover-side-gold-hero.webp',
     stripe_url: '',
@@ -197,7 +197,7 @@ const BENDAGO_PRODUCTS = {
     product_name: 'Black Ribbed Clutch Cover',
     product_short: 'Black ribbed clutch cover Napoleon 125/250',
     fitment: 'Benda Napoleon 125/250',
-    price: '259 €',
+    price: '220.15 €',
     delivery_estimate: '10 to 15 business days',
     image: './black-striped-clutch-cover-retouched-1.webp',
     stripe_url: ''
@@ -207,7 +207,7 @@ const BENDAGO_PRODUCTS = {
     product_name: 'Gold Clutch Inner Accent',
     product_short: 'Gold inner clutch accent Napoleon 125/250',
     fitment: 'Benda Napoleon 125/250',
-    price: '289 €',
+    price: '245.65 €',
     delivery_estimate: '10 to 15 business days',
     image: './gold-clutch-flywheel-retouched-1.webp',
     stripe_url: ''
@@ -217,7 +217,7 @@ const BENDAGO_PRODUCTS = {
     product_name: 'Clear Clutch Window Cover',
     product_short: 'Transparent clutch window cover Napoleon 125/250',
     fitment: 'Benda Napoleon 125/250',
-    price: '289 €',
+    price: '245.65 €',
     delivery_estimate: '10 to 15 business days',
     image: './transparent-clutch-cover-retouched-1.webp',
     stripe_url: ''
@@ -227,7 +227,7 @@ const BENDAGO_PRODUCTS = {
     product_name: 'Future Front Light Upgrade',
     product_short: 'Future LED front light Napoleon 125/250',
     fitment: 'Benda Napoleon 125/250',
-    price: '289 €',
+    price: '245.65 €',
     delivery_estimate: '10 to 15 business days',
     image: './future-led-light-retouched-1.webp',
     stripe_url: ''
@@ -237,7 +237,7 @@ const BENDAGO_PRODUCTS = {
     product_name: 'MatriX Design Head Light',
     product_short: 'MatriX design head light Napoleon 125/250',
     fitment: 'Benda Napoleon 125/250',
-    price: '184 €',
+    price: '156.40 €',
     delivery_estimate: '10 to 15 business days',
     image: './matrix-headlight-hero.webp',
     stripe_url: '',
@@ -249,7 +249,7 @@ const BENDAGO_PRODUCTS = {
     product_name: 'Tank Volume Cover',
     product_short: 'Tank cover / support volume Napoleon 125/250',
     fitment: 'Benda Napoleon 125/250',
-    price: '289 €',
+    price: '245.65 €',
     delivery_estimate: '10 to 15 business days',
     image: './tank-cover-retouched-1.webp',
     stripe_url: ''
@@ -262,7 +262,7 @@ const BENDAGO_PRODUCTS = {
     product_name: 'Samurai Wheel Cover',
     product_short: 'Closed metal hubcap / Samurai wheel cover',
     fitment: 'Benda Napoleon 125/250',
-    price: '329 €',
+    price: '279.65 €',
     delivery_estimate: '10 to 15 business days',
     image: './closed-metal-hubcap-retouched-1.webp',
     stripe_url: ''
@@ -272,7 +272,7 @@ const BENDAGO_PRODUCTS = {
     product_name: 'Rear Arch Support Rack',
     product_short: 'Rear arch support rack Napoleon 125/250',
     fitment: 'Benda Napoleon 125/250',
-    price: '321 €',
+    price: '272.85 €',
     delivery_estimate: '10 to 15 business days',
     image: './rear-arch-luggage-rack-retouched-1.webp',
     stripe_url: ''
@@ -282,7 +282,7 @@ const BENDAGO_PRODUCTS = {
     product_name: 'Bronze Foot Control Kit',
     product_short: 'Metal gear/brake foot controls Napoleon 125/250',
     fitment: 'Benda Napoleon 125/250',
-    price: '449 €',
+    price: '381.65 €',
     delivery_estimate: '10 to 15 business days',
     image: './metal-foot-controls-hero.webp',
     stripe_url: ''
@@ -292,7 +292,7 @@ const BENDAGO_PRODUCTS = {
     product_name: 'Black Foot Control Kit',
     product_short: 'Black foot control kit Napoleon 125/250',
     fitment: 'Benda Napoleon 125/250',
-    price: '449 €',
+    price: '381.65 €',
     delivery_estimate: '10 to 15 business days',
     image: './black-foot-control-hero-5.webp',
     stripe_url: ''
@@ -302,7 +302,7 @@ const BENDAGO_PRODUCTS = {
     product_name: 'Comfort Seat & Foot Peg Kit',
     product_short: 'Comfort seat and foot peg kit Napoleon 125/250',
     fitment: 'Benda Napoleon 125/250',
-    price: '729 €',
+    price: '619.65 €',
     delivery_estimate: '10 to 15 business days',
     image: './comfort-seat-footpeg-01.png',
     stripe_url: '',
@@ -314,7 +314,7 @@ const BENDAGO_PRODUCTS = {
     product_name: 'Premium Comfort Double Seat',
     product_short: 'Premium comfort double seat Napoleon 125/250',
     fitment: 'Benda Napoleon 125/250',
-    price: '961 €',
+    price: '816.85 €',
     delivery_estimate: '10 to 15 business days',
     image: './premium-double-seat-hero-v3.webp',
     stripe_url: '',
@@ -326,7 +326,7 @@ const BENDAGO_PRODUCTS = {
     product_name: 'Ultra Single Seat Comfort',
     product_short: 'Ultra single bobber comfort seat Napoleon 125/250',
     fitment: 'Benda Napoleon 125/250',
-    price: '411 €',
+    price: '349.35 €',
     delivery_estimate: '10 to 15 business days',
     image: './ultra-single-seat-comfort-hero.webp',
     stripe_url: ''
@@ -336,7 +336,7 @@ const BENDAGO_PRODUCTS = {
     product_name: 'Brutal Rear Fender Kit',
     product_short: 'Brutal rear fender kit Napoleon 125/250',
     fitment: 'Benda Napoleon 125/250',
-    price: '290 €',
+    price: '246.50 €',
     delivery_estimate: '10 to 15 business days',
     image: './brutal-rear-fender-hero-clean.webp',
     stripe_url: ''
@@ -347,7 +347,7 @@ const BENDAGO_PRODUCTS = {
     product_name: 'GPS / CarPlay screen for Benda Napoleon 125/250',
     product_short: 'GPS / CarPlay screen Napoleon 125/250',
     fitment: 'Benda Napoleon 125/250',
-    price: '159 €',
+    price: '135.15 €',
     delivery_estimate: '10 to 15 business days',
     image: './carplay-benda.webp',
     stripe_url: ''
@@ -357,7 +357,7 @@ const BENDAGO_PRODUCTS = {
     product_name: 'Chrome Air Side Cover',
     product_short: 'Chrome left-side air filter cover Napoleon 125/250',
     fitment: 'Benda Napoleon 125/250',
-    price: '389 €',
+    price: '330.65 €',
     delivery_estimate: '10 to 15 business days',
     image: './air_filter_cover_chrome_left_01_detail.png',
     stripe_url: ''
@@ -367,7 +367,7 @@ const BENDAGO_PRODUCTS = {
     product_name: 'Rear Clean Fender Kit',
     product_short: 'Rear clean fender kit Napoleon 125/250',
     fitment: 'Benda Napoleon 125/250',
-    price: '429 €',
+    price: '364.65 €',
     delivery_estimate: '10 to 15 business days',
     image: './rear_fender_05_side_profile.png',
     stripe_url: ''
@@ -377,7 +377,7 @@ const BENDAGO_PRODUCTS = {
     product_name: 'Left Side Travel Bag Kit',
     product_short: 'Left side travel bag and support Napoleon 125/250',
     fitment: 'Benda Napoleon 125/250',
-    price: '349 €',
+    price: '296.65 €',
     delivery_estimate: '10 to 15 business days',
     image: './left_side_bag_00_mount_bar_detail.png',
     stripe_url: ''
@@ -387,7 +387,7 @@ const BENDAGO_PRODUCTS = {
     product_name: 'Premium Left Engine Cover',
     product_short: 'Premium left engine cover Napoleon 125/250',
     fitment: 'Benda Napoleon 125/250',
-    price: '399 €',
+    price: '339.15 €',
     delivery_estimate: '10 to 15 business days',
     image: './left-engine-cover-2-closeup.png',
     stripe_url: ''
@@ -397,7 +397,7 @@ const BENDAGO_PRODUCTS = {
     product_name: 'Dual Exhaust Custom Kit',
     product_short: 'Dual exhaust custom kit Napoleon 125/250',
     fitment: 'Benda Napoleon 125/250',
-    price: '749 €',
+    price: '636.65 €',
     delivery_estimate: '10 to 15 business days',
     image: './dual-exhaust-card-hero.webp',
     stripe_url: ''
@@ -407,7 +407,7 @@ const BENDAGO_PRODUCTS = {
     product_name: 'Right Engine Side Cover',
     product_short: 'Right engine filter-style cover Napoleon 125/250',
     fitment: 'Benda Napoleon 125/250',
-    price: '249 €',
+    price: '211.65 €',
     delivery_estimate: '10 to 15 business days',
     image: './right-engine-filter-04.png',
     stripe_url: ''
@@ -417,7 +417,7 @@ const BENDAGO_PRODUCTS = {
     product_name: 'Comfort Handlebar Riser Kit',
     product_short: 'Comfort handlebar riser kit Napoleon 125/250',
     fitment: 'Benda Napoleon 125/250',
-    price: '359 €',
+    price: '305.15 €',
     delivery_estimate: '10 to 15 business days',
     image: './handlebar-riser-gallery-04.webp',
     stripe_url: ''
@@ -427,7 +427,7 @@ const BENDAGO_PRODUCTS = {
     product_name: 'Fat Bob Front Bumper Kit',
     product_short: 'Fat Bob front bumper kit Napoleon 125/250',
     fitment: 'Benda Napoleon 125/250',
-    price: '521 €',
+    price: '442.85 €',
     delivery_estimate: '10 to 15 business days',
     image: './fat-bob-bumper-hero-v2.webp',
     stripe_url: ''
@@ -437,7 +437,7 @@ const BENDAGO_PRODUCTS = {
     product_name: 'Top Bumper',
     product_short: 'Top bumper protection kit Napoleon 125/250',
     fitment: 'Benda Napoleon 125/250',
-    price: '418 €',
+    price: '355.30 €',
     delivery_estimate: '10 to 15 business days',
     image: './top-bumper-hero.webp',
     stripe_url: ''
@@ -447,7 +447,7 @@ const BENDAGO_PRODUCTS = {
     product_name: 'Lower Chassis Protection Plate',
     product_short: 'Lower chassis protection plate Napoleon 125/250',
     fitment: 'Benda Napoleon 125/250',
-    price: '449 €',
+    price: '381.65 €',
     delivery_estimate: '10 to 15 business days',
     image: './chassis-protection-featured.webp',
     stripe_url: ''
@@ -457,7 +457,7 @@ const BENDAGO_PRODUCTS = {
     product_name: 'Rear Led Seat Comfort +',
     product_short: 'Premium rear LED comfort seat Napoleon 125/250',
     fitment: 'Benda Napoleon 125/250',
-    price: '538 €',
+    price: '457.30 €',
     delivery_estimate: '10 to 15 business days',
     image: './rear-led-seat-comfort-card-hero.png',
     stripe_url: ''
@@ -467,7 +467,7 @@ const BENDAGO_PRODUCTS = {
     product_name: 'Front Fairing Style Kit',
     product_short: 'Front fairing style kit Napoleon 125/250',
     fitment: 'Benda Napoleon 125/250',
-    price: '199 €',
+    price: '169.15 €',
     delivery_estimate: '10 to 15 business days',
     image: './fairing-hero.png',
     stripe_url: ''
