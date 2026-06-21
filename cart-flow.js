@@ -297,26 +297,14 @@
     return keys.length === 1 ? keys[0] : '';
   }
 
-  /* BENDAGO V123 — preserve the originating look for individual look-part additions.
-     A completed build still wins. If individual items come from one visible look, the cart keeps that exact reel.
-     Mixed known looks fall back to the model reel so no false direction is implied. */
-  function normalizeLookContextV123(value) {
-    const key = String(value || '').trim();
-    return BUILD_VISUALS_V18[key] ? key : '';
-  }
-
-  function cartLookContextV123(lines) {
-    const keys = Array.from(new Set((lines || []).map(function (line) {
-      return normalizeLookContextV123(line && line.look_context);
-    }).filter(Boolean)));
-    return keys.length === 1 ? keys[0] : '';
-  }
-
   function cartBuildVisualV18(pricing, lines) {
     const buildKey = String((pricing && pricing.buildKey) || '').trim();
     if (buildKey && BUILD_VISUALS_V18[buildKey]) return BUILD_VISUALS_V18[buildKey];
-    const lookKey = cartLookContextV123(lines);
-    if (lookKey) return BUILD_VISUALS_V18[lookKey];
+
+    /* A part added from a mapped look keeps that exact look reel until the cart contains competing mapped looks. */
+    const lookContext = cartLookContextV19(lines);
+    if (lookContext && BUILD_VISUALS_V18[lookContext]) return BUILD_VISUALS_V18[lookContext];
+
     const modelKey = cartModelKeyV18(lines);
     return modelKey ? (MODEL_VISUALS_V18[modelKey] || null) : null;
   }
@@ -527,9 +515,8 @@
       button.addEventListener('click', () => {
         const key = String(button.getAttribute('data-add-bundle') || '').trim();
         const items = BUNDLE_ADD_TO_CART_ITEMS[key];
-        const lookContext = normalizeLookContextV123(key.replace(/-(?:complete|essentials)$/i, ''));
         if (!items || !items.length) return;
-        upsertMany(items, lookContext);
+        upsertMany(items);
         const box = button.closest('[data-bundle-box]');
         const msg = box ? box.querySelector('.build-bundle-added') : null;
         if (msg) {
@@ -615,6 +602,26 @@
 
   function cleanOption(value) {
     return String(value || '').trim();
+  }
+
+  /* BENDAGO V19 — preserve the originating look when a single part is added.
+     This drives the correct cart reel without changing SKU, price, quantity or discount logic. */
+  const CART_LOOK_CONTEXTS_V19 = Object.freeze({
+    'storm-rider-66': true
+  });
+
+  function cleanLookContextV19(value) {
+    const key = String(value || '').trim();
+    return CART_LOOK_CONTEXTS_V19[key] ? key : '';
+  }
+
+  function cartLookContextV19(lines) {
+    const raw = (lines || []).map(function (line) {
+      return String(line && line.look_context || '').trim();
+    });
+    if (raw.includes('mixed')) return '';
+    const keys = Array.from(new Set(raw.map(cleanLookContextV19).filter(Boolean)));
+    return keys.length === 1 ? keys[0] : '';
   }
 
   function optionLabel(item) {
@@ -1563,7 +1570,7 @@ async function createStripeCheckout(lines, formData) {
       if (!product) return null;
       const qty = Math.max(1, Number(item.qty) || 1);
       const unit = euroToNumber(product.price);
-      return { ...product, code: item.code, qty, color_option: optionLabel(item), look_context: normalizeLookContextV123(item.look_context), line_total: unit * qty };
+      return { ...product, code: item.code, qty, color_option: optionLabel(item), look_context: cleanLookContextV19(item.look_context), line_total: unit * qty };
     }).filter(Boolean);
   }
 
@@ -1577,7 +1584,7 @@ async function createStripeCheckout(lines, formData) {
       code: String(item.code || '').trim(),
       qty: Math.max(1, Number(item.qty) || 1),
       color_option: cleanOption(item.color_option),
-      look_context: normalizeLookContextV123(item.look_context)
+      look_context: cleanLookContextV19(item.look_context)
     })).filter(item => item.code);
     try {
       return btoa(unescape(encodeURIComponent(JSON.stringify(safeCart))));
@@ -1597,7 +1604,7 @@ async function createStripeCheckout(lines, formData) {
         code: String(item.code || '').trim(),
         qty: Math.max(1, Number(item.qty) || 1),
         color_option: cleanOption(item.color_option),
-        look_context: normalizeLookContextV123(item.look_context)
+        look_context: cleanLookContextV19(item.look_context)
       })).filter(item => item.code && map[item.code]);
     } catch (e) {
       return [];
@@ -1651,12 +1658,14 @@ async function createStripeCheckout(lines, formData) {
     const map = products();
     if (!code || !map[code]) return false;
     const colorOption = cleanOption(options.color_option);
-    const lookContext = normalizeLookContextV123(options.look_context);
+    const lookContext = cleanLookContextV19(options.look_context);
     const cart = readCart();
     const existing = cart.find(item => item.code === code && optionLabel(item) === colorOption);
     if (existing) {
       existing.qty += qty;
-      if (lookContext) existing.look_context = lookContext;
+      const previousContext = String(existing.look_context || '').trim();
+      if (lookContext && !previousContext) existing.look_context = lookContext;
+      else if (lookContext && previousContext !== lookContext) existing.look_context = 'mixed';
     } else {
       cart.push({ code, qty, color_option: colorOption, look_context: lookContext });
     }
@@ -1666,34 +1675,33 @@ async function createStripeCheckout(lines, formData) {
       product_name: map[code].product_name,
       price: map[code].price,
       color_option: colorOption,
-      look_context: lookContext,
+      source_look_context: lookContext,
       cart_count: cartCount()
     });
     return true;
   }
 
-  function upsertMany(items = [], lookContext = '') {
+  function upsertMany(items = []) {
     const map = products();
     const cart = readCart();
-    const normalizedLookContext = normalizeLookContextV123(lookContext);
     let changed = 0;
     (Array.isArray(items) ? items : []).forEach(item => {
       const code = String(item && item.code || '').trim();
       if (!code || !map[code]) return;
       const colorOption = cleanOption(item.options && item.options.color_option);
+      const lookContext = cleanLookContextV19(item.look_context);
       const existing = cart.find(line => line.code === code && optionLabel(line) === colorOption);
       if (existing) {
         existing.qty = Math.max(1, Number(existing.qty) || 1);
-        if (normalizedLookContext) existing.look_context = normalizedLookContext;
+        if (lookContext && !String(existing.look_context || '').trim()) existing.look_context = lookContext;
       } else {
-        cart.push({ code, qty: 1, color_option: colorOption, look_context: normalizedLookContext });
+        cart.push({ code, qty: 1, color_option: colorOption, look_context: lookContext });
         changed += 1;
       }
     });
     saveCart(cart);
     push('cart_bundle_upsert', {
       inserted_count: changed,
-      look_context: normalizedLookContext,
       cart_count: cartCount()
     });
     return changed;

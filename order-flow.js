@@ -531,12 +531,15 @@ function bendagoAddOneToCart(code, options = {}) {
   return false;
 }
 
-/* BENDAGO V123 — retain look context when a customer adds a part from a mapped build. */
-function bendagoLookContextFromControl(control) {
-  const explicit = String((control && control.getAttribute && control.getAttribute('data-look-context')) || '').trim();
-  if (explicit) return explicit;
+/* BENDAGO V19 — carry a mapped look from a look card to the cart, including option pages. */
+function bendagoLookContextV19(value) {
+  const key = String(value || '').trim();
+  return key === 'storm-rider-66' ? key : '';
+}
+
+function bendagoCurrentLookContextV19() {
   try {
-    return String(new URL(window.location.href).searchParams.get('look') || '').trim();
+    return bendagoLookContextV19(new URLSearchParams(window.location.search || '').get('look'));
   } catch (e) {
     return '';
   }
@@ -634,13 +637,13 @@ document.addEventListener('DOMContentLoaded', () => {
       if (button.disabled || button.hasAttribute('data-add-disabled')) return;
       const code = (button.getAttribute('data-add-preview') || '').trim();
       if (!code) return;
-      const lookContext = bendagoLookContextFromControl(button);
+      const lookContext = bendagoLookContextV19(button.getAttribute('data-cart-look-context')) || bendagoCurrentLookContextV19();
       const added = bendagoAddOneToCart(code, lookContext ? { look_context: lookContext } : {});
       bendagoPush('model_card_add_to_cart', {
         product_code: code,
         product_name: (window.BENDAGO_PRODUCTS && window.BENDAGO_PRODUCTS[code] && window.BENDAGO_PRODUCTS[code].product_name) || code,
         source_page: window.location.pathname || '',
-        look_context: lookContext
+        source_look_context: lookContext
       });
       if (added && window.BendagoCart && typeof window.BendagoCart.open === 'function') {
         window.BendagoCart.open();
@@ -662,7 +665,7 @@ document.addEventListener('DOMContentLoaded', () => {
         bendagoShowProductOptionError(link, 'Choose the required option before adding to cart: ' + selected.requiredMissing.join(', ') + '.');
         return;
       }
-      const lookContext = bendagoLookContextFromControl(link);
+      const lookContext = bendagoLookContextV19(link.getAttribute('data-cart-look-context')) || bendagoCurrentLookContextV19();
       if (lookContext) selected.options.look_context = lookContext;
       const added = bendagoAddOneToCart(code, selected.options);
       bendagoPush('product_detail_add_to_cart', {
@@ -670,7 +673,7 @@ document.addEventListener('DOMContentLoaded', () => {
         product_name: link.getAttribute('data-product-name') || document.title,
         product_url: window.location.href,
         color_option: selected.options.color_option || '',
-        look_context: lookContext
+        source_look_context: selected.options.look_context || ''
       });
       if (added && window.BendagoCart && typeof window.BendagoCart.open === 'function') {
         window.BendagoCart.open();
