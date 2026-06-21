@@ -445,17 +445,18 @@
       { code: 'black-striped-clutch-cover' }
     ],
     'brutal-bob-complete': [
-      { code: 'right-engine-filter-cover' },
+      { code: 'maverick-air-filter-cover' },
       { code: 'handlebar-riser' },
       { code: 'transparent-clutch-cover' },
       { code: 'gold-clutch-flywheel' },
-      { code: 'rear-led-seat-comfort' },
+      { code: 'ultra-single-seat-comfort' },
       { code: 'brutal-rear-fender-kit' },
       { code: 'closed-metal-hubcap-benda-samurai' },
-      { code: 'dual-exhaust', options: { color_option: 'Chrome' } }
+      { code: 'dual-exhaust', options: { color_option: 'Chrome' } },
+      { code: 'black-foot-control-kit' }
     ],
     'brutal-bob-essentials': [
-      { code: 'right-engine-filter-cover' },
+      { code: 'maverick-air-filter-cover' },
       { code: 'closed-metal-hubcap-benda-samurai' }
     ],
     'blackout-predator-complete': [
