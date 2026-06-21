@@ -158,7 +158,7 @@
         { code: 'chrome-air-filter-450-500-sr66' },
         { code: 'black-night-clutch-cover-450-500-sr66' },
         { code: 'brutal-storm-exhaust-450-500-sr66' },
-        { code: 'premium-comfort-foot-kit-450', options: { color_option: 'Skull Platinum' } }
+        { code: 'premium-comfort-foot-kit-450', options: { color_option: 'Design Black' } }
       ]
     },
   ];
@@ -523,12 +523,35 @@
       { code: 'chrome-air-filter-450-500-sr66' },
       { code: 'black-night-clutch-cover-450-500-sr66' },
       { code: 'brutal-storm-exhaust-450-500-sr66' },
-      { code: 'premium-comfort-foot-kit-450', options: { color_option: 'Skull Platinum' } }
+      { code: 'premium-comfort-foot-kit-450', options: { color_option: 'Design Black' } }
     ],
     'midnight-hunter-essentials': [
       { code: 'premium-comfort-foot-kit-450', options: { color_option: 'Skull Platinum' } }
     ]
   };
+
+  const STORM_RIDER_FOOT_KIT_FINISHES_V25 = ['Skull Platinum', 'Black Strass', 'Gold Look', 'Design Black'];
+
+  function selectedStormRiderFootKitFinishV25() {
+    const select = document.querySelector('[data-storm-rider-foot-kit-finish]');
+    const value = cleanOption(select && select.value);
+    return STORM_RIDER_FOOT_KIT_FINISHES_V25.includes(value) ? value : 'Design Black';
+  }
+
+  function bundleItemsWithStormFootKitFinishV25(key, items) {
+    const source = Array.isArray(items) ? items : [];
+    if (key !== 'storm-rider-66-complete') {
+      return source.map(item => ({ ...item, options: item && item.options ? { ...item.options } : undefined }));
+    }
+    const finish = selectedStormRiderFootKitFinishV25();
+    return source.map(item => {
+      const next = { ...item, options: item && item.options ? { ...item.options } : undefined };
+      if (next.code === 'premium-comfort-foot-kit-450') {
+        next.options = { ...(next.options || {}), color_option: finish };
+      }
+      return next;
+    });
+  }
 
   function bindBuildBundleButtons() {
     document.querySelectorAll('[data-add-bundle]').forEach(button => {
@@ -538,19 +561,24 @@
         const key = String(button.getAttribute('data-add-bundle') || '').trim();
         const items = BUNDLE_ADD_TO_CART_ITEMS[key];
         if (!items || !items.length) return;
+        const resolvedItems = bundleItemsWithStormFootKitFinishV25(key, items);
+        const stormFootKitFinish = key === 'storm-rider-66-complete' ? selectedStormRiderFootKitFinishV25() : '';
         const lookContext = cleanLookContextV19(key.replace(/-(complete|essentials)$/, ''));
-        upsertMany(items, lookContext ? { look_context: lookContext } : {});
+        upsertMany(resolvedItems, lookContext ? { look_context: lookContext } : {});
         const box = button.closest('[data-bundle-box]');
         const msg = box ? box.querySelector('.build-bundle-added') : null;
         if (msg) {
           msg.textContent = key.endsWith('-essentials')
             ? 'Essentials added to cart. You can complete the full look later.'
-            : 'Complete look added to cart. Launch Access 5% appears in cart.';
+            : (key === 'storm-rider-66-complete'
+              ? 'Complete look added with ' + stormFootKitFinish + ' Foot Kit. Launch Access 5% appears in cart.'
+              : 'Complete look added to cart. Launch Access 5% appears in cart.');
           msg.classList.add('show');
         }
         push('build_bundle_add_click', {
           build_key: key,
           build_name: key.indexOf('storm-rider-66') === 0 ? 'Storm Rider 66 Build' : (key.indexOf('midnight-hunter') === 0 ? 'Midnight Hunter Build' : (key.indexOf('shadow-beast-v4') === 0 ? 'Shadow Monster Bike' : key)),
+          foot_kit_finish: stormFootKitFinish,
           cart_count: cartCount()
         });
         openCart();
@@ -673,13 +701,9 @@
   }
 
   function lineLookContextsV125(line) {
-    const code = String(line && (line.code || line.product_code) || '').trim();
     const raw = line && Array.isArray(line.look_contexts) ? line.look_contexts : [];
     const legacy = line && line.look_context ? [line.look_context] : [];
-    return Array.from(new Set(raw.concat(legacy).map(cleanLookContextV19).filter(Boolean))).filter(function (key) {
-      /* V24 migration: these products are independent and must never retain a legacy Storm context. */
-      return !(key === 'storm-rider-66' && (code === 'premium-rear-fender-450' || code === 'double-seat-comfort-premium-plus'));
-    });
+    return Array.from(new Set(raw.concat(legacy).map(cleanLookContextV19).filter(Boolean)));
   }
 
   function cartLookContextsV125(lines) {
@@ -1641,6 +1665,21 @@ async function createStripeCheckout(lines, formData) {
     'ghost-protector-darkflag-950-v4': './order-ghost-protector-darkflag-950-v4.html'
   };
 
+  /* BENDAGO V26 — cart thumbnail follows the selected Foot Kit design. Pricing/SKU/look context are untouched. */
+  const FOOT_KIT_OPTION_IMAGES_V26 = Object.freeze({
+    'Black Strass': './premium-comfort-foot-kit-450-black-strass.png',
+    'Skull Platinum': './premium-comfort-foot-kit-450-skull-platinum.png',
+    'Gold Look': './premium-comfort-foot-kit-450-gold-look.png',
+    'Design Black': './premium-comfort-foot-kit-450-design-black.png'
+  });
+
+  function productWithSelectedOptionImageV26(product, item) {
+    const code = String(item && item.code || '').trim();
+    const option = cleanOption(item && item.color_option);
+    const selectedImage = code === 'premium-comfort-foot-kit-450' ? FOOT_KIT_OPTION_IMAGES_V26[option] : '';
+    return selectedImage ? { ...product, image: selectedImage } : product;
+  }
+
   function productPageUrl(code) {
     return PRODUCT_PAGE_MAP[String(code || '').trim()] || './benda-napoleon-125-250-custom-parts.html#shop-part-by-part';
   }
@@ -1648,8 +1687,9 @@ async function createStripeCheckout(lines, formData) {
   function getLines() {
     const map = products();
     return readCart().map(item => {
-      const product = map[item.code];
-      if (!product) return null;
+      const baseProduct = map[item.code];
+      if (!baseProduct) return null;
+      const product = productWithSelectedOptionImageV26(baseProduct, item);
       const qty = Math.max(1, Number(item.qty) || 1);
       const unit = euroToNumber(product.price);
       const lookContexts = lineLookContextsV125(item);
