@@ -195,6 +195,55 @@ body.bcp-lightbox-open{overflow:hidden!important}
 <meta name="twitter:title" content="Dual Exhaust Custom Kit for Benda Napoleon 125/250 | Benda Custom Picks"/>
 <meta name="twitter:description" content="Dual Exhaust Custom Kit for Benda Napoleon 125/250. Complete dual exhaust look, stronger right-side custom style, product photos and secure Stripe checkout."/>
 <meta name="twitter:image" content="https://bendacustompicks.com/dual-exhaust-card-hero.webp"/>
+
+<style id="bcp-v1-dual-exhaust-hero-gallery-fix">
+/* BENDAGO V1 — Dual Exhaust product page only: better hero crop + adaptive full-format gallery */
+.dual-exhaust-media #mainProductImage{
+  object-position:center 72% !important;
+}
+.dual-exhaust-gallery{
+  display:grid !important;
+  grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+  gap:12px !important;
+}
+.dual-exhaust-gallery .product-thumb{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  min-height:124px !important;
+  padding:6px !important;
+  border-radius:16px !important;
+  background:rgba(5,7,11,.92) !important;
+}
+.dual-exhaust-gallery .product-thumb img{
+  width:100% !important;
+  height:auto !important;
+  max-height:170px !important;
+  aspect-ratio:auto !important;
+  object-fit:contain !important;
+  object-position:center center !important;
+  border-radius:12px !important;
+  background:#05070b !important;
+}
+.dual-exhaust-gallery .video-thumb{
+  min-height:124px !important;
+}
+.dual-exhaust-gallery .video-thumb::after{
+  inset:6px !important;
+  border-radius:12px !important;
+}
+@media (max-width: 900px){
+  .dual-exhaust-gallery{grid-template-columns:repeat(3,minmax(0,1fr)) !important;}
+  .dual-exhaust-gallery .product-thumb{min-height:110px !important;}
+  .dual-exhaust-gallery .product-thumb img{max-height:150px !important;}
+}
+@media (max-width: 640px){
+  .dual-exhaust-gallery{grid-template-columns:repeat(2,minmax(0,1fr)) !important;}
+  .dual-exhaust-gallery .product-thumb{min-height:124px !important;}
+  .dual-exhaust-gallery .product-thumb img{max-height:180px !important;}
+}
+</style>
+
 </head>
 <body class="order-body">
 <!-- Google Tag Manager (noscript) -->
@@ -379,6 +428,6 @@ document.getElementById('year').textContent = new Date().getFullYear();
 })();
 </script>
 <script src="./order-flow.js?v=v90-gtm-emailjs-anticopy"></script>
-<script src="./cart-flow.js?v=v116-cart-product-links"></script>
+<script src="./cart-flow.js?v=v90-gtm-emailjs-anticopy"></script>
 <script src="./anti-copy.js?v=v90-gtm-emailjs-anticopy"></script>
 </body></html>
