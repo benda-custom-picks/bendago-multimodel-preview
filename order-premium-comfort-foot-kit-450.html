@@ -267,12 +267,25 @@ document.addEventListener('DOMContentLoaded', function () {
         other.classList.toggle('is-selected', active);
         other.setAttribute('aria-pressed', active ? 'true' : 'false');
       });
+
+      var designImageMap = {
+        'Black Strass': './premium-comfort-foot-kit-450-black-strass.png',
+        'Skull Platinum': './premium-comfort-foot-kit-450-skull-platinum.png',
+        'Gold Look': './premium-comfort-foot-kit-450-gold-look.png',
+        'Design Black': './premium-comfort-foot-kit-450-design-black.png'
+      };
+      var imageSrc = designImageMap[value];
+      var mainImage = document.getElementById('mainProductImage');
+      if (imageSrc && mainImage) {
+        mainImage.src = imageSrc;
+        mainImage.alt = 'Premium Comfort Foot Kit ' + value + ' design';
+      }
     });
   });
 });
 </script>
-<script src="./order-flow.js?v=v123-storm-cart-context"></script>
-<script src="./cart-flow.js?v=v123-storm-cart-context"></script>
+<script src="./order-flow.js?v=v122-price-reset"></script>
+<script src="./cart-flow.js?v=v122-price-reset"></script>
 <script src="./anti-copy.js?v=v90-gtm-emailjs-anticopy"></script>
 </body>
 </html>
