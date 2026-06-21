@@ -55,6 +55,24 @@
   .filter-only-box{display:grid;grid-template-columns:82px minmax(0,1fr);gap:12px;align-items:center}.filter-only-box img{width:82px;height:82px;border-radius:12px;object-fit:contain;background:#05070b;padding:4px;box-sizing:border-box}.filter-only-box h3{margin:0 0 4px;font-size:1rem}.filter-only-box p{margin:0;color:rgba(255,255,255,.72);font-size:.82rem;line-height:1.35}.filter-only-box strong{color:#f6c431}
   @media (max-width:900px) { .product-layout { grid-template-columns:1fr; } .info-card { position:static; } .thumb-row { grid-template-columns:repeat(2,minmax(0,1fr)); } }
   @media (max-width:480px){.order-wrap{width:min(100% - 22px,1180px)!important}.product-option-actions{display:grid!important;grid-template-columns:1fr!important}.product-option-btn{justify-content:center!important;width:100%!important}.filter-only-box{grid-template-columns:1fr}.filter-only-box img{width:100%;height:130px;object-fit:contain!important}}
+  /* BENDAGO — PC-only: keep Filter Only CTA on its own full-width row. Mobile/tablet remain untouched. */
+  @media (min-width:901px){
+    .filter-only-box .filter-only-add{
+      grid-column:1 / -1;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-sizing:border-box;
+      width:100%;
+      min-width:0;
+      max-width:100%;
+      min-height:54px;
+      margin:4px 0 0!important;
+      padding:12px 14px!important;
+      white-space:nowrap;
+    }
+  }
+
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Product", "name": "Transparent Air Filter Cover Aluminium", "description": "Clear aluminium-framed air filter intake cover for Benda Dark Flag V4 950 with Right or Left side choice and separate Filter Only replacement option.", "image": "https://bendacustompicks.com/transparent-air-filter-cover-aluminium-v4-hero.png", "sku": "transparent-air-filter-cover-aluminium-v4", "category": "Motorcycle parts and accessories", "brand": {"@type": "Brand", "name": "Benda Custom Picks"}, "offers": {"@type": "Offer", "url": "https://bendacustompicks.com/order-transparent-air-filter-cover-aluminium-v4.html", "priceCurrency": "EUR", "price": "249.90", "seller": {"@type": "OnlineStore", "name": "Benda Custom Picks"}, "availability": "https://schema.org/PreOrder", "itemCondition": "https://schema.org/NewCondition"}}</script>
 </head>
