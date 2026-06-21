@@ -545,6 +545,26 @@ function bendagoCurrentLookContextV19() {
   }
 }
 
+/* BENDAGO V20 — resolve Storm Rider context from the actual card container,
+   not only from a button attribute. This covers every direct add path inside
+   the Storm Rider 66 parts rail. */
+function bendagoAncestorLookContextV20(node) {
+  try {
+    const host = node && node.closest ? node.closest('[data-cart-look-context], [data-look-context], #look-parts-storm-rider-66') : null;
+    if (!host) return '';
+    const explicit = host.getAttribute('data-cart-look-context') || host.getAttribute('data-look-context') || '';
+    return bendagoLookContextV19(explicit || (host.id === 'look-parts-storm-rider-66' ? 'storm-rider-66' : ''));
+  } catch (e) {
+    return '';
+  }
+}
+
+function bendagoResolvedLookContextV20(node) {
+  return bendagoLookContextV19(node && node.getAttribute && node.getAttribute('data-cart-look-context')) ||
+    bendagoAncestorLookContextV20(node) ||
+    bendagoCurrentLookContextV19();
+}
+
 function bendagoSelectedProductOptions(link) {
   const scope = link.closest('.info-card') || document;
   const result = {};
@@ -637,7 +657,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (button.disabled || button.hasAttribute('data-add-disabled')) return;
       const code = (button.getAttribute('data-add-preview') || '').trim();
       if (!code) return;
-      const lookContext = bendagoLookContextV19(button.getAttribute('data-cart-look-context')) || bendagoCurrentLookContextV19();
+      const lookContext = bendagoResolvedLookContextV20(button);
       const added = bendagoAddOneToCart(code, lookContext ? { look_context: lookContext } : {});
       bendagoPush('model_card_add_to_cart', {
         product_code: code,
@@ -665,7 +685,7 @@ document.addEventListener('DOMContentLoaded', () => {
         bendagoShowProductOptionError(link, 'Choose the required option before adding to cart: ' + selected.requiredMissing.join(', ') + '.');
         return;
       }
-      const lookContext = bendagoLookContextV19(link.getAttribute('data-cart-look-context')) || bendagoCurrentLookContextV19();
+      const lookContext = bendagoResolvedLookContextV20(link);
       if (lookContext) selected.options.look_context = lookContext;
       const added = bendagoAddOneToCart(code, selected.options);
       bendagoPush('product_detail_add_to_cart', {

@@ -305,6 +305,9 @@
     const lookContext = cartLookContextV19(lines);
     if (lookContext && BUILD_VISUALS_V18[lookContext]) return BUILD_VISUALS_V18[lookContext];
 
+    /* Last-resort visual only: exclusive Storm Rider part(s) with no foreign SKU. */
+    if (cartStormRiderFallbackV20(lines)) return BUILD_VISUALS_V18['storm-rider-66'];
+
     const modelKey = cartModelKeyV18(lines);
     return modelKey ? (MODEL_VISUALS_V18[modelKey] || null) : null;
   }
@@ -609,6 +612,32 @@
   const CART_LOOK_CONTEXTS_V19 = Object.freeze({
     'storm-rider-66': true
   });
+
+  /* BENDAGO V20 — hard fallback for Storm Rider 66 product cards.
+     The cart retains the explicit look_context first. This fallback only protects
+     a Storm-only selection if a legacy button/session arrives without context. */
+  const STORM_RIDER_66_CODES_V20 = Object.freeze({
+    'chrome-air-filter-450-500-sr66': true,
+    'black-night-clutch-cover-450-500-sr66': true,
+    'brutal-storm-exhaust-450-500-sr66': true,
+    'premium-comfort-foot-kit-450': true,
+    'premium-rear-fender-450': true,
+    'double-seat-comfort-premium-plus': true
+  });
+  const STORM_RIDER_66_EXCLUSIVE_CODES_V20 = Object.freeze({
+    'chrome-air-filter-450-500-sr66': true,
+    'black-night-clutch-cover-450-500-sr66': true,
+    'brutal-storm-exhaust-450-500-sr66': true
+  });
+
+  function cartStormRiderFallbackV20(lines) {
+    const codes = (lines || []).map(function (line) {
+      return String(line && (line.code || line.product_code) || '').trim();
+    }).filter(Boolean);
+    return codes.length > 0 &&
+      codes.every(function (code) { return !!STORM_RIDER_66_CODES_V20[code]; }) &&
+      codes.some(function (code) { return !!STORM_RIDER_66_EXCLUSIVE_CODES_V20[code]; });
+  }
 
   function cleanLookContextV19(value) {
     const key = String(value || '').trim();
