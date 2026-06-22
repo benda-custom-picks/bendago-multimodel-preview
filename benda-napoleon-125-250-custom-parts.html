@@ -2259,94 +2259,40 @@ html body.model-page section#looks article.look-card > .look-body > h3 > a.bcp-w
     }
   ]
 }</script>
-<style id="bcp-v140-brutal-bob-responsive-sound">
-/* BENDAGO V140 — Brutal Bob responsive media + reliable user-initiated sound.
-   Scope: Napoleon 125/250 → Brutal Bob presentation card only. */
-#brutal-bob-full-build .look-media-sound-card{
-  position:relative!important;
-  isolation:isolate!important;
-  overflow:hidden!important;
-}
-#brutal-bob-full-build .look-media-sound-card .look-video{
-  position:absolute!important;
-  inset:0!important;
-  z-index:1!important;
-  width:100%!important;
-  height:100%!important;
-  object-fit:cover!important;
-  object-position:center center!important;
-  background:#030303!important;
-}
+<style id="bcp-v144-brutal-bob-storm-rider-sound">
+/* BENDAGO V144 — Brutal Bob uses the proven Storm Rider 66 sound-control pattern.
+   Scope: Brutal Bob presentation card only. No media/card/CTA stacking overrides. */
+#brutal-bob-full-build .look-media-sound-card{position:relative!important}
 #brutal-bob-full-build .look-sound-toggle{
   position:absolute!important;
   left:12px!important;
   bottom:12px!important;
-  z-index:40!important;
+  z-index:8!important;
   display:inline-flex!important;
   align-items:center!important;
-  justify-content:center!important;
   gap:7px!important;
-  min-height:44px!important;
-  min-width:126px!important;
-  padding:0 14px!important;
-  border:1px solid rgba(255,255,255,.50)!important;
+  min-height:34px!important;
+  padding:0 11px!important;
+  border:1px solid rgba(255,255,255,.38)!important;
   border-radius:999px!important;
-  background:rgba(0,0,0,.78)!important;
+  background:rgba(0,0,0,.72)!important;
   color:#fff!important;
-  font:850 .74rem/1 inherit!important;
-  letter-spacing:.045em!important;
+  font:800 .72rem/1 inherit!important;
+  letter-spacing:.04em!important;
   text-transform:uppercase!important;
   cursor:pointer!important;
-  pointer-events:auto!important;
   touch-action:manipulation!important;
   -webkit-tap-highlight-color:transparent!important;
-  box-shadow:0 5px 18px rgba(0,0,0,.38)!important;
+  box-shadow:0 4px 16px rgba(0,0,0,.32)!important;
 }
 #brutal-bob-full-build .look-sound-toggle:hover,
 #brutal-bob-full-build .look-sound-toggle:focus-visible{
-  background:rgba(17,25,20,.96)!important;
-  border-color:rgba(151,214,132,.98)!important;
+  background:rgba(17,25,20,.92)!important;
+  border-color:rgba(151,214,132,.9)!important;
   outline:none!important;
 }
-#brutal-bob-full-build .look-sound-toggle.is-sound-on{
-  border-color:rgba(151,214,132,.98)!important;
-  background:rgba(24,61,39,.94)!important;
-}
-#brutal-bob-full-build .look-sound-toggle span[aria-hidden="true"]{font-size:15px!important;line-height:1!important;}
-@media (max-width:900px){
-  #brutal-bob-full-build .look-media-sound-card{min-height:0!important;}
-  #brutal-bob-full-build .look-sound-toggle{
-    left:10px!important;
-    bottom:10px!important;
-    min-height:42px!important;
-    min-width:122px!important;
-    padding:0 13px!important;
-  }
-}
-@media (orientation:landscape) and (max-height:480px) and (max-width:920px){
-  #brutal-bob-full-build .look-sound-toggle{
-    left:9px!important;
-    bottom:9px!important;
-    min-height:40px!important;
-    min-width:116px!important;
-    padding:0 11px!important;
-    font-size:.68rem!important;
-  }
-}
-
-/* BENDAGO V142 — restore Brutal Bob CTAs below the reel.
-   The media must not stack above the Look body/actions. */
-#brutal-bob-full-build .look-media-sound-card{
-  z-index:auto!important;
-  pointer-events:auto!important;
-}
-#brutal-bob-full-build .look-media-sound-card .look-sound-toggle{
-  z-index:40!important;
-  pointer-events:auto!important;
-}
-#brutal-bob-full-build .look-body{
-  z-index:auto!important;
-  pointer-events:auto!important;
+@media (max-width:520px){
+  #brutal-bob-full-build .look-sound-toggle{left:10px!important;bottom:10px!important;min-height:32px!important;padding:0 10px!important}
 }
 </style>
 </head><body class="model-page model-125"><!-- Google Tag Manager (noscript) -->
@@ -3043,52 +2989,33 @@ html body.model-page section#looks article.look-card > .look-body > h3 > a.bcp-w
 </div>
 </section>
 </main><footer class="bcp-footer footer"><div class="wrap"><p>Benda Custom Picks — selected custom parts for Benda riders.</p><p>Independent custom parts selection · Secure Stripe checkout · Support: <a href="mailto:support@bendacustompicks.com">support@bendacustompicks.com</a></p></div></footer><script src="order-flow.js?v=v137-comfort-seat-cart-hero"></script><script src="cart-flow.js?v=v137-comfort-seat-cart-hero"></script><script src="currency-display.js?v=v127-recovery-currency"></script><script src="./anti-copy.js?v=v90-gtm-emailjs-anticopy"></script>
-<script id="bcp-v142-brutal-bob-sound-runtime">
-/* BENDAGO V142 — native click only; preserves Brutal Bob CTA interaction.
-   Scope: Brutal Bob model-card MP4 only. */
+<script id="bcp-v144-brutal-bob-sound-runtime">
+/* BENDAGO V144 — exact Storm Rider 66 interaction pattern, scoped to Brutal Bob. */
 (function(){
-  function init(){
-    var card = document.getElementById('brutal-bob-full-build');
-    if (!card) return;
-    var video = card.querySelector('[data-brutal-bob-sound-video]');
-    var button = card.querySelector('[data-brutal-bob-sound-toggle]');
-    if (!video || !button || button.dataset.soundV141 === '1') return;
-    button.dataset.soundV141 = '1';
-    var label = button.querySelector('.look-sound-toggle-label');
+  const video = document.querySelector('[data-brutal-bob-sound-video]');
+  const toggle = document.querySelector('[data-brutal-bob-sound-toggle]');
+  if (!video || !toggle) return;
 
-    function active(){ return !video.muted && video.volume > 0; }
-    function paint(){
-      var on = active();
-      button.classList.toggle('is-sound-on', on);
-      button.setAttribute('aria-pressed', on ? 'true' : 'false');
-      button.setAttribute('aria-label', on ? 'Turn sound off' : 'Turn sound on');
-      if (label) label.textContent = on ? 'Sound off' : 'Sound on';
-    }
-    function toggle(event){
-      event.preventDefault();
-      event.stopPropagation();
-      var next = !active();
-      video.muted = !next;
-      video.defaultMuted = !next;
-      if (next) {
-        video.removeAttribute('muted');
-        video.volume = 1;
-      } else {
-        video.setAttribute('muted','');
-      }
-      var attempt = video.play();
-      if (attempt && attempt.catch) attempt.catch(function(){ paint(); });
-      paint();
-    }
+  const label = toggle.querySelector('.look-sound-toggle-label');
 
-    /* One native click avoids Android touchend + synthetic click double toggles. */
-    button.addEventListener('click', toggle, false);
-    video.addEventListener('volumechange', paint);
-    video.addEventListener('loadedmetadata', paint);
-    paint();
+  function syncSoundUi(){
+    const soundOn = !video.muted && video.volume > 0;
+    toggle.setAttribute('aria-label', soundOn ? 'Turn sound off' : 'Turn sound on');
+    toggle.setAttribute('aria-pressed', soundOn ? 'true' : 'false');
+    if (label) label.textContent = soundOn ? 'Sound off' : 'Sound on';
   }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, {once:true});
-  else init();
+
+  toggle.addEventListener('click', function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    video.muted = !video.muted;
+    if (!video.muted && video.volume === 0) video.volume = 1;
+    video.play().catch(function(){});
+    syncSoundUi();
+  });
+
+  video.addEventListener('volumechange', syncSoundUi);
+  syncSoundUi();
 })();
 </script>
 </body></html>
