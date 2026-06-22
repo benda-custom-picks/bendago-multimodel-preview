@@ -31,6 +31,7 @@
     'ultra-single-seat-comfort': 'ultra-single-seat-comfort',
     'rear-led-seat-comfort': 'rear-led-seat-comfort-plus',
     'brutal-rear-fender-kit': 'brutal-rear-fender-kit',
+    'brutal-rear-metal-fender-minimalist': 'brutal-rear-metal-fender-minimalist',
     'brutal-rear-metal-fender-fixed-rack': 'brutal-rear-metal-fender-fixed-rack',
     'brutal-rear-metal-fender-separate-rack': 'brutal-rear-metal-fender-separate-rack',
     'gps-carplay': 'gps-carplay-screen',
@@ -112,7 +113,7 @@
         { code: 'transparent-clutch-cover' },
         { code: 'gold-clutch-flywheel' },
         { code: 'double-seat-foot-peg-kit', color_option: 'Black' },
-        { code: 'brutal-rear-fender-kit', color_option: 'Minimalist' },
+        { code: 'brutal-rear-metal-fender-minimalist', color_option: 'Minimalist' },
         { code: 'closed-metal-hubcap-benda-samurai' },
         { code: 'dual-exhaust', color_option: 'Chrome' },
         { code: 'black-foot-control-kit' }
@@ -483,7 +484,7 @@
       { code: 'transparent-clutch-cover' },
       { code: 'gold-clutch-flywheel' },
       { code: 'double-seat-foot-peg-kit', options: { color_option: 'Black' } },
-      { code: 'brutal-rear-fender-kit', options: { color_option: 'Minimalist' } },
+      { code: 'brutal-rear-metal-fender-minimalist', options: { color_option: 'Minimalist' } },
       { code: 'closed-metal-hubcap-benda-samurai' },
       { code: 'dual-exhaust', options: { color_option: 'Chrome' } },
       { code: 'black-foot-control-kit' }
@@ -622,16 +623,35 @@
     window.dataLayer.push(payload);
   }
 
+  /* BENDAGO V136 — only pre-split Metal Fender lines carrying a concrete style are migrated.
+     Historical Brutal Rear Fender Kit lines have no style and remain untouched. */
+  function migrateLegacyMetalFenderLineV136(line) {
+    if (!line || String(line.code || '').trim() !== 'brutal-rear-fender-kit') return false;
+    const style = cleanOption(line.color_option);
+    const map = {
+      'Minimalist': 'brutal-rear-metal-fender-minimalist',
+      'With Fixed Luggage Rack': 'brutal-rear-metal-fender-fixed-rack',
+      'With Separate Luggage Rack': 'brutal-rear-metal-fender-separate-rack'
+    };
+    if (!map[style]) return false;
+    line.code = map[style];
+    return true;
+  }
+
   function readCart() {
     try {
       const cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
-      return Array.isArray(cart) ? cart.filter(function (item) {
+      let migrated = false;
+      const normalized = Array.isArray(cart) ? cart.filter(function (item) {
         return item && item.code && Number(item.qty) > 0;
       }).map(function (item) {
         const next = Object.assign({}, item);
+        if (migrateLegacyMetalFenderLineV136(next)) migrated = true;
         syncLineLookContextsV125(next);
         return next;
       }) : [];
+      if (migrated) localStorage.setItem(CART_KEY, JSON.stringify(normalized));
+      return normalized;
     } catch (e) {
       return [];
     }
@@ -744,7 +764,7 @@
     if (item && String(item.code || item.product_code || '').trim() === 'maverick-air-filter-cover') return 'Side: ' + color;
     if (item && String(item.code || item.product_code || '').trim() === 'decorative-cover-side') return 'Finish: ' + color;
     if (item && String(item.code || item.product_code || '').trim() === 'premium-comfort-foot-kit-450') return 'Design: ' + color;
-    if (item && ['brutal-rear-fender-kit','brutal-rear-metal-fender-fixed-rack','brutal-rear-metal-fender-separate-rack'].indexOf(String(item.code || item.product_code || '').trim()) !== -1) return 'Style: ' + color;
+    if (item && ['brutal-rear-metal-fender-minimalist','brutal-rear-metal-fender-fixed-rack','brutal-rear-metal-fender-separate-rack'].indexOf(String(item.code || item.product_code || '').trim()) !== -1) return 'Style: ' + color;
     return 'Colour: ' + color;
   }
 
@@ -1644,8 +1664,9 @@ async function createStripeCheckout(lines, formData) {
     'ultra-single-seat-comfort': './order-ultra-single-seat-comfort.html',
     'rear-led-seat-comfort': './order-rear-led-seat-comfort.html',
     'brutal-rear-fender-kit': './order-brutal-rear-fender-kit.html',
-    'brutal-rear-metal-fender-fixed-rack': './order-brutal-rear-fender-kit.html',
-    'brutal-rear-metal-fender-separate-rack': './order-brutal-rear-fender-kit.html',
+    'brutal-rear-metal-fender-minimalist': './order-brutal-rear-metal-fender.html',
+    'brutal-rear-metal-fender-fixed-rack': './order-brutal-rear-metal-fender.html',
+    'brutal-rear-metal-fender-separate-rack': './order-brutal-rear-metal-fender.html',
     'gps-carplay': './order-gps-carplay.html',
     'chrome-engine-cover': './order-chrome-engine-cover.html',
     'rear-fender': './order-rear-fender.html',

@@ -333,6 +333,16 @@ const BENDAGO_PRODUCTS = {
   },
   "brutal-rear-fender-kit": {
     product_code: "brutal-rear-fender-kit",
+    product_name: 'Brutal Rear Fender Kit',
+    product_short: 'Brutal rear fender kit Napoleon 125/250',
+    fitment: 'Benda Napoleon 125/250',
+    price: '246.50 €',
+    delivery_estimate: '10 to 15 business days',
+    image: './brutal-rear-fender-hero-clean.webp',
+    stripe_url: ''
+  },
+  "brutal-rear-metal-fender-minimalist": {
+    product_code: "brutal-rear-metal-fender-minimalist",
     product_name: 'Brutal Rear Metal Fender',
     product_short: '46 cm glossy rear metal fender for Benda Napoleon 125/250 — Minimalist configuration',
     fitment: 'Benda Napoleon 125/250',
@@ -551,10 +561,35 @@ function bendagoAddOneToCart(code, options = {}) {
   return false;
 }
 
-/* BENDAGO V19 — carry a mapped look from a look card to the cart, including option pages. */
+/* BENDAGO V136 — preserve every declared source look from a model rail into its product page and cart. */
+const BENDAGO_LOOK_CONTEXTS_V136 = Object.freeze({
+  'strong-pure-bob': true,
+  'headlight-fairing': true,
+  'black-fat-bob': true,
+  'blackout-predator': true,
+  'storm-rider-66': true
+});
 function bendagoLookContextV19(value) {
   const key = String(value || '').trim();
-  return key === 'storm-rider-66' ? key : '';
+  return BENDAGO_LOOK_CONTEXTS_V136[key] ? key : '';
+}
+
+function bendagoDecorateProductLinksWithLookContextV136() {
+  document.querySelectorAll('[data-cart-look-context], [data-look-context]').forEach(function(host) {
+    const lookContext = bendagoLookContextV19(host.getAttribute('data-cart-look-context') || host.getAttribute('data-look-context') || '');
+    if (!lookContext) return;
+    host.querySelectorAll('a[href]').forEach(function(link) {
+      const rawHref = link.getAttribute('href') || '';
+      let url;
+      try { url = new URL(rawHref, window.location.href); } catch (e) { return; }
+      if (!/\/order-[^/]+\.html$/i.test(url.pathname)) return;
+      url.searchParams.set('look', lookContext);
+      const base = rawHref.split('?')[0].split('#')[0] || url.pathname.split('/').pop();
+      const query = url.searchParams.toString();
+      const hash = url.hash || '';
+      link.setAttribute('href', base + (query ? '?' + query : '') + hash);
+    });
+  });
 }
 
 function bendagoCurrentLookContextV19() {
@@ -630,6 +665,7 @@ function bendagoShowProductOptionError(link, message) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  bendagoDecorateProductLinksWithLookContextV136();
   document.querySelectorAll('[data-order-product]').forEach(el => {
     el.addEventListener('click', () => {
       bendagoPush('order_product_view_click', {
