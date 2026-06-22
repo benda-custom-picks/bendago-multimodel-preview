@@ -1376,11 +1376,14 @@ async function createStripeCheckout(lines, formData) {
         fitment: 'Benda Napoleon 125/250',
         price: '619.65 €',
         delivery_estimate: '10 to 15 business days',
-        image: './comfort-seat-footpeg-01.png',
+        image: './comfort-seat-footpeg-hero-installed.jpg',
         stripe_url: '',
         color_required: true,
         color_options: 'Black / Brown'
       };
+    } else {
+      /* Override stale order-flow maps so every cart surface uses the current black-seat hero. */
+      map['double-seat-foot-peg-kit'].image = './comfort-seat-footpeg-hero-installed.jpg';
     }
 
     const napoleon450Fallbacks = {

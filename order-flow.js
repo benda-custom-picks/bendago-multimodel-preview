@@ -304,7 +304,8 @@ const BENDAGO_PRODUCTS = {
     fitment: 'Benda Napoleon 125/250',
     price: '619.65 €',
     delivery_estimate: '10 to 15 business days',
-    image: './comfort-seat-footpeg-01.png',
+    /* Canonical card/cart hero: black finish used by the Brutal Bob look. */
+    image: './comfort-seat-footpeg-hero-installed.jpg',
     stripe_url: '',
     color_required: true,
     color_options: "Black / Brown"
