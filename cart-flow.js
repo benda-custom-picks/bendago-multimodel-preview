@@ -191,10 +191,11 @@
     'black-fat-bob': {
       kind: 'build',
       title: 'Brutal Bob Build',
-      video: './brutal-bob-look-autoplay.mp4',
-      poster: './brutal-bob-look-autoplay-poster.jpg',
+      video: './brutal-bob-look-autoplay-v2.mp4',
+      poster: './brutal-bob-look-autoplay-v2-poster.jpg',
       model: 'Benda Napoleon 125/250',
-      position: 'center 52%',
+      /* Portrait reel in horizontal cart: calibrated lower crop keeps engine + twin pipes visible. */
+      position: 'center 57%',
       kicker: 'Your selected build',
       status: 'Launch Access 5% applied',
       note: 'Your selected parts below form one complete Benda direction.'
