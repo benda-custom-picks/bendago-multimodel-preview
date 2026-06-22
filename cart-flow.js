@@ -475,7 +475,7 @@
       { code: 'black-striped-clutch-cover' }
     ],
     'brutal-bob-complete': [
-      { code: 'maverick-air-filter-cover' },
+      { code: 'right-engine-filter-cover' },
       { code: 'handlebar-riser' },
       { code: 'transparent-clutch-cover' },
       { code: 'gold-clutch-flywheel' },
@@ -486,7 +486,7 @@
       { code: 'black-foot-control-kit' }
     ],
     'brutal-bob-essentials': [
-      { code: 'maverick-air-filter-cover' },
+      { code: 'right-engine-filter-cover' },
       { code: 'closed-metal-hubcap-benda-samurai' }
     ],
     'blackout-predator-complete': [
