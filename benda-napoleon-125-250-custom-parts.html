@@ -2333,6 +2333,21 @@ html body.model-page section#looks article.look-card > .look-body > h3 > a.bcp-w
     font-size:.68rem!important;
   }
 }
+
+/* BENDAGO V141 — Brutal Bob sound-control stacking repair.
+   The sound control must sit above the mobile look-body overlay. */
+#brutal-bob-full-build .look-media-sound-card{
+  z-index:60!important;
+  pointer-events:auto!important;
+}
+#brutal-bob-full-build .look-media-sound-card .look-sound-toggle{
+  z-index:2147483647!important;
+  pointer-events:auto!important;
+}
+#brutal-bob-full-build .look-body{
+  z-index:4!important;
+  pointer-events:none!important;
+}
 </style>
 </head><body class="model-page model-125"><!-- Google Tag Manager (noscript) -->
 <noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-MQHMSX8X" style="display:none;visibility:hidden" width="0"></iframe></noscript>
@@ -3028,86 +3043,56 @@ html body.model-page section#looks article.look-card > .look-body > h3 > a.bcp-w
 </div>
 </section>
 </main><footer class="bcp-footer footer"><div class="wrap"><p>Benda Custom Picks — selected custom parts for Benda riders.</p><p>Independent custom parts selection · Secure Stripe checkout · Support: <a href="mailto:support@bendacustompicks.com">support@bendacustompicks.com</a></p></div></footer><script src="order-flow.js?v=v137-comfort-seat-cart-hero"></script><script src="cart-flow.js?v=v137-comfort-seat-cart-hero"></script><script src="currency-display.js?v=v127-recovery-currency"></script><script src="./anti-copy.js?v=v90-gtm-emailjs-anticopy"></script>
-<script id="bcp-v140-brutal-bob-sound-runtime">
-/* BENDAGO V140 — robust touch/click sound toggle for the Brutal Bob look MP4 only. */
+<script id="bcp-v141-brutal-bob-sound-runtime">
+/* BENDAGO V141 — native click first; fixes mobile overlay interception.
+   Scope: Brutal Bob model-card MP4 only. */
 (function(){
-  function initBrutalBobSound(){
+  function init(){
     var card = document.getElementById('brutal-bob-full-build');
     if (!card) return;
-
     var video = card.querySelector('[data-brutal-bob-sound-video]');
-    var toggle = card.querySelector('[data-brutal-bob-sound-toggle]');
-    if (!video || !toggle || toggle.dataset.soundReady === 'true') return;
+    var button = card.querySelector('[data-brutal-bob-sound-toggle]');
+    if (!video || !button || button.dataset.soundV141 === '1') return;
+    button.dataset.soundV141 = '1';
+    var label = button.querySelector('.look-sound-toggle-label');
 
-    toggle.dataset.soundReady = 'true';
-    var label = toggle.querySelector('.look-sound-toggle-label');
-    var lastPointerActivation = 0;
-
-    function soundIsOn(){
-      return video.muted === false && Number(video.volume || 0) > 0;
-    }
-
-    function syncSoundUi(){
-      var on = soundIsOn();
-      toggle.classList.toggle('is-sound-on', on);
-      toggle.setAttribute('aria-label', on ? 'Turn sound off' : 'Turn sound on');
-      toggle.setAttribute('aria-pressed', on ? 'true' : 'false');
+    function active(){ return !video.muted && video.volume > 0; }
+    function paint(){
+      var on = active();
+      button.classList.toggle('is-sound-on', on);
+      button.setAttribute('aria-pressed', on ? 'true' : 'false');
+      button.setAttribute('aria-label', on ? 'Turn sound off' : 'Turn sound on');
       if (label) label.textContent = on ? 'Sound off' : 'Sound on';
     }
-
-    function setSound(on){
-      try {
-        video.muted = !on;
-        video.defaultMuted = !on;
-        if (on) {
-          video.removeAttribute('muted');
-          video.volume = 1;
-          video.setAttribute('playsinline', '');
-          var playAttempt = video.play();
-          if (playAttempt && playAttempt.catch) playAttempt.catch(function(){});
-        } else {
-          video.muted = true;
-          video.setAttribute('muted', '');
-        }
-      } catch (error) {
-        /* Keep the control usable even when a browser limits media state changes. */
+    function toggle(event){
+      event.preventDefault();
+      event.stopPropagation();
+      var next = !active();
+      video.muted = !next;
+      video.defaultMuted = !next;
+      if (next) {
+        video.removeAttribute('muted');
+        video.volume = 1;
+      } else {
+        video.setAttribute('muted','');
       }
-      syncSoundUi();
+      var attempt = video.play();
+      if (attempt && attempt.catch) attempt.catch(function(){ paint(); });
+      paint();
     }
 
-    function activate(event){
-      if (event) {
-        event.preventDefault();
-        event.stopPropagation();
-        if (event.stopImmediatePropagation) event.stopImmediatePropagation();
-      }
-      setSound(!soundIsOn());
-    }
-
-    toggle.addEventListener('pointerup', function(event){
-      lastPointerActivation = Date.now();
-      activate(event);
-    }, { passive:false });
-
-    toggle.addEventListener('click', function(event){
-      if (Date.now() - lastPointerActivation < 500) {
-        event.preventDefault();
-        event.stopPropagation();
-        return;
-      }
-      activate(event);
-    });
-
-    video.addEventListener('volumechange', syncSoundUi);
-    video.addEventListener('loadedmetadata', syncSoundUi);
-    syncSoundUi();
+    /* A normal click is the primary Android interaction. touchend is fallback only. */
+    button.addEventListener('click', toggle, false);
+    button.addEventListener('touchend', function(event){
+      if (event.cancelable) event.preventDefault();
+      toggle(event);
+    }, {passive:false});
+    video.addEventListener('volumechange', paint);
+    video.addEventListener('loadedmetadata', paint);
+    paint();
   }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initBrutalBobSound, { once:true });
-  } else {
-    initBrutalBobSound();
-  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, {once:true});
+  else init();
 })();
 </script>
 </body></html>
