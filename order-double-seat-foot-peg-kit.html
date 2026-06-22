@@ -205,6 +205,45 @@ html,body{max-width:100%;overflow-x:hidden!important}
 #mainProductVideo[hidden]{display:none!important;}
 #mainProductImage:not([hidden]),
 #mainProductVideo:not([hidden]){display:block!important;}
+/* BENDAGO V31 — gallery stage must follow the selected media, not a permanent 16:9 video frame. */
+.media-stage.bcp-gallery-image-stage{
+  position:relative!important;
+  aspect-ratio:auto!important;
+  height:auto!important;
+  min-height:0!important;
+  overflow:hidden!important;
+  background:#05070b!important;
+}
+.media-stage.bcp-gallery-image-stage #mainProductImage:not([hidden]){
+  position:relative!important;
+  inset:auto!important;
+  display:block!important;
+  width:100%!important;
+  height:auto!important;
+  max-width:100%!important;
+  max-height:none!important;
+  object-fit:contain!important;
+  object-position:center center!important;
+  background:#05070b!important;
+}
+.media-stage.bcp-gallery-video-stage{
+  position:relative!important;
+  aspect-ratio:16/9!important;
+  height:auto!important;
+  min-height:0!important;
+  overflow:hidden!important;
+  background:#05070b!important;
+}
+.media-stage.bcp-gallery-video-stage #mainProductVideo:not([hidden]){
+  position:absolute!important;
+  inset:0!important;
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center center!important;
+}
+
 
 .thumb-row,.gallery{display:grid!important;grid-template-columns:repeat(auto-fit,minmax(104px,1fr))!important;gap:12px!important;margin-top:0!important;width:100%!important;overflow:visible!important;padding:0!important}
 .product-thumb{height:auto!important;min-height:0!important;aspect-ratio:4/3!important;padding:0!important;border-radius:14px!important;background:#05070b!important;border:1px solid rgba(255,255,255,.14)!important;display:flex!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;cursor:pointer!important}
@@ -278,7 +317,7 @@ body.bcp-lightbox-open{overflow:hidden!important}
 <section>
 <h1 class="product-title">Comfort Seat &amp; Foot Peg Kit for Benda Napoleon 125/250</h1>
 <div class="media-card">
-<div class="media-stage">
+<div class="media-stage bcp-gallery-image-stage">
 <img alt="Comfort Seat &amp; Foot Peg Kit for Benda Napoleon 125/250" class="main-product-img" decoding="async" id="mainProductImage" src="./comfort-seat-footpeg-hero-installed.jpg" fetchpriority="high">
 <video autoplay="" class="main-product-video" controls="" hidden="" id="mainProductVideo" loop="" muted="" playsinline="" poster="./comfort-seat-footpeg-hero-installed.jpg" preload="auto">
 <source src="./comfort-seat-footpeg-gallery.mp4" type="video/mp4"/>
@@ -369,11 +408,17 @@ body.bcp-lightbox-open{overflow:hidden!important}
 document.getElementById('year').textContent = new Date().getFullYear();
 const mainImg = document.getElementById('mainProductImage');
 const mainVideo = document.getElementById('mainProductVideo');
+const mediaStage = document.querySelector('.media-stage');
 const videoSource = mainVideo.querySelector('source');
 const thumbs = document.querySelectorAll('#galleryThumbs .product-thumb');
 
 function setActiveThumb(activeBtn) {
   thumbs.forEach(btn => btn.classList.toggle('is-active', btn === activeBtn));
+}
+
+function setStageMode(mode) {
+  mediaStage.classList.toggle('bcp-gallery-image-stage', mode === 'image');
+  mediaStage.classList.toggle('bcp-gallery-video-stage', mode === 'video');
 }
 
 function showImage(src, btn) {
@@ -384,6 +429,7 @@ function showImage(src, btn) {
   mainImg.removeAttribute('hidden');
   mainImg.classList.add('is-adaptive-contain');
   mainImg.src = src;
+  setStageMode('image');
   setActiveThumb(btn);
 }
 
@@ -402,6 +448,7 @@ function showVideo(src, btn) {
     videoSource.setAttribute('src', src);
     mainVideo.load();
   }
+  setStageMode('video');
   setActiveThumb(btn);
   const playAttempt = mainVideo.play();
   if (playAttempt && playAttempt.catch) playAttempt.catch(function () {});
