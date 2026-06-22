@@ -199,6 +199,13 @@ html,body{max-width:100%;overflow-x:hidden!important}
 .media-card{display:grid!important;gap:14px!important;align-content:start!important;max-width:100%!important;overflow:hidden!important;padding:16px!important}
 .media-card .main-product-img,.main-product-img{width:100%!important;height:auto!important;max-height:none!important;object-fit:contain!important;object-position:center!important;display:block!important;border-radius:18px!important;background:transparent!important;padding:0!important;cursor:zoom-in!important;user-select:none!important;-webkit-user-select:none!important;-webkit-user-drag:none!important}
 .main-product-img.is-adaptive-contain{object-fit:contain!important;object-position:center center!important;background:#05070b!important;}
+/* V30 gallery state fix: external mobile CSS forces videos display:block!important.
+   Use [hidden] with local !important state rules so image/video swaps remain functional. */
+#mainProductImage[hidden],
+#mainProductVideo[hidden]{display:none!important;}
+#mainProductImage:not([hidden]),
+#mainProductVideo:not([hidden]){display:block!important;}
+
 .thumb-row,.gallery{display:grid!important;grid-template-columns:repeat(auto-fit,minmax(104px,1fr))!important;gap:12px!important;margin-top:0!important;width:100%!important;overflow:visible!important;padding:0!important}
 .product-thumb{height:auto!important;min-height:0!important;aspect-ratio:4/3!important;padding:0!important;border-radius:14px!important;background:#05070b!important;border:1px solid rgba(255,255,255,.14)!important;display:flex!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;cursor:pointer!important}
 .product-thumb img{width:100%!important;height:100%!important;object-fit:contain!important;object-position:center!important;display:block!important;padding:0!important;background:#05070b!important}
@@ -273,7 +280,7 @@ body.bcp-lightbox-open{overflow:hidden!important}
 <div class="media-card">
 <div class="media-stage">
 <img alt="Comfort Seat &amp; Foot Peg Kit for Benda Napoleon 125/250" class="main-product-img" decoding="async" id="mainProductImage" src="./comfort-seat-footpeg-hero-installed.jpg" fetchpriority="high">
-<video autoplay="" class="main-product-video" controls="" id="mainProductVideo" loop="" muted="" playsinline="" poster="./comfort-seat-footpeg-hero-installed.jpg" preload="auto">
+<video autoplay="" class="main-product-video" controls="" hidden="" id="mainProductVideo" loop="" muted="" playsinline="" poster="./comfort-seat-footpeg-hero-installed.jpg" preload="auto">
 <source src="./comfort-seat-footpeg-gallery.mp4" type="video/mp4"/>
 </video>
 </div>
@@ -358,7 +365,56 @@ body.bcp-lightbox-open{overflow:hidden!important}
 <footer class="order-footer">
 <div class="order-wrap">© <span id="year">2026</span> Benda Custom Picks — independent, not affiliated with the brands mentioned. · <a href="./terms-and-conditions.html">Terms &amp; Conditions</a></div>
 </footer>
-<script> document.getElementById('year').textContent = new Date().getFullYear(); const mainImg = document.getElementById('mainProductImage'); const mainVideo = document.getElementById('mainProductVideo'); const videoSource = mainVideo.querySelector('source'); const thumbs = document.querySelectorAll('#galleryThumbs .product-thumb'); function setActiveThumb(activeBtn) { thumbs.forEach(btn => btn.classList.toggle('is-active', btn === activeBtn)); } function showImage(src, btn) { mainVideo.pause(); mainVideo.style.display = 'none'; mainImg.style.display = 'block'; mainImg.classList.add('is-adaptive-contain'); mainImg.src = src; setActiveThumb(btn); } function showVideo(src, btn) { mainImg.classList.remove('is-adaptive-contain'); mainImg.style.display = 'none'; mainVideo.style.display = 'block'; mainVideo.muted = true; mainVideo.setAttribute('muted', ''); mainVideo.setAttribute('playsinline', ''); mainVideo.setAttribute('loop', ''); mainVideo.setAttribute('autoplay', ''); if (videoSource.getAttribute('src') !== src) { videoSource.setAttribute('src', src); mainVideo.load(); } setActiveThumb(btn); var playAttempt = mainVideo.play(); if (playAttempt && playAttempt.catch) playAttempt.catch(function () {}); } thumbs.forEach(btn => { btn.addEventListener('click', function() { const type = this.getAttribute('data-type'); const src = this.getAttribute('data-src'); if (type === 'video') { showVideo(src, this); } else { showImage(src, this); } }); });
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+const mainImg = document.getElementById('mainProductImage');
+const mainVideo = document.getElementById('mainProductVideo');
+const videoSource = mainVideo.querySelector('source');
+const thumbs = document.querySelectorAll('#galleryThumbs .product-thumb');
+
+function setActiveThumb(activeBtn) {
+  thumbs.forEach(btn => btn.classList.toggle('is-active', btn === activeBtn));
+}
+
+function showImage(src, btn) {
+  try { mainVideo.pause(); } catch (e) {}
+  mainVideo.hidden = true;
+  mainVideo.setAttribute('hidden', '');
+  mainImg.hidden = false;
+  mainImg.removeAttribute('hidden');
+  mainImg.classList.add('is-adaptive-contain');
+  mainImg.src = src;
+  setActiveThumb(btn);
+}
+
+function showVideo(src, btn) {
+  mainImg.hidden = true;
+  mainImg.setAttribute('hidden', '');
+  mainImg.classList.remove('is-adaptive-contain');
+  mainVideo.hidden = false;
+  mainVideo.removeAttribute('hidden');
+  mainVideo.muted = true;
+  mainVideo.setAttribute('muted', '');
+  mainVideo.setAttribute('playsinline', '');
+  mainVideo.setAttribute('loop', '');
+  mainVideo.setAttribute('autoplay', '');
+  if (videoSource.getAttribute('src') !== src) {
+    videoSource.setAttribute('src', src);
+    mainVideo.load();
+  }
+  setActiveThumb(btn);
+  const playAttempt = mainVideo.play();
+  if (playAttempt && playAttempt.catch) playAttempt.catch(function () {});
+}
+
+thumbs.forEach(btn => {
+  btn.addEventListener('click', function () {
+    const type = this.getAttribute('data-type');
+    const src = this.getAttribute('data-src');
+    if (type === 'video') showVideo(src, this);
+    else showImage(src, this);
+  });
+});
 </script>
 <script src="./order-flow.js?v=v122-price-reset"></script>
 <script src="./cart-flow.js?v=v122-price-reset"></script>
