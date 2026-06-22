@@ -109,10 +109,11 @@
         { code: 'handlebar-riser' },
         { code: 'transparent-clutch-cover' },
         { code: 'gold-clutch-flywheel' },
-        { code: 'rear-led-seat-comfort' },
+        { code: 'double-seat-foot-peg-kit', color_option: 'Black' },
         { code: 'brutal-rear-fender-kit' },
         { code: 'closed-metal-hubcap-benda-samurai' },
-        { code: 'dual-exhaust', color_option: 'Chrome' }
+        { code: 'dual-exhaust', color_option: 'Chrome' },
+        { code: 'black-foot-control-kit' }
       ]
     },
     {
@@ -191,7 +192,7 @@
     'black-fat-bob': {
       kind: 'build',
       title: 'Brutal Bob Build',
-      video: './brutal-bob-look-autoplay-v2.mp4',
+      video: './brutal-bob-look-autoplay-v3.mp4',
       poster: './brutal-bob-look-autoplay-v2-poster.jpg',
       model: 'Benda Napoleon 125/250',
       /* Portrait reel in horizontal cart: calibrated lower crop keeps engine + twin pipes visible. */
@@ -479,7 +480,7 @@
       { code: 'handlebar-riser' },
       { code: 'transparent-clutch-cover' },
       { code: 'gold-clutch-flywheel' },
-      { code: 'ultra-single-seat-comfort' },
+      { code: 'double-seat-foot-peg-kit', options: { color_option: 'Black' } },
       { code: 'brutal-rear-fender-kit' },
       { code: 'closed-metal-hubcap-benda-samurai' },
       { code: 'dual-exhaust', options: { color_option: 'Chrome' } },
@@ -1341,6 +1342,21 @@ async function createStripeCheckout(lines, formData) {
         delivery_estimate: '10 to 15 business days',
         image: './ultra-single-seat-comfort-hero.webp',
         stripe_url: ''
+      };
+    }
+
+    if (!map['double-seat-foot-peg-kit']) {
+      map['double-seat-foot-peg-kit'] = {
+        product_code: 'double-seat-foot-peg-kit',
+        product_name: 'Comfort Seat & Foot Peg Kit',
+        product_short: 'Comfort seat and foot peg kit Napoleon 125/250',
+        fitment: 'Benda Napoleon 125/250',
+        price: '619.65 €',
+        delivery_estimate: '10 to 15 business days',
+        image: './comfort-seat-footpeg-01.png',
+        stripe_url: '',
+        color_required: true,
+        color_options: 'Black / Brown'
       };
     }
 
