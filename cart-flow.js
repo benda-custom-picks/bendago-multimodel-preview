@@ -31,6 +31,8 @@
     'ultra-single-seat-comfort': 'ultra-single-seat-comfort',
     'rear-led-seat-comfort': 'rear-led-seat-comfort-plus',
     'brutal-rear-fender-kit': 'brutal-rear-fender-kit',
+    'brutal-rear-metal-fender-fixed-rack': 'brutal-rear-metal-fender-fixed-rack',
+    'brutal-rear-metal-fender-separate-rack': 'brutal-rear-metal-fender-separate-rack',
     'gps-carplay': 'gps-carplay-screen',
     'chrome-engine-cover': 'chrome-air-side-cover',
     'rear-fender': 'rear-clean-fender-kit',
@@ -110,7 +112,7 @@
         { code: 'transparent-clutch-cover' },
         { code: 'gold-clutch-flywheel' },
         { code: 'double-seat-foot-peg-kit', color_option: 'Black' },
-        { code: 'brutal-rear-fender-kit' },
+        { code: 'brutal-rear-fender-kit', color_option: 'Minimalist' },
         { code: 'closed-metal-hubcap-benda-samurai' },
         { code: 'dual-exhaust', color_option: 'Chrome' },
         { code: 'black-foot-control-kit' }
@@ -481,7 +483,7 @@
       { code: 'transparent-clutch-cover' },
       { code: 'gold-clutch-flywheel' },
       { code: 'double-seat-foot-peg-kit', options: { color_option: 'Black' } },
-      { code: 'brutal-rear-fender-kit' },
+      { code: 'brutal-rear-fender-kit', options: { color_option: 'Minimalist' } },
       { code: 'closed-metal-hubcap-benda-samurai' },
       { code: 'dual-exhaust', options: { color_option: 'Chrome' } },
       { code: 'black-foot-control-kit' }
@@ -742,6 +744,7 @@
     if (item && String(item.code || item.product_code || '').trim() === 'maverick-air-filter-cover') return 'Side: ' + color;
     if (item && String(item.code || item.product_code || '').trim() === 'decorative-cover-side') return 'Finish: ' + color;
     if (item && String(item.code || item.product_code || '').trim() === 'premium-comfort-foot-kit-450') return 'Design: ' + color;
+    if (item && ['brutal-rear-fender-kit','brutal-rear-metal-fender-fixed-rack','brutal-rear-metal-fender-separate-rack'].indexOf(String(item.code || item.product_code || '').trim()) !== -1) return 'Style: ' + color;
     return 'Colour: ' + color;
   }
 
@@ -1641,6 +1644,8 @@ async function createStripeCheckout(lines, formData) {
     'ultra-single-seat-comfort': './order-ultra-single-seat-comfort.html',
     'rear-led-seat-comfort': './order-rear-led-seat-comfort.html',
     'brutal-rear-fender-kit': './order-brutal-rear-fender-kit.html',
+    'brutal-rear-metal-fender-fixed-rack': './order-brutal-rear-fender-kit.html',
+    'brutal-rear-metal-fender-separate-rack': './order-brutal-rear-fender-kit.html',
     'gps-carplay': './order-gps-carplay.html',
     'chrome-engine-cover': './order-chrome-engine-cover.html',
     'rear-fender': './order-rear-fender.html',

@@ -333,12 +333,32 @@ const BENDAGO_PRODUCTS = {
   },
   "brutal-rear-fender-kit": {
     product_code: "brutal-rear-fender-kit",
-    product_name: 'Brutal Rear Fender Kit',
-    product_short: 'Brutal rear fender kit Napoleon 125/250',
+    product_name: 'Brutal Rear Metal Fender',
+    product_short: '46 cm glossy rear metal fender for Benda Napoleon 125/250 — Minimalist configuration',
     fitment: 'Benda Napoleon 125/250',
-    price: '246.50 €',
+    price: '637.00 €',
     delivery_estimate: '10 to 15 business days',
-    image: './brutal-rear-fender-hero-clean.webp',
+    image: './brutal-rear-metal-fender-minimalist.png',
+    stripe_url: ''
+  },
+  "brutal-rear-metal-fender-fixed-rack": {
+    product_code: "brutal-rear-metal-fender-fixed-rack",
+    product_name: 'Brutal Rear Metal Fender',
+    product_short: '46 cm glossy rear metal fender for Benda Napoleon 125/250 — With Fixed Luggage Rack',
+    fitment: 'Benda Napoleon 125/250',
+    price: '691.00 €',
+    delivery_estimate: '10 to 15 business days',
+    image: './brutal-rear-metal-fender-fixed-rack.png',
+    stripe_url: ''
+  },
+  "brutal-rear-metal-fender-separate-rack": {
+    product_code: "brutal-rear-metal-fender-separate-rack",
+    product_name: 'Brutal Rear Metal Fender',
+    product_short: '46 cm glossy rear metal fender for Benda Napoleon 125/250 — With Separate Luggage Rack',
+    fitment: 'Benda Napoleon 125/250',
+    price: '691.00 €',
+    delivery_estimate: '10 to 15 business days',
+    image: './brutal-rear-metal-fender-separate-rack.png',
     stripe_url: ''
   },
 
@@ -531,18 +551,10 @@ function bendagoAddOneToCart(code, options = {}) {
   return false;
 }
 
-/* BENDAGO V125 — preserve the true source look for 125/250 look rails and Storm Rider. */
-const BENDAGO_CART_LOOK_CONTEXTS_V125 = Object.freeze({
-  'strong-pure-bob': true,
-  'headlight-fairing': true,
-  'black-fat-bob': true,
-  'blackout-predator': true,
-  'storm-rider-66': true
-});
-
+/* BENDAGO V19 — carry a mapped look from a look card to the cart, including option pages. */
 function bendagoLookContextV19(value) {
   const key = String(value || '').trim();
-  return BENDAGO_CART_LOOK_CONTEXTS_V125[key] ? key : '';
+  return key === 'storm-rider-66' ? key : '';
 }
 
 function bendagoCurrentLookContextV19() {
@@ -553,7 +565,9 @@ function bendagoCurrentLookContextV19() {
   }
 }
 
-/* Resolve origin from the actual card/panel container. Never guess a look from the SKU. */
+/* BENDAGO V20 — resolve Storm Rider context from the actual card container,
+   not only from a button attribute. This covers every direct add path inside
+   the Storm Rider 66 parts rail. */
 function bendagoAncestorLookContextV20(node) {
   try {
     const host = node && node.closest ? node.closest('[data-cart-look-context], [data-look-context], #look-parts-storm-rider-66') : null;
@@ -569,20 +583,6 @@ function bendagoResolvedLookContextV20(node) {
   return bendagoLookContextV19(node && node.getAttribute && node.getAttribute('data-cart-look-context')) ||
     bendagoAncestorLookContextV20(node) ||
     bendagoCurrentLookContextV19();
-}
-
-function bendagoApplyLookContextToProductLinksV125() {
-  document.querySelectorAll('[data-cart-look-context] a[href]').forEach(function (link) {
-    const lookContext = bendagoAncestorLookContextV20(link);
-    const rawHref = String(link.getAttribute('href') || '').trim();
-    if (!lookContext || !rawHref || rawHref.charAt(0) === '#' || /^(mailto:|tel:|https?:\/\/)/i.test(rawHref)) return;
-    try {
-      const url = new URL(rawHref, window.location.href);
-      if (!/\/order-[^/]+\.html$/i.test(url.pathname)) return;
-      if (!url.searchParams.get('look')) url.searchParams.set('look', lookContext);
-      link.setAttribute('href', url.pathname.replace(/^.*\//, './') + (url.search || '') + (url.hash || ''));
-    } catch (e) {}
-  });
 }
 
 function bendagoSelectedProductOptions(link) {
@@ -630,8 +630,6 @@ function bendagoShowProductOptionError(link, message) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  bendagoApplyLookContextToProductLinksV125();
-
   document.querySelectorAll('[data-order-product]').forEach(el => {
     el.addEventListener('click', () => {
       bendagoPush('order_product_view_click', {
