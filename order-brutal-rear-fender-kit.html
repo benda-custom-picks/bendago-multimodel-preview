@@ -279,7 +279,7 @@ document.getElementById('year').textContent = new Date().getFullYear();
       if (status) status.textContent = 'Cart is not ready. Please reload the page.';
       return;
     }
-    var added = window.BendagoCart.add(variant.code, 1, { color_option: variant.label, look_context: 'brutal-bob' });
+    var added = window.BendagoCart.add(variant.code, 1, { color_option: variant.label, look_context: 'black-fat-bob' });
     if (added) {
       if (status) status.textContent = variant.label + ' added to cart.';
       if (window.BendagoCart.open) window.BendagoCart.open();
