@@ -7,12 +7,12 @@
   const TERMS_URL = 'https://bendacustompicks.com/terms-and-conditions.html';
   const CHECKOUT_TERMS_VISIBLE_TEXT = [
     'Model & parts: I confirm the selected motorcycle model, parts, quantities, colours and options.',
-    'Total & delivery country: I confirm the delivery country and full amount before payment.',
+    'Total: I confirm the full amount before payment. Stripe securely collects my delivery address during checkout.',
     'Custom order: I understand this is a custom-sourced parts order prepared according to my selection.',
     'Processing after payment: I request order processing after Stripe payment confirmation.',
     'Delivery/import: delivery is included unless stated; local import duties, taxes or carrier fees remain my responsibility if applied.',
     'Cancellation policy: once processing, supplier preparation or dispatch preparation has started, cancellation is not automatic and may no longer be possible.',
-    'I confirm my model, selected parts/options, delivery country, total amount, custom sourcing, processing after payment and cancellation policy before secure payment.'
+    'I confirm my model, selected parts/options, total amount, custom sourcing, processing after payment and cancellation policy before secure payment. Stripe securely collects my delivery address during checkout.'
   ].join('\n');
 
   const CHECKOUT_SKU_MAP = {

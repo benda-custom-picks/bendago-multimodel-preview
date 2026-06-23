@@ -826,7 +826,7 @@ document.addEventListener('DOMContentLoaded', () => {
     data.stripe_url = product.stripe_url;
     data.payment_url = product.stripe_url;
     data.payment_provider = 'Stripe';
-    data.order_status_message = 'Checkout details received. Continue to secure Stripe card payment.';
+    data.order_status_message = 'Secure Stripe checkout created. Continue to payment.';
     data.tracking_note = 'Tracking details are shared as soon as they are available after shipment.';
     data.processing_note = 'Order processed after secure Stripe payment confirmation.';
 
