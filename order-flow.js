@@ -317,7 +317,7 @@ const BENDAGO_PRODUCTS = {
     fitment: 'Benda Napoleon 125/250',
     price: '816.85 €',
     delivery_estimate: '10 to 15 business days',
-    image: './premium-double-seat-hero-v3.webp',
+    image: './premium-double-seat-hero-v4.jpg',
     stripe_url: '',
     color_required: true,
     color_options: 'Black / Brown'
@@ -826,7 +826,7 @@ document.addEventListener('DOMContentLoaded', () => {
     data.stripe_url = product.stripe_url;
     data.payment_url = product.stripe_url;
     data.payment_provider = 'Stripe';
-    data.order_status_message = 'Secure Stripe checkout created. Continue to payment.';
+    data.order_status_message = 'Checkout details received. Continue to secure Stripe card payment.';
     data.tracking_note = 'Tracking details are shared as soon as they are available after shipment.';
     data.processing_note = 'Order processed after secure Stripe payment confirmation.';
 
