@@ -870,31 +870,6 @@
     ].join('');
   }
 
-  function cartSummaryText(lines, pricing) {
-    const productLines = lines.map(line => line.product_name + ' x ' + line.qty + (optionText(line) ? ' — ' + optionText(line) : '') + ' — ' + formatEuro(line.line_total));
-    if (pricing && pricing.discountApplied) {
-      productLines.push('Subtotal — ' + formatEuro(pricing.subtotal));
-      productLines.push('Launch Access 5% — -' + formatEuro(pricing.discountAmount));
-      productLines.push('Total today — ' + formatEuro(pricing.total));
-    }
-    return productLines.join('\n');
-  }
-
-  function pricingFromCheckout(checkout, fallback) {
-    const amount = Number(checkout && checkout.amount);
-    const subtotal = Number(checkout && checkout.subtotal);
-    const discount = Number(checkout && checkout.discount_amount);
-    const applied = !!(checkout && checkout.discount_applied && discount > 0);
-    return {
-      subtotal: Number.isFinite(subtotal) ? subtotal : (fallback ? fallback.subtotal : amount),
-      discountAmount: Number.isFinite(discount) ? discount : 0,
-      total: Number.isFinite(amount) ? amount : (fallback ? fallback.total : 0),
-      discountApplied: applied,
-      buildName: (checkout && checkout.eligible_build_name) || (fallback && fallback.buildName) || '',
-      buildKey: (checkout && checkout.eligible_build_key) || (fallback && fallback.buildKey) || ''
-    };
-  }
-
 async function createStripeCheckout(lines, formData) {
     const pricing = calculateLaunchOffer(lines);
     const payload = {
@@ -1016,100 +991,12 @@ async function createStripeCheckout(lines, formData) {
     };
   }
 
-  function checkoutEvidenceDeviceSnapshot() {
-    let timezone = '';
-    try { timezone = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) {}
-    return [
-      'Checkout page URL: ' + window.location.href,
-      'Terms page URL: ' + TERMS_URL,
-      'Referrer: ' + (document.referrer || 'direct'),
-      'User agent: ' + (navigator.userAgent || ''),
-      'Browser language: ' + (navigator.language || ''),
-      'Viewport: ' + (window.innerWidth || '') + 'x' + (window.innerHeight || ''),
-      'Timezone: ' + timezone
-    ].join('\n');
-  }
-
-  function buildCheckoutEvidenceBody(options) {
-    const formData = options.formData || {};
-    const finalPricing = options.finalPricing || {};
-    const lines = options.lines || [];
-    const cartSummary = options.cartSummary || '';
-    const provider = options.provider || '';
-    const requestId = options.requestId || '';
-    const checkoutId = options.checkoutId || '';
-    const stage = options.stage || 'CHECKOUT_EVIDENCE';
-    const paymentUrl = options.paymentUrl || '';
-    const createdAt = new Date().toISOString();
-    const lineCount = lines.reduce((sum, line) => sum + (Number(line.qty) || 0), 0);
-
-    return [
-      'BENDAGO CHECKOUT EVIDENCE SNAPSHOT',
-      'Evidence stage: ' + stage,
-      'Evidence created at: ' + createdAt,
-      'Request ID: ' + requestId,
-      'Payment provider: ' + provider,
-      'Checkout ID: ' + checkoutId,
-      paymentUrl ? 'Payment URL / checkout URL: ' + paymentUrl : '',
-      '',
-      'CUSTOMER / ORDER DETAILS',
-      'Customer name: ' + (formData.customer_name || ''),
-      'Customer email: ' + (formData.email || formData.customer_email || ''),
-      'Phone: ' + (formData.phone || ''),
-      'Motorcycle model: ' + (formData.motorcycle_model || ''),
-      'Year / version: ' + (formData.year_version || ''),
-      'Delivery country: ' + (formData.country || ''),
-      'Delivery city/country: ' + (formData.delivery_city_country || ''),
-      'Delivery address: ' + (formData.delivery_address || ''),
-      '',
-      'CART SNAPSHOT',
-      cartSummary,
-      'Cart item count: ' + String(lineCount),
-      'Subtotal: ' + formatEuro(finalPricing.subtotal || finalPricing.total || 0),
-      finalPricing.discountApplied ? 'Launch Access discount: -' + formatEuro(finalPricing.discountAmount || 0) : 'Launch Access discount: not applied',
-      'Final total accepted before payment: ' + formatEuro(finalPricing.total || 0),
-      '',
-      'TERMS ACCEPTANCE SNAPSHOT',
-      'terms_accepted: ' + (formData.terms_accepted || 'true'),
-      'custom_order_accepted: ' + (formData.custom_order_accepted || 'true'),
-      'selected_model_accepted: ' + (formData.selected_model_accepted || 'true'),
-      'selected_products_colours_options_accepted: ' + (formData.selected_products_colours_options_accepted || 'true'),
-      'delivery_country_accepted: ' + (formData.delivery_country_accepted || 'true'),
-      'total_amount_accepted: ' + (formData.total_amount_accepted || 'true'),
-      'immediate_processing_requested: ' + (formData.immediate_processing_requested || 'true'),
-      'cancellation_policy_accepted: ' + (formData.cancellation_policy_accepted || 'true'),
-      'Terms version: ' + (formData.terms_version || TERMS_VERSION),
-      'Terms accepted at: ' + (formData.terms_accepted_at || ''),
-      'Terms page URL: ' + TERMS_URL,
-      '',
-      'VISIBLE CHECKOUT WORDING ACCEPTED BEFORE PAYMENT',
-      CHECKOUT_TERMS_VISIBLE_TEXT,
-      '',
-      'PROCESSING / CANCELLATION RECORD',
-      'Payment received / checkout success triggers order confirmation and custom order processing evidence.',
-      'Cancellation is not automatic once order processing, supplier preparation or dispatch preparation has started.',
-      '',
-      'DEVICE / PAGE SNAPSHOT',
-      checkoutEvidenceDeviceSnapshot()
-    ].filter(Boolean).join('\n');
-  }
-
   function showCartStatus(type, message) {
     const status = document.getElementById('cartFormStatus');
     if (!status) return;
     status.className = 'status-box show ' + type;
     status.textContent = message;
   }
-
-  function isEmailJsConfigured(cfg) {
-    const c = cfg || {};
-    const values = [c.publicKey, c.serviceId, c.adminTemplateId, c.clientTemplateId];
-    return values.every(function (value) {
-      const text = String(value || '').trim();
-      return text && !/PASTE_|YOUR_|REPLACE_|XXXX|TODO/i.test(text);
-    });
-  }
-
 
   function checkoutFitmentLabel(lines, formData) {
     const manual = String((formData && formData.motorcycle_model) || '').trim();
@@ -1136,167 +1023,11 @@ async function createStripeCheckout(lines, formData) {
     if (!form) throw new Error('Cart form not found');
 
     const lines = getLines();
-    if (!lines.length) throw new Error('Your cart is empty. Choose at least one Benda Napoleon part first.');
+    if (!lines.length) throw new Error('Your cart is empty. Choose at least one Benda part first.');
 
     const formData = Object.fromEntries(new FormData(form).entries());
     const termsAcceptance = termsAcceptanceEvidence(form, formData);
-    const requiredSelectors = ['customer_name', 'email', 'phone', 'country', 'motorcycle_model', 'year_version', 'delivery_city_country', 'delivery_address'];
-
-    for (const name of requiredSelectors) {
-      const value = String(formData[name] || '').trim();
-      if (!value) {
-        const field = form.querySelector('[name="' + name + '"]');
-        if (field) field.focus();
-        throw new Error('Please complete all required details before secure checkout.');
-      }
-    }
-
-    const cfg = window.BENDAGO_EMAILJS_CONFIG || {};
-
-    return { form, formData, lines, cfg, termsAcceptance };
-  }
-
-  async function sendStripePreCheckoutEmails(context, checkout) {
-    const { formData, lines, cfg } = context;
-    const pricing = calculateLaunchOffer(lines);
-    const finalPricing = pricingFromCheckout(checkout, pricing);
-    const cartSummary = cartSummaryText(lines, finalPricing);
-    const first = lines[0];
-    const isSingle = lines.length === 1 && first.qty === 1;
-    const requestId = checkout.order_id || ('BENDAGO-STRIPE-' + Date.now());
-    const checkoutId = checkout.checkout_id || checkout.stripe_session_id || '';
-    const checkoutEvidenceBody = buildCheckoutEvidenceBody({
-      formData,
-      lines,
-      finalPricing,
-      cartSummary,
-      provider: 'Stripe',
-      requestId,
-      checkoutId,
-      paymentUrl: checkout.checkout_url || '',
-      stage: 'PRE_PAYMENT_STRIPE_CHECKOUT_CREATED'
-    });
-
-    const emailData = {
-      ...formData,
-      request_id: requestId,
-      request_date: new Date().toLocaleString(),
-      customer_email: formData.email,
-      product_code: isSingle ? first.product_code : 'grouped-cart',
-      product_name: isSingle ? first.product_name : checkoutGroupedCartLabel(lines, formData),
-      product_short: isSingle ? first.product_short : 'Grouped Benda Custom Picks parts',
-      price: isSingle ? first.price : formatEuro(finalPricing.total),
-      fitment: isSingle ? (first.fitment || checkoutFitmentLabel(lines, formData)) : checkoutFitmentLabel(lines, formData),
-      delivery_estimate: '10 to 15 business days',
-      payment_provider: 'Stripe',
-      payment_url: checkout.checkout_url || '',
-      stripe_url: checkout.checkout_url || '',
-      stripe_session_id: checkout.stripe_session_id || checkout.checkout_id || '',
-            checkout_url: checkout.checkout_url || '',
-      checkout_id: checkout.checkout_id || checkout.stripe_session_id || '',
-      checkout_evidence_id: requestId,
-      evidence_email_type: 'PRE_PAYMENT_CHECKOUT_ACCEPTANCE',
-      checkout_evidence_body: checkoutEvidenceBody,
-      evidence_mail_body: checkoutEvidenceBody,
-      message: checkoutEvidenceBody,
-      post_payment_evidence_required: 'true',
-      cart_summary: cartSummary,
-      cart_total: formatEuro(finalPricing.total),
-      launch_discount: finalPricing.discountApplied ? formatEuro(finalPricing.discountAmount) : '',
-      launch_offer: finalPricing.discountApplied ? 'Launch Access applied: ' + finalPricing.buildName + ' — no code needed' : '',
-      cart_count: String(lines.reduce((sum, line) => sum + line.qty, 0)),
-      request_page: window.location.href,
-      referrer: document.referrer || 'direct',
-      terms_accepted: formData.terms_accepted || 'true',
-      custom_sourcing_accepted: formData.custom_sourcing_accepted || 'true',
-      custom_order_accepted: formData.custom_order_accepted || 'true',
-      selected_model_accepted: formData.selected_model_accepted || 'true',
-      selected_products_colours_options_accepted: formData.selected_products_colours_options_accepted || 'true',
-      delivery_country_accepted: formData.delivery_country_accepted || 'true',
-      total_amount_accepted: formData.total_amount_accepted || 'true',
-      immediate_processing_requested: formData.immediate_processing_requested || 'true',
-      cancellation_policy_accepted: formData.cancellation_policy_accepted || 'true',
-      terms_version: formData.terms_version || TERMS_VERSION,
-      terms_accepted_at: formData.terms_accepted_at || '',
-      terms_page_url: TERMS_URL,
-      cancellation_policy_summary: 'Custom parts order accepted before payment. Order processing may start after payment. Cancellation is not automatic once order processing, supplier preparation or dispatch preparation has started. Delivery included unless stated otherwise; local import duties/taxes or carrier fees remain customer responsibility if applied.',
-      order_processing_status: 'Payment received. Custom order confirmed. Selected model, parts, colours, options and total amount recorded for processing.',
-      order_evidence_summary: 'Customer accepted custom order terms before payment: selected motorcycle model, products, quantities, colours, options, delivery country, total amount and local import/customs responsibility reviewed.',
-      order_status_message: 'Checkout details received. Customer continues directly to secure Stripe card checkout.',
-      color_option: isSingle ? (first.color_option || formData.color_option || 'To confirm / not applicable') : (formData.color_option || 'See cart summary'),
-      tracking_note: 'Tracking details are shared as soon as they are available after shipment.',
-      processing_note: 'Order processed after Stripe payment confirmation.'
-    };
-
-    if (isEmailJsConfigured(cfg) && window.emailjs && window.emailjs.init && window.emailjs.send) {
-      try {
-        window.emailjs.init({ publicKey: cfg.publicKey });
-        await window.emailjs.send(cfg.serviceId, cfg.adminTemplateId, emailData);
-        await window.emailjs.send(cfg.serviceId, cfg.clientTemplateId, emailData);
-        push('cart_checkout_email_sent', {
-          request_id: emailData.request_id,
-          checkout_id: emailData.checkout_id,
-          payment_provider: 'stripe'
-        });
-      } catch (emailErr) {
-        console.warn('EmailJS pre-checkout email skipped; Stripe checkout continues.', emailErr);
-        push('cart_checkout_email_skipped', {
-          request_id: emailData.request_id,
-          checkout_id: emailData.checkout_id,
-          reason: 'emailjs_send_failed',
-          payment_provider: 'stripe'
-        });
-      }
-    } else {
-      console.warn('EmailJS not configured; Stripe checkout continues without pre-checkout email.');
-      push('cart_checkout_email_skipped', {
-        request_id: emailData.request_id,
-        checkout_id: emailData.checkout_id,
-        reason: 'emailjs_not_configured',
-        payment_provider: 'stripe'
-      });
-    }
-
-    push('stripe_checkout_created', {
-      request_id: emailData.request_id,
-      checkout_id: emailData.checkout_id,
-      cart_total: formatEuro(finalPricing.total),
-      cart_count: emailData.cart_count,
-      payment_provider: 'stripe'
-    });
-
-    push('cart_checkout_details_sent', {
-      request_id: emailData.request_id,
-      cart_total: formatEuro(finalPricing.total),
-      cart_count: emailData.cart_count,
-      payment_provider: 'stripe'
-    });
-
-    sessionStorage.removeItem('bendago_last_request');
-    sessionStorage.removeItem('bendago_last_cart_request');
-    sessionStorage.setItem('bendago_last_checkout', JSON.stringify({
-      cart_summary: cartSummary.replace(/\n/g, '<br>'),
-      cart_total: formatEuro(finalPricing.total),
-      email: formData.email,
-      customer_name: formData.customer_name,
-      request_id: emailData.request_id,
-      checkout_id: emailData.checkout_id,
-      checkout_url: checkout.checkout_url || '',
-      payment_provider: 'Stripe',
-      terms_accepted: formData.terms_accepted || 'true',
-      terms_version: formData.terms_version || TERMS_VERSION,
-      terms_accepted_at: formData.terms_accepted_at || '',
-      cancellation_policy_summary: 'Custom order, delivery/import responsibility and cancellation policy accepted before payment.',
-      checkout_evidence_id: requestId,
-      checkout_evidence_body: checkoutEvidenceBody,
-      evidence_mail_body: checkoutEvidenceBody,
-      evidence_device_snapshot: checkoutEvidenceDeviceSnapshot(),
-      terms_visible_text: CHECKOUT_TERMS_VISIBLE_TEXT,
-      post_payment_evidence_pending: 'true'
-    }));
-
-    saveCart([]);
-    return emailData;
+    return { form, formData, lines, termsAcceptance };
   }
 
   function updateStripeCheckoutButtonLabel() {
@@ -1326,18 +1057,31 @@ async function createStripeCheckout(lines, formData) {
       push('stripe_checkout_attempt', { cart_count: cartCount(), payment_provider: 'stripe' });
       try {
         const context = getValidatedCartFormData();
+        const pricing = calculateLaunchOffer(context.lines);
         button.disabled = true;
         button.textContent = 'Creating Stripe checkout…';
-        showCartStatus('ok', 'Preparing your secure Stripe checkout…');
+        showCartStatus('ok', 'Opening secure Stripe checkout…');
 
         const checkout = await createStripeCheckout(context.lines, context.formData);
-        const emailData = await sendStripePreCheckoutEmails(context, checkout);
-
-        push('stripe_payment_click', {
-          request_id: emailData.request_id,
+        sessionStorage.setItem('bendago_pending_checkout_v149', JSON.stringify({
+          order_id: checkout.order_id || '',
           checkout_id: checkout.checkout_id || checkout.stripe_session_id || '',
-          cart_total: emailData.cart_total,
-          cart_count: emailData.cart_count,
+          cart_total: formatEuro(Number(checkout.amount) || pricing.total || 0),
+          created_at: new Date().toISOString()
+        }));
+
+        push('stripe_checkout_created', {
+          request_id: checkout.order_id || '',
+          checkout_id: checkout.checkout_id || checkout.stripe_session_id || '',
+          cart_total: formatEuro(Number(checkout.amount) || pricing.total || 0),
+          cart_count: String(context.lines.reduce((sum, line) => sum + line.qty, 0)),
+          payment_provider: 'stripe'
+        });
+        push('stripe_payment_click', {
+          request_id: checkout.order_id || '',
+          checkout_id: checkout.checkout_id || checkout.stripe_session_id || '',
+          cart_total: formatEuro(Number(checkout.amount) || pricing.total || 0),
+          cart_count: String(context.lines.reduce((sum, line) => sum + line.qty, 0)),
           payment_provider: 'stripe'
         });
 
@@ -2339,49 +2083,41 @@ async function createStripeCheckout(lines, formData) {
     initCartBuildCarouselsV18(box);
   }
 
+  function checkoutReturnStateV149() {
+    const params = new URLSearchParams(window.location.search || '');
+    return String(params.get('payment') || '').trim();
+  }
+
+  function renderPaidCheckoutReturnV149() {
+    clearCart();
+    sessionStorage.removeItem('bendago_pending_checkout_v149');
+
+    const heading = document.querySelector('.request-top .product-title');
+    const intro = document.querySelector('.request-top p');
+    const summary = document.getElementById('cartSummary');
+    const form = document.getElementById('cartRequestForm');
+    const next = document.querySelector('.next-card');
+
+    if (heading) heading.textContent = 'Payment received';
+    if (intro) intro.textContent = 'Stripe confirmed your payment. Your selected setup is now recorded for processing.';
+    if (summary) {
+      summary.innerHTML = '<h2>Order confirmed</h2><div class="cart-summary-row"><span>Payment status</span><strong>PAID</strong></div><div class="cart-summary-row"><span>What happens next</span><strong>Order confirmation by email</strong></div><div class="cart-summary-total"><span>Delivery</span><strong>10–15 business days</strong></div>';
+    }
+    if (form) form.style.display = 'none';
+    if (next) next.style.display = 'none';
+
+    try {
+      const url = new URL(window.location.href);
+      url.searchParams.delete('payment');
+      url.searchParams.delete('session_id');
+      window.history.replaceState({}, document.title, url.pathname + (url.search ? url.search : '') + url.hash);
+    } catch (e) {}
+  }
+
   function bindCartForm() {
     const form = document.getElementById('cartRequestForm');
     if (!form) return;
-
     renderCartSummary();
-
-    form.addEventListener('submit', async (event) => {
-      event.preventDefault();
-      const submitBtn = form.querySelector('[type="submit"]');
-      const originalText = submitBtn ? submitBtn.textContent : '';
-
-      try {
-        push('stripe_checkout_attempt', { cart_count: cartCount(), payment_provider: 'stripe', submit_source: 'cart_form' });
-        const context = getValidatedCartFormData();
-        if (submitBtn) {
-          submitBtn.disabled = true;
-          submitBtn.textContent = 'Creating Stripe checkout…';
-        }
-        showCartStatus('ok', 'Preparing your secure Stripe checkout…');
-
-        const checkout = await createStripeCheckout(context.lines, context.formData);
-        const emailData = await sendStripePreCheckoutEmails(context, checkout);
-
-        push('stripe_payment_click', {
-          request_id: emailData.request_id,
-          checkout_id: checkout.checkout_id || checkout.stripe_session_id || '',
-          cart_total: emailData.cart_total,
-          cart_count: emailData.cart_count,
-          payment_provider: 'stripe'
-        });
-
-        showCartStatus('ok', 'Redirecting to secure Stripe checkout…');
-        window.location.href = checkout.checkout_url;
-      } catch (err) {
-        console.error(err);
-        push('stripe_checkout_error', { error_message: (err && err.message) ? err.message : 'Stripe checkout could not be created', cart_count: cartCount(), payment_provider: 'stripe', submit_source: 'cart_form' });
-        showCartStatus('err', err.message || 'Stripe checkout could not be created. Please contact Benda Custom Picks.');
-        if (submitBtn) {
-          submitBtn.disabled = false;
-          submitBtn.textContent = originalText || 'Continue to secure payment';
-        }
-      }
-    });
   }
 
 window.BendagoCart = {
@@ -2395,13 +2131,24 @@ window.BendagoCart = {
   };
 
   document.addEventListener('DOMContentLoaded', () => {
+    const checkoutReturn = checkoutReturnStateV149();
     const sharedCartLoaded = loadSharedCartFromUrl();
     ensureCartUi();
     bindOpenCartLinks();
     bindBuildBundleButtons();
+
+    if (checkoutReturn === 'stripe_success') {
+      renderPaidCheckoutReturnV149();
+      return;
+    }
+
     bindCartForm();
     renderStripeCheckoutButton();
     updateStripeCheckoutButtonLabel();
+
+    if (checkoutReturn === 'stripe_cancelled') {
+      showCartStatus('err', 'Payment cancelled. Your selected parts remain in your cart.');
+    }
     if (sharedCartLoaded) openCart();
   });
   window.addEventListener('bendago:cart-updated', function () {

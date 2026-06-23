@@ -891,33 +891,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <div class="request-top">
 <div>
 <h1 class="product-title">Secure your Benda setup</h1>
-<p>Your curated parts stay grouped by model and look. Confirm the details once, then move to secure Stripe checkout without rebuilding the selection elsewhere.</p>
+<p>Your selected parts and options stay grouped. Review the order terms, then Stripe securely collects your contact and delivery details at payment.</p>
 </div>
 </div>
 <div class="cart-summary-card" id="cartSummary"></div>
 <form data-terms-version="BCP-CGV-2026-06-09-ORDERLOCK" id="cartRequestForm">
-<input name="terms_version" type="hidden" value="BCP-CGV-2026-06-09-ORDERLOCK"/>
-<input name="terms_accepted_at" type="hidden" value=""/>
-<input name="custom_sourcing_accepted" type="hidden" value="false"/>
-<input name="custom_order_accepted" type="hidden" value="false"/>
-<input name="selected_model_accepted" type="hidden" value="false"/>
-<input name="selected_products_colours_options_accepted" type="hidden" value="false"/>
-<input name="delivery_country_accepted" type="hidden" value="false"/>
-<input name="total_amount_accepted" type="hidden" value="false"/>
-<input name="immediate_processing_requested" type="hidden" value="false"/>
-<input name="cancellation_policy_accepted" type="hidden" value="false"/>
-<div class="form-grid">
-<div class="field"><label>Full name *</label><input name="customer_name" placeholder="e.g. John Doe" required=""/></div>
-<div class="field"><label>Email *</label><input name="email" placeholder="e.g. john@example.com" required="" type="email"/></div>
-<div class="field"><label>Phone *</label><input name="phone" placeholder="e.g. +33 6 12 34 56 78" required=""/></div>
-<div class="field"><label>Country *</label><input name="country" placeholder="e.g. France" required=""/></div>
-<div class="field"><label>Motorcycle model *</label><input name="motorcycle_model" placeholder="e.g. Benda Napoleon 125" required=""/></div>
-<div class="field"><label>Year / version *</label><input name="year_version" placeholder="e.g. 2024" required=""/></div>
-<div class="field"><label>Colour / option</label><input name="color_option" placeholder="e.g. black parts / green Benda Napoleon / to confirm"/></div>
-<div class="field"><label>Delivery city / country *</label><input name="delivery_city_country" placeholder="e.g. Paris, France" required=""/></div>
-<div class="field full"><label>Delivery address *</label><textarea name="delivery_address" placeholder="Street, postcode, city, country" required=""></textarea></div>
-<div class="field full"><label>Message / notes</label><textarea name="message" placeholder="Anything we should know about your Benda model, colour, build or order?"></textarea></div>
-</div>
 <div class="checkout-trust-compact-v106">Curated Benda setup · secure Stripe checkout · tracking after dispatch · French registered business</div>
 <div aria-label="Secure checkout reassurance" class="checkout-trust-panel checkout-trust-panel-v105">
 <div class="checkout-trust-item"><strong>Curated setup</strong>Your selected Benda parts stay grouped from cart to payment.</div>
@@ -941,19 +919,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>These confirmations are recorded before Stripe checkout for order clarity and payment-dispute evidence.</p>
 <ul class="checkout-confirmation-list-v106 checkout-confirmation-list-compact-v106">
 <li><strong>Model / parts / options:</strong> I confirm my Benda model, selected parts, colours, quantities and options.</li>
-<li><strong>Total / delivery country:</strong> I confirm the delivery country and full amount before payment.</li>
+<li><strong>Total / delivery:</strong> I confirm the full amount; Stripe collects the delivery country and address securely at payment.</li>
 <li><strong>Custom order terms:</strong> I accept custom sourcing, processing after payment, delivery/import responsibility and cancellation policy.</li>
 </ul>
 </div>
 <label class="checkout-terms-accept checkout-terms-accept-v105 checkout-terms-accept-v106">
 <input id="customOrderTerms" name="custom_order_terms_acceptance" required="" type="checkbox" value="Accepted"/>
-<span>I confirm my model, selected parts/options, delivery country, total amount, custom sourcing, processing after payment and cancellation policy before secure payment.</span>
+<span>I confirm my selected parts/options, total amount, custom sourcing, processing after payment and cancellation policy before secure payment. Stripe collects my delivery details securely.</span>
 </label>
 <details class="checkout-full-terms-v106">
 <summary>View full custom order terms</summary>
 <ul class="checkout-full-terms-list-v106">
 <li>I confirm the selected motorcycle model, parts, quantities, colours and options.</li>
-<li>I confirm the delivery country and full amount before payment.</li>
+<li>I confirm the full amount before payment. Stripe collects delivery country and address securely during checkout.</li>
 <li>I understand this is a custom-sourced parts order prepared according to my selection.</li>
 <li>I request order processing after Stripe payment confirmation.</li>
 <li>Delivery is included unless stated otherwise; local import duties, taxes or carrier fees remain my responsibility if applied.</li>
@@ -976,8 +954,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <section class="next-card next-card-v106">
 <h2>What happens next?</h2>
 <div class="next-grid next-grid-two">
-<div class="next-step"><strong>1. Secure payment</strong><p>Your Benda setup, cart total, Benda model and delivery information are confirmed before secure payment.</p></div>
-<div class="next-step"><strong>2. Delivery after payment</strong><p>After payment confirmation, your products are prepared and delivered within 10 to 15 business days. For EU delivery, no import duties are added at checkout. Outside the EU, local import duties, taxes or carrier handling fees may apply depending on the destination country.</p></div>
+<div class="next-step"><strong>1. Secure payment</strong><p>Stripe securely collects your email, phone number and delivery address during payment.</p></div>
+<div class="next-step"><strong>2. Paid order confirmation</strong><p>After confirmed payment, your paid order is recorded and an email confirmation is sent before preparation and delivery within 10 to 15 business days.</p></div>
 </div>
 </section>
 </main>
@@ -987,10 +965,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <div class="footer-registered">French registered business · SIREN 849 889 514 · RCS Lisieux · Based in Normandy, France · <a href="mailto:support@bendacustompicks.com">support@bendacustompicks.com</a> · <a href="./terms-and-conditions.html">Terms &amp; Conditions</a></div>
 </div>
 </footer>
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script src="./emailjs-config.js?v=v90-gtm-emailjs-anticopy"></script>
 <script src="./order-flow.js?v=v137-comfort-seat-cart-hero"></script>
-<script src="./cart-flow.js?v=v137-comfort-seat-cart-hero"></script>
+<script src="./cart-flow.js?v=v149-paid-stripe-checkout"></script>
 <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 <script id="bcp-v59-terms-accordion">
 (function () {
