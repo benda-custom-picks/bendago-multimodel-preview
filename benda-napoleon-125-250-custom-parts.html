@@ -2294,6 +2294,26 @@ html body.model-page section#looks article.look-card > .look-body > h3 > a.bcp-w
 @media (max-width:520px){
   #brutal-bob-full-build .look-sound-toggle{left:10px!important;bottom:10px!important;min-height:32px!important;padding:0 10px!important}
 }
+</style><style id="bcp-v161-brutal-bob-sound-top-lock">
+/* BENDAGO V161 — regression lock: Brutal Bob responsive sound control stays at the top of its MP4.
+   Scope: only the Brutal Bob look card, <=900px. No Build Access/cart/Stripe/CTA/layout changes. */
+@media (max-width:900px){
+  body.model-page.model-125 section#looks #brutal-bob-full-build .look-sound-toggle{
+    top:12px!important;
+    bottom:auto!important;
+    z-index:20!important;
+    display:inline-flex!important;
+    visibility:visible!important;
+    opacity:1!important;
+    pointer-events:auto!important;
+  }
+}
+@media (max-width:520px){
+  body.model-page.model-125 section#looks #brutal-bob-full-build .look-sound-toggle{
+    top:10px!important;
+    bottom:auto!important;
+  }
+}
 </style>
 <script>document.documentElement.classList.add('bcp-access-pending');</script>
 <link rel="stylesheet" href="./build-access.css?v=v158-build-access-2eur">
