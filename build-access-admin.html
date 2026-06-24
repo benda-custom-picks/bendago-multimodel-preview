@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <title>Private Catalog Access | Benda Custom Picks</title>
+  <link rel="stylesheet" href="./build-access.css?v=v160-build-access-admin">
+</head>
+<body class="bcp-access-page">
+  <main class="bcp-access-page-card">
+    <a class="brand" href="./index.html">Custom Picks</a>
+    <span class="bcp-access-kicker">Private access</span>
+    <h1>Catalog access</h1>
+    <p>Enter your private admin key to unlock the catalog on this browser. No payment is created.</p>
+    <form id="bcp-admin-access-form" novalidate>
+      <label for="bcp-admin-access-key" style="display:block;text-align:left;margin:22px auto 8px;max-width:390px;color:var(--bcp-access-muted);font-size:.85rem">Admin key</label>
+      <input id="bcp-admin-access-key" name="admin_key" type="password" autocomplete="current-password" spellcheck="false" required style="width:min(390px,100%);box-sizing:border-box;min-height:50px;border-radius:14px;border:1px solid var(--bcp-access-line);background:#090d14;color:#f7f7f7;padding:0 14px;font:600 1rem/1 system-ui,-apple-system,Segoe UI,sans-serif">
+      <button type="submit" class="bcp-access-unlock-btn" style="margin-top:14px">Unlock catalog</button>
+      <p id="bcp-admin-access-status" aria-live="polite" style="min-height:1.5em;margin:14px auto 0;font-size:.88rem"></p>
+    </form>
+    <small>This page is private and not linked from the public website.</small>
+  </main>
+  <script src="./build-access-admin.js?v=v160-build-access-admin"></script>
+</body>
+</html>
