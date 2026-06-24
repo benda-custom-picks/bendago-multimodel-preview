@@ -177,10 +177,11 @@
   }
   function lock(){
     root.classList.remove('bcp-access-pending');
+    /* V162: SEO build-guide pages stay fully public. Build Access applies only to catalog, product and cart surfaces. */
+    if(scope==='guide') return;
     root.classList.add('bcp-access-locked');
     if(scope==='home') lockHome();
     else if(scope==='model') lockModel();
-    else if(scope==='guide') lockGuide();
     else if(scope==='product') lockProduct();
     else if(scope==='cart') lockCart();
   }
