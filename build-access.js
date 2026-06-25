@@ -22,7 +22,26 @@
     if(!p.startsWith('/') || p.indexOf('//') === 0) p = '/';
     return p + (location.hash || '');
   }
+  function directLookCard(){
+    if(scope !== 'model') return null;
+    var rawHash = (location.hash || '').replace(/^#/, '');
+    if(!rawHash) return null;
+    var id = '';
+    try{ id = decodeURIComponent(rawHash); }catch(error){ id = rawHash; }
+    var target = document.getElementById(id);
+    if(!target) return null;
+    if(target.classList && target.classList.contains('look-card')) return target;
+    return target.closest ? target.closest('.look-card') : null;
+  }
+  function directLookName(){
+    var look = directLookCard();
+    if(!look) return '';
+    var title = look.querySelector('h3');
+    return cleanText(title ? title.textContent : '', 120);
+  }
   function sourceBuildKey(){
+    var look = directLookCard();
+    if(look && look.id) return cleanText(look.id, 80);
     var hash = cleanText((location.hash || '').replace(/^#/, ''), 80);
     if(hash) return hash;
     var file = cleanText((location.pathname || '').split('/').pop() || '', 120).replace(/\.html$/i, '');
@@ -30,6 +49,8 @@
     return '';
   }
   function sourceBuildName(){
+    var directName = directLookName();
+    if(directName) return directName;
     var h1 = document.querySelector('h1');
     return cleanText(h1 ? h1.textContent : '', 120);
   }
@@ -133,7 +154,7 @@
     panel.className='bcp-access-unlock-panel';
     panel.setAttribute('data-bcp-access-panel','1');
     panel.setAttribute('data-bcp-source-section', context || defaultSourceSection());
-    panel.innerHTML='<b>Private catalog access</b><h2>Unlock full catalog · '+PRICE+'</h2><p>Watch the build videos freely. Unlock product cards, prices, options, galleries and cart access across all Benda models for 30 days.</p><button type="button" class="bcp-access-unlock-btn" data-bcp-unlock>Unlock full catalog · '+PRICE+'</button><small>One payment · secure Stripe checkout · not a subscription</small>';
+    panel.innerHTML='<b>Selected upgrades for this build</b><h2>See the exact upgrades used on this build</h2><p>Unlock the exact parts list, prices, options, galleries and cart access for 30 days.</p><button type="button" class="bcp-access-unlock-btn" data-bcp-unlock>See the selected upgrades · '+PRICE+'</button><small>One payment · Secure Stripe checkout · Not a subscription</small>';
     return panel;
   }
   function insertOnce(anchor, where, context){
@@ -152,10 +173,13 @@
     var looks=document.querySelector('#looks');
     var fullLook=document.querySelector('#full-look-parts');
     var individual=document.querySelector('#shop-part-by-part .product-grid');
-    insertOnce(looks,'after','full_look');
+    var look=directLookCard();
+    var lookContext=look && look.id ? look.id : 'full_look';
+    if(look) insertOnce(look,'after',lookContext);
+    else insertOnce(looks,'after','full_look');
     blur(fullLook);
     blur(individual);
-    if(fullLook){ markLockedView('full_look'); observeLockedTarget(fullLook,'full_look'); }
+    if(fullLook){ markLockedView(lookContext); observeLockedTarget(fullLook,'full_look'); }
     if(individual){ observeLockedTarget(individual,'individual_upgrades'); }
   }
   function lockGuide(){
@@ -200,7 +224,7 @@
       })
       .catch(function(error){
         track('build_access_checkout_error', { error_stage: 'create_checkout' });
-        if(button){button.disabled=false;button.textContent='Unlock full catalog · '+PRICE;}
+        if(button){button.disabled=false;button.textContent='See the selected upgrades · '+PRICE;}
         alert(error.message || 'Secure checkout is unavailable.');
       });
   }
