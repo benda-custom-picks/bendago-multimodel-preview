@@ -11,6 +11,7 @@
   if (!body) return;
   var scope = body.getAttribute('data-bcp-access-scope') || '';
   var activeSourceSection = '';
+  var clickedLookCard = null;
   var firedLockedViews = Object.create(null);
   var pendingContextKey = 'bcp_build_access_tracking_context_v159';
 
@@ -33,14 +34,15 @@
     if(target.classList && target.classList.contains('look-card')) return target;
     return target.closest ? target.closest('.look-card') : null;
   }
+  function selectedLookCard(){ return directLookCard() || clickedLookCard; }
   function directLookName(){
-    var look = directLookCard();
+    var look = selectedLookCard();
     if(!look) return '';
     var title = look.querySelector('h3');
     return cleanText(title ? title.textContent : '', 120);
   }
   function sourceBuildKey(){
-    var look = directLookCard();
+    var look = selectedLookCard();
     if(look && look.id) return cleanText(look.id, 80);
     var hash = cleanText((location.hash || '').replace(/^#/, ''), 80);
     if(hash) return hash;
@@ -228,8 +230,35 @@
         alert(error.message || 'Secure checkout is unavailable.');
       });
   }
+  function scrollToLockedAccessPanel(lookCta){
+    if(!root.classList.contains('bcp-access-locked')) return false;
+    var panel=document.querySelector('[data-bcp-access-panel]');
+    if(!panel) return false;
+    var lookCard=lookCta && lookCta.closest ? lookCta.closest('.look-card') : null;
+    if(lookCard){
+      clickedLookCard=lookCard;
+      var lookContext=lookCard.id || 'full_look';
+      panel.setAttribute('data-bcp-source-section',lookContext);
+      activeSourceSection=lookContext;
+      if(lookCard.parentNode && panel.previousElementSibling!==lookCard) lookCard.parentNode.insertBefore(panel,lookCard.nextSibling);
+    }else{
+      var context=panel.getAttribute('data-bcp-source-section');
+      if(context) activeSourceSection=context;
+    }
+    panel.scrollIntoView({behavior:'smooth',block:'center'});
+    window.setTimeout(function(){
+      var button=panel.querySelector('[data-bcp-unlock]');
+      if(button && typeof button.focus==='function') button.focus({preventScroll:true});
+    },420);
+    return true;
+  }
   function bind(){
     document.addEventListener('click',function(event){
+      var lookCta=event.target.closest('.bcp-look-scroll-link-v16m');
+      if(lookCta && scrollToLockedAccessPanel(lookCta)){
+        event.preventDefault();
+        return;
+      }
       var button=event.target.closest('[data-bcp-unlock]');
       if(!button)return;
       event.preventDefault();
