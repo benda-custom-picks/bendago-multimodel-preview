@@ -156,7 +156,7 @@
     panel.className='bcp-access-unlock-panel';
     panel.setAttribute('data-bcp-access-panel','1');
     panel.setAttribute('data-bcp-source-section', context || defaultSourceSection());
-    panel.innerHTML='<b>Exact build configuration</b><h2>Unlock exact selected upgrades</h2><p>Unlock the exact parts list, options, galleries and full-build cart access for 30 days.</p><button type="button" class="bcp-access-unlock-btn" data-bcp-unlock>Unlock this full configuration · '+PRICE+'</button><small>One payment · Secure Stripe checkout · Not a subscription</small>';
+    panel.innerHTML='<b>Custom parts only · motorcycle not included</b><h2>Unlock the exact parts for this build</h2><p>See the exact parts list, options, galleries and cart access for 30 days. The motorcycle shown is not for sale.</p><button type="button" class="bcp-access-unlock-btn" data-bcp-unlock>Unlock exact parts list · '+PRICE+'</button><small>Custom parts only · One payment · Secure Stripe checkout · Not a subscription</small>';
     return panel;
   }
   function insertOnce(anchor, where, context){
@@ -226,7 +226,7 @@
       })
       .catch(function(error){
         track('build_access_checkout_error', { error_stage: 'create_checkout' });
-        if(button){button.disabled=false;button.textContent=button.getAttribute('data-bcp-unlock-label') || 'Unlock this full configuration · '+PRICE;}
+        if(button){button.disabled=false;button.textContent=button.getAttribute('data-bcp-unlock-label') || 'Unlock exact parts list · '+PRICE;}
         alert(error.message || 'Secure checkout is unavailable.');
       });
   }
@@ -239,11 +239,11 @@
     var title=panel.querySelector('h2');
     var copy=panel.querySelector('p');
     var button=panel.querySelector('[data-bcp-unlock]');
-    if(kicker) kicker.textContent='Exact configuration for this build';
-    if(title) title.textContent='Unlock the '+buildName+' configuration';
-    if(copy) copy.textContent='See the exact selected parts, options, galleries and full-build cart for 30 days.';
+    if(kicker) kicker.textContent='Custom parts only · motorcycle not included';
+    if(title) title.textContent='Unlock exact parts for '+buildName;
+    if(copy) copy.textContent='See the exact parts used on this build, options, galleries and cart access for 30 days. Motorcycle not included.';
     if(button){
-      var label='Unlock this full configuration · '+PRICE;
+      var label='Unlock exact parts list · '+PRICE;
       button.textContent=label;
       button.setAttribute('data-bcp-unlock-label',label);
     }
