@@ -46,6 +46,8 @@
     'top-bumper': 'top-bumper',
     'chassis-protection': 'lower-chassis-protection-plate',
     'headlight-fairing': 'front-fairing-style-kit',
+    'cafe-holder-napoleon-125-250': 'cafe-holder-napoleon-125-250',
+    'ghost-metal-cover-napoleon-125-250': 'ghost-metal-cover-napoleon-125-250',
     'double-seat-comfort-premium-plus': 'double-seat-comfort-premium-plus',
     'bumper-top-protect-450': 'bumper-top-protect-450',
     'premium-rear-fender-450': 'premium-rear-fender-450',
@@ -125,6 +127,7 @@
       items: [
         { code: 'dual-exhaust', color_option: 'Black' },
         { code: 'maverick-air-filter-cover' },
+        { code: 'ghost-metal-cover-napoleon-125-250' },
         { code: 'headlight-fairing', color_option: 'Black' },
         { code: 'black-foot-control-kit' },
         { code: 'tank-cover-support-volume', color_option: 'Black' },
@@ -496,6 +499,7 @@
     'blackout-predator-complete': [
       { code: 'dual-exhaust', options: { color_option: 'Black' } },
       { code: 'maverick-air-filter-cover' },
+      { code: 'ghost-metal-cover-napoleon-125-250' },
       { code: 'headlight-fairing', options: { color_option: 'Black' } },
       { code: 'black-foot-control-kit' },
       { code: 'tank-cover-support-volume', options: { color_option: 'Black' } },
@@ -1273,6 +1277,26 @@ async function createStripeCheckout(lines, formData) {
         image: './tandem-kit-v4-hero.png',
         stripe_url: ''
       },
+      'cafe-holder-napoleon-125-250': {
+        product_code: 'cafe-holder-napoleon-125-250',
+        product_name: 'Café Holder',
+        product_short: 'Foldable cup holder for Benda Napoleon 125/250',
+        fitment: 'Benda Napoleon 125/250',
+        price: '91 €',
+        delivery_estimate: '10 to 15 business days',
+        image: './cafe-holder-03.png',
+        stripe_url: ''
+      },
+      'ghost-metal-cover-napoleon-125-250': {
+        product_code: 'ghost-metal-cover-napoleon-125-250',
+        product_name: 'Ghost Metal Cover',
+        product_short: 'Precision-machined aviation-grade aluminium side cover with contrast silver cut-outs for Benda Napoleon 125/250',
+        fitment: 'Benda Napoleon 125/250',
+        price: '142.80 €',
+        delivery_estimate: '10 to 15 business days',
+        image: './ghost-metal-cover-v4-hero.png',
+        stripe_url: ''
+      },
       'aircraft-metal-cover-v4': {
         product_code: 'aircraft-metal-cover-v4',
         product_name: 'Aircraft Metal Cover',
@@ -1426,6 +1450,8 @@ async function createStripeCheckout(lines, formData) {
     'top-bumper': './order-top-bumper.html',
     'chassis-protection': './order-chassis-protection.html',
     'headlight-fairing': './order-headlight-fairing.html',
+    'cafe-holder-napoleon-125-250': './order-cafe-holder.html',
+    'ghost-metal-cover-napoleon-125-250': './order-ghost-metal-cover-napoleon-125-250.html',
     'double-seat-comfort-premium-plus': './order-kit-double-seat-comfort-premium-plus.html',
     'bumper-top-protect-450': './order-top-bumper-protection-450.html',
     'premium-rear-fender-450': './order-premium-rear-fender-450.html',

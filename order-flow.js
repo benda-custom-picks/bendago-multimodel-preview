@@ -502,6 +502,26 @@ const BENDAGO_PRODUCTS = {
     delivery_estimate: '10 to 15 business days',
     image: './fairing-hero.png',
     stripe_url: ''
+  },
+  "cafe-holder-napoleon-125-250": {
+    product_code: "cafe-holder-napoleon-125-250",
+    product_name: 'Café Holder',
+    product_short: 'Foldable cup holder for Benda Napoleon 125/250',
+    fitment: 'Benda Napoleon 125/250',
+    price: '91 €',
+    delivery_estimate: '10 to 15 business days',
+    image: './cafe-holder-03.png',
+    stripe_url: ''
+  },
+  "ghost-metal-cover-napoleon-125-250": {
+    product_code: "ghost-metal-cover-napoleon-125-250",
+    product_name: 'Ghost Metal Cover',
+    product_short: 'Precision-machined aviation-grade aluminium side cover with contrast silver cut-outs for Benda Napoleon 125/250',
+    fitment: 'Benda Napoleon 125/250',
+    price: '142.80 €',
+    delivery_estimate: '10 to 15 business days',
+    image: './ghost-metal-cover-v4-hero.png',
+    stripe_url: ''
   }
 };
 
