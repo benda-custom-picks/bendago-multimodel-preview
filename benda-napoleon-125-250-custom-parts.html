@@ -2351,6 +2351,53 @@ html body.model-page section#looks article.look-card > .look-body > h3 > a.bcp-w
   }
 }
 </style>
+<!-- BENDAGO V180 — hide poster flash until the MP4 has started rendering.
+     Scope: model-page look videos only. Posters stay declared as media fallback / SEO assets. -->
+<script id="bcp-v180-look-video-first-frame-gate">
+(function () {
+  'use strict';
+
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var root = document.documentElement;
+  root.classList.add('bcp-look-video-first-frame-gate');
+
+  function isLookVideo(node) {
+    return node instanceof HTMLVideoElement && !!node.closest('.model-page');
+  }
+
+  function reveal(video) {
+    if (!isLookVideo(video)) return;
+    video.classList.add('bcp-look-video-first-frame-ready');
+  }
+
+  document.addEventListener('playing', function (event) {
+    reveal(event.target);
+  }, true);
+
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.model-page video').forEach(function (video) {
+      if (!video.paused && video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+        reveal(video);
+      }
+    });
+  });
+}());
+</script>
+<style id="bcp-v180-look-video-first-frame-gate-style">
+/* No poster flash: keep a neutral black frame until video playback is actually running. */
+html.bcp-look-video-first-frame-gate .model-page video {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  background: #050505 !important;
+}
+
+html.bcp-look-video-first-frame-gate .model-page video.bcp-look-video-first-frame-ready {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transition: opacity 120ms linear !important;
+}
+</style>
 </head><body class="model-page model-125" data-bcp-access-scope="model"><!-- Google Tag Manager (noscript) -->
 <noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-MQHMSX8X" style="display:none;visibility:hidden" width="0"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
