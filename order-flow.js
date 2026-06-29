@@ -775,7 +775,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (added && window.BendagoCart && typeof window.BendagoCart.open === 'function') {
         window.BendagoCart.open();
       } else if (!added) {
-        window.location.href = link.getAttribute('href') || './cart-request.html';
+        window.alert('Cart is temporarily unavailable. Please reload this page and try again.');
       }
     });
   });

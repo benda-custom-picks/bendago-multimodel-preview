@@ -1,4 +1,4 @@
-/* BENDAGO CART FLOW V1.15 — product links from cart drawer / Stripe-only checkout */
+/* BENDAGO CART FLOW V1.16 — direct Stripe Checkout from cart drawer / no cart-request step */
 (function () {
   const CART_KEY = 'bendago_cart_v1';
   const CHECKOUT_WORKER_URL = ['https://bendago-', 'sum', 'up-checkout.custom125picks.workers.dev/'].join('');
@@ -874,6 +874,18 @@
     ].join('');
   }
 
+  function directCheckoutReturnUrls() {
+    const success = window.location.origin + '/thank-you.html?payment=stripe_success&session_id={CHECKOUT_SESSION_ID}';
+    let cancel = window.location.href;
+    try {
+      const url = new URL(window.location.href);
+      url.searchParams.set('payment', 'stripe_cancelled');
+      url.searchParams.delete('session_id');
+      cancel = url.toString();
+    } catch (error) {}
+    return { success_url: success, cancel_url: cancel };
+  }
+
 async function createStripeCheckout(lines, formData) {
     const pricing = calculateLaunchOffer(lines);
     const payload = {
@@ -903,6 +915,7 @@ async function createStripeCheckout(lines, formData) {
         discount_amount: pricing.discountAmount,
         total: pricing.total
       },
+      return_urls: directCheckoutReturnUrls(),
       items: lines.map(line => ({
         sku: workerSkuFor(line.product_code || line.code),
         quantity: Math.max(1, Number(line.qty) || 1),
@@ -942,57 +955,35 @@ async function createStripeCheckout(lines, formData) {
 
 
 
-  function termsAcceptanceEvidence(form, formData) {
-    const checkbox = form.querySelector('[name="custom_order_terms_acceptance"]');
-    const acceptedAt = new Date().toISOString();
+  function directCheckoutTermsAcceptance() {
+    const checkbox = document.querySelector('[data-cart-terms-acceptance]');
     if (!checkbox || !checkbox.checked) {
       if (checkbox) checkbox.focus();
-      throw new Error('Please accept the custom order and cancellation policy before secure payment.');
+      throw new Error('Please accept the order terms and cancellation policy before secure payment.');
     }
 
-    formData.terms_version = TERMS_VERSION;
-    formData.terms_accepted = 'true';
-    formData.custom_sourcing_accepted = 'true';
-    formData.custom_order_accepted = 'true';
-    formData.selected_model_accepted = 'true';
-    formData.selected_products_colours_options_accepted = 'true';
-    formData.delivery_country_accepted = 'true';
-    formData.total_amount_accepted = 'true';
-    formData.immediate_processing_requested = 'true';
-    formData.cancellation_policy_accepted = 'true';
-    formData.terms_accepted_at = acceptedAt;
-    formData.terms_page_url = TERMS_URL;
-
-    ['terms_version','terms_accepted_at','custom_sourcing_accepted','custom_order_accepted','selected_model_accepted','selected_products_colours_options_accepted','delivery_country_accepted','total_amount_accepted','immediate_processing_requested','cancellation_policy_accepted'].forEach(name => {
-      const input = form.querySelector('[name="' + name + '"]');
-      if (!input) return;
-      if (name === 'terms_version') input.value = TERMS_VERSION;
-      if (name === 'terms_accepted_at') input.value = acceptedAt;
-      if (name === 'custom_sourcing_accepted') input.value = 'true';
-      if (name === 'custom_order_accepted') input.value = 'true';
-      if (name === 'selected_model_accepted') input.value = 'true';
-      if (name === 'selected_products_colours_options_accepted') input.value = 'true';
-      if (name === 'delivery_country_accepted') input.value = 'true';
-      if (name === 'total_amount_accepted') input.value = 'true';
-      if (name === 'immediate_processing_requested') input.value = 'true';
-      if (name === 'cancellation_policy_accepted') input.value = 'true';
-    });
-
+    const acceptedAt = new Date().toISOString();
     return {
-      terms_accepted: true,
-      custom_sourcing_accepted: true,
-      custom_order_accepted: true,
-      selected_model_accepted: true,
-      selected_products_colours_options_accepted: true,
-      delivery_country_accepted: true,
-      total_amount_accepted: true,
-      immediate_processing_requested: true,
-      cancellation_policy_accepted: true,
+      terms_accepted: 'true',
+      custom_sourcing_accepted: 'true',
+      custom_order_accepted: 'true',
+      selected_model_accepted: 'true',
+      selected_products_colours_options_accepted: 'true',
+      delivery_country_accepted: 'true',
+      total_amount_accepted: 'true',
+      immediate_processing_requested: 'true',
+      cancellation_policy_accepted: 'true',
       terms_version: TERMS_VERSION,
       terms_accepted_at: acceptedAt,
-      terms_page_url: TERMS_URL,
-      checkout_page_url: window.location.href
+      terms_page_url: TERMS_URL
     };
+  }
+
+  function getDirectCartCheckoutContext() {
+    const lines = getLines();
+    if (!lines.length) throw new Error('Your cart is empty. Choose at least one Benda part first.');
+    const formData = directCheckoutTermsAcceptance();
+    return { formData, lines };
   }
 
   function showCartStatus(type, message) {
@@ -1002,103 +993,53 @@ async function createStripeCheckout(lines, formData) {
     status.textContent = message;
   }
 
-  function checkoutFitmentLabel(lines, formData) {
-    const manual = String((formData && formData.motorcycle_model) || '').trim();
-    const fitments = Array.from(new Set((lines || []).map(function (line) {
-      return String(line.fitment || '').trim();
-    }).filter(Boolean)));
+  async function startDirectStripeCheckout(button) {
+    if (!button || button.classList.contains('disabled') || button.disabled) return;
+    const originalText = button.dataset.readyText || button.textContent;
+    push('cart_checkout_click', { cart_count: cartCount(), payment_provider: 'stripe' });
+    push('stripe_checkout_attempt', { cart_count: cartCount(), payment_provider: 'stripe' });
 
-    if (fitments.length === 1) return fitments[0];
-    if (manual) return manual;
-    if (fitments.length > 1) return 'Mixed Benda model cart';
-    return 'Benda Custom Picks order';
-  }
+    try {
+      const context = getDirectCartCheckoutContext();
+      const pricing = calculateLaunchOffer(context.lines);
+      button.disabled = true;
+      button.classList.add('is-loading');
+      button.textContent = 'Creating Stripe checkout…';
+      showCartStatus('ok', 'Opening secure Stripe checkout…');
 
-  function checkoutGroupedCartLabel(lines, formData) {
-    const fitment = checkoutFitmentLabel(lines, formData);
-    if (/dark flag/i.test(fitment)) return 'Grouped Benda Dark Flag V4 cart';
-    if (/450|500/i.test(fitment)) return 'Grouped Benda Napoleon 450/500 cart';
-    if (/125|250/i.test(fitment)) return 'Grouped Benda Napoleon 125/250 cart';
-    return 'Grouped Benda Custom Picks cart';
-  }
+      const checkout = await createStripeCheckout(context.lines, context.formData);
+      sessionStorage.setItem('bendago_pending_checkout_v149', JSON.stringify({
+        order_id: checkout.order_id || '',
+        checkout_id: checkout.checkout_id || checkout.stripe_session_id || '',
+        cart_total: formatEuro(Number(checkout.amount) || pricing.total || 0),
+        created_at: new Date().toISOString()
+      }));
 
-  function getValidatedCartFormData() {
-    const form = document.getElementById('cartRequestForm');
-    if (!form) throw new Error('Cart form not found');
+      push('stripe_checkout_created', {
+        request_id: checkout.order_id || '',
+        checkout_id: checkout.checkout_id || checkout.stripe_session_id || '',
+        cart_total: formatEuro(Number(checkout.amount) || pricing.total || 0),
+        cart_count: String(context.lines.reduce((sum, line) => sum + line.qty, 0)),
+        payment_provider: 'stripe'
+      });
+      push('stripe_payment_click', {
+        request_id: checkout.order_id || '',
+        checkout_id: checkout.checkout_id || checkout.stripe_session_id || '',
+        cart_total: formatEuro(Number(checkout.amount) || pricing.total || 0),
+        cart_count: String(context.lines.reduce((sum, line) => sum + line.qty, 0)),
+        payment_provider: 'stripe'
+      });
 
-    const lines = getLines();
-    if (!lines.length) throw new Error('Your cart is empty. Choose at least one Benda part first.');
-
-    const formData = Object.fromEntries(new FormData(form).entries());
-    const termsAcceptance = termsAcceptanceEvidence(form, formData);
-    return { form, formData, lines, termsAcceptance };
-  }
-
-  function updateStripeCheckoutButtonLabel() {
-    const button = document.getElementById('stripeCheckoutButton');
-    if (!button || button.disabled) return;
-    const lines = getLines();
-    if (!lines.length) {
-      button.textContent = 'Secure this setup';
-      button.dataset.readyText = button.textContent;
-      return;
+      showCartStatus('ok', 'Redirecting to secure Stripe checkout…');
+      window.location.href = checkout.checkout_url;
+    } catch (err) {
+      console.error(err);
+      push('stripe_checkout_error', { error_message: (err && err.message) ? err.message : 'Stripe checkout could not be created', cart_count: cartCount(), payment_provider: 'stripe' });
+      showCartStatus('err', err.message || 'Stripe checkout could not be created. Please contact Benda Custom Picks.');
+      button.disabled = false;
+      button.classList.remove('is-loading');
+      button.textContent = originalText || 'Secure this setup';
     }
-    const pricing = calculateLaunchOffer(lines);
-    const visual = cartBuildVisualV18(pricing, lines);
-    const label = visual && visual.kind === 'build' ? 'Secure this build' : 'Secure these parts';
-    button.textContent = label + ' — ' + formatEuro(pricing.total);
-    button.dataset.readyText = button.textContent;
-  }
-
-  function renderStripeCheckoutButton() {
-    const button = document.getElementById('stripeCheckoutButton');
-    if (!button || button.dataset.bound === 'true') return;
-    button.dataset.bound = 'true';
-    updateStripeCheckoutButtonLabel();
-
-    button.addEventListener('click', async () => {
-      const originalText = button.dataset.readyText || button.textContent;
-      push('stripe_checkout_attempt', { cart_count: cartCount(), payment_provider: 'stripe' });
-      try {
-        const context = getValidatedCartFormData();
-        const pricing = calculateLaunchOffer(context.lines);
-        button.disabled = true;
-        button.textContent = 'Creating Stripe checkout…';
-        showCartStatus('ok', 'Opening secure Stripe checkout…');
-
-        const checkout = await createStripeCheckout(context.lines, context.formData);
-        sessionStorage.setItem('bendago_pending_checkout_v149', JSON.stringify({
-          order_id: checkout.order_id || '',
-          checkout_id: checkout.checkout_id || checkout.stripe_session_id || '',
-          cart_total: formatEuro(Number(checkout.amount) || pricing.total || 0),
-          created_at: new Date().toISOString()
-        }));
-
-        push('stripe_checkout_created', {
-          request_id: checkout.order_id || '',
-          checkout_id: checkout.checkout_id || checkout.stripe_session_id || '',
-          cart_total: formatEuro(Number(checkout.amount) || pricing.total || 0),
-          cart_count: String(context.lines.reduce((sum, line) => sum + line.qty, 0)),
-          payment_provider: 'stripe'
-        });
-        push('stripe_payment_click', {
-          request_id: checkout.order_id || '',
-          checkout_id: checkout.checkout_id || checkout.stripe_session_id || '',
-          cart_total: formatEuro(Number(checkout.amount) || pricing.total || 0),
-          cart_count: String(context.lines.reduce((sum, line) => sum + line.qty, 0)),
-          payment_provider: 'stripe'
-        });
-
-        showCartStatus('ok', 'Redirecting to secure Stripe checkout…');
-        window.location.href = checkout.checkout_url;
-      } catch (err) {
-        console.error(err);
-        push('stripe_checkout_error', { error_message: (err && err.message) ? err.message : 'Stripe checkout could not be created', cart_count: cartCount(), payment_provider: 'stripe' });
-        showCartStatus('err', err.message || 'Stripe checkout could not be created. Please contact Benda Custom Picks.');
-        button.disabled = false;
-        button.textContent = originalText || button.dataset.readyText || 'Secure this setup';
-      }
-    });
   }
 
   function products() {
@@ -1718,6 +1659,10 @@ async function createStripeCheckout(lines, formData) {
       .cart-note{margin-top:2px!important;padding:11px 12px!important;}
       .cart-note strong{display:block!important;margin-bottom:3px!important;color:#f7f1e8!important;}
       .cart-checkout-btn{margin-top:12px!important;min-height:54px!important;font-size:.83rem!important;letter-spacing:.13em!important;text-transform:uppercase!important;}
+      .cart-terms-consent{display:flex!important;gap:9px!important;align-items:flex-start!important;margin:12px 0 0!important;padding:11px!important;border:1px solid rgba(226,189,114,.22)!important;border-radius:12px!important;background:rgba(255,255,255,.035)!important;color:rgba(247,241,232,.80)!important;font-size:.76rem!important;line-height:1.38!important;}
+      .cart-terms-consent input{flex:0 0 auto!important;width:17px!important;height:17px!important;margin:2px 0 0!important;accent-color:#d7b369!important;}
+      .cart-terms-consent a{color:#f2d28a!important;text-decoration:underline!important;font-weight:800!important;}
+      .cart-footer #cartFormStatus{margin-top:10px!important;}
       .cart-share-btn{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-height:34px!important;padding:0 12px!important;border-radius:999px!important;border:1px solid rgba(226,189,114,.26)!important;background:rgba(226,189,114,.055)!important;color:rgba(240,213,143,.86)!important;font-size:.68rem!important;font-weight:850!important;text-decoration:none!important;letter-spacing:.04em!important;}
       .cart-secondary-actions{display:flex!important;gap:8px!important;margin-top:10px!important;align-items:center!important;justify-content:center!important;}
       .cart-secondary-actions .cart-share-btn,.cart-secondary-actions .cart-other-product-btn,.cart-secondary-actions .cart-clear-btn{width:auto!important;min-height:34px!important;padding:0 12px!important;border-radius:999px!important;background:rgba(255,255,255,.025)!important;border:1px solid rgba(255,255,255,.10)!important;color:rgba(255,255,255,.58)!important;font-size:.68rem!important;font-weight:850!important;text-decoration:none!important;letter-spacing:.04em!important;}
@@ -1904,8 +1849,10 @@ async function createStripeCheckout(lines, formData) {
       '<div class="cart-look-lock-v16cart"><span>Setup preserved</span><strong>No need to rebuild this look part by part elsewhere.</strong></div>',
       '<div class="cart-pricing-block" data-cart-pricing><div class="cart-total-row"><span>Setup secured today</span><strong>0 €</strong></div></div>',
       '<div class="cart-proof-strip-v16cart"><span>Model fit kept</span><span>Options grouped</span><span>Stripe checkout</span></div>',
-      '<div class="cart-note"><strong>Finish here.</strong><br>Your selected parts are already grouped for this setup. Secure it now or share the exact setup link.</div>',
-      '<a class="cart-checkout-btn disabled" data-cart-checkout href="./cart-request.html">Secure this setup</a>',
+      '<div class="cart-note"><strong>Finish here.</strong><br>Your selected parts are already grouped for this setup. Secure payment opens directly in Stripe.</div>',
+      '<label class="cart-terms-consent"><input type="checkbox" data-cart-terms-acceptance><span>I confirm the selected model, parts, options and total, and accept the <a href="' + TERMS_URL + '" target="_blank" rel="noopener">Terms &amp; Conditions</a> and cancellation policy. Delivery details are collected securely by Stripe.</span></label>',
+      '<button type="button" class="cart-checkout-btn disabled" data-cart-checkout>Secure this setup</button>',
+      '<div id="cartFormStatus" class="status-box" role="status" aria-live="polite"></div>',
       '<div class="cart-secondary-actions">',
       '<button type="button" class="cart-share-btn" data-cart-share>Share this setup</button>',
       '<a class="cart-other-product-btn" href="' + currentPartsHref() + '" data-cart-other-product>Continue setup</a>',
@@ -1926,8 +1873,9 @@ async function createStripeCheckout(lines, formData) {
       renderCartDrawer();
     });
 
-    drawer.querySelector('[data-cart-checkout]').addEventListener('click', () => {
-      push('cart_checkout_click', { cart_count: cartCount() });
+    drawer.querySelector('[data-cart-checkout]').addEventListener('click', async (event) => {
+      event.preventDefault();
+      await startDirectStripeCheckout(event.currentTarget);
     });
 
     const shareBtn = drawer.querySelector('[data-cart-share]');
@@ -2114,36 +2062,16 @@ async function createStripeCheckout(lines, formData) {
     return String(params.get('payment') || '').trim();
   }
 
-  function renderPaidCheckoutReturnV149() {
-    clearCart();
-    sessionStorage.removeItem('bendago_pending_checkout_v149');
-
-    const heading = document.querySelector('.request-top .product-title');
-    const intro = document.querySelector('.request-top p');
-    const summary = document.getElementById('cartSummary');
-    const form = document.getElementById('cartRequestForm');
-    const next = document.querySelector('.next-card');
-
-    if (heading) heading.textContent = 'Payment received';
-    if (intro) intro.textContent = 'Stripe confirmed your payment. Your selected setup is now recorded for processing.';
-    if (summary) {
-      summary.innerHTML = '<h2>Order confirmed</h2><div class="cart-summary-row"><span>Payment status</span><strong>PAID</strong></div><div class="cart-summary-row"><span>What happens next</span><strong>Order confirmation by email</strong></div><div class="cart-summary-total"><span>Delivery</span><strong>10–15 business days</strong></div>';
-    }
-    if (form) form.style.display = 'none';
-    if (next) next.style.display = 'none';
-
+  function handleCancelledStripeReturn() {
+    if (checkoutReturnStateV149() !== 'stripe_cancelled') return;
+    openCart();
+    showCartStatus('err', 'Payment cancelled. Your selected parts remain in your cart.');
     try {
       const url = new URL(window.location.href);
       url.searchParams.delete('payment');
       url.searchParams.delete('session_id');
       window.history.replaceState({}, document.title, url.pathname + (url.search ? url.search : '') + url.hash);
-    } catch (e) {}
-  }
-
-  function bindCartForm() {
-    const form = document.getElementById('cartRequestForm');
-    if (!form) return;
-    renderCartSummary();
+    } catch (error) {}
   }
 
 window.BendagoCart = {
@@ -2163,17 +2091,8 @@ window.BendagoCart = {
     bindOpenCartLinks();
     bindBuildBundleButtons();
 
-    if (checkoutReturn === 'stripe_success') {
-      renderPaidCheckoutReturnV149();
-      return;
-    }
-
-    bindCartForm();
-    renderStripeCheckoutButton();
-    updateStripeCheckoutButtonLabel();
-
     if (checkoutReturn === 'stripe_cancelled') {
-      showCartStatus('err', 'Payment cancelled. Your selected parts remain in your cart.');
+      handleCancelledStripeReturn();
     }
     if (sharedCartLoaded) openCart();
   });
