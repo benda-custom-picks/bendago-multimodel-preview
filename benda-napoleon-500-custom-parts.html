@@ -1520,86 +1520,51 @@ html body.model-page section#looks article.look-card > .look-body > h3 > a.bcp-w
   }
 }
 </style>
-<!-- BENDAGO V183 — deterministic first-frame gate for look MP4s.
-     Posters remain in HTML as fallback metadata, but are never painted before `playing`. -->
-<script id="bcp-v183-look-video-first-frame-gate">
+<!-- BENDAGO V180 — hide poster flash until the MP4 has started rendering.
+     Scope: model-page look videos only. Posters stay declared as media fallback / SEO assets. -->
+<script id="bcp-v180-look-video-first-frame-gate">
 (function () {
   'use strict';
 
-  var SELECTOR = [
-    '.model-page #looks .look-media video',
-    '.model-page #looks .look-media-video video',
-    '.model-page #looks .look-media-link video',
-    '.model-page .bcp-look-sticky-media-v16m video',
-    '.model-page .bcp-look-gallery-banner-v16n video',
-    '.model-page .bcp-browse-look-banner-v16n video'
-  ].join(',');
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  function isGatedLookVideo(node) {
-    return node instanceof HTMLVideoElement && node.matches(SELECTOR);
+  var root = document.documentElement;
+  root.classList.add('bcp-look-video-first-frame-gate');
+
+  function isLookVideo(node) {
+    return node instanceof HTMLVideoElement && !!node.closest('.model-page');
   }
 
-  function markLoading(video) {
-    if (!isGatedLookVideo(video)) return;
-    video.classList.remove('bcp-video-ready');
-    video.setAttribute('data-bcp-video-state', 'loading');
+  function reveal(video) {
+    if (!isLookVideo(video)) return;
+    video.classList.add('bcp-look-video-first-frame-ready');
   }
-
-  function markReady(video) {
-    if (!isGatedLookVideo(video)) return;
-    video.classList.add('bcp-video-ready');
-    video.setAttribute('data-bcp-video-state', 'ready');
-  }
-
-  document.addEventListener('loadstart', function (event) {
-    markLoading(event.target);
-  }, true);
-
-  document.addEventListener('emptied', function (event) {
-    markLoading(event.target);
-  }, true);
 
   document.addEventListener('playing', function (event) {
-    markReady(event.target);
+    reveal(event.target);
   }, true);
 
   document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll(SELECTOR).forEach(markLoading);
+    document.querySelectorAll('.model-page video').forEach(function (video) {
+      if (!video.paused && video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+        reveal(video);
+      }
+    });
   });
 }());
 </script>
-<style id="bcp-v183-look-video-first-frame-gate-style">
-/* The wrappers are permanently neutral until an actual video frame is playing. */
-.model-page #looks .look-media,
-.model-page #looks .look-media-video,
-.model-page #looks .look-media-link,
-.model-page .bcp-look-sticky-media-v16m,
-.model-page .bcp-look-gallery-banner-v16n,
-.model-page .bcp-browse-look-banner-v16n {
-  background-color: #050505 !important;
-  background-image: none !important;
-}
-
-/* Hide the native poster and the video surface by default. `playing` is the only reveal event. */
-.model-page #looks .look-media video,
-.model-page #looks .look-media-video video,
-.model-page #looks .look-media-link video,
-.model-page .bcp-look-sticky-media-v16m video,
-.model-page .bcp-look-gallery-banner-v16n video,
-.model-page .bcp-browse-look-banner-v16n video {
+<style id="bcp-v180-look-video-first-frame-gate-style">
+/* No poster flash: keep a neutral black frame until video playback is actually running. */
+html.bcp-look-video-first-frame-gate .model-page video {
   opacity: 0 !important;
-  visibility: visible !important;
+  visibility: hidden !important;
   background: #050505 !important;
-  transition: none !important;
 }
 
-.model-page #looks .look-media video.bcp-video-ready,
-.model-page #looks .look-media-video video.bcp-video-ready,
-.model-page #looks .look-media-link video.bcp-video-ready,
-.model-page .bcp-look-sticky-media-v16m video.bcp-video-ready,
-.model-page .bcp-look-gallery-banner-v16n video.bcp-video-ready,
-.model-page .bcp-browse-look-banner-v16n video.bcp-video-ready {
+html.bcp-look-video-first-frame-gate .model-page video.bcp-look-video-first-frame-ready {
   opacity: 1 !important;
+  visibility: visible !important;
+  transition: opacity 120ms linear !important;
 }
 </style>
 </head><body class="model-page model-500" data-bcp-access-scope="model"><!-- Google Tag Manager (noscript) -->
@@ -1925,5 +1890,5 @@ html body.model-page section#looks article.look-card > .look-body > h3 > a.bcp-w
   syncSoundUi();
 })();
 </script>
-<script src="./build-access.js?v=v175-parts-not-motorcycle"></script>
+<script src="./build-access.js?v=v189-pc-cachefix"></script>
 </body></html>
