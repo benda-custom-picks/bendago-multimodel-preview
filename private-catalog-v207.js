@@ -1,4 +1,4 @@
-/* BCP V223 — selected look catalog: clean private-video preload without visible poster thumbnails. */
+/* BCP V227 — selected look catalog: full-configuration-first presentation, component prices withheld until cart. */
 (function(){
   'use strict';
   var body=document.body;
@@ -114,62 +114,125 @@
     return target;
   }
   function injectStyle(){
-    if(document.getElementById('bcp-v206-post-access-style')) return;
+    if(document.getElementById('bcp-v227-full-configuration-style')) return;
     var style=document.createElement('style');
-    style.id='bcp-v206-post-access-style';
+    style.id='bcp-v227-full-configuration-style';
     style.textContent=''
-      +'.bcp-post-access-v206{margin:14px 0 18px;padding:16px 18px;border:1px solid rgba(224,180,93,.45);border-radius:16px;background:linear-gradient(135deg,rgba(224,180,93,.14),rgba(255,255,255,.035));box-shadow:0 14px 32px rgba(0,0,0,.18)}'
-      +'.bcp-post-access-v206-kicker{display:block;margin-bottom:4px;color:#e0b45d;font-size:.75rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase}'
-      +'.bcp-post-access-v206 h4{margin:0 0 7px;color:#fff;font-size:clamp(1.15rem,2.4vw,1.55rem);line-height:1.15}'
-      +'.bcp-post-access-v206 p{margin:0 0 13px;max-width:62ch;color:rgba(255,255,255,.78);line-height:1.5}'
-      +'.bcp-post-access-v206-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap}'
-      +'.bcp-post-access-v206 .bcp-look-fast-action-v174{margin:0!important;display:inline-flex!important}'
-      +'.bcp-post-access-v206 .bcp-look-full-add-v16m{min-height:48px!important}'
-      +'.bcp-post-access-v206-secondary{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 16px;border:1px solid rgba(255,255,255,.32);border-radius:13px;color:#fff;text-decoration:none;font-weight:750}'
-      +'.bcp-post-access-v206-secondary:hover,.bcp-post-access-v206-secondary:focus-visible{border-color:#e0b45d;color:#fff}'
-      +'@media(max-width:640px){.bcp-post-access-v206{padding:15px}.bcp-post-access-v206-actions{align-items:stretch;flex-direction:column}.bcp-post-access-v206 .bcp-look-fast-action-v174,.bcp-post-access-v206 .bcp-look-full-add-v16m,.bcp-post-access-v206-secondary{display:flex!important;width:100%}}';
+      +'.bcp-build-summary-v227{margin:14px 0 18px;padding:15px 16px;border:1px solid rgba(224,180,93,.34);border-radius:16px;background:linear-gradient(135deg,rgba(224,180,93,.11),rgba(255,255,255,.025));box-shadow:0 14px 32px rgba(0,0,0,.16)}'
+      +'.bcp-build-summary-v227-title{display:block;margin:0 0 10px;color:#fff;font-size:.92rem;font-weight:900;letter-spacing:.04em}'
+      +'.bcp-build-summary-v227-list{display:grid;gap:9px;margin:0;padding:0;list-style:none}'
+      +'.bcp-build-summary-v227-list li{display:flex;align-items:center;gap:10px;color:rgba(255,255,255,.84);font-size:.92rem;line-height:1.3}'
+      +'.bcp-build-summary-v227-icon{display:inline-flex;align-items:center;justify-content:center;flex:0 0 24px;width:24px;height:24px;border:1px solid rgba(224,180,93,.46);border-radius:50%;color:#e0b45d;font-weight:950;font-size:.82rem;background:rgba(224,180,93,.08)}'
+      +'.bcp-build-components-heading-v227{margin:22px 0 12px;color:#fff;font-size:1rem;font-weight:900;letter-spacing:.02em}'
+      +'.bcp-look-product-grid-v16m.bcp-build-components-grid-v227{display:grid!important;grid-template-columns:1fr!important;gap:10px!important;margin-top:0!important}'
+      +'.bcp-look-product-grid-v16m.bcp-build-components-grid-v227 .bcp-build-component-card-v227{display:grid!important;grid-template-columns:86px minmax(0,1fr)!important;align-items:center!important;min-height:86px!important;padding:0!important;overflow:hidden!important;border:1px solid rgba(255,255,255,.12)!important;border-radius:14px!important;background:rgba(255,255,255,.028)!important;box-shadow:none!important}'
+      +'.bcp-look-product-grid-v16m.bcp-build-components-grid-v227 .bcp-build-component-card-v227 .thumb{display:block!important;width:86px!important;height:86px!important;min-height:86px!important;margin:0!important;border:0!important;border-radius:0!important;background-position:center!important;background-size:cover!important;pointer-events:none!important}'
+      +'.bcp-look-product-grid-v16m.bcp-build-components-grid-v227 .bcp-build-component-card-v227 .body{padding:12px 14px!important;min-width:0!important}'
+      +'.bcp-look-product-grid-v16m.bcp-build-components-grid-v227 .bcp-build-component-card-v227 .body h3{margin:0!important;color:#fff!important;font-size:.98rem!important;line-height:1.25!important}'
+      +'.bcp-look-product-grid-v16m.bcp-build-components-grid-v227 .bcp-build-component-card-v227 .body h3 a{color:inherit!important;text-decoration:none!important;pointer-events:none!important;cursor:default!important}'
+      +'.bcp-look-product-grid-v16m.bcp-build-components-grid-v227 .bcp-build-component-card-v227 .body>p,.bcp-look-product-grid-v16m.bcp-build-components-grid-v227 .bcp-build-component-card-v227 .product-meta,.bcp-look-product-grid-v16m.bcp-build-components-grid-v227 .bcp-build-component-card-v227 .small,.bcp-look-product-grid-v16m.bcp-build-components-grid-v227 .bcp-build-component-card-v227 .product-details-link,.bcp-look-product-grid-v16m.bcp-build-components-grid-v227 .bcp-build-component-card-v227 .add-preview{display:none!important}'
+      +'.bcp-full-build-cta-v227{margin:20px 0 6px;padding:0}'
+      +'.bcp-full-build-cta-v227 .bcp-look-fast-action-v174{display:block!important;margin:0!important}'
+      +'.bcp-full-build-cta-v227 .bcp-look-full-add-v16m{display:flex!important;align-items:center!important;justify-content:center!important;width:100%!important;min-height:54px!important;margin:0!important}'
+      +'.bcp-full-build-individual-v227{display:inline-flex;align-items:center;justify-content:center;width:100%;min-height:42px;margin:10px 0 0;color:#e0b45d;text-decoration:none;font-weight:850;font-size:.9rem}'
+      +'.bcp-full-build-individual-v227:hover,.bcp-full-build-individual-v227:focus-visible{color:#fff;text-decoration:underline}'
+      +'@media(min-width:901px){.bcp-build-summary-v227,.bcp-build-components-heading-v227,.bcp-full-build-cta-v227,.bcp-full-build-individual-v227{grid-column:2!important}.bcp-look-product-grid-v16m.bcp-build-components-grid-v227{grid-column:2!important}.bcp-look-product-grid-v16m.bcp-build-components-grid-v227 .bcp-build-component-card-v227{grid-template-columns:72px minmax(0,1fr)!important;min-height:72px!important}.bcp-look-product-grid-v16m.bcp-build-components-grid-v227 .bcp-build-component-card-v227 .thumb{width:72px!important;height:72px!important;min-height:72px!important}}'
+      +'@media(max-width:640px){.bcp-build-summary-v227{padding:14px}.bcp-build-summary-v227-list li{font-size:.88rem}.bcp-look-product-grid-v16m.bcp-build-components-grid-v227 .bcp-build-component-card-v227{grid-template-columns:76px minmax(0,1fr)!important;min-height:76px!important}.bcp-look-product-grid-v16m.bcp-build-components-grid-v227 .bcp-build-component-card-v227 .thumb{width:76px!important;height:76px!important;min-height:76px!important}.bcp-look-product-grid-v16m.bcp-build-components-grid-v227 .bcp-build-component-card-v227 .body{padding:10px 12px!important}.bcp-full-build-cta-v227 .bcp-look-full-add-v16m{min-height:52px!important}}';
     document.head.appendChild(style);
   }
-  function insertPostAccessPanel(target){
-    if(!target || target.querySelector('.bcp-post-access-v206')) return;
+  function makeStaticComponentList(grid){
+    if(!grid || grid.classList.contains('bcp-build-components-grid-v227')) return 0;
+    var cards=Array.prototype.slice.call(grid.querySelectorAll('.product-card'));
+    grid.classList.add('bcp-build-components-grid-v227');
+    cards.forEach(function(card){
+      card.classList.add('bcp-build-component-card-v227');
+      card.querySelectorAll('a[href]').forEach(function(link){
+        link.removeAttribute('href');
+        link.setAttribute('aria-disabled','true');
+        link.setAttribute('tabindex','-1');
+      });
+      card.querySelectorAll('button.add-preview, a.add-preview').forEach(function(action){
+        action.setAttribute('aria-hidden','true');
+        action.setAttribute('tabindex','-1');
+      });
+    });
+    return cards.length;
+  }
+  function buildFullConfigurationPresentation(target){
+    if(!target || target.querySelector('.bcp-build-summary-v227')) return;
     var bodyNode=target.querySelector('.bcp-look-parts-body-v16m') || target;
     var titleNode=bodyNode.querySelector('h3');
     var nativeButton=bodyNode.querySelector('[data-add-bundle]');
     var nativeAction=nativeButton && nativeButton.closest ? nativeButton.closest('.bcp-look-fast-action-v174') : null;
-    if(!titleNode || !nativeButton || !nativeAction) return;
+    var media=bodyNode.querySelector('.bcp-look-gallery-banner-v16n, .bcp-look-sticky-media-v16m');
+    var grid=bodyNode.querySelector('.bcp-look-product-grid-v16m');
+    var kicker=bodyNode.querySelector('.bcp-look-kicker-v16m');
+    var copy=titleNode ? titleNode.nextElementSibling : null;
+    if(!titleNode || !nativeButton || !nativeAction || !media || !grid) return;
     var name=cleanText(titleNode.textContent,100) || 'this build';
-    var panel=document.createElement('section');
-    panel.className='bcp-post-access-v206';
-    panel.setAttribute('aria-label','Unlocked '+name+' selection');
-    var kicker=document.createElement('span'); kicker.className='bcp-post-access-v206-kicker'; kicker.textContent='Your selection is unlocked';
-    var heading=document.createElement('h4'); heading.textContent=name;
-    var copy=document.createElement('p'); copy.textContent='The exact selected upgrades for this build are ready below. Complete the build in one step, or choose individual parts.';
-    var actions=document.createElement('div'); actions.className='bcp-post-access-v206-actions';
+    var count=makeStaticComponentList(grid);
+    if(kicker) kicker.textContent='Your selected configuration';
+    if(copy && copy.tagName==='P') copy.textContent='The exact selected components for this complete build are below.';
     nativeButton.textContent='Complete this build · Save 5%';
-    nativeButton.setAttribute('aria-label','Complete the '+name+' build and add selected parts to cart');
-    actions.appendChild(nativeAction);
+    nativeButton.setAttribute('aria-label','Complete the '+name+' build, add all selected parts to cart and receive the 5% Full Build saving');
+    /* Keep the look video as the first visual decision. */
+    bodyNode.insertBefore(media,bodyNode.firstChild);
+    var summary=document.createElement('section');
+    summary.className='bcp-build-summary-v227';
+    summary.setAttribute('aria-label','Complete '+name+' configuration summary');
+    var summaryTitle=document.createElement('strong');
+    summaryTitle.className='bcp-build-summary-v227-title';
+    summaryTitle.textContent='Your exact '+name+' configuration';
+    var list=document.createElement('ul');
+    list.className='bcp-build-summary-v227-list';
+    [
+      [String(count)+' selected component'+(count===1?'':'s'),'▣'],
+      ['One complete configuration','✓'],
+      ['Full Build saving: 5%','%'],
+      ['Motorcycle not included','i']
+    ].forEach(function(item){
+      var row=document.createElement('li');
+      var icon=document.createElement('span');
+      icon.className='bcp-build-summary-v227-icon';
+      icon.setAttribute('aria-hidden','true');
+      icon.textContent=item[1];
+      row.appendChild(icon);
+      row.appendChild(document.createTextNode(item[0]));
+      list.appendChild(row);
+    });
+    summary.appendChild(summaryTitle);
+    summary.appendChild(list);
+    var heading=document.createElement('h4');
+    heading.className='bcp-build-components-heading-v227';
+    heading.textContent='Build components ('+count+')';
+    var ctaWrap=document.createElement('div');
+    ctaWrap.className='bcp-full-build-cta-v227';
     var individual=document.createElement('a');
-    individual.className='bcp-post-access-v206-secondary';
+    individual.className='bcp-full-build-individual-v227';
     individual.href='#shop-part-by-part';
-    individual.textContent='Choose parts individually';
-    individual.setAttribute('aria-label','Choose individual upgrades instead of the complete '+name+' build');
+    individual.textContent='Review individual parts';
+    individual.setAttribute('aria-label','Review individual parts and prices instead of completing the '+name+' build');
     individual.addEventListener('click',function(){
       emit('private_look_individual_parts_click',{source_build_key:target.getAttribute('data-cart-look-context')||'',source_build_name:name});
     });
+    if(copy && copy.parentNode===bodyNode) copy.insertAdjacentElement('afterend',summary);
+    else titleNode.insertAdjacentElement('afterend',summary);
+    grid.insertAdjacentElement('beforebegin',heading);
+    grid.insertAdjacentElement('afterend',ctaWrap);
+    ctaWrap.appendChild(nativeAction);
+    ctaWrap.insertAdjacentElement('afterend',individual);
     nativeButton.addEventListener('click',function(){
       emit('complete_look_clicked',{source_build_key:target.getAttribute('data-cart-look-context')||'',source_build_name:name});
       window.setTimeout(function(){
         emit('complete_look_added_to_cart',{source_build_key:target.getAttribute('data-cart-look-context')||'',source_build_name:name});
       },0);
     });
-    panel.appendChild(kicker); panel.appendChild(heading); panel.appendChild(copy); panel.appendChild(actions);
-    titleNode.insertAdjacentElement('afterend',panel);
   }
   function routeToSelectedLook(){
     var target=selectedPrivateLook();
     if(!target) return;
     injectStyle();
-    insertPostAccessPanel(target);
+    buildFullConfigurationPresentation(target);
     var name=cleanText((target.querySelector('h3')||{}).textContent,100);
     emit('private_look_opened',{source_build_key:target.getAttribute('data-cart-look-context')||'',source_build_name:name});
     window.requestAnimationFrame(function(){
