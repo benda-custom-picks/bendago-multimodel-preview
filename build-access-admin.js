@@ -1,4 +1,4 @@
-/* BCP V216 — full admin catalog or exact customer-look preview. The key is never stored. */
+/* BCP V220 — full admin catalog or exact customer-look preview. Safe paste normalization and actionable errors. */
 (function(){
   'use strict';
   var form = document.getElementById('bcp-admin-access-form');
@@ -58,7 +58,7 @@
 
   form.addEventListener('submit', function(event){
     event.preventDefault();
-    var adminKey = String(keyInput.value || '');
+    var adminKey = String(keyInput.value == null ? '' : keyInput.value).replace(/^\uFEFF/, '').replace(/^[\s\uFEFF]+|[\s\uFEFF]+$/g, '');
     if(!adminKey){
       setStatus('Enter your admin key.', true);
       keyInput.focus();
@@ -77,7 +77,9 @@
       body: JSON.stringify(payload)
     }).then(function(response){
       return response.json().catch(function(){ return {}; }).then(function(data){
-        if(!response.ok || !data || !data.ok) throw new Error('Private access could not be granted.');
+        if(!response.ok || !data || !data.ok) {
+          throw new Error((data && data.error) ? String(data.error) : 'Private access could not be granted.');
+        }
         return data;
       });
     }).then(function(data){
@@ -85,9 +87,9 @@
       if(isPreview) clearPreviewCart();
       setStatus(isPreview ? 'Preview granted. Opening selected build…' : 'Full admin access granted. Opening the catalog…');
       window.setTimeout(function(){ window.location.assign(data.redirect_path || './index.html'); }, 250);
-    }).catch(function(){
-      keyInput.value = '';
-      setStatus('Private access could not be granted.', true);
+    }).catch(function(error){
+      /* Preserve the field on failure so a correct key is never silently discarded. */
+      setStatus((error && error.message) ? error.message : 'Private access could not be granted.', true);
       if(button){ button.disabled = false; refreshCopy(); }
     });
   });
