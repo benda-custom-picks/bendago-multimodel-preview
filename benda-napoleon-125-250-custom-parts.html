@@ -2059,6 +2059,26 @@ html.bcp-look-video-first-frame-gate .model-page video.bcp-look-video-first-fram
   transition: opacity 120ms linear !important;
 }
 </style>
+
+<style id="bcp-v198-mobile-guide-title-hitbox">
+/* V198 — responsive only: the native guide-page title links must stay tappable above the visual overlay. */
+@media (max-width:900px){
+  html body.model-page section#looks article.look-card > .look-body > h3,
+  html body.model-page section#looks article.look-card > .look-body > h3 > a.bcp-watch-title-link-v18{
+    position:relative !important;
+    z-index:40 !important;
+    pointer-events:auto !important;
+    touch-action:manipulation !important;
+  }
+  html body.model-page section#looks article.look-card > .look-body > h3 > a.bcp-watch-title-link-v18{
+    display:inline-flex !important;
+    align-items:flex-end !important;
+    min-height:44px !important;
+    max-width:100% !important;
+    cursor:pointer !important;
+  }
+}
+</style>
 </head><body class="model-page model-125" data-bcp-access-scope="model" data-bcp-private-catalog="napoleon-125-250"><!-- Google Tag Manager (noscript) -->
 <noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-MQHMSX8X" style="display:none;visibility:hidden" width="0"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
