@@ -1,4 +1,4 @@
-/* BCP V195 — public access shell. Private data loads only from authenticated Worker endpoints. */
+/* BCP V197 — public access shell. Mobile look titles keep native guide-page navigation; deep anchors place the unlock panel under the selected look. */
 /* BCP V159 — Build Access client + direct GA4 tracking (no GTM event tag required). */
 (function(){
   'use strict';
@@ -172,14 +172,25 @@
     insertOnce(document.querySelector('.hero-band'),'after','home');
     markLockedView('home');
   }
+  function placeLockedAccessPanel(anchor, context, lookCard){
+    var panel=document.querySelector('[data-bcp-access-panel]');
+    if(!panel) panel=unlockPanel(context || defaultSourceSection());
+    if(context) panel.setAttribute('data-bcp-source-section',context);
+    if(lookCard) setPanelBuildCopy(panel,lookCard);
+    if(anchor && anchor.parentNode && panel.previousElementSibling!==anchor){
+      anchor.parentNode.insertBefore(panel,anchor.nextSibling);
+    }else if(!panel.parentNode){
+      body.insertBefore(panel,body.firstChild);
+    }
+    return panel;
+  }
   function lockModel(){
     var looks=document.querySelector('#looks');
     var fullLook=document.querySelector('#full-look-parts');
     var individual=document.querySelector('#shop-part-by-part .product-grid');
     var look=directLookCard();
     var lookContext=look && look.id ? look.id : 'full_look';
-    if(look) insertOnce(look,'after',lookContext);
-    else insertOnce(looks,'after','full_look');
+    placeLockedAccessPanel(look || looks,lookContext,look);
     blur(fullLook);
     blur(individual);
     if(fullLook){ markLockedView(lookContext); observeLockedTarget(fullLook,'full_look'); }
@@ -253,16 +264,7 @@
       button.setAttribute('data-bcp-unlock-label',label);
     }
   }
-  function isResponsiveLookViewport(){
-    return !!(window.matchMedia && window.matchMedia('(max-width: 900px)').matches);
-  }
-  function persistLookAnchor(lookCard){
-    if(!lookCard || !lookCard.id || !window.history || typeof window.history.replaceState !== 'function') return;
-    var hash='#'+encodeURIComponent(lookCard.id);
-    if(location.hash===hash) return;
-    window.history.replaceState(null,'',location.pathname+location.search+hash);
-  }
-  function scrollToLockedAccessPanel(lookCta, persistAnchor){
+  function scrollToLockedAccessPanel(lookCta){
     if(!root.classList.contains('bcp-access-locked')) return false;
     var panel=document.querySelector('[data-bcp-access-panel]');
     if(!panel) return false;
@@ -273,8 +275,7 @@
       panel.setAttribute('data-bcp-source-section',lookContext);
       setPanelBuildCopy(panel,lookCard);
       activeSourceSection=lookContext;
-      if(persistAnchor) persistLookAnchor(lookCard);
-      if(lookCard.parentNode && panel.previousElementSibling!==lookCard) lookCard.parentNode.insertBefore(panel,lookCard.nextSibling);
+      placeLockedAccessPanel(lookCard,lookContext,lookCard);
     }else{
       var context=panel.getAttribute('data-bcp-source-section');
       if(context) activeSourceSection=context;
@@ -289,12 +290,7 @@
   function bind(){
     document.addEventListener('click',function(event){
       var lookCta=event.target.closest('.bcp-look-scroll-link-v16m');
-      if(lookCta && scrollToLockedAccessPanel(lookCta,false)){
-        event.preventDefault();
-        return;
-      }
-      var responsiveLookTitle=event.target.closest('.bcp-watch-title-link-v18');
-      if(responsiveLookTitle && isResponsiveLookViewport() && scrollToLockedAccessPanel(responsiveLookTitle,true)){
+      if(lookCta && scrollToLockedAccessPanel(lookCta)){
         event.preventDefault();
         return;
       }
