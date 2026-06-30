@@ -144,7 +144,7 @@
     observer.observe(el);
   }
   function api(path, options){
-    return fetch(API_BASE + path, Object.assign({credentials:'same-origin',headers:{'Content-Type':'application/json'}}, options || {})).then(function(res){
+    return fetch(API_BASE + path, Object.assign({credentials:'same-origin',cache:'no-store',headers:{'Content-Type':'application/json'}}, options || {})).then(function(res){
       return res.json().catch(function(){return {};}).then(function(data){
         if(!res.ok) throw new Error((data && data.error) || 'Secure catalog access is unavailable.');
         return data;
@@ -203,7 +203,7 @@
   }
   function lock(){
     root.classList.remove('bcp-access-pending','bcp-access-granted');
-    /* V190: fail closed — only a verified granted response may expose the catalog. */
+    /* V191 fail-closed: only an explicit signed access grant may expose private catalog content. */
     if(scope==='guide') return;
     root.classList.add('bcp-access-locked');
     if(scope==='home') lockHome();
@@ -311,7 +311,7 @@
   if(scope==='access'){ grant(); return; }
   if(scope==='return'){ grant(); confirmReturn(); return; }
   api('/build-access/status').then(function(data){
-    /* V190: never grant because a request merely returned 2xx; require the signed entitlement response. */
+    /* A 200 fallback page, malformed JSON, or unrelated response must stay locked. */
     if(data && data.ok === true && data.access === 'granted') grant();
     else lock();
   }).catch(lock);
