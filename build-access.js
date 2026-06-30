@@ -1,4 +1,4 @@
-/* BCP V197 — public access shell. Mobile look titles keep native guide-page navigation; deep anchors place the unlock panel under the selected look. */
+/* BCP V205 — contextual Build Access state: anonymous visitors unlock a chosen look; authorised visitors open the same look. */
 /* BCP V159 — Build Access client + direct GA4 tracking (no GTM event tag required). */
 (function(){
   'use strict';
@@ -15,6 +15,7 @@
   var clickedLookCard = null;
   var firedLockedViews = Object.create(null);
   var pendingContextKey = 'bcp_build_access_tracking_context_v159';
+  if(scope==='model') root.classList.add('bcp-access-pending');
 
   function cleanText(value, maxLength){
     return String(value || '').replace(/[\u0000-\u001F\u007F]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, maxLength || 100);
@@ -172,6 +173,43 @@
     insertOnce(document.querySelector('.hero-band'),'after','home');
     markLockedView('home');
   }
+  function setPanelHidden(panel, hidden){
+    if(!panel) return;
+    panel.hidden=!!hidden;
+    panel.classList.toggle('bcp-access-panel-active',!hidden);
+  }
+  function lookNameFromCard(lookCard){
+    var title=lookCard && lookCard.querySelector ? lookCard.querySelector('.look-body h3') : null;
+    return cleanText(title ? title.textContent : '',90);
+  }
+  function setModelAccessCopy(mode){
+    if(scope!=='model') return;
+    var intro=document.querySelector('[data-bcp-model-access-intro]');
+    if(intro){
+      intro.textContent=(mode==='granted')
+        ? 'Choose a build direction. Open its exact selected upgrades, options, galleries and cart access.'
+        : 'Choose a build direction. Unlock its exact selected upgrades, options, galleries and cart access for 30 days.';
+    }
+    document.querySelectorAll('.bcp-look-scroll-link-v16m').forEach(function(link){
+      var card=link.closest ? link.closest('.look-card') : null;
+      var name=lookNameFromCard(card);
+      if(mode==='granted'){
+        link.textContent='View exact selected upgrades';
+        link.setAttribute('aria-label','View exact selected upgrades for '+(name || 'this build'));
+      }else{
+        link.textContent='Unlock exact selected upgrades · '+PRICE;
+        link.setAttribute('aria-label','Unlock exact selected upgrades for '+(name || 'this build')+' for '+PRICE);
+      }
+    });
+  }
+  function activateLookFromCta(lookCta){
+    var card=lookCta && lookCta.closest ? lookCta.closest('.look-card') : null;
+    if(!card) return '';
+    clickedLookCard=card;
+    var context=card.id || 'full_look';
+    activeSourceSection=context;
+    return context;
+  }
   function placeLockedAccessPanel(anchor, context, lookCard){
     var panel=document.querySelector('[data-bcp-access-panel]');
     if(!panel) panel=unlockPanel(context || defaultSourceSection());
@@ -190,7 +228,10 @@
     var individual=document.querySelector('#shop-part-by-part .product-grid');
     var look=directLookCard();
     var lookContext=look && look.id ? look.id : 'full_look';
-    placeLockedAccessPanel(look || looks,lookContext,look);
+    var panel=placeLockedAccessPanel(look || looks,lookContext,look);
+    /* On a normal showroom visit, a customer selects a look first; a deep guide link keeps its chosen panel visible. */
+    setPanelHidden(panel,!look);
+    setModelAccessCopy('locked');
     blur(fullLook);
     blur(individual);
     if(fullLook){ markLockedView(lookContext); observeLockedTarget(fullLook,'full_look'); }
@@ -226,7 +267,8 @@
   function grant(){
     root.classList.remove('bcp-access-pending','bcp-access-locked');
     root.classList.add('bcp-access-granted');
-    document.querySelectorAll('[data-bcp-access-panel]').forEach(function(panel){ panel.hidden=true; });
+    if(scope==='model') setModelAccessCopy('granted');
+    document.querySelectorAll('[data-bcp-access-panel]').forEach(function(panel){ setPanelHidden(panel,true); });
     try{ window.dispatchEvent(new CustomEvent('bcp:access-granted')); }catch(error){}
   }
   function checkout(button){
@@ -271,12 +313,12 @@
     if(!panel) return false;
     var lookCard=lookCta && lookCta.closest ? lookCta.closest('.look-card') : null;
     if(lookCard){
-      clickedLookCard=lookCard;
-      var lookContext=lookCard.id || 'full_look';
+      var lookContext=activateLookFromCta(lookCta) || 'full_look';
       panel.setAttribute('data-bcp-source-section',lookContext);
       setPanelBuildCopy(panel,lookCard);
-      activeSourceSection=lookContext;
       placeLockedAccessPanel(lookCard,lookContext,lookCard);
+      setPanelHidden(panel,false);
+      track('build_access_look_cta_click',{source_section:lookContext});
     }else{
       var context=panel.getAttribute('data-bcp-source-section');
       if(context) activeSourceSection=context;
@@ -291,9 +333,20 @@
   function bind(){
     document.addEventListener('click',function(event){
       var lookCta=event.target.closest('.bcp-look-scroll-link-v16m');
-      if(lookCta && scrollToLockedAccessPanel(lookCta)){
-        event.preventDefault();
-        return;
+      if(lookCta){
+        if(root.classList.contains('bcp-access-pending')){
+          event.preventDefault();
+          return;
+        }
+        if(root.classList.contains('bcp-access-granted')){
+          var grantedContext=activateLookFromCta(lookCta) || 'full_look';
+          track('private_catalog_look_cta_click',{source_section:grantedContext});
+          return;
+        }
+        if(scrollToLockedAccessPanel(lookCta)){
+          event.preventDefault();
+          return;
+        }
       }
       var button=event.target.closest('[data-bcp-unlock]');
       if(!button)return;

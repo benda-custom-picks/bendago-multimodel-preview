@@ -1,4 +1,4 @@
-/* BCP V195 — public shell; no catalog names, prices, SKUs, options or card HTML are stored here. */
+/* BCP V205 — private slots become visible only after authenticated catalog data is mounted. */
 (function(){
   'use strict';
   var body=document.body;
@@ -26,10 +26,18 @@
       if(slot) slot.setAttribute('aria-busy',isBusy ? 'true' : 'false');
     });
   }
+  function setCatalogVisible(isVisible){
+    ['full-look-parts','shop-part-by-part'].forEach(function(id){
+      var slot=document.getElementById(id);
+      if(!slot) return;
+      slot.hidden=!isVisible;
+      if(isVisible) slot.style.display='';
+    });
+  }
   function showUnavailable(){
     var full=document.getElementById('full-look-parts');
     var shop=document.getElementById('shop-part-by-part');
-    [full,shop].forEach(function(el){ if(el){el.innerHTML=''; el.style.display='none';} });
+    [full,shop].forEach(function(el){ if(el){el.innerHTML=''; el.hidden=true; el.style.display='none';} });
     setCatalogBusy(false);
     document.documentElement.classList.remove('bcp-access-granted');
     document.documentElement.classList.add('bcp-access-locked');
@@ -59,10 +67,12 @@
     if(!full || !shop || !data.sections) throw new Error('Private catalog mount unavailable.');
     full.innerHTML=String(data.sections.full_look_html||'');
     shop.innerHTML=String(data.sections.shop_html||'');
+    setCatalogVisible(true);
   }
   function load(){
     if(loaded) return;
     loaded=true;
+    setCatalogVisible(false);
     setCatalogBusy(true);
     privateFetch('/api/private-catalog/'+encodeURIComponent(model)).then(function(data){
       hydrate(data);
