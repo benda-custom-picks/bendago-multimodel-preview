@@ -253,7 +253,16 @@
       button.setAttribute('data-bcp-unlock-label',label);
     }
   }
-  function scrollToLockedAccessPanel(lookCta){
+  function isResponsiveLookViewport(){
+    return !!(window.matchMedia && window.matchMedia('(max-width: 900px)').matches);
+  }
+  function persistLookAnchor(lookCard){
+    if(!lookCard || !lookCard.id || !window.history || typeof window.history.replaceState !== 'function') return;
+    var hash='#'+encodeURIComponent(lookCard.id);
+    if(location.hash===hash) return;
+    window.history.replaceState(null,'',location.pathname+location.search+hash);
+  }
+  function scrollToLockedAccessPanel(lookCta, persistAnchor){
     if(!root.classList.contains('bcp-access-locked')) return false;
     var panel=document.querySelector('[data-bcp-access-panel]');
     if(!panel) return false;
@@ -264,6 +273,7 @@
       panel.setAttribute('data-bcp-source-section',lookContext);
       setPanelBuildCopy(panel,lookCard);
       activeSourceSection=lookContext;
+      if(persistAnchor) persistLookAnchor(lookCard);
       if(lookCard.parentNode && panel.previousElementSibling!==lookCard) lookCard.parentNode.insertBefore(panel,lookCard.nextSibling);
     }else{
       var context=panel.getAttribute('data-bcp-source-section');
@@ -279,7 +289,12 @@
   function bind(){
     document.addEventListener('click',function(event){
       var lookCta=event.target.closest('.bcp-look-scroll-link-v16m');
-      if(lookCta && scrollToLockedAccessPanel(lookCta)){
+      if(lookCta && scrollToLockedAccessPanel(lookCta,false)){
+        event.preventDefault();
+        return;
+      }
+      var responsiveLookTitle=event.target.closest('.bcp-watch-title-link-v18');
+      if(responsiveLookTitle && isResponsiveLookViewport() && scrollToLockedAccessPanel(responsiveLookTitle,true)){
         event.preventDefault();
         return;
       }
