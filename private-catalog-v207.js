@@ -1,4 +1,4 @@
-/* BCP V206 — route paid Build Access visitors straight to their selected private look and make full-build purchase the primary next step. */
+/* BCP V216 — selected look catalog plus admin customer preview notice. */
 (function(){
   'use strict';
   var body=document.body;
@@ -10,19 +10,26 @@
   var requestedLookId='';
   var LOOK_ROUTES={
     'strong-pure-bob-full-build':'look-parts-strong-pure-bob',
+    'strong-pure-bob':'look-parts-strong-pure-bob',
     'look-parts-strong-pure-bob':'look-parts-strong-pure-bob',
     'headlight-fairing-full-build':'look-parts-headlight-fairing',
+    'headlight-fairing':'look-parts-headlight-fairing',
     'look-parts-headlight-fairing':'look-parts-headlight-fairing',
     'brutal-bob-full-build':'look-parts-brutal-bob',
     'black-fat-bob':'look-parts-brutal-bob',
+    'brutal-bob':'look-parts-brutal-bob',
     'look-parts-brutal-bob':'look-parts-brutal-bob',
     'blackout-predator-full-build':'look-parts-blackout-predator',
+    'blackout-predator':'look-parts-blackout-predator',
     'look-parts-blackout-predator':'look-parts-blackout-predator',
     'storm-rider-66-full-build':'look-parts-storm-rider-66',
+    'storm-rider-66':'look-parts-storm-rider-66',
     'look-parts-storm-rider-66':'look-parts-storm-rider-66',
     'midnight-hunter-full-build':'look-parts-midnight-hunter',
+    'midnight-hunter':'look-parts-midnight-hunter',
     'look-parts-midnight-hunter':'look-parts-midnight-hunter',
     'shadow-beast-v4-full-build':'look-parts-shadow-beast-v4',
+    'shadow-beast-v4':'look-parts-shadow-beast-v4',
     'look-parts-shadow-beast-v4':'look-parts-shadow-beast-v4'
   };
 
@@ -169,6 +176,19 @@
       target.scrollIntoView({behavior:'auto',block:'start'});
     });
   }
+  function mountPreviewNotice(data){
+    var old=document.getElementById('bcp-customer-preview-notice-v216');
+    if(old && old.parentNode) old.parentNode.removeChild(old);
+    if(!data || data.preview!==true) return;
+    var full=document.getElementById('full-look-parts');
+    if(!full || !full.parentNode) return;
+    var notice=document.createElement('aside');
+    notice.id='bcp-customer-preview-notice-v216';
+    notice.setAttribute('role','status');
+    notice.style.cssText='margin:14px auto;width:min(1180px,calc(100% - 32px));padding:12px 14px;border:1px solid rgba(246,196,49,.55);border-radius:14px;background:rgba(246,196,49,.11);color:#fff;font:800 .88rem/1.35 system-ui,-apple-system,Segoe UI,sans-serif';
+    notice.textContent='Customer preview — '+(data.access_look_name||'selected build')+'. This browser is limited exactly like a customer. Stripe checkout is disabled.';
+    full.parentNode.insertBefore(notice,full);
+  }
   function hydrate(data){
     var full=document.getElementById('full-look-parts');
     var shop=document.getElementById('shop-part-by-part');
@@ -196,6 +216,8 @@
       /* Access is confirmed and catalog HTML is mounted before optional runtime assets.
          Asset failures must never hide a paid/admin catalog or revoke its UI state. */
       hydrate(data);
+      mountPreviewNotice(data);
+      window.BENDAGO_CUSTOMER_PREVIEW = !!(data && data.preview===true);
       /* V215: the paid entitlement owns one exact build. The cart uses this same key for its single sticky video. */
       if (data && data.access_look_key) {
         requestedLookId = String(data.access_look_key);
