@@ -158,7 +158,12 @@
     panel.className='bcp-access-unlock-panel';
     panel.setAttribute('data-bcp-access-panel','1');
     panel.setAttribute('data-bcp-source-section', context || defaultSourceSection());
-    panel.innerHTML='<b>Custom parts only · motorcycle not included</b><h2>Unlock the exact parts for this build</h2><p>See the exact parts list, options, galleries and cart access for 30 days. The motorcycle shown is not for sale.</p><button type="button" class="bcp-access-unlock-btn" data-bcp-unlock>Unlock exact parts list · '+PRICE+'</button><small>Custom parts only · One payment · Secure Stripe checkout · Not a subscription</small>';
+    if(scope==='home'){
+      panel.classList.add('bcp-access-home-guide');
+      panel.innerHTML='<b>Start with your motorcycle</b><h2>Choose your Benda build</h2><p>Select your motorcycle first, then choose the build direction whose exact parts you want to unlock.</p><button type="button" class="bcp-access-unlock-btn" data-bcp-explore-builds>Explore the builds</button><small>Choose a model, then choose a build.</small>';
+    }else{
+      panel.innerHTML='<b>Custom parts only · motorcycle not included</b><h2>Unlock the exact parts for this build</h2><p>See the exact parts list, options, galleries and cart access for 30 days. The motorcycle shown is not for sale.</p><button type="button" class="bcp-access-unlock-btn" data-bcp-unlock>Unlock exact parts list · '+PRICE+'</button><small data-bcp-access-message>Custom parts only · One payment · Secure Stripe checkout · Not a subscription</small>';
+    }
     return panel;
   }
   function insertOnce(anchor, where, context){
@@ -279,9 +284,42 @@
     }
     return cleanPath();
   }
+  function setPanelMessage(panel, message, isError){
+    if(!panel) return;
+    var note=panel.querySelector('[data-bcp-access-message]');
+    if(!note){
+      note=document.createElement('small');
+      note.setAttribute('data-bcp-access-message','1');
+      panel.appendChild(note);
+    }
+    note.textContent=cleanText(message, 220);
+    note.classList.toggle('bcp-access-message-error', !!isError);
+  }
+  function guideToModels(){
+    var models=document.getElementById('models');
+    if(!models) return;
+    var guidance=models.querySelector('[data-bcp-model-choice-guidance]');
+    if(!guidance){
+      guidance=document.createElement('p');
+      guidance.setAttribute('data-bcp-model-choice-guidance','1');
+      guidance.setAttribute('role','status');
+      guidance.className='bcp-model-choice-guidance';
+      guidance.textContent='Choose your motorcycle, then choose a build to unlock its exact parts.';
+      models.appendChild(guidance);
+    }
+    guidance.hidden=false;
+    models.classList.add('bcp-models-guided');
+    models.scrollIntoView({behavior:'smooth',block:'start'});
+    window.setTimeout(function(){ models.classList.remove('bcp-models-guided'); }, 1800);
+  }
   function checkout(button){
     var panel = button && button.closest ? button.closest('[data-bcp-access-panel]') : null;
     if(panel && panel.getAttribute('data-bcp-source-section')) activeSourceSection = panel.getAttribute('data-bcp-source-section');
+    if(!sourceBuildKey()){
+      if(scope==='home') guideToModels();
+      else setPanelMessage(panel, 'Choose a build first to unlock its exact parts.', true);
+      return;
+    }
     track('build_access_checkout_click');
     rememberCheckoutContext();
     if(button) { button.disabled=true; button.textContent='Opening secure checkout…'; }
@@ -294,7 +332,7 @@
       .catch(function(error){
         track('build_access_checkout_error', { error_stage: 'create_checkout' });
         if(button){button.disabled=false;button.textContent=button.getAttribute('data-bcp-unlock-label') || 'Unlock exact parts list · '+PRICE;}
-        alert(error.message || 'Secure checkout is unavailable.');
+        setPanelMessage(panel, error.message || 'Secure checkout is unavailable. Please try again.', true);
       });
   }
   function setPanelBuildCopy(panel, lookCard){
@@ -310,7 +348,7 @@
     if(title) title.textContent='Unlock exact parts for '+buildName;
     if(copy) copy.textContent='See the exact parts used on this build, options, galleries and cart access for 30 days. Motorcycle not included.';
     if(button){
-      var label='Unlock exact parts list · '+PRICE;
+      var label='Unlock '+buildName+' exact parts · '+PRICE;
       button.textContent=label;
       button.setAttribute('data-bcp-unlock-label',label);
     }
@@ -361,6 +399,13 @@
           event.preventDefault();
           return;
         }
+      }
+      var exploreButton=event.target.closest('[data-bcp-explore-builds]');
+      if(exploreButton){
+        event.preventDefault();
+        track('build_access_explore_builds_click',{source_section:'home'});
+        guideToModels();
+        return;
       }
       var button=event.target.closest('[data-bcp-unlock]');
       if(!button)return;
