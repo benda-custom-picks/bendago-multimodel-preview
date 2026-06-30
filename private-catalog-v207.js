@@ -14,6 +14,7 @@
     'headlight-fairing-full-build':'look-parts-headlight-fairing',
     'look-parts-headlight-fairing':'look-parts-headlight-fairing',
     'brutal-bob-full-build':'look-parts-brutal-bob',
+    'black-fat-bob':'look-parts-brutal-bob',
     'look-parts-brutal-bob':'look-parts-brutal-bob',
     'blackout-predator-full-build':'look-parts-blackout-predator',
     'look-parts-blackout-predator':'look-parts-blackout-predator',
@@ -195,6 +196,15 @@
       /* Access is confirmed and catalog HTML is mounted before optional runtime assets.
          Asset failures must never hide a paid/admin catalog or revoke its UI state. */
       hydrate(data);
+      /* V215: the paid entitlement owns one exact build. The cart uses this same key for its single sticky video. */
+      if (data && data.access_look_key) {
+        requestedLookId = String(data.access_look_key);
+        window.BENDAGO_ACTIVE_ACCESS_LOOK = requestedLookId;
+        try { sessionStorage.setItem('bcp_active_access_look_v215', requestedLookId); } catch (ignore) {}
+      } else {
+        window.BENDAGO_ACTIVE_ACCESS_LOOK = '';
+        try { sessionStorage.removeItem('bcp_active_access_look_v215'); } catch (ignore) {}
+      }
       catalogMounted=true;
       setCatalogBusy(false);
       routeToSelectedLook();
