@@ -27,6 +27,25 @@
     document.documentElement.classList.remove('bcp-access-granted');
     document.documentElement.classList.add('bcp-access-locked');
   }
+  function restoreDeepLookAnchor(){
+    var raw=(location.hash||'').replace(/^#/,'');
+    if(!raw) return;
+    var map={
+      'strong-pure-bob-full-build':'look-parts-strong-pure-bob',
+      'headlight-fairing-full-build':'look-parts-headlight-fairing',
+      'brutal-bob-full-build':'look-parts-brutal-bob',
+      'blackout-predator-full-build':'look-parts-blackout-predator',
+      'storm-rider-66-full-build':'look-parts-storm-rider-66',
+      'midnight-hunter-full-build':'look-parts-midnight-hunter',
+      'shadow-beast-v4-full-build':'look-parts-shadow-beast-v4'
+    };
+    var targetId=map[raw] || raw;
+    var target=document.getElementById(targetId);
+    if(!target) return;
+    window.requestAnimationFrame(function(){
+      target.scrollIntoView({behavior:'smooth',block:'start'});
+    });
+  }
   function hydrate(data){
     var full=document.getElementById('full-look-parts');
     var shop=document.getElementById('shop-part-by-part');
@@ -39,6 +58,7 @@
     loaded=true;
     privateFetch('/api/private-catalog/'+encodeURIComponent(model)).then(function(data){
       hydrate(data);
+      restoreDeepLookAnchor();
       return loadScript('/api/private-assets/order-flow.js');
     }).then(function(){
       return loadScript('/api/private-assets/cart-flow.js');

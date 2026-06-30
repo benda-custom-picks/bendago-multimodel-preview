@@ -2079,6 +2079,48 @@ html.bcp-look-video-first-frame-gate .model-page video.bcp-look-video-first-fram
   }
 }
 </style>
+
+<style id="bcp-v202-look-catalog-cta">
+/* V202 — one clear catalog route per public look card.
+   Title keeps native navigation to the public guide. This CTA routes to the same look's private catalog anchor. */
+html body.model-page section#looks article.look-card .bcp-look-cta-v202{
+  position:relative!important;
+  z-index:45!important;
+  display:block!important;
+  margin-top:10px!important;
+  pointer-events:auto!important;
+}
+html body.model-page section#looks article.look-card .bcp-look-cta-v202 > a.bcp-look-scroll-link-v16m{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  min-height:44px!important;
+  padding:0 15px!important;
+  border-radius:999px!important;
+  border:1px solid rgba(246,196,49,.62)!important;
+  background:linear-gradient(135deg,rgba(246,196,49,.96),rgba(191,138,40,.96))!important;
+  color:#140d04!important;
+  box-shadow:0 12px 28px rgba(0,0,0,.32)!important;
+  font-size:.78rem!important;
+  font-weight:950!important;
+  line-height:1!important;
+  letter-spacing:.02em!important;
+  text-decoration:none!important;
+  cursor:pointer!important;
+  pointer-events:auto!important;
+  touch-action:manipulation!important;
+}
+html body.model-page section#looks article.look-card .bcp-look-cta-v202 > a.bcp-look-scroll-link-v16m:hover,
+html body.model-page section#looks article.look-card .bcp-look-cta-v202 > a.bcp-look-scroll-link-v16m:focus-visible{
+  filter:brightness(1.06)!important;
+  transform:translateY(-1px)!important;
+}
+@media(max-width:900px){
+  html body.model-page section#looks article.look-card .bcp-look-cta-v202 > a.bcp-look-scroll-link-v16m{
+    width:100%!important;
+  }
+}
+</style>
 </head><body class="model-page model-125" data-bcp-access-scope="model" data-bcp-private-catalog="napoleon-125-250"><!-- Google Tag Manager (noscript) -->
 <noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-MQHMSX8X" style="display:none;visibility:hidden" width="0"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
@@ -2150,7 +2192,7 @@ html.bcp-look-video-first-frame-gate .model-page video.bcp-look-video-first-fram
 </div>
 </div>
 </section>
-<main><h1 class="seo-visually-hidden">Benda Napoleon 125/250 Custom Parts</h1><section class="section model-start" id="looks"><div class="wrap"><div class="section-head"><h2>Napoleon 125 / 250 — choose your build</h2><p>Active shop base. Choose a build direction first, then shop selected parts.</p></div><div class="look-grid"><article class="look-card" id="strong-pure-bob-full-build"><div class="look-media look-media-video"><video autoplay="" class="look-video" loop="" muted="" playsinline="" poster="poster-strong-pure-bob.jpg" preload="metadata" src="strong-pure-bob-look-autoplay.mp4"></video></div><div class="look-body"><h3><a class="bcp-watch-title-link-v18" href="strong-pure-bob-benda-napoleon-125-250-custom-build.html">Strong Pure Bob</a></h3></div></article><article class="look-card" id="headlight-fairing-full-build"><div class="look-media look-media-video"><video autoplay="" class="look-video" loop="" muted="" playsinline="" poster="poster-headlight-fairing.jpg" preload="metadata" src="headlight-fairing-look-autoplay-v2.mp4"></video></div><div class="look-body"><h3><a class="bcp-watch-title-link-v18" href="headlight-fairing-benda-napoleon-125-250-custom-build.html">Headlight Fairing Build</a></h3></div></article><article class="look-card" id="brutal-bob-full-build"><div aria-label="Brutal Bob Build video" class="look-media look-media-video look-media-sound-card"><video aria-label="Brutal Bob Build selected build video" autoplay="" class="look-video" data-brutal-bob-sound-video="" loop="" muted="" playsinline="" poster="poster-brutal-bob.jpg" preload="metadata" src="brutal-bob-look-autoplay-v3.mp4"></video><button aria-label="Turn sound on" class="look-sound-toggle" data-brutal-bob-sound-toggle="" type="button"><span aria-hidden="true">🔊</span><span class="look-sound-toggle-label">Sound on</span></button></div><div class="look-body"><h3><a class="bcp-watch-title-link-v18" href="brutal-bob-benda-napoleon-125-250-custom-build.html">Brutal Bob Build</a></h3></div></article><article class="look-card" id="blackout-predator-full-build"><div class="look-media look-media-video"><video autoplay="" class="look-video" loop="" muted="" playsinline="" poster="poster-blackout-predator.jpg" preload="metadata" src="blackout-predator-look-autoplay.mp4"></video></div><div class="look-body"><h3><a class="bcp-watch-title-link-v18" href="blackout-predator-benda-napoleon-125-250-custom-build.html">Blackout Predator</a></h3></div></article></div></div></section>
+<main><h1 class="seo-visually-hidden">Benda Napoleon 125/250 Custom Parts</h1><section class="section model-start" id="looks"><div class="wrap"><div class="section-head"><h2>Napoleon 125 / 250 — choose your build</h2><p>Active shop base. Choose a build direction first, then shop selected parts.</p></div><div class="look-grid"><article class="look-card" id="strong-pure-bob-full-build"><div class="look-media look-media-video"><video autoplay="" class="look-video" loop="" muted="" playsinline="" poster="poster-strong-pure-bob.jpg" preload="metadata" src="strong-pure-bob-look-autoplay.mp4"></video></div><div class="look-body"><h3><a class="bcp-watch-title-link-v18" href="strong-pure-bob-benda-napoleon-125-250-custom-build.html">Strong Pure Bob</a></h3><div class="bcp-look-cta-v202"><a class="bcp-look-scroll-link-v16m" href="#look-parts-strong-pure-bob" aria-label="View exact selected upgrades for Strong Pure Bob">View exact selected upgrades</a></div></div></article><article class="look-card" id="headlight-fairing-full-build"><div class="look-media look-media-video"><video autoplay="" class="look-video" loop="" muted="" playsinline="" poster="poster-headlight-fairing.jpg" preload="metadata" src="headlight-fairing-look-autoplay-v2.mp4"></video></div><div class="look-body"><h3><a class="bcp-watch-title-link-v18" href="headlight-fairing-benda-napoleon-125-250-custom-build.html">Headlight Fairing Build</a></h3><div class="bcp-look-cta-v202"><a class="bcp-look-scroll-link-v16m" href="#look-parts-headlight-fairing" aria-label="View exact selected upgrades for Headlight Fairing">View exact selected upgrades</a></div></div></article><article class="look-card" id="brutal-bob-full-build"><div aria-label="Brutal Bob Build video" class="look-media look-media-video look-media-sound-card"><video aria-label="Brutal Bob Build selected build video" autoplay="" class="look-video" data-brutal-bob-sound-video="" loop="" muted="" playsinline="" poster="poster-brutal-bob.jpg" preload="metadata" src="brutal-bob-look-autoplay-v3.mp4"></video><button aria-label="Turn sound on" class="look-sound-toggle" data-brutal-bob-sound-toggle="" type="button"><span aria-hidden="true">🔊</span><span class="look-sound-toggle-label">Sound on</span></button></div><div class="look-body"><h3><a class="bcp-watch-title-link-v18" href="brutal-bob-benda-napoleon-125-250-custom-build.html">Brutal Bob Build</a></h3><div class="bcp-look-cta-v202"><a class="bcp-look-scroll-link-v16m" href="#look-parts-brutal-bob" aria-label="View exact selected upgrades for Brutal Bob">View exact selected upgrades</a></div></div></article><article class="look-card" id="blackout-predator-full-build"><div class="look-media look-media-video"><video autoplay="" class="look-video" loop="" muted="" playsinline="" poster="poster-blackout-predator.jpg" preload="metadata" src="blackout-predator-look-autoplay.mp4"></video></div><div class="look-body"><h3><a class="bcp-watch-title-link-v18" href="blackout-predator-benda-napoleon-125-250-custom-build.html">Blackout Predator</a></h3><div class="bcp-look-cta-v202"><a class="bcp-look-scroll-link-v16m" href="#look-parts-blackout-predator" aria-label="View exact selected upgrades for Blackout Predator">View exact selected upgrades</a></div></div></article></div></div></section>
 <section class="bcp-access-unlock-panel bcp-access-failclosed-panel" data-bcp-access-panel="1" data-bcp-source-section="full_look">
 <b>Custom parts only · motorcycle not included</b>
 <h2>Unlock the exact selected upgrades</h2>
@@ -2209,4 +2251,4 @@ html.bcp-look-video-first-frame-gate .model-page video.bcp-look-video-first-fram
 })();
 </script>
 <script src="./build-access.js?v=v197-guide-links-anchor-panel"></script>
-<script src="./private-catalog.js?v=v195-private-catalog-gate"></script></body></html>
+<script src="./private-catalog.js?v=v202-look-catalog-anchor"></script></body></html>
