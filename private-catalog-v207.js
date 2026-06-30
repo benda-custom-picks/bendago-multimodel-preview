@@ -1,4 +1,4 @@
-/* BCP V228 — desktop full-build component tiles: larger visual thumbnails, titles below images. */
+/* BCP V229 — private Build component cards open the live product gallery and price in a modal panel. */
 (function(){
   'use strict';
   var body=document.body;
@@ -126,11 +126,21 @@
       +'.bcp-build-components-heading-v227{margin:22px 0 12px;color:#fff;font-size:1rem;font-weight:900;letter-spacing:.02em}'
       +'.bcp-look-product-grid-v16m.bcp-build-components-grid-v227{display:grid!important;grid-template-columns:1fr!important;gap:10px!important;margin-top:0!important}'
       +'.bcp-look-product-grid-v16m.bcp-build-components-grid-v227 .bcp-build-component-card-v227{display:grid!important;grid-template-columns:86px minmax(0,1fr)!important;align-items:center!important;min-height:86px!important;padding:0!important;overflow:hidden!important;border:1px solid rgba(255,255,255,.12)!important;border-radius:14px!important;background:rgba(255,255,255,.028)!important;box-shadow:none!important}'
-      +'.bcp-look-product-grid-v16m.bcp-build-components-grid-v227 .bcp-build-component-card-v227 .thumb{display:block!important;width:86px!important;height:86px!important;min-height:86px!important;margin:0!important;border:0!important;border-radius:0!important;background-position:center!important;background-size:cover!important;pointer-events:none!important}'
+      +'.bcp-look-product-grid-v16m.bcp-build-components-grid-v227 .bcp-build-component-card-v227 .thumb{display:block!important;width:86px!important;height:86px!important;min-height:86px!important;margin:0!important;border:0!important;border-radius:0!important;background-position:center!important;background-size:cover!important}'
+      +'.bcp-look-product-grid-v16m.bcp-build-components-grid-v227 .bcp-build-component-card-v227{cursor:pointer!important;outline:none!important;transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease!important}'
+      +'.bcp-look-product-grid-v16m.bcp-build-components-grid-v227 .bcp-build-component-card-v227:hover{transform:translateY(-2px)!important;border-color:rgba(224,180,93,.58)!important;box-shadow:0 12px 28px rgba(0,0,0,.24)!important}'
+      +'.bcp-look-product-grid-v16m.bcp-build-components-grid-v227 .bcp-build-component-card-v227:focus-visible{border-color:#e0b45d!important;box-shadow:0 0 0 3px rgba(224,180,93,.24)!important}'
       +'.bcp-look-product-grid-v16m.bcp-build-components-grid-v227 .bcp-build-component-card-v227 .body{padding:12px 14px!important;min-width:0!important}'
       +'.bcp-look-product-grid-v16m.bcp-build-components-grid-v227 .bcp-build-component-card-v227 .body h3{margin:0!important;color:#fff!important;font-size:.98rem!important;line-height:1.25!important}'
-      +'.bcp-look-product-grid-v16m.bcp-build-components-grid-v227 .bcp-build-component-card-v227 .body h3 a{color:inherit!important;text-decoration:none!important;pointer-events:none!important;cursor:default!important}'
+      +'.bcp-look-product-grid-v16m.bcp-build-components-grid-v227 .bcp-build-component-card-v227 .body h3 a{color:inherit!important;text-decoration:none!important;cursor:pointer!important}'
       +'.bcp-look-product-grid-v16m.bcp-build-components-grid-v227 .bcp-build-component-card-v227 .body>p,.bcp-look-product-grid-v16m.bcp-build-components-grid-v227 .bcp-build-component-card-v227 .product-meta,.bcp-look-product-grid-v16m.bcp-build-components-grid-v227 .bcp-build-component-card-v227 .small,.bcp-look-product-grid-v16m.bcp-build-components-grid-v227 .bcp-build-component-card-v227 .product-details-link,.bcp-look-product-grid-v16m.bcp-build-components-grid-v227 .bcp-build-component-card-v227 .add-preview{display:none!important}'
+      +'.bcp-private-product-panel-v229{position:fixed!important;inset:0!important;z-index:2147483000!important;display:none!important;align-items:center!important;justify-content:center!important;padding:18px!important;background:rgba(0,0,0,.78)!important;backdrop-filter:blur(8px)!important;-webkit-backdrop-filter:blur(8px)!important}'
+      +'.bcp-private-product-panel-v229.is-open{display:flex!important}'
+      +'.bcp-private-product-panel-dialog-v229{position:relative!important;width:min(1040px,100%)!important;height:min(92vh,920px)!important;overflow:hidden!important;border:1px solid rgba(224,180,93,.54)!important;border-radius:18px!important;background:#090909!important;box-shadow:0 24px 70px rgba(0,0,0,.6)!important}'
+      +'.bcp-private-product-panel-frame-v229{display:block!important;width:100%!important;height:100%!important;border:0!important;background:#090909!important}'
+      +'.bcp-private-product-panel-close-v229{position:absolute!important;top:10px!important;right:10px!important;z-index:2!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;width:42px!important;height:42px!important;border:1px solid rgba(224,180,93,.7)!important;border-radius:50%!important;background:rgba(5,5,5,.9)!important;color:#fff!important;font:900 1.45rem/1 system-ui,-apple-system,Segoe UI,sans-serif!important;cursor:pointer!important;box-shadow:0 8px 20px rgba(0,0,0,.35)!important}'
+      +'.bcp-private-product-panel-close-v229:hover,.bcp-private-product-panel-close-v229:focus-visible{background:#e0b45d!important;color:#050505!important;outline:none!important}'
+      +'body.bcp-private-product-panel-open-v229{overflow:hidden!important}'
       +'.bcp-full-build-cta-v227{margin:20px 0 6px;padding:0}'
       +'.bcp-full-build-cta-v227 .bcp-look-fast-action-v174{display:block!important;margin:0!important}'
       +'.bcp-full-build-cta-v227 .bcp-look-full-add-v16m{display:flex!important;align-items:center!important;justify-content:center!important;width:100%!important;min-height:54px!important;margin:0!important}'
@@ -140,20 +150,110 @@
       +'@media(max-width:640px){.bcp-build-summary-v227{padding:14px}.bcp-build-summary-v227-list li{font-size:.88rem}.bcp-look-product-grid-v16m.bcp-build-components-grid-v227 .bcp-build-component-card-v227{grid-template-columns:76px minmax(0,1fr)!important;min-height:76px!important}.bcp-look-product-grid-v16m.bcp-build-components-grid-v227 .bcp-build-component-card-v227 .thumb{width:76px!important;height:76px!important;min-height:76px!important}.bcp-look-product-grid-v16m.bcp-build-components-grid-v227 .bcp-build-component-card-v227 .body{padding:10px 12px!important}.bcp-full-build-cta-v227 .bcp-look-full-add-v16m{min-height:52px!important}}';
     document.head.appendChild(style);
   }
-  function makeStaticComponentList(grid){
+  function safePrivateProductUrl(value){
+    try{
+      var url=new URL(String(value||''),location.origin);
+      if(url.origin!==location.origin) return '';
+      if(!/^\/api\/private-product\/order-[a-z0-9-]+\.html$/i.test(url.pathname)) return '';
+      return url.pathname+(url.search||'')+(url.hash||'');
+    }catch(error){
+      return '';
+    }
+  }
+  function getProductDetailUrl(card){
+    if(!card) return '';
+    var preferred=card.querySelector('.product-details-link[href],.product-card-thumb-link[href],.product-title-link[href]');
+    return safePrivateProductUrl(preferred && preferred.getAttribute('href'));
+  }
+  function ensurePrivateProductPanel(){
+    var existing=document.getElementById('bcp-private-product-panel-v229');
+    if(existing) return existing;
+    var panel=document.createElement('div');
+    panel.id='bcp-private-product-panel-v229';
+    panel.className='bcp-private-product-panel-v229';
+    panel.setAttribute('role','dialog');
+    panel.setAttribute('aria-modal','true');
+    panel.setAttribute('aria-hidden','true');
+    panel.innerHTML='<div class="bcp-private-product-panel-dialog-v229" role="document"><button class="bcp-private-product-panel-close-v229" type="button" aria-label="Close product gallery">×</button><iframe class="bcp-private-product-panel-frame-v229" title="Product gallery and price"></iframe></div>';
+    document.body.appendChild(panel);
+    var close=panel.querySelector('.bcp-private-product-panel-close-v229');
+    var frame=panel.querySelector('.bcp-private-product-panel-frame-v229');
+    function closePanel(){
+      if(!panel.classList.contains('is-open')) return;
+      panel.classList.remove('is-open');
+      panel.setAttribute('aria-hidden','true');
+      document.body.classList.remove('bcp-private-product-panel-open-v229');
+      window.setTimeout(function(){ if(frame) frame.src='about:blank'; },160);
+      var previous=panel._bcpReturnFocus;
+      panel._bcpReturnFocus=null;
+      if(previous && typeof previous.focus==='function') previous.focus();
+    }
+    close.addEventListener('click',closePanel);
+    panel.addEventListener('click',function(event){
+      if(event.target===panel) closePanel();
+    });
+    document.addEventListener('keydown',function(event){
+      if(event.key==='Escape' && panel.classList.contains('is-open')) closePanel();
+    });
+    panel._bcpClose=closePanel;
+    return panel;
+  }
+  function openPrivateProductPanel(url,title,trigger,context){
+    var safeUrl=safePrivateProductUrl(url);
+    if(!safeUrl) return;
+    var panel=ensurePrivateProductPanel();
+    var frame=panel.querySelector('.bcp-private-product-panel-frame-v229');
+    var close=panel.querySelector('.bcp-private-product-panel-close-v229');
+    panel._bcpReturnFocus=trigger || document.activeElement;
+    panel.setAttribute('aria-label',(title||'Product')+' gallery and price');
+    if(frame){
+      frame.title=(title||'Product')+' gallery and price';
+      frame.src=safeUrl;
+    }
+    panel.classList.add('is-open');
+    panel.setAttribute('aria-hidden','false');
+    document.body.classList.add('bcp-private-product-panel-open-v229');
+    if(close) close.focus();
+    emit('private_look_product_gallery_opened',{
+      source_build_key:context && context.key || '',
+      source_build_name:context && context.name || '',
+      product_name:cleanText(title,120)
+    });
+  }
+  function makeStaticComponentList(grid,context){
     if(!grid || grid.classList.contains('bcp-build-components-grid-v227')) return 0;
     var cards=Array.prototype.slice.call(grid.querySelectorAll('.product-card'));
     grid.classList.add('bcp-build-components-grid-v227');
     cards.forEach(function(card){
+      var detailUrl=getProductDetailUrl(card);
+      var productTitle=cleanText((card.querySelector('.body h3')||{}).textContent,120) || 'Product';
       card.classList.add('bcp-build-component-card-v227');
+      if(detailUrl){
+        card.setAttribute('data-bcp-private-product-url',detailUrl);
+        card.setAttribute('role','button');
+        card.setAttribute('tabindex','0');
+        card.setAttribute('aria-label','View gallery and price for '+productTitle);
+      }
       card.querySelectorAll('a[href]').forEach(function(link){
         link.removeAttribute('href');
-        link.setAttribute('aria-disabled','true');
+        link.setAttribute('aria-hidden','true');
         link.setAttribute('tabindex','-1');
       });
       card.querySelectorAll('button.add-preview, a.add-preview').forEach(function(action){
         action.setAttribute('aria-hidden','true');
         action.setAttribute('tabindex','-1');
+      });
+      if(!detailUrl) return;
+      function openFromCard(event){
+        if(event) event.preventDefault();
+        openPrivateProductPanel(detailUrl,productTitle,card,context||{});
+      }
+      card.addEventListener('click',openFromCard);
+      card.addEventListener('keydown',function(event){
+        if(event.key==='Enter' || event.key===' '){
+          event.preventDefault();
+          openFromCard(event);
+        }
       });
     });
     return cards.length;
@@ -170,7 +270,7 @@
     var copy=titleNode ? titleNode.nextElementSibling : null;
     if(!titleNode || !nativeButton || !nativeAction || !media || !grid) return;
     var name=cleanText(titleNode.textContent,100) || 'this build';
-    var count=makeStaticComponentList(grid);
+    var count=makeStaticComponentList(grid,{key:target.getAttribute('data-cart-look-context')||'',name:name});
     if(kicker) kicker.textContent='Your selected configuration';
     if(copy && copy.tagName==='P') copy.textContent='The exact selected components for this complete build are below.';
     nativeButton.textContent='Complete this build · Save 5%';
