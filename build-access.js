@@ -1,3 +1,4 @@
+/* BCP V195 — public access shell. Private data loads only from authenticated Worker endpoints. */
 /* BCP V159 — Build Access client + direct GA4 tracking (no GTM event tag required). */
 (function(){
   'use strict';
@@ -203,17 +204,18 @@
   }
   function lock(){
     root.classList.remove('bcp-access-pending','bcp-access-granted');
-    /* V191 fail-closed: only an explicit signed access grant may expose private catalog content. */
-    if(scope==='guide') return;
+    /* V194: fail closed. Exact catalog data is never present in public HTML. */
     root.classList.add('bcp-access-locked');
     if(scope==='home') lockHome();
     else if(scope==='model') lockModel();
+    else if(scope==='guide') lockGuide();
     else if(scope==='product') lockProduct();
     else if(scope==='cart') lockCart();
   }
   function grant(){
     root.classList.remove('bcp-access-pending','bcp-access-locked');
     root.classList.add('bcp-access-granted');
+    try{ window.dispatchEvent(new CustomEvent('bcp:access-granted')); }catch(error){}
   }
   function checkout(button){
     var panel = button && button.closest ? button.closest('[data-bcp-access-panel]') : null;
