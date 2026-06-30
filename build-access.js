@@ -226,6 +226,7 @@
   function grant(){
     root.classList.remove('bcp-access-pending','bcp-access-locked');
     root.classList.add('bcp-access-granted');
+    document.querySelectorAll('[data-bcp-access-panel]').forEach(function(panel){ panel.hidden=true; });
     try{ window.dispatchEvent(new CustomEvent('bcp:access-granted')); }catch(error){}
   }
   function checkout(button){

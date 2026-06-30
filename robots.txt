@@ -1,8 +1,7 @@
 User-agent: *
 Allow: /
-Sitemap: https://bendacustompicks.com/sitemap.xml
-Sitemap: https://bendacustompicks.com/video-sitemap.xml
-Disallow: /order-
-Disallow: /cart-request.html
 Disallow: /build-access-return.html
 Disallow: /build-access.html
+Disallow: /build-access-admin.html
+Sitemap: https://bendacustompicks.com/sitemap.xml
+Sitemap: https://bendacustompicks.com/video-sitemap.xml

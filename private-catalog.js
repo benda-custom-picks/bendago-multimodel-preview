@@ -20,10 +20,17 @@
       return r.json().catch(function(){return {};}).then(function(data){ if(!r.ok || !data || data.ok!==true) throw new Error((data&&data.error)||'Build Access required.'); return data; });
     });
   }
+  function setCatalogBusy(isBusy){
+    ['full-look-parts','shop-part-by-part'].forEach(function(id){
+      var slot=document.getElementById(id);
+      if(slot) slot.setAttribute('aria-busy',isBusy ? 'true' : 'false');
+    });
+  }
   function showUnavailable(){
     var full=document.getElementById('full-look-parts');
     var shop=document.getElementById('shop-part-by-part');
     [full,shop].forEach(function(el){ if(el){el.innerHTML=''; el.style.display='none';} });
+    setCatalogBusy(false);
     document.documentElement.classList.remove('bcp-access-granted');
     document.documentElement.classList.add('bcp-access-locked');
   }
@@ -56,8 +63,10 @@
   function load(){
     if(loaded) return;
     loaded=true;
+    setCatalogBusy(true);
     privateFetch('/api/private-catalog/'+encodeURIComponent(model)).then(function(data){
       hydrate(data);
+      setCatalogBusy(false);
       restoreDeepLookAnchor();
       return loadScript('/api/private-assets/order-flow.js');
     }).then(function(){
