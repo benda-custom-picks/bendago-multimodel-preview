@@ -202,8 +202,8 @@
     markLockedView('cart');
   }
   function lock(){
-    root.classList.remove('bcp-access-pending');
-    /* V162: SEO build-guide pages stay fully public. Build Access applies only to catalog, product and cart surfaces. */
+    root.classList.remove('bcp-access-pending','bcp-access-granted');
+    /* V190: fail closed — only a verified granted response may expose the catalog. */
     if(scope==='guide') return;
     root.classList.add('bcp-access-locked');
     if(scope==='home') lockHome();
@@ -211,7 +211,10 @@
     else if(scope==='product') lockProduct();
     else if(scope==='cart') lockCart();
   }
-  function grant(){ root.classList.remove('bcp-access-pending','bcp-access-locked'); }
+  function grant(){
+    root.classList.remove('bcp-access-pending','bcp-access-locked');
+    root.classList.add('bcp-access-granted');
+  }
   function checkout(button){
     var panel = button && button.closest ? button.closest('[data-bcp-access-panel]') : null;
     if(panel && panel.getAttribute('data-bcp-source-section')) activeSourceSection = panel.getAttribute('data-bcp-source-section');
@@ -307,5 +310,9 @@
   bind();
   if(scope==='access'){ grant(); return; }
   if(scope==='return'){ grant(); confirmReturn(); return; }
-  api('/build-access/status').then(grant).catch(lock);
+  api('/build-access/status').then(function(data){
+    /* V190: never grant because a request merely returned 2xx; require the signed entitlement response. */
+    if(data && data.ok === true && data.access === 'granted') grant();
+    else lock();
+  }).catch(lock);
 }());
