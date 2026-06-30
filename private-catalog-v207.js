@@ -1,4 +1,4 @@
-/* BCP V216 — selected look catalog plus admin customer preview notice. */
+/* BCP V223 — selected look catalog: clean private-video preload without visible poster thumbnails. */
 (function(){
   'use strict';
   var body=document.body;
@@ -189,12 +189,43 @@
     notice.textContent='Customer preview — '+(data.access_look_name||'selected build')+'. This browser is limited exactly like a customer. Stripe checkout is disabled.';
     full.parentNode.insertBefore(notice,full);
   }
+  function injectPrivateVideoPreloadStyle(){
+    if(document.getElementById('bcp-v223-private-video-preload-style')) return;
+    var style=document.createElement('style');
+    style.id='bcp-v223-private-video-preload-style';
+    style.textContent=''
+      +'.bcp-private-video-frame-v223{background:#050505!important;background-image:none!important}'
+      +'.bcp-private-video-frame-v223 video.bcp-private-video-clean-preload-v223{background:#050505!important;background-image:none!important}';
+    document.head.appendChild(style);
+  }
+  function cleanPrivateVideoPreload(rootNode){
+    if(!rootNode) return;
+    injectPrivateVideoPreloadStyle();
+    rootNode.querySelectorAll('video[poster]').forEach(function(video){
+      /* Private catalog videos are entitlement-only and are not crawl targets.
+         Remove the visible poster before first paint; reveal the decoded MP4 frame only. */
+      video.removeAttribute('poster');
+      video.classList.add('bcp-private-video-clean-preload-v223');
+      var frame=video.closest('.bcp-look-sticky-media-v16m, .bcp-browse-look-banner-v16n, .look-media-video');
+      if(frame) frame.classList.add('bcp-private-video-frame-v223');
+      function revealDecodedFrame(){
+        if(video.readyState>=HTMLMediaElement.HAVE_CURRENT_DATA){
+          video.classList.add('bcp-look-video-first-frame-ready');
+        }
+      }
+      video.addEventListener('loadeddata',revealDecodedFrame,{once:true});
+      video.addEventListener('playing',revealDecodedFrame,{once:true});
+      revealDecodedFrame();
+    });
+  }
   function hydrate(data){
     var full=document.getElementById('full-look-parts');
     var shop=document.getElementById('shop-part-by-part');
     if(!full || !shop || !data.sections) throw new Error('Private catalog mount unavailable.');
     full.innerHTML=String(data.sections.full_look_html||'');
     shop.innerHTML=String(data.sections.shop_html||'');
+    cleanPrivateVideoPreload(full);
+    cleanPrivateVideoPreload(shop);
     setCatalogVisible(true);
   }
   function bindPrivateAssets(results){
