@@ -1299,54 +1299,88 @@ html body.model-page section#looks article.look-card .bcp-look-cta-v202 > a.bcp-
 .bcp-visually-hidden{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
 html.bcp-access-granted [data-bcp-access-panel]{display:none!important}
 </style>
-
-<style id="bcp-v246-darkflag-v4-pc-shop-parts-center">
-/* V246 — Dark Flag V4 / PC only.
-   Recenter the private "Parts by Parts" product grid by removing the empty browse rail.
-   Scope: #shop-part-by-part only. No Worker, Stripe, cart or catalog-script changes. */
-@media (min-width: 901px){
-  html body.model-page.model-v4 section#shop-part-by-part{
-    --bcp-v4-shop-grid-w: 824px;
-    padding-top: 12px !important;
-  }
-
+<style id="bcp-v247-darkflag-v4-pc-shop-parts-match-cards">
+/* V247 — Dark Flag V4 / desktop only
+   Browse "Shop parts" cards must use the same full-card presentation as the section above,
+   aligned cleanly across the available width with no left-offset rail. */
+@media (min-width:901px){
   html body.model-page.model-v4 section#shop-part-by-part > .wrap{
-    display: block !important;
-    width: min(1240px, calc(100vw - 72px)) !important;
-    max-width: min(1240px, calc(100vw - 72px)) !important;
-    margin-inline: auto !important;
+    display:block !important;
   }
 
-  /* The duplicate browse rail creates the empty left column and shifts cards right. */
+  /* Remove the reserved browse rail on desktop for this section only. */
   html body.model-page.model-v4 section#shop-part-by-part .bcp-browse-look-banner-v16n,
   html body.model-page.model-v4 section#shop-part-by-part .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y{
-    display: none !important;
+    display:none !important;
   }
 
   html body.model-page.model-v4 section#shop-part-by-part > .wrap > .section-head{
-    display: grid !important;
-    grid-template-columns: 132px minmax(0, 1fr) !important;
-    gap: 34px !important;
-    align-items: start !important;
-    width: min(100%, var(--bcp-v4-shop-grid-w)) !important;
-    max-width: var(--bcp-v4-shop-grid-w) !important;
-    margin: 0 auto 26px !important;
-  }
-
-  html body.model-page.model-v4 section#shop-part-by-part > .wrap > .section-head h2,
-  html body.model-page.model-v4 section#shop-part-by-part > .wrap > .section-head p{
-    margin-top: 0 !important;
+    width:100% !important;
+    max-width:none !important;
+    margin:0 0 26px !important;
+    padding:0 !important;
   }
 
   html body.model-page.model-v4 section#shop-part-by-part > .wrap > .product-grid{
-    display: grid !important;
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    gap: 18px !important;
-    width: min(100%, var(--bcp-v4-shop-grid-w)) !important;
-    max-width: var(--bcp-v4-shop-grid-w) !important;
-    margin: 0 auto !important;
-    justify-content: center !important;
-    align-items: stretch !important;
+    display:grid !important;
+    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+    grid-auto-rows:1fr !important;
+    gap:22px !important;
+    width:100% !important;
+    min-width:0 !important;
+    margin:0 !important;
+    align-items:stretch !important;
+    justify-content:stretch !important;
+  }
+
+  html body.model-page.model-v4 section#shop-part-by-part > .wrap > .product-grid > .product-card{
+    display:flex !important;
+    flex-direction:column !important;
+    min-width:0 !important;
+    height:100% !important;
+    overflow:hidden !important;
+  }
+
+  html body.model-page.model-v4 section#shop-part-by-part > .wrap > .product-grid > .product-card > .thumb{
+    display:block !important;
+    width:100% !important;
+    aspect-ratio:4 / 3 !important;
+    min-height:0 !important;
+    background-position:center !important;
+    background-size:cover !important;
+    border-radius:0 !important;
+  }
+
+  html body.model-page.model-v4 section#shop-part-by-part > .wrap > .product-grid > .product-card > .body{
+    display:flex !important;
+    flex:1 1 auto !important;
+    flex-direction:column !important;
+    min-width:0 !important;
+    padding:16px !important;
+  }
+
+  html body.model-page.model-v4 section#shop-part-by-part > .wrap > .product-grid > .product-card > .body h3{
+    min-height:2.7em !important;
+    margin:0 0 9px !important;
+  }
+
+  html body.model-page.model-v4 section#shop-part-by-part > .wrap > .product-grid > .product-card > .body > p{
+    display:-webkit-box !important;
+    overflow:hidden !important;
+    min-height:4.8em !important;
+    margin:0 0 14px !important;
+    -webkit-box-orient:vertical !important;
+    -webkit-line-clamp:4 !important;
+  }
+
+  html body.model-page.model-v4 section#shop-part-by-part > .wrap > .product-grid > .product-card .product-meta{
+    margin-top:auto !important;
+  }
+
+  html body.model-page.model-v4 section#shop-part-by-part > .wrap > .product-grid > .product-card .product-details-link,
+  html body.model-page.model-v4 section#shop-part-by-part > .wrap > .product-grid > .product-card .add-preview,
+  html body.model-page.model-v4 section#shop-part-by-part > .wrap > .product-grid > .product-card a.choose-options-card{
+    width:100% !important;
   }
 }
 </style>
