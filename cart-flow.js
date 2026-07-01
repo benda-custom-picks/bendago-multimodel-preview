@@ -3,7 +3,7 @@
   const CART_KEY = 'bendago_cart_v1';
   const CHECKOUT_WORKER_URL = ['https://bendago-', 'sum', 'up-checkout.custom125picks.workers.dev/'].join('');
   const LAUNCH_DISCOUNT_RATE = 0.05;
-  const TERMS_VERSION = 'BCP-CGV-2026-06-09-ORDERLOCK';
+  const TERMS_VERSION = 'BCP-CGV-2026-07-01-KLARNA';
   const TERMS_URL = 'https://bendacustompicks.com/terms-and-conditions.html';
   const CHECKOUT_TERMS_VISIBLE_TEXT = [
     'Model & parts: I confirm the selected motorcycle model, parts, quantities, colours and options.',
@@ -77,6 +77,7 @@
     'ghost-protector-darkflag-950-v4': 'ghost-protector-darkflag-950-v4'
   };
 
+  /* V237 — Midnight Hunter Full Build excludes Carbon Exhaust Protection Kit and Black Shield Armor Kit; both remain purchasable individually in Parts by Parts. */
   const COMPLETE_BUILD_OFFERS = [
     {
       key: 'strong-pure-bob',
@@ -153,9 +154,7 @@
         { code: 'madmax-double-exhaust-kit-450' },
         { code: 'maverick-air-filter-450' },
         { code: 'premium-comfort-foot-kit-450' },
-        { code: 'premium-transparent-clutch-cover-kit-450' },
-        { code: 'carbon-exhaust-protection-kit-450' },
-        { code: 'black-shield-armor-kit-450' }
+        { code: 'premium-transparent-clutch-cover-kit-450' }
       ]
     },
     {
@@ -524,9 +523,7 @@
       { code: 'madmax-double-exhaust-kit-450' },
       { code: 'maverick-air-filter-450' },
       { code: 'premium-comfort-foot-kit-450', options: { color_option: 'Skull Platinum' } },
-      { code: 'premium-transparent-clutch-cover-kit-450' },
-      { code: 'carbon-exhaust-protection-kit-450' },
-      { code: 'black-shield-armor-kit-450' }
+      { code: 'premium-transparent-clutch-cover-kit-450' }
     ],
     'storm-rider-66-complete': [
       { code: 'chrome-air-filter-450-500-sr66' },
