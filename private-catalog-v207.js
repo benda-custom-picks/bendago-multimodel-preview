@@ -618,3 +618,114 @@
     queueRecovery();
   }
 }());
+
+
+/* BENDAGO V252 — emergency private cart drawer recovery.
+   Scope: model pages only. This is a UI recovery layer: it does not change catalog,
+   access control, Worker checkout validation, Stripe, prices, or cart storage. */
+(function(){
+  'use strict';
+  var body=document.body;
+  if(!body || body.getAttribute('data-bcp-access-scope')!=='model') return;
+
+  function safeCart(){
+    return window.BendagoCart && typeof window.BendagoCart.open==='function' ? window.BendagoCart : null;
+  }
+
+  function escapeHtml(value){
+    return String(value==null?'':value).replace(/[&<>"]/g,function(char){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[char];
+    });
+  }
+
+  function showEmergencyDrawerContent(){
+    var cart=safeCart();
+    var lines=[];
+    try{ lines=cart && typeof cart.read==='function' ? cart.read() : []; }catch(error){ lines=[]; }
+    if(!Array.isArray(lines)) lines=[];
+
+    var drawer=document.getElementById('bendagoCartDrawer');
+    var content=document.querySelector('[data-cart-body]');
+    var pricing=document.querySelector('[data-cart-pricing]');
+    var checkout=document.querySelector('[data-cart-checkout]');
+    if(!drawer || !content || !pricing || !checkout) return;
+
+    content.innerHTML=lines.length
+      ? '<div class="cart-included-label-v16g">Selected upgrades</div>' + lines.map(function(line){
+          var label=String(line && (line.product_name||line.code) || 'Selected part');
+          var quantity=Math.max(1,Number(line && line.qty)||1);
+          return '<div class="cart-line"><div><strong class="cart-line-title">'+escapeHtml(label)+'</strong><div class="cart-line-fit-v16cart">Quantity '+quantity+'</div></div></div>';
+        }).join('')
+      : '<div class="cart-empty">Your setup is empty. Choose a look part first.</div>';
+    pricing.innerHTML=lines.length
+      ? '<div class="cart-total-row"><span>Selected parts ready</span><strong>Review securely at checkout</strong></div>'
+      : '<div class="cart-total-row"><span>Setup secured today</span><strong>0 €</strong></div>';
+    checkout.textContent=lines.length ? 'Secure these parts' : 'Secure this setup';
+    checkout.classList.toggle('disabled',!lines.length);
+  }
+
+  function forceDrawerOpen(){
+    var cart=safeCart();
+    if(!cart) return false;
+    /* The private asset contains a legacy callback that can throw during redraw.
+       It is presentation-only and must never prevent a customer reopening their cart. */
+    if(typeof window.updateStripeCheckoutButtonLabel!=='function'){
+      window.updateStripeCheckoutButtonLabel=function(){};
+    }
+
+    var opened=false;
+    try{
+      cart.open();
+      opened=true;
+    }catch(error){
+      showEmergencyDrawerContent();
+    }
+
+    var overlay=document.getElementById('bendagoCartOverlay');
+    var drawer=document.getElementById('bendagoCartDrawer');
+    if(!drawer){
+      try{ cart.open(); opened=true; }catch(error){ return false; }
+      overlay=document.getElementById('bendagoCartOverlay');
+      drawer=document.getElementById('bendagoCartDrawer');
+    }
+    if(!drawer) return false;
+
+    /* Open even when a non-critical redraw failed. The original checkout handler remains attached. */
+    if(!opened) showEmergencyDrawerContent();
+    body.classList.add('cart-drawer-open');
+    if(overlay) overlay.classList.add('active');
+    drawer.classList.add('active');
+    drawer.setAttribute('aria-hidden','false');
+    return true;
+  }
+
+  function openWhenReady(tries){
+    if(forceDrawerOpen()) return;
+    if((tries||0)<12){
+      window.setTimeout(function(){ openWhenReady((tries||0)+1); },80);
+    }
+  }
+
+  /* Capture phase guarantees the header Cart works even when a previous bubble handler failed. */
+  document.addEventListener('click',function(event){
+    var cartTrigger=event.target && event.target.closest ? event.target.closest('[data-open-cart]') : null;
+    if(cartTrigger){
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      openWhenReady(0);
+      return;
+    }
+
+    /* Preserve the existing complete-build handler. Open the drawer immediately after its cart write. */
+    var bundleTrigger=event.target && event.target.closest ? event.target.closest('[data-add-bundle]') : null;
+    if(bundleTrigger){
+      window.setTimeout(function(){ openWhenReady(0); },0);
+    }
+  },true);
+
+  window.addEventListener('bcp:private-catalog-ready',function(){
+    if(typeof window.updateStripeCheckoutButtonLabel!=='function'){
+      window.updateStripeCheckoutButtonLabel=function(){};
+    }
+  });
+}());
