@@ -828,7 +828,8 @@
   }
 
 
-  /* BENDAGO V240 — Klarna on-site CRO, restrained and single-surface.
+  /* BENDAGO V241 — Klarna cart-only CRO.
+     No Klarna promotional cards are rendered on product cards or Full Build pages.
      Checkout availability, payment plan and approval remain determined by Klarna. */
   const KLARNA_MIN_EUR_V240 = 1000;
   const KLARNA_MAX_EUR_V240 = 5000;
@@ -1847,65 +1848,53 @@ async function createStripeCheckout(lines, formData) {
       .bcp-klarna-progress-v240{height:5px!important;border-radius:999px!important;overflow:hidden!important;background:rgba(255,255,255,.20)!important;}
       .bcp-klarna-progress-v240 i{display:block!important;height:100%!important;border-radius:inherit!important;background:rgba(222,255,238,.92)!important;}
       .bcp-klarna-nudge-cta-v240{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-height:34px!important;border-radius:9px!important;background:rgba(255,255,255,.14)!important;border:1px solid rgba(255,255,255,.26)!important;color:#fff!important;text-decoration:none!important;font-weight:850!important;font-size:.74rem!important;letter-spacing:.02em!important;padding:0 11px!important;}
-      .bcp-klarna-build-promo-v240{margin:8px 0 0!important;padding:9px 10px!important;border-radius:12px!important;background:linear-gradient(135deg,rgba(9,77,56,.56),rgba(15,111,76,.40))!important;color:#f7fbf8!important;border:1px solid rgba(116,214,171,.36)!important;box-shadow:none!important;backdrop-filter:blur(10px)!important;-webkit-backdrop-filter:blur(10px)!important;display:grid!important;gap:3px!important;}
-      .bcp-klarna-build-row-v240{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:8px!important;}
-      .bcp-klarna-build-promo-v240 strong{color:#fff!important;font-size:.80rem!important;line-height:1.15!important;font-weight:900!important;letter-spacing:.01em!important;}
-      .bcp-klarna-build-promo-v240 small{color:rgba(255,255,255,.73)!important;font-size:.61rem!important;line-height:1.24!important;}
+      /* V241: hard-hide legacy/promotional Klarna cards outside the cart. */
+      .bcp-klarna-catalog-promo-v239,.bcp-klarna-build-promo-v239,.bcp-klarna-catalog-promo-v240,.bcp-klarna-build-promo-v240,[data-bcp-klarna-v239="product"],[data-bcp-klarna-v239="build"],[data-bcp-klarna-v240="product"],[data-bcp-klarna-v240="build"]{display:none!important;}
       @media(max-width:460px){.bcp-klarna-promo-v240{padding:11px 12px!important;}.bcp-klarna-promo-v240 strong{font-size:1.02rem!important;}.bcp-klarna-badge-v240{width:68px!important;height:17px!important;}}
     `;
     document.head.appendChild(style);
   }
 
 
-  function isVisibleKlarnaTargetV240(element) {
-    if (!element) return false;
-    const style = window.getComputedStyle ? window.getComputedStyle(element) : null;
-    if (style && (style.display === 'none' || style.visibility === 'hidden')) return false;
-    return !!(element.offsetWidth || element.offsetHeight || element.getClientRects().length);
+  const KLARNA_ONSITE_CARD_SELECTOR_V241 = [
+    '.bcp-klarna-catalog-promo-v239',
+    '.bcp-klarna-build-promo-v239',
+    '.bcp-klarna-catalog-promo-v240',
+    '.bcp-klarna-build-promo-v240',
+    '[data-bcp-klarna-v239="product"]',
+    '[data-bcp-klarna-v239="build"]',
+    '[data-bcp-klarna-v240="product"]',
+    '[data-bcp-klarna-v240="build"]'
+  ].join(',');
+
+  function removeOnsiteKlarnaCardsV241(root) {
+    const removeNode = function (node) {
+      if (node && node.parentNode) node.parentNode.removeChild(node);
+    };
+    if (root && root.nodeType === 1 && root.matches && root.matches(KLARNA_ONSITE_CARD_SELECTOR_V241)) removeNode(root);
+    const scope = root && root.querySelectorAll ? root : document;
+    scope.querySelectorAll(KLARNA_ONSITE_CARD_SELECTOR_V241).forEach(removeNode);
   }
 
-  function clearLegacyKlarnaPromosV240() {
-    document.querySelectorAll('.bcp-klarna-catalog-promo-v239,.bcp-klarna-build-promo-v239,.bcp-klarna-catalog-promo-v240,.bcp-klarna-build-promo-v240').forEach(function (node) {
-      node.remove();
+  function installOnsiteKlarnaCardGuardV241() {
+    removeOnsiteKlarnaCardsV241(document);
+    if (window.__bcpKlarnaCardGuardV241) return;
+    window.__bcpKlarnaCardGuardV241 = true;
+    const target = document.documentElement || document.body;
+    if (!target || !window.MutationObserver) return;
+    const observer = new MutationObserver(function (mutations) {
+      mutations.forEach(function (mutation) {
+        mutation.addedNodes.forEach(function (node) {
+          if (node && node.nodeType === 1) removeOnsiteKlarnaCardsV241(node);
+        });
+      });
     });
-  }
-
-  function bundlePricingV240(key) {
-    const items = BUNDLE_ADD_TO_CART_ITEMS[String(key || '').trim()];
-    if (!Array.isArray(items) || !items.length) return null;
-    const lines = items.map(function (item) {
-      const qty = Math.max(1, Number(item && item.qty) || 1);
-      const unit = productUnit(item && item.code);
-      return {
-        code: String(item && item.code || '').trim(),
-        qty: qty,
-        color_option: cleanOption(item && item.options && item.options.color_option),
-        line_total: unit * qty
-      };
-    }).filter(function (line) { return line.code && line.line_total > 0; });
-    if (!lines.length) return null;
-    return calculateLaunchOffer(lines);
+    observer.observe(target, { childList: true, subtree: true });
   }
 
   function decorateKlarnaBuildV240() {
-    clearLegacyKlarnaPromosV240();
-    const buttons = Array.from(document.querySelectorAll('[data-add-bundle]')).filter(function (button) {
-      const key = String(button.getAttribute('data-add-bundle') || '').trim();
-      return /-complete$/.test(key) && isVisibleKlarnaTargetV240(button);
-    });
-    const button = buttons[0];
-    if (!button) return;
-    const key = String(button.getAttribute('data-add-bundle') || '').trim();
-    const pricing = bundlePricingV240(key);
-    if (!pricing || pricing.total < KLARNA_MIN_EUR_V240 || pricing.total > KLARNA_MAX_EUR_V240) return;
-    const third = Math.round((pricing.total / 3) * 100) / 100;
-    const action = button.closest('.bcp-look-fast-action-v174') || button;
-    const promo = document.createElement('div');
-    promo.className = 'bcp-klarna-build-promo-v240';
-    promo.setAttribute('data-bcp-klarna-v240', 'build');
-    promo.setAttribute('aria-label', 'Klarna payment information');
-    promo.innerHTML = '<div class="bcp-klarna-build-row-v240"><strong>PAY IN 3 · 3 × ' + escapeHtml(formatEuro(third)) + '</strong>' + klarnaBadgeHtmlV240('bcp-klarna-badge-build-v240') + '</div><small>*Eligible customers only. Klarna confirms approval at checkout.</small>';
-    action.insertAdjacentElement('afterend', promo);
+    /* V241 deliberately keeps Klarna messaging in the cart only. */
+    removeOnsiteKlarnaCardsV241(document);
   }
 
   function currentPartsHref() {
@@ -2198,6 +2187,7 @@ window.BendagoCart = {
     ensureCartUi();
     bindOpenCartLinks();
     bindBuildBundleButtons();
+    installOnsiteKlarnaCardGuardV241();
     decorateKlarnaBuildV240();
     window.setTimeout(decorateKlarnaBuildV240, 450);
     window.setTimeout(decorateKlarnaBuildV240, 1400);
@@ -2214,6 +2204,9 @@ window.BendagoCart = {
   });
 
   window.addEventListener('load', function () {
-    window.setTimeout(decorateKlarnaBuildV240, 220);
+    window.setTimeout(function () {
+      installOnsiteKlarnaCardGuardV241();
+      removeOnsiteKlarnaCardsV241(document);
+    }, 220);
   });
 })();
