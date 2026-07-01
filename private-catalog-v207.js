@@ -1,4 +1,4 @@
-/* BCP V230 — protected cart/order binding before private product-gallery presentation. */
+/* BCP V231 — comparison-product modal cleanup; cart/order binding retained. */
 (function(){
   'use strict';
   var body=document.body;
@@ -165,6 +165,56 @@
     var preferred=card.querySelector('.product-details-link[href],.product-card-thumb-link[href],.product-title-link[href]');
     return safePrivateProductUrl(preferred && preferred.getAttribute('href'));
   }
+
+  function applyComparisonProductModalPolicy(frame){
+    /* Same-origin private product documents only. This policy is deliberately scoped to
+       products that expose a finish-comparison panel inside the modal. */
+    if(!frame) return;
+    var doc;
+    try{ doc=frame.contentDocument; }catch(error){ return; }
+    if(!doc || !doc.documentElement || !doc.body) return;
+    var comparePanel=doc.querySelector('.product-compare-panel');
+    if(!comparePanel) return;
+
+    doc.documentElement.classList.add('bcp-comparison-product-modal-v231');
+
+    /* A comparison must stay between the two finishes. Do not disclose other looks here. */
+    doc.querySelectorAll('[class*="used-builds"], [aria-label*="Used in"]').forEach(function(section){
+      if(section && section.parentNode) section.parentNode.removeChild(section);
+    });
+
+    doc.querySelectorAll('.product-compare-panel .product-compare-card').forEach(function(card){
+      var href=String(card.getAttribute('href')||'');
+      var copy=card.querySelector('span');
+      if(!copy) return;
+      if(/order-metal-foot-controls\.html/i.test(href)) copy.textContent='Warmer bronze metal finish.';
+      else if(/order-black-foot-control-kit\.html/i.test(href)) copy.textContent='Darker black metal finish.';
+      else copy.textContent='Choose the finish that suits your build.';
+    });
+
+    /* The original three-column “Style / Price / Flow” block is too narrow inside the
+       modal right panel. Convert it to compact, equal horizontal rows. */
+    doc.querySelectorAll('.detail-grid .detail').forEach(function(row){
+      var heading=row.querySelector('strong');
+      if(!heading) return;
+      var label=cleanText(heading.textContent,80).toLowerCase();
+      if(label.indexOf('price paid')===0) heading.textContent='Price';
+      else if(label==='flow') heading.textContent='Checkout';
+      else if(label==='style') heading.textContent='Finish';
+    });
+
+    if(!doc.getElementById('bcp-comparison-product-modal-v231-style')){
+      var style=doc.createElement('style');
+      style.id='bcp-comparison-product-modal-v231-style';
+      style.textContent=''
+        +'html.bcp-comparison-product-modal-v231 .detail-grid{display:grid!important;grid-template-columns:1fr!important;gap:9px!important;margin-top:18px!important}'
+        +'html.bcp-comparison-product-modal-v231 .detail-grid .detail{display:grid!important;grid-template-columns:minmax(88px,112px) minmax(0,1fr)!important;column-gap:12px!important;align-items:start!important;min-height:0!important;padding:12px 14px!important}'
+        +'html.bcp-comparison-product-modal-v231 .detail-grid .detail strong{margin:0!important;line-height:1.35!important}'
+        +'html.bcp-comparison-product-modal-v231 .detail-grid .detail p{margin:0!important;line-height:1.4!important}'
+        +'@media(max-width:480px){html.bcp-comparison-product-modal-v231 .detail-grid .detail{grid-template-columns:1fr!important;row-gap:3px!important}}';
+      (doc.head||doc.documentElement).appendChild(style);
+    }
+  }
   function ensurePrivateProductPanel(){
     var existing=document.getElementById('bcp-private-product-panel-v229');
     if(existing) return existing;
@@ -208,6 +258,9 @@
     panel.setAttribute('aria-label',(title||'Product')+' gallery and price');
     if(frame){
       frame.title=(title||'Product')+' gallery and price';
+      frame.onload=function(){
+        applyComparisonProductModalPolicy(frame);
+      };
       frame.src=safeUrl;
     }
     panel.classList.add('is-open');
