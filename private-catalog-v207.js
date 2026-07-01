@@ -538,3 +538,83 @@
   window.addEventListener('bcp:private-look-request',handlePrivateLookRequest);
   if(document.documentElement.classList.contains('bcp-access-granted')) load();
 }());
+
+/* BENDAGO V250 — private cart runtime recovery.
+   The catalog may render before its protected cart asset has finished loading.
+   This recovery is model-page only: it validates the runtime, rebinds the existing
+   header and build CTAs, and makes one controlled retry only when the cart runtime is absent. */
+(function(){
+  'use strict';
+  if(!document.body || document.body.getAttribute('data-bcp-access-scope')!=='model') return;
+
+  var CART_SRC='/api/private-assets/cart-flow.js';
+  var recoveryQueued=false;
+  var recoveryAttempted=false;
+
+  function cartReady(){
+    return !!(window.BendagoCart && typeof window.BendagoCart.open==='function' && typeof window.BendagoCart.bindCatalog==='function');
+  }
+
+  function orderReady(){
+    return !!(window.BENDAGO_PRODUCTS && window.BendagoOrderFlow && typeof window.BendagoOrderFlow.bindCatalog==='function');
+  }
+
+  function bindHeaderCartFallback(){
+    document.querySelectorAll('[data-open-cart]').forEach(function(link){
+      if(link.dataset.bcpCartRecoveryBound==='1') return;
+      link.dataset.bcpCartRecoveryBound='1';
+      link.addEventListener('click',function(event){
+        if(!cartReady()) return;
+        event.preventDefault();
+        window.BendagoCart.open();
+      });
+    });
+  }
+
+  function bindWorkingCart(){
+    if(!cartReady()) return false;
+    /* Current private cart asset emits this legacy callback after cart updates.
+       It is absent from the asset itself; defining a no-op keeps cart updates
+       from interrupting the completed-build flow. */
+    if(typeof window.updateStripeCheckoutButtonLabel!=='function'){
+      window.updateStripeCheckoutButtonLabel=function(){};
+    }
+    window.BendagoCart.bindCatalog();
+    bindHeaderCartFallback();
+    return true;
+  }
+
+  function removeStalledCartScript(){
+    document.querySelectorAll('script[data-bcp-private-src]').forEach(function(script){
+      var src=String(script.getAttribute('data-bcp-private-src')||'');
+      if(src===CART_SRC) script.remove();
+    });
+  }
+
+  function retryCartAsset(){
+    if(bindWorkingCart() || recoveryAttempted || !orderReady()) return;
+    recoveryAttempted=true;
+    removeStalledCartScript();
+    var script=document.createElement('script');
+    script.async=false;
+    script.src=CART_SRC+'?runtime=v250';
+    script.setAttribute('data-bcp-private-src',CART_SRC);
+    script.onload=function(){ bindWorkingCart(); };
+    script.onerror=function(){};
+    document.head.appendChild(script);
+  }
+
+  function queueRecovery(){
+    if(recoveryQueued) return;
+    recoveryQueued=true;
+    window.setTimeout(function(){
+      recoveryQueued=false;
+      if(!bindWorkingCart()) retryCartAsset();
+    },0);
+  }
+
+  window.addEventListener('bcp:private-catalog-ready',queueRecovery);
+  if(document.documentElement.classList.contains('bcp-access-granted') && document.getElementById('full-look-parts') && !document.getElementById('full-look-parts').hidden){
+    queueRecovery();
+  }
+}());
