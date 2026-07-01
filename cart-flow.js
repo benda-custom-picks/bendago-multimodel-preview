@@ -3,7 +3,7 @@
   const CART_KEY = 'bendago_cart_v1';
   const CHECKOUT_WORKER_URL = ['https://bendago-', 'sum', 'up-checkout.custom125picks.workers.dev/'].join('');
   const LAUNCH_DISCOUNT_RATE = 0.05;
-  const TERMS_VERSION = 'BCP-CGV-2026-07-01-KLARNA';
+  const TERMS_VERSION = 'BCP-CGV-2026-06-09-ORDERLOCK';
   const TERMS_URL = 'https://bendacustompicks.com/terms-and-conditions.html';
   const CHECKOUT_TERMS_VISIBLE_TEXT = [
     'Model & parts: I confirm the selected motorcycle model, parts, quantities, colours and options.',
@@ -154,6 +154,8 @@
         { code: 'maverick-air-filter-450' },
         { code: 'premium-comfort-foot-kit-450' },
         { code: 'premium-transparent-clutch-cover-kit-450' },
+        { code: 'carbon-exhaust-protection-kit-450' },
+        { code: 'black-shield-armor-kit-450' }
       ]
     },
     {
@@ -523,6 +525,8 @@
       { code: 'maverick-air-filter-450' },
       { code: 'premium-comfort-foot-kit-450', options: { color_option: 'Skull Platinum' } },
       { code: 'premium-transparent-clutch-cover-kit-450' },
+      { code: 'carbon-exhaust-protection-kit-450' },
+      { code: 'black-shield-armor-kit-450' }
     ],
     'storm-rider-66-complete': [
       { code: 'chrome-air-filter-450-500-sr66' },
@@ -827,60 +831,16 @@
     };
   }
 
-
-  /* BENDAGO V241 — Klarna cart-only CRO.
-     No Klarna promotional cards are rendered on product cards or Full Build pages.
-     Checkout availability, payment plan and approval remain determined by Klarna. */
-  const KLARNA_MIN_EUR_V240 = 1000;
-  const KLARNA_MAX_EUR_V240 = 5000;
-  const KLARNA_NUDGE_FROM_EUR_V240 = 700;
-  const KLARNA_BADGE_URL_V240 = 'https://osm.klarnaservices.com/images/badges/klarna_badge_rectangle.svg';
-
-  function klarnaBadgeHtmlV240(extraClass) {
-    return '<img class="bcp-klarna-badge-v240 ' + (extraClass || '') + '" src="' + KLARNA_BADGE_URL_V240 + '" alt="Klarna" width="72" height="18" loading="lazy" referrerpolicy="no-referrer">';
-  }
-
-  function klarnaPromotionHtmlV240(total) {
-    const amount = Math.round((Number(total) || 0) * 100) / 100;
-    if (amount >= KLARNA_MIN_EUR_V240 && amount <= KLARNA_MAX_EUR_V240) {
-      const third = Math.round((amount / 3) * 100) / 100;
-      return [
-        '<section class="bcp-klarna-promo-v240 is-unlocked" aria-label="Klarna payment option information">',
-          '<div class="bcp-klarna-promo-top-v240"><span>PAY IN 3</span>' + klarnaBadgeHtmlV240('bcp-klarna-badge-cart-v240') + '</div>',
-          '<strong>3 × ' + formatEuro(third) + '</strong>',
-          '<small>*Eligible customers only. Klarna confirms approval and payment options at checkout.</small>',
-        '</section>'
-      ].join('');
-    }
-    if (amount >= KLARNA_NUDGE_FROM_EUR_V240 && amount < KLARNA_MIN_EUR_V240) {
-      const remaining = Math.round((KLARNA_MIN_EUR_V240 - amount) * 100) / 100;
-      const progress = Math.min(100, Math.max(0, Math.round((amount / KLARNA_MIN_EUR_V240) * 100)));
-      return [
-        '<section class="bcp-klarna-promo-v240 is-nudge" aria-label="Klarna unlock progress">',
-          '<div class="bcp-klarna-promo-top-v240"><span>UNLOCK PAY IN 3</span>' + klarnaBadgeHtmlV240('bcp-klarna-badge-cart-v240') + '</div>',
-          '<strong>Only ' + formatEuro(remaining) + ' more</strong>',
-          '<span class="bcp-klarna-promo-copy-v240">Add a compatible upgrade to reach 1,000 €.</span>',
-          '<div class="bcp-klarna-progress-v240" aria-hidden="true"><i style="width:' + progress + '%"></i></div>',
-          '<a class="bcp-klarna-nudge-cta-v240" href="' + escapeHtml(currentPartsHref()) + '">Add a compatible upgrade</a>',
-          '<small>*Eligible customers only. Klarna confirms approval and payment options at checkout.</small>',
-        '</section>'
-      ].join('');
-    }
-    return '';
-  }
-
   function pricingHtml(pricing) {
-    const total = pricing ? pricing.total : 0;
     if (pricing && pricing.discountApplied) {
       return [
         '<div class="cart-pricing-row"><span>Parts value</span><strong>' + formatEuro(pricing.subtotal) + '</strong></div>',
         '<div class="cart-pricing-row cart-pricing-discount"><span>Launch Access kept</span><strong>-' + formatEuro(pricing.discountAmount) + '</strong></div>',
-        '<div class="cart-total-row"><span>Setup secured today</span><strong>' + formatEuro(total) + '</strong></div>',
-        '<div class="cart-launch-note">Launch Access kept inside this setup' + (pricing.buildName ? ': ' + escapeHtml(pricing.buildName) : '') + '.</div>',
-        klarnaPromotionHtmlV240(total)
+        '<div class="cart-total-row"><span>Setup secured today</span><strong>' + formatEuro(pricing.total) + '</strong></div>',
+        '<div class="cart-launch-note">Launch Access kept inside this setup' + (pricing.buildName ? ': ' + escapeHtml(pricing.buildName) : '') + '.</div>'
       ].join('');
     }
-    return '<div class="cart-total-row"><span>Setup secured today</span><strong>' + formatEuro(total) + '</strong></div>' + klarnaPromotionHtmlV240(total);
+    return '<div class="cart-total-row"><span>Setup secured today</span><strong>' + formatEuro(pricing ? pricing.total : 0) + '</strong></div>';
   }
 
 
@@ -1836,65 +1796,8 @@ async function createStripeCheckout(lines, formData) {
         .cart-build-preview-dot-v18{width:5px!important;height:5px!important;}
         .cart-build-preview-dot-v18.is-active{width:13px!important;}
       }
-
-      /* BENDAGO V240 — one discreet, translucent Klarna surface per decision point. */
-      .bcp-klarna-promo-v240{margin:12px 0 2px!important;padding:12px 13px!important;border-radius:15px!important;background:linear-gradient(135deg,rgba(9,77,56,.68),rgba(15,111,76,.52))!important;color:#f7fbf8!important;border:1px solid rgba(116,214,171,.43)!important;box-shadow:0 9px 24px rgba(0,0,0,.17)!important;backdrop-filter:blur(12px)!important;-webkit-backdrop-filter:blur(12px)!important;display:grid!important;gap:5px!important;}
-      .bcp-klarna-promo-v240.is-nudge{background:linear-gradient(135deg,rgba(29,79,62,.66),rgba(17,101,70,.48))!important;}
-      .bcp-klarna-promo-top-v240{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:10px!important;font-size:.68rem!important;font-weight:900!important;letter-spacing:.095em!important;}
-      .bcp-klarna-promo-v240 strong{display:block!important;color:#fff!important;font-size:1.1rem!important;line-height:1.12!important;font-weight:900!important;letter-spacing:-.015em!important;}
-      .bcp-klarna-promo-copy-v240{display:block!important;color:rgba(255,255,255,.89)!important;font-size:.79rem!important;line-height:1.32!important;}
-      .bcp-klarna-promo-v240 small{display:block!important;color:rgba(255,255,255,.76)!important;font-size:.64rem!important;line-height:1.28!important;}
-      .bcp-klarna-badge-v240{display:block!important;width:72px!important;height:18px!important;max-width:72px!important;object-fit:contain!important;object-position:center!important;box-shadow:none!important;filter:none!important;transform:none!important;border:0!important;border-radius:0!important;background:transparent!important;}
-      .bcp-klarna-progress-v240{height:5px!important;border-radius:999px!important;overflow:hidden!important;background:rgba(255,255,255,.20)!important;}
-      .bcp-klarna-progress-v240 i{display:block!important;height:100%!important;border-radius:inherit!important;background:rgba(222,255,238,.92)!important;}
-      .bcp-klarna-nudge-cta-v240{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-height:34px!important;border-radius:9px!important;background:rgba(255,255,255,.14)!important;border:1px solid rgba(255,255,255,.26)!important;color:#fff!important;text-decoration:none!important;font-weight:850!important;font-size:.74rem!important;letter-spacing:.02em!important;padding:0 11px!important;}
-      /* V241: hard-hide legacy/promotional Klarna cards outside the cart. */
-      .bcp-klarna-catalog-promo-v239,.bcp-klarna-build-promo-v239,.bcp-klarna-catalog-promo-v240,.bcp-klarna-build-promo-v240,[data-bcp-klarna-v239="product"],[data-bcp-klarna-v239="build"],[data-bcp-klarna-v240="product"],[data-bcp-klarna-v240="build"]{display:none!important;}
-      @media(max-width:460px){.bcp-klarna-promo-v240{padding:11px 12px!important;}.bcp-klarna-promo-v240 strong{font-size:1.02rem!important;}.bcp-klarna-badge-v240{width:68px!important;height:17px!important;}}
     `;
     document.head.appendChild(style);
-  }
-
-
-  const KLARNA_ONSITE_CARD_SELECTOR_V241 = [
-    '.bcp-klarna-catalog-promo-v239',
-    '.bcp-klarna-build-promo-v239',
-    '.bcp-klarna-catalog-promo-v240',
-    '.bcp-klarna-build-promo-v240',
-    '[data-bcp-klarna-v239="product"]',
-    '[data-bcp-klarna-v239="build"]',
-    '[data-bcp-klarna-v240="product"]',
-    '[data-bcp-klarna-v240="build"]'
-  ].join(',');
-
-  function removeOnsiteKlarnaCardsV241(root) {
-    const removeNode = function (node) {
-      if (node && node.parentNode) node.parentNode.removeChild(node);
-    };
-    if (root && root.nodeType === 1 && root.matches && root.matches(KLARNA_ONSITE_CARD_SELECTOR_V241)) removeNode(root);
-    const scope = root && root.querySelectorAll ? root : document;
-    scope.querySelectorAll(KLARNA_ONSITE_CARD_SELECTOR_V241).forEach(removeNode);
-  }
-
-  function installOnsiteKlarnaCardGuardV241() {
-    removeOnsiteKlarnaCardsV241(document);
-    if (window.__bcpKlarnaCardGuardV241) return;
-    window.__bcpKlarnaCardGuardV241 = true;
-    const target = document.documentElement || document.body;
-    if (!target || !window.MutationObserver) return;
-    const observer = new MutationObserver(function (mutations) {
-      mutations.forEach(function (mutation) {
-        mutation.addedNodes.forEach(function (node) {
-          if (node && node.nodeType === 1) removeOnsiteKlarnaCardsV241(node);
-        });
-      });
-    });
-    observer.observe(target, { childList: true, subtree: true });
-  }
-
-  function decorateKlarnaBuildV240() {
-    /* V241 deliberately keeps Klarna messaging in the cart only. */
-    removeOnsiteKlarnaCardsV241(document);
   }
 
   function currentPartsHref() {
@@ -2150,7 +2053,7 @@ async function createStripeCheckout(lines, formData) {
       '<div class="cart-summary-total cart-summary-discount"><span>Launch Access kept</span><strong>-' + formatEuro(pricing.discountAmount) + '</strong></div>',
       '<div class="cart-summary-total"><span>Setup secured today</span><strong>' + formatEuro(pricing.total) + '</strong></div>',
       '<p class="cart-summary-launch-note">Launch Access kept inside this build: ' + escapeHtml(pricing.buildName) + '.</p>'
-    ].join('') : '<div class="cart-summary-total"><span>Setup secured today</span><strong>' + formatEuro(pricing.total) + '</strong></div>') + klarnaPromotionHtmlV240(pricing.total);
+    ].join('') : '<div class="cart-summary-total"><span>Setup secured today</span><strong>' + formatEuro(pricing.total) + '</strong></div>');
     initCartBuildCarouselsV18(box);
   }
 
@@ -2187,11 +2090,6 @@ window.BendagoCart = {
     ensureCartUi();
     bindOpenCartLinks();
     bindBuildBundleButtons();
-    installOnsiteKlarnaCardGuardV241();
-    decorateKlarnaBuildV240();
-    window.setTimeout(decorateKlarnaBuildV240, 450);
-    window.setTimeout(decorateKlarnaBuildV240, 1400);
-    window.setTimeout(decorateKlarnaBuildV240, 2800);
 
     if (checkoutReturn === 'stripe_cancelled') {
       handleCancelledStripeReturn();
@@ -2201,12 +2099,5 @@ window.BendagoCart = {
   window.addEventListener('bendago:cart-updated', function () {
     renderCartDrawer();
     updateStripeCheckoutButtonLabel();
-  });
-
-  window.addEventListener('load', function () {
-    window.setTimeout(function () {
-      installOnsiteKlarnaCardGuardV241();
-      removeOnsiteKlarnaCardsV241(document);
-    }, 220);
   });
 })();
