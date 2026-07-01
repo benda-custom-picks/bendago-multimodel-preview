@@ -1,4 +1,4 @@
-/* BCP V231 — comparison-product modal cleanup; cart/order binding retained. */
+/* BCP V232 — remove cross-look references from all private product galleries; cart/order binding retained. */
 (function(){
   'use strict';
   var body=document.body;
@@ -166,24 +166,48 @@
     return safePrivateProductUrl(preferred && preferred.getAttribute('href'));
   }
 
-  function applyComparisonProductModalPolicy(frame){
-    /* Same-origin private product documents only. This policy is deliberately scoped to
-       products that expose a finish-comparison panel inside the modal. */
+  function applyPrivateProductModalPolicy(frame){
+    /* Same-origin private product documents only. Every modal must remain anchored
+       to the active Build: no panel may disclose that a component is used in another look. */
     if(!frame) return;
     var doc;
     try{ doc=frame.contentDocument; }catch(error){ return; }
     if(!doc || !doc.documentElement || !doc.body) return;
-    var comparePanel=doc.querySelector('.product-compare-panel');
-    if(!comparePanel) return;
 
-    doc.documentElement.classList.add('bcp-comparison-product-modal-v231');
+    doc.documentElement.classList.add('bcp-private-product-modal-v232');
 
-    /* A comparison must stay between the two finishes. Do not disclose other looks here. */
-    doc.querySelectorAll('[class*="used-builds"], [aria-label*="Used in"]').forEach(function(section){
+    /* Current catalog documents use either bcp-used-builds-* or look-build-reference.
+       Remove those modules for every product, not only comparison products. */
+    doc.querySelectorAll('.bcp-used-builds-v125,.bcp-used-builds-v54,.look-build-reference,[class*="used-builds"],[class*="look-build-reference"]').forEach(function(section){
       if(section && section.parentNode) section.parentNode.removeChild(section);
     });
 
-    doc.querySelectorAll('.product-compare-panel .product-compare-card').forEach(function(card){
+    /* Defensive semantic fallback for future markup: remove a dedicated module whose
+       visible heading explicitly says that the item is used/pairs with named builds. */
+    doc.querySelectorAll('[aria-label]').forEach(function(section){
+      var label=cleanText(section.getAttribute('aria-label'),160).toLowerCase();
+      if(/(?:used|pairs|featured|shown|included)\s+(?:in|with|across|on)?\s*(?:this|these|other|multiple)?\s*(?:benda custom picks\s*)?builds?\b/.test(label)){
+        if(section && section.parentNode) section.parentNode.removeChild(section);
+      }
+    });
+    doc.querySelectorAll('h2,h3,h4').forEach(function(heading){
+      var label=cleanText(heading.textContent,120).toLowerCase();
+      if(!/^(?:used|pairs|featured|shown|included)\s+(?:in|with|across|on)?\s*(?:this|these|other|multiple)?\s*(?:benda custom picks\s*)?builds?\b/.test(label)) return;
+      var holder=heading.parentElement;
+      while(holder && holder!==doc.body){
+        if(holder.querySelector && holder.querySelector('a[href*="custom-parts.html#"][href*="build"]')){
+          if(holder.parentNode) holder.parentNode.removeChild(holder);
+          break;
+        }
+        holder=holder.parentElement;
+      }
+    });
+
+    var comparePanel=doc.querySelector('.product-compare-panel');
+    if(!comparePanel) return;
+
+    /* Comparison remains only between the two product finishes: no named looks. */
+    comparePanel.querySelectorAll('.product-compare-card').forEach(function(card){
       var href=String(card.getAttribute('href')||'');
       var copy=card.querySelector('span');
       if(!copy) return;
@@ -203,15 +227,15 @@
       else if(label==='style') heading.textContent='Finish';
     });
 
-    if(!doc.getElementById('bcp-comparison-product-modal-v231-style')){
+    if(!doc.getElementById('bcp-comparison-product-modal-v232-style')){
       var style=doc.createElement('style');
-      style.id='bcp-comparison-product-modal-v231-style';
+      style.id='bcp-comparison-product-modal-v232-style';
       style.textContent=''
-        +'html.bcp-comparison-product-modal-v231 .detail-grid{display:grid!important;grid-template-columns:1fr!important;gap:9px!important;margin-top:18px!important}'
-        +'html.bcp-comparison-product-modal-v231 .detail-grid .detail{display:grid!important;grid-template-columns:minmax(88px,112px) minmax(0,1fr)!important;column-gap:12px!important;align-items:start!important;min-height:0!important;padding:12px 14px!important}'
-        +'html.bcp-comparison-product-modal-v231 .detail-grid .detail strong{margin:0!important;line-height:1.35!important}'
-        +'html.bcp-comparison-product-modal-v231 .detail-grid .detail p{margin:0!important;line-height:1.4!important}'
-        +'@media(max-width:480px){html.bcp-comparison-product-modal-v231 .detail-grid .detail{grid-template-columns:1fr!important;row-gap:3px!important}}';
+        +'html.bcp-private-product-modal-v232 .detail-grid{display:grid!important;grid-template-columns:1fr!important;gap:9px!important;margin-top:18px!important}'
+        +'html.bcp-private-product-modal-v232 .detail-grid .detail{display:grid!important;grid-template-columns:minmax(88px,112px) minmax(0,1fr)!important;column-gap:12px!important;align-items:start!important;min-height:0!important;padding:12px 14px!important}'
+        +'html.bcp-private-product-modal-v232 .detail-grid .detail strong{margin:0!important;line-height:1.35!important}'
+        +'html.bcp-private-product-modal-v232 .detail-grid .detail p{margin:0!important;line-height:1.4!important}'
+        +'@media(max-width:480px){html.bcp-private-product-modal-v232 .detail-grid .detail{grid-template-columns:1fr!important;row-gap:3px!important}}';
       (doc.head||doc.documentElement).appendChild(style);
     }
   }
@@ -259,7 +283,7 @@
     if(frame){
       frame.title=(title||'Product')+' gallery and price';
       frame.onload=function(){
-        applyComparisonProductModalPolicy(frame);
+        applyPrivateProductModalPolicy(frame);
       };
       frame.src=safeUrl;
     }
