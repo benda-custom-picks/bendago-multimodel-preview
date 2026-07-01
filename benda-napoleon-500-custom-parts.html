@@ -1654,6 +1654,100 @@ html body.model-page section#looks article.look-card .bcp-look-cta-v202 > a.bcp-
 .bcp-visually-hidden{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
 html.bcp-access-granted [data-bcp-access-panel]{display:none!important}
 </style>
+
+<style id="bcp-v234-napoleon-500-parts-grid-alignment">
+/* BENDAGO V234 — Napoleon 450/500 Parts by Parts desktop alignment.
+   Scope: private Shop Parts layout only. Keeps the existing top quick-access bar,
+   private catalog, cart, checkout, product cards and mobile layout unchanged. */
+@media (min-width:901px){
+  html body.model-page.model-500 section#shop-part-by-part > .wrap{
+    display:block !important;
+    width:min(1440px,calc(100vw - 64px)) !important;
+    max-width:min(1440px,calc(100vw - 64px)) !important;
+    margin:0 auto !important;
+  }
+
+  /* The browse MP4 was occupying a permanent left rail and pushing the catalogue right.
+     The top quick-access section remains the route into this catalogue. */
+  html body.model-page.model-500 section#shop-part-by-part .bcp-browse-look-banner-v16n,
+  html body.model-page.model-500 section#shop-part-by-part .bcp-browse-look-banner-v16n.bcp-single-look-browse-v16y{
+    display:none !important;
+  }
+
+  html body.model-page.model-500 section#shop-part-by-part > .wrap > .section-head{
+    width:100% !important;
+    max-width:none !important;
+    margin:0 0 26px !important;
+    padding:0 !important;
+  }
+
+  html body.model-page.model-500 section#shop-part-by-part > .wrap > .product-grid{
+    display:grid !important;
+    grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+    grid-auto-rows:1fr !important;
+    gap:22px !important;
+    width:100% !important;
+    min-width:0 !important;
+    margin:0 !important;
+    align-items:stretch !important;
+  }
+
+  html body.model-page.model-500 section#shop-part-by-part > .wrap > .product-grid > .product-card{
+    display:flex !important;
+    flex-direction:column !important;
+    min-width:0 !important;
+    height:100% !important;
+    overflow:hidden !important;
+  }
+
+  html body.model-page.model-500 section#shop-part-by-part > .wrap > .product-grid > .product-card > .thumb{
+    display:block !important;
+    width:100% !important;
+    aspect-ratio:4 / 3 !important;
+    min-height:0 !important;
+    background-position:center !important;
+    background-size:cover !important;
+    border-radius:0 !important;
+  }
+
+  html body.model-page.model-500 section#shop-part-by-part > .wrap > .product-grid > .product-card > .body{
+    display:flex !important;
+    flex:1 1 auto !important;
+    flex-direction:column !important;
+    min-width:0 !important;
+    padding:16px !important;
+  }
+
+  html body.model-page.model-500 section#shop-part-by-part > .wrap > .product-grid > .product-card > .body h3{
+    min-height:2.7em !important;
+    margin:0 0 9px !important;
+  }
+
+  html body.model-page.model-500 section#shop-part-by-part > .wrap > .product-grid > .product-card > .body > p{
+    display:-webkit-box !important;
+    overflow:hidden !important;
+    min-height:4.8em !important;
+    margin:0 0 14px !important;
+    -webkit-box-orient:vertical !important;
+    -webkit-line-clamp:4 !important;
+  }
+
+  html body.model-page.model-500 section#shop-part-by-part > .wrap > .product-grid > .product-card .product-meta{
+    margin-top:auto !important;
+  }
+
+  html body.model-page.model-500 section#shop-part-by-part > .wrap > .product-grid > .product-card .product-details-link,
+  html body.model-page.model-500 section#shop-part-by-part > .wrap > .product-grid > .product-card .add-preview{
+    width:100% !important;
+  }
+}
+
+@media (min-width:901px) and (max-width:1260px){
+  html body.model-page.model-500 section#shop-part-by-part > .wrap > .product-grid{
+    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+  }
+}
+</style>
 </head><body class="model-page model-500" data-bcp-access-scope="model" data-bcp-private-catalog="napoleon-450-500"><!-- Google Tag Manager (noscript) -->
 <noscript><iframe height="0" src="https://www.googletagmanager.com/ns.html?id=GTM-MQHMSX8X" style="display:none;visibility:hidden" width="0"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
