@@ -1,4 +1,4 @@
-/* BCP V229 — private Build component cards open the live product gallery and price in a modal panel. */
+/* BCP V230 — protected cart/order binding before private product-gallery presentation. */
 (function(){
   'use strict';
   var body=document.body;
@@ -400,8 +400,17 @@
       try{ window.dispatchEvent(new CustomEvent('bcp:private-catalog-assets-degraded')); }catch(error){}
     }
   }
+  /* V230: cart/order bindings are a protected first step. A visual enhancement must never prevent
+     the Full Build CTA or header cart from becoming interactive. */
+  function presentSelectedLookSafely(){
+    try{
+      routeToSelectedLook();
+    }catch(error){
+      try{ window.dispatchEvent(new CustomEvent('bcp:private-catalog-presentation-degraded')); }catch(ignore){}
+    }
+  }
   function load(){
-    if(catalogMounted){ routeToSelectedLook(); return; }
+    if(catalogMounted){ presentSelectedLookSafely(); return; }
     if(loaded) return;
     loaded=true;
     setCatalogVisible(false);
@@ -423,13 +432,13 @@
       }
       catalogMounted=true;
       setCatalogBusy(false);
-      routeToSelectedLook();
       return Promise.allSettled([
         loadScript('/api/private-assets/order-flow.js'),
         loadScript('/api/private-assets/cart-flow.js')
       ]);
     }).then(function(results){
       bindPrivateAssets(results);
+      presentSelectedLookSafely();
       try{ window.dispatchEvent(new CustomEvent('bcp:private-catalog-ready')); }catch(error){}
     }).catch(function(error){
       loaded=false;
